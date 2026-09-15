@@ -1,16 +1,38 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>팀 구조 지도 · 보수 찾기표</title>
 <style>
+/* =========================================================
+   색·간격 토큰 — 초안(543ea870…png)에서 뽑은 실측값
+     페이지 배경 #F7F9FC / 카드 #FFFFFF / 테두리 #E8EDF5
+     사이드바 #132232, 선택행 #1F4069 / 포인트 파랑 #2B80FD
+     KPI 틴트 파랑 #F1F7FE · 분홍 #FEF6F7 · 초록 #F3FEF9 · 흰 #FDFDFE
+   ========================================================= */
 :root{
-  --bg:#0a0e16; --side:#0d1220; --panel:#131a29; --panel2:#182033; --line:#26304a;
-  --txt:#e8eefb; --mut:#8e9bb3; --dim:#5f6b83;
-  --blue:#5b9dfb; --green:#43d787; --purple:#a98bfa; --amber:#f5bd4f; --red:#f5717a;
-  --teal:#2fd3c0; --gold:#fbcf5a;
-  --r:14px;
+  --bg:#F7F9FC; --card:#FFFFFF; --line:#E8EDF5; --line2:#EEF2F7;
+  --side:#132232; --side2:#0E1B29; --sideSel:#1F4069; --sideTxt:#A7B4C6; --sideDim:#64748B;
+  --txt:#111827; --mut:#64748B; --dim:#94A3B8;
+  --blue:#2B80FD; --blueSoft:#F1F7FE; --blueLine:#D6E6FF;
+  --red:#EF4444; --redSoft:#FEF6F7;
+  --green:#10B981; --greenSoft:#F3FEF9;
+  --amber:#F59E0B; --amberSoft:#FFF8EC;
+  --purple:#8B5CF6; --purpleSoft:#F6F3FF;
+  --teal:#14B8A6; --slate:#64748B;
+  --r:14px; --r2:10px; --r3:8px;
+  --sh:0 1px 2px rgba(16,24,40,.04), 0 1px 3px rgba(16,24,40,.06);
+  --shHover:0 4px 10px rgba(16,24,40,.07), 0 2px 4px rgba(16,24,40,.05);
+  --gap:12px;
+}
+html[data-theme="dark"]{
+  --bg:#0A0E16; --card:#131A29; --line:#26304A; --line2:#1E2740;
+  --side:#0D1220; --side2:#0A0E19; --sideSel:#1B2A47; --sideTxt:#8E9BB3; --sideDim:#5F6B83;
+  --txt:#E8EEFB; --mut:#8E9BB3; --dim:#5F6B83;
+  --blueSoft:#141F35; --blueLine:#25365C;
+  --redSoft:#2A161A; --greenSoft:#0F2A1E; --amberSoft:#2C2210; --purpleSoft:#1F1938;
+  --sh:none; --shHover:0 4px 12px rgba(0,0,0,.4);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
@@ -18,230 +40,345 @@ body{
   background:var(--bg);color:var(--txt);
   font-family:"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo","Segoe UI",sans-serif;
   font-size:13px;line-height:1.45;overflow:hidden;
+  -webkit-font-smoothing:antialiased;
 }
 button,input{font:inherit;color:inherit}
 button{background:none;border:none;cursor:pointer}
-::-webkit-scrollbar{width:7px;height:7px}
-::-webkit-scrollbar-thumb{background:#2c3550;border-radius:6px}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:6px;border:2px solid transparent;background-clip:padding-box}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb{background:#2C3550;background-clip:padding-box}
 ::-webkit-scrollbar-track{background:transparent}
 
 /* ===== 레이아웃 ===== */
 .app{display:flex;height:100vh;overflow:hidden}
-.side{width:212px;flex:0 0 212px;background:var(--side);border-right:1px solid var(--line);
-  display:flex;flex-direction:column;padding:18px 12px 14px}
-.brand{display:flex;gap:10px;align-items:center;padding:0 8px 18px}
-.brand .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(140deg,#5b9dfb,#a98bfa);
-  display:grid;place-items:center;font-size:15px}
-.brand b{font-size:15px;letter-spacing:-.2px;display:block}
-.brand small{color:var(--dim);font-size:10.5px}
-.nav{display:flex;flex-direction:column;gap:2px}
-.nav button{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;color:var(--mut);font-size:13px;width:100%;text-align:left}
-.nav button .ico{width:16px;text-align:center;opacity:.9}
-.nav button:hover{background:#151d30;color:var(--txt)}
-.nav button.on{background:linear-gradient(90deg,#1b2a47,#162034);color:#fff;box-shadow:inset 2px 0 0 var(--blue)}
-.side .foot{margin-top:auto;padding:12px 10px 0;color:var(--dim);font-size:10.5px;border-top:1px solid #1a2234}
+.side{width:206px;flex:0 0 206px;background:var(--side);
+  display:flex;flex-direction:column;padding:16px 10px 12px}
+.brand{display:flex;gap:9px;align-items:center;padding:2px 8px 16px}
+.brand .mark{width:30px;height:30px;border-radius:9px;flex:0 0 auto;
+  background:linear-gradient(140deg,#2B80FD,#6EA8FE);display:grid;place-items:center;font-size:15px}
+.brand b{font-size:14px;letter-spacing:-.2px;display:block;color:#fff}
+.brand small{color:var(--sideDim);font-size:10px;letter-spacing:-.1px}
+.nav{display:flex;flex-direction:column;gap:1px}
+.nav button{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:var(--r2);
+  color:var(--sideTxt);font-size:12.5px;width:100%;text-align:left;transition:.12s}
+.nav button .ico{width:16px;text-align:center;opacity:.95;font-size:13px}
+.nav button .cnt{margin-left:auto;font-size:10px;color:var(--sideDim);font-weight:700}
+.nav button:hover{background:rgba(255,255,255,.05);color:#fff}
+.nav button.on{background:var(--sideSel);color:#fff;font-weight:700}
+.nav button.on .cnt{color:#BFD7FF}
+.side .foot{margin-top:auto;padding:11px 10px 0;color:var(--sideDim);font-size:10px;
+  border-top:1px solid rgba(255,255,255,.07);line-height:1.6}
+.themebtn{margin:10px 2px 0;display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:var(--r2);
+  color:var(--sideTxt);font-size:11.5px;background:rgba(255,255,255,.05);width:calc(100% - 4px)}
+.themebtn:hover{background:rgba(255,255,255,.1);color:#fff}
 
-.main{flex:1;display:flex;flex-direction:column;min-width:0}
-.top{min-height:54px;flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:0 20px;
-  border-bottom:1px solid var(--line);background:#0c1120}
-.top .ttl{font-size:14.5px;font-weight:700}
-.top .sub{color:var(--dim);font-size:11.5px}
+.main{flex:1;display:flex;flex-direction:column;min-width:0;background:var(--bg)}
+.top{min-height:56px;flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:0 18px;
+  border-bottom:1px solid var(--line);background:var(--card)}
+.top .ttl{font-size:14.5px;font-weight:800;letter-spacing:-.3px}
+.top .sub{color:var(--dim);font-size:11px}
 .top .spacer{flex:1}
-.search{display:flex;align-items:center;gap:7px;background:#141c2e;border:1px solid var(--line);
-  border-radius:10px;padding:6px 11px;width:330px;max-width:42vw}
+.search{display:flex;align-items:center;gap:7px;background:var(--bg);border:1px solid var(--line);
+  border-radius:var(--r2);padding:6px 11px;width:320px;max-width:38vw;transition:.13s}
+.search:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(43,128,253,.1);background:var(--card)}
 .search input{background:none;border:none;outline:none;flex:1;min-width:0;font-size:12.5px}
 .search input::placeholder{color:var(--dim)}
-.search .kbd{color:var(--dim);font-size:10px;border:1px solid #2b3550;border-radius:5px;padding:1px 5px}
-.who{display:flex;align-items:center;gap:7px;padding:4px 10px;border-radius:999px;background:#151d30;border:1px solid var(--line);font-size:11.5px}
-.who .av{width:20px;height:20px;border-radius:50%;background:var(--gold);color:#241a00;display:grid;place-items:center;font-size:10px;font-weight:800}
+.search .kbd{color:var(--mut);font-size:10px;border:1px solid var(--line);border-radius:5px;padding:1px 6px;background:var(--card)}
+.who{display:flex;align-items:center;gap:7px;padding:4px 11px 4px 4px;border-radius:999px;
+  background:var(--bg);border:1px solid var(--line);font-size:11.5px;font-weight:600}
+.who .av{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;
+  display:grid;place-items:center;font-size:10px;font-weight:800}
 
-.scroll{flex:1;overflow:auto;padding:14px 16px 24px}
+.scroll{flex:1;overflow:auto;padding:14px 18px 20px}
 .view{display:none}
 .view.on{display:block}
 
 /* ===== 카드 ===== */
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
-  display:flex;flex-direction:column;overflow:hidden;min-height:0}
-.card>h3{display:flex;align-items:center;gap:8px;padding:11px 13px 9px;font-size:13px;font-weight:700;letter-spacing:-.2px;flex-wrap:wrap}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--sh);display:flex;flex-direction:column;overflow:hidden;min-height:0}
+.card>h3{display:flex;align-items:center;gap:8px;padding:12px 14px 9px;font-size:13px;
+  font-weight:800;letter-spacing:-.3px;flex-wrap:wrap}
 .card>h3 .hint{margin-left:auto;color:var(--dim);font-size:10.5px;font-weight:500}
-.body{padding:0 13px 13px;overflow:auto;flex:1;min-height:0}
-.badge{display:inline-grid;place-items:center;min-width:20px;height:19px;padding:0 6px;border-radius:7px;
-  font-size:11px;font-weight:800;background:#243049;color:#cfe0ff}
-.badge.gold{background:#3a2e13;color:#f9cd6e}
-.badge.green{background:#12301f;color:#6fe3a5}
-.badge.purple{background:#241c3d;color:#c7b0ff}
-.clk{cursor:pointer;transition:.13s}
-.clk:hover{background:var(--panel2);border-color:#35446a}
+.body{padding:0 14px 14px;overflow:auto;flex:1;min-height:0}
 .muted{color:var(--dim)}
-.sec-t{font-size:11px;color:var(--dim);margin:13px 0 6px;letter-spacing:.3px}
-.tag{font-size:10px;padding:2px 7px;border-radius:6px;background:#1e2740;color:var(--mut);white-space:nowrap}
-.tag.cst{background:#3a2e13;color:#f9cd6e}
-.tag.cmn{background:#1e2b46;color:#9cc2ff}
+.sec-t{font-size:10.5px;color:var(--dim);margin:13px 0 6px;letter-spacing:.2px;font-weight:700}
+.clk{cursor:pointer;transition:.13s}
 
-.wide2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.wide3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.stack{display:flex;flex-direction:column;gap:12px}
+.badge{display:inline-grid;place-items:center;min-width:20px;height:19px;padding:0 6px;border-radius:6px;
+  font-size:10.5px;font-weight:800;background:var(--blueSoft);color:var(--blue);border:1px solid var(--blueLine)}
+.badge.gold{background:var(--amberSoft);color:#B45309;border-color:#FDE4B4}
+.badge.green{background:var(--greenSoft);color:#047857;border-color:#C7F0DF}
+.tag{font-size:10px;padding:2px 7px;border-radius:6px;background:var(--bg);color:var(--mut);
+  white-space:nowrap;border:1px solid var(--line)}
+.tag.cst{background:var(--amberSoft);color:#B45309;border-color:#FDE4B4;font-weight:700}
+.tag.cmn{background:var(--blueSoft);color:var(--blue);border-color:var(--blueLine);font-weight:700}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 7px;border-radius:999px;
+  background:var(--bg);color:var(--mut);white-space:nowrap;border:1px solid var(--line)}
+.chip.b{background:var(--blueSoft);color:var(--blue);border-color:var(--blueLine);font-weight:700}
 
-/* ===== 조직도 ===== */
-.org{padding:6px 4px 2px}
-.org .lvl{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.org .conn{height:18px;border-left:2px solid #2b3550}
-.vline{width:2px;height:16px;background:#2c3550;margin:0 auto}
-.hline{height:2px;background:#2b3550;margin:0 14px}
-.onode{border:1px solid var(--line);border-radius:12px;background:#111829;padding:10px 13px;text-align:center;min-width:150px}
-.onode.boss{border-color:#5a4a1c;background:linear-gradient(140deg,#1d1a10,#111829)}
-.onode.sec{border-color:#3a4a73;background:linear-gradient(140deg,#131c31,#111829)}
-.onode .nm{font-weight:800;font-size:13px}
-.onode .ro{font-size:10.5px;color:var(--dim);margin-top:2px}
-.botrow{display:grid;grid-template-columns:repeat(7,1fr);gap:9px;margin-top:2px}
-.bcard{border:1px solid var(--line);border-radius:12px;background:#111829;padding:10px 10px 9px;cursor:pointer;transition:.13s;position:relative;overflow:hidden}
-.bcard:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c,#3a4a73)}
-.bcard:hover{background:#1a2338;border-color:#3a4a73;transform:translateY(-2px)}
-.bcard .hd{display:flex;align-items:center;gap:7px}
-.bcard .av{width:23px;height:23px;border-radius:7px;display:grid;place-items:center;font-size:11px;font-weight:800;color:#0b0f17;background:var(--c,#5b9dfb)}
-.bcard .id{font-weight:800;font-size:12px}
+.wide2{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.wide3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.row12{margin-bottom:var(--gap)}
+
+/* ===== 상단 KPI 4장 (초안 그대로) ===== */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);margin-bottom:var(--gap)}
+.kpi{border:1px solid var(--line);border-radius:var(--r);padding:12px 14px 11px;background:var(--card);
+  box-shadow:var(--sh);cursor:pointer;transition:.14s;position:relative;overflow:hidden}
+.kpi:hover{box-shadow:var(--shHover);transform:translateY(-1px)}
+.kpi.t1{background:var(--blueSoft)}
+.kpi.t2{background:var(--redSoft)}
+.kpi.t3{background:var(--greenSoft)}
+.kpi.t4{background:var(--card)}
+.kpi .lab{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--mut)}
+.kpi .lab .i{width:19px;height:19px;border-radius:6px;display:grid;place-items:center;font-size:10.5px;
+  background:var(--card);border:1px solid var(--line);flex:0 0 auto}
+.kpi .num{font-size:29px;font-weight:800;letter-spacing:-1.2px;line-height:1.15;margin-top:5px}
+.kpi .num .u{font-size:14px;font-weight:700;letter-spacing:-.2px;margin-left:1px;color:var(--mut)}
+.kpi .dt{font-size:10.5px;font-weight:700;margin-top:3px;display:flex;align-items:center;gap:3px}
+.kpi .dt.b{color:var(--blue)} .kpi .dt.r{color:var(--red)}
+.kpi .dt.g{color:var(--green)} .kpi .dt.m{color:var(--mut)}
+
+/* ===== 중앙 흐름도 (초안 허브형) ===== */
+.flowwrap{display:grid;grid-template-columns:1fr 212px;gap:14px;align-items:stretch}
+.flow{position:relative;min-height:300px;padding:4px 2px}
+.flow svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.fgrid{position:relative;display:grid;
+  grid-template-columns:130px minmax(0,1fr) 168px minmax(0,1fr) 130px;
+  align-items:center;justify-items:center;gap:0 6px;height:100%;min-height:292px}
+.fcol{display:flex;flex-direction:column;gap:8px;justify-content:center;align-items:center;
+  width:100%;max-width:150px}
+.fnode{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:9px 8px;
+  text-align:center;cursor:pointer;transition:.14s;box-shadow:var(--sh);position:relative;z-index:2}
+.fnode:hover{transform:translateY(-2px);box-shadow:var(--shHover);border-color:var(--blue)}
+.fnode .e{font-size:17px;line-height:1.2}
+.fnode .n{font-size:12px;font-weight:800;margin-top:2px;letter-spacing:-.2px}
+.fnode .r{font-size:9.5px;color:var(--dim);margin-top:1px}
+.fnode.ext{background:var(--bg)}
+.fnode.tint{border-color:color-mix(in srgb, var(--c) 34%, var(--line));
+  background:color-mix(in srgb, var(--c) 7%, var(--card));
+  box-shadow:inset 3px 0 0 var(--c), var(--sh)}
+.fnode.tint:hover{border-color:var(--c);
+  background:color-mix(in srgb, var(--c) 13%, var(--card))}
+.fnode.tint .n{color:color-mix(in srgb, var(--c) 68%, var(--txt))}
+.fnode.hub{padding:14px 10px;border-width:2px;border-color:var(--amber);
+  background:linear-gradient(160deg,#FFFBF2,var(--card));box-shadow:0 6px 18px rgba(245,158,11,.16)}
+html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var(--card))}
+.fnode.hub .e{font-size:24px}
+.fnode.hub .n{font-size:14px}
+.fnode.out{background:var(--bg);border-style:dashed}
+.legend{border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:11px 12px;align-self:start}
+.legend h5{font-size:11px;font-weight:800;color:var(--mut);margin-bottom:8px;letter-spacing:.2px}
+.lgi{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut);padding:3px 0}
+.lgi .ln{width:26px;height:0;border-top:2px solid var(--blue);flex:0 0 auto}
+.lgi .ln.g{border-color:var(--green)}
+.lgi .ln.p{border-top-style:dashed;border-color:var(--purple)}
+.lgi .ln.a{border-top-style:dotted;border-color:var(--amber)}
+.lgi .ln.s{border-color:var(--slate)}
+.legend .note{font-size:10px;color:var(--dim);margin-top:9px;padding-top:8px;
+  border-top:1px dashed var(--line);line-height:1.6}
+
+/* ===== 봇 카드 ===== */
+.botrow{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.bcard{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:11px 12px 10px;
+  cursor:pointer;transition:.14s;position:relative;overflow:hidden;box-shadow:var(--sh)}
+.bcard:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c,#2B80FD)}
+.bcard:hover{transform:translateY(-2px);box-shadow:var(--shHover);border-color:var(--c,#2B80FD)}
+.bcard .hd{display:flex;align-items:center;gap:8px}
+.bcard .av{width:25px;height:25px;border-radius:8px;display:grid;place-items:center;font-size:10.5px;
+  font-weight:800;color:#fff;background:var(--c,#2B80FD);flex:0 0 auto}
+.bcard .id{font-weight:800;font-size:12.5px;letter-spacing:-.2px}
 .bcard .nm2{font-size:10.5px;color:var(--mut)}
-.bcard .ro{font-size:10.5px;color:var(--dim);margin-top:6px;height:28px;overflow:hidden}
-.bcard .mdl{font-size:9.5px;color:#9cc2ff;background:#16223a;border-radius:6px;padding:2px 6px;display:inline-block;margin-top:4px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bcard .st{margin-top:7px;display:flex;justify-content:space-between;font-size:10.5px;color:var(--mut);border-top:1px dashed #212b44;padding-top:6px}
-.bcard .st b{color:#cfe0ff}
-.bcard .st .cst{color:#f9cd6e}
-
-/* ===== 파이프라인 ===== */
-.pipe{display:flex;align-items:stretch;overflow-x:auto;padding:4px 2px 8px;gap:0}
-.pnode{flex:1 1 0;min-width:86px;border:1px solid var(--line);border-radius:11px;padding:9px 6px;text-align:center;background:#111829;cursor:pointer;transition:.13s}
-.pnode:hover{background:#1b2440;border-color:#46598c;transform:translateY(-2px)}
-.pnode.sec{border-color:#5a4a1c}
-.pnode .e{font-size:16px}
-.pnode .n{font-size:11.5px;font-weight:700;margin-top:2px}
-.pnode .r{font-size:9.5px;color:var(--dim)}
-.parw{flex:0 0 74px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
-.parw .lb{font-size:9.5px;color:#9cc2ff;background:#16223a;border:1px solid #23325a;border-radius:6px;padding:1px 5px;white-space:nowrap}
-.parw .ar{color:#3b496d;font-size:13px;line-height:1}
+.bcard .ro{font-size:10.5px;color:var(--dim);margin-top:7px;height:28px;overflow:hidden;line-height:1.35}
+.bcard .mdl{font-size:9.5px;color:var(--blue);background:var(--blueSoft);border:1px solid var(--blueLine);
+  border-radius:6px;padding:2px 6px;display:inline-block;margin-top:5px;max-width:100%;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bcard .st{margin-top:8px;display:flex;justify-content:space-between;font-size:10.5px;color:var(--mut);
+  border-top:1px solid var(--line2);padding-top:7px}
+.bcard .st b{color:var(--txt);font-weight:800}
+.bcard .st .cst{color:#B45309;font-weight:800}
 
 /* ===== 표 ===== */
 .tbl{width:100%;border-collapse:collapse;font-size:12px}
-.tbl th{text-align:left;color:var(--dim);font-weight:600;font-size:10.5px;padding:6px 8px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel);z-index:2}
-.tbl td{padding:7px 8px;border-bottom:1px dashed #1e2740;vertical-align:top}
-.tbl tr:hover td{background:#161e30}
-.path{font-family:Consolas,"D2Coding",monospace;font-size:11px;color:#9cc2ff;background:#141c2e;border:1px solid #23325a;
-  border-radius:7px;padding:3px 7px;cursor:pointer;display:inline-block;word-break:break-all;transition:.13s}
-.path:hover{background:#1d2a45;border-color:#3a4a73;color:#cfe0ff}
+.tbl th{text-align:left;color:var(--dim);font-weight:700;font-size:10.5px;padding:7px 8px;
+  border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--card);z-index:2}
+.tbl td{padding:8px;border-bottom:1px solid var(--line2);vertical-align:top}
+.tbl tr:hover td{background:var(--bg)}
+.path{font-family:Consolas,"D2Coding",monospace;font-size:11px;color:var(--blue);background:var(--blueSoft);
+  border:1px solid var(--blueLine);border-radius:7px;padding:3px 7px;cursor:pointer;display:inline-block;
+  word-break:break-all;transition:.13s}
+.path:hover{background:#E3EFFF;border-color:var(--blue)}
 .path:active{transform:scale(.98)}
-.path.vault{color:#c7b0ff;border-color:#33285a;background:#181430}
-.path.vault:hover{background:#221b42}
+.path.vault{color:#7C3AED;border-color:#E3D9FE;background:var(--purpleSoft)}
+.path.vault:hover{background:#EDE6FE}
 
 /* ===== 목록 ===== */
-.li{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;border:1px solid transparent}
-.li+.li{margin-top:3px}
+.li{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:var(--r3);border:1px solid transparent}
+.li+.li{margin-top:2px}
 .li .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .li .m{color:var(--dim);font-size:10.5px;white-space:nowrap}
-.li:hover{background:var(--panel2);border-color:#2f3a59}
-.chip{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 7px;border-radius:999px;background:#1e2740;color:var(--mut);white-space:nowrap}
-.chip.b{background:#16223a;color:#9cc2ff}
+.li:hover{background:var(--bg);border-color:var(--line)}
 
-/* 스킬 지도 */
-.skillcols{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
-.skcol{border:1px solid var(--line);border-radius:11px;background:#111829;padding:9px}
-.skcol h4{font-size:11.5px;display:flex;align-items:center;gap:6px;margin-bottom:6px}
-.skcol .dotc{width:8px;height:8px;border-radius:3px;background:var(--c,#5b9dfb)}
-.sk{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:7px;cursor:pointer;font-size:11.5px}
-.sk:hover{background:#1b2440}
-.sk .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.star{color:#f9cd6e}
+/* =========================================================
+   스킬 화면 — 그룹형 카드 (나열 금지)
+   ========================================================= */
+.skbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:var(--gap)}
+.skfilter{display:flex;gap:4px;background:var(--card);border:1px solid var(--line);
+  border-radius:999px;padding:3px;box-shadow:var(--sh)}
+.skfilter button{padding:5px 13px;border-radius:999px;font-size:11.5px;font-weight:700;color:var(--mut);transition:.12s}
+.skfilter button:hover{color:var(--txt)}
+.skfilter button.on{background:var(--blue);color:#fff}
+.botfilter{display:flex;gap:4px;flex-wrap:wrap}
+.botpill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 5px;border-radius:999px;
+  border:1px solid var(--line);background:var(--card);font-size:11px;font-weight:700;color:var(--mut);
+  cursor:pointer;transition:.12s;box-shadow:var(--sh)}
+.botpill .d{width:16px;height:16px;border-radius:5px;background:var(--c,#2B80FD);color:#fff;
+  display:grid;place-items:center;font-size:8.5px;font-weight:800}
+.botpill:hover{border-color:var(--blue);color:var(--txt)}
+.botpill.on{background:var(--blueSoft);border-color:var(--blue);color:var(--blue)}
 
-/* 저장소 지도 */
+.skgroups{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);align-items:start}
+.skg{border:1px solid var(--line);border-radius:var(--r);background:var(--card);
+  box-shadow:var(--sh);overflow:hidden;transition:.14s}
+.skg:hover{box-shadow:var(--shHover)}
+.skg.open{border-color:var(--blue)}
+.skg>.gh{display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;user-select:none}
+.skg>.gh:hover{background:var(--bg)}
+.skg .gi{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:14px;
+  background:var(--gs,#F1F7FE);flex:0 0 auto}
+.skg .gt{flex:1;min-width:0}
+.skg .gt b{display:block;font-size:12.5px;font-weight:800;letter-spacing:-.2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.skg .gt .gs{font-size:10px;color:var(--dim);display:flex;gap:5px;align-items:center;margin-top:1px}
+.skg .gn{font-size:15px;font-weight:800;color:var(--txt);letter-spacing:-.5px}
+.skg .gcv{font-size:12px;color:var(--dim);transition:.18s;flex:0 0 auto;width:14px;text-align:center}
+.skg.open .gcv{transform:rotate(90deg);color:var(--blue)}
+.skg .gbar{height:4px;background:var(--line2);display:flex;overflow:hidden}
+.skg .gbar i{display:block;height:100%}
+.skg .gb{display:none;padding:4px 9px 10px;border-top:1px solid var(--line);
+  max-height:330px;overflow:auto}
+.skg.open .gb{display:block}
+.skitem{display:flex;align-items:center;gap:7px;padding:6px 7px;border-radius:var(--r3);cursor:pointer;
+  font-size:11.5px;border:1px solid transparent;transition:.1s}
+.skitem:hover{background:var(--bg);border-color:var(--line)}
+.skitem .st{width:13px;flex:0 0 auto;text-align:center;font-size:10px}
+.skitem .st.c{color:var(--amber)}
+.skitem .st.s{color:var(--dim)}
+.skitem .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.owners{display:flex;gap:2px;flex:0 0 auto}
+.odot{width:15px;height:15px;border-radius:5px;background:var(--c,#2B80FD);color:#fff;
+  display:grid;place-items:center;font-size:8px;font-weight:800;letter-spacing:-.5px}
+.odot.more{background:var(--bg);color:var(--mut);border:1px solid var(--line)}
+.skall{text-align:center;font-size:10.5px;color:var(--blue);font-weight:700;padding:5px;cursor:pointer;border-radius:6px}
+.skall:hover{background:var(--blueSoft)}
+
+/* 스킬 요약 스트립 */
+.skstat{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);margin-bottom:var(--gap)}
+.ss{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:11px 13px;box-shadow:var(--sh)}
+.ss .l{font-size:11px;color:var(--mut);font-weight:700}
+.ss .v{font-size:23px;font-weight:800;letter-spacing:-1px;margin-top:2px}
+.ss .s{font-size:10px;color:var(--dim);margin-top:2px}
+.ssbar{display:flex;height:6px;border-radius:99px;overflow:hidden;background:var(--line2);margin-top:7px}
+.ssbar i{display:block;height:100%}
+
+/* 저장소·규칙 */
 .stores{display:flex;align-items:center;gap:0;flex-wrap:wrap}
-.store{flex:1 1 0;min-width:150px;border:1px solid var(--line);border-radius:12px;background:#111829;padding:11px 12px;cursor:pointer;transition:.13s}
-.store:hover{background:#1a2338;border-color:#3a4a73}
+.store{flex:1 1 0;min-width:150px;border:1px solid var(--line);border-radius:12px;background:var(--card);
+  padding:12px;cursor:pointer;transition:.13s;box-shadow:var(--sh)}
+.store:hover{transform:translateY(-2px);box-shadow:var(--shHover)}
 .store .nm{font-weight:800;font-size:13px}
-.store .rl{font-size:10.5px;margin-top:2px}
-.store .nt{font-size:10.5px;color:var(--dim);margin-top:6px}
-.sarw{flex:0 0 128px;text-align:center;color:#3b496d;font-size:11px;padding:0 6px}
-.sarw b{display:block;color:#9cc2ff;font-size:10px;font-weight:600;line-height:1.35;margin-top:2px}
-
-/* 규칙 계층 */
-.layer{display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:11px;background:#111829;padding:10px 12px;cursor:pointer;transition:.13s}
-.layer:hover{background:#1a2338;border-color:#3a4a73}
-.layer+.layer{margin-top:7px}
-.layer .no{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:12px;background:#22304d;color:#a8c3f2;flex:0 0 auto}
-.layer .nm{font-weight:700}
+.store .rl{font-size:10.5px;margin-top:2px;font-weight:700}
+.store .nt{font-size:10.5px;color:var(--dim);margin-top:6px;line-height:1.5}
+.sarw{flex:0 0 120px;text-align:center;color:var(--dim);font-size:11px;padding:0 6px}
+.sarw b{display:block;color:var(--blue);font-size:10px;font-weight:700;line-height:1.35;margin-top:2px}
+.layer{display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:11px;
+  background:var(--card);padding:10px 12px;cursor:pointer;transition:.13s}
+.layer:hover{background:var(--bg);border-color:var(--blue)}
+.layer+.layer{margin-top:6px}
+.layer .no{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-weight:800;
+  font-size:12px;background:var(--blueSoft);color:var(--blue);border:1px solid var(--blueLine);flex:0 0 auto}
+.layer .nm{font-weight:800;font-size:12.5px}
 .layer .ds{font-size:10.5px;color:var(--dim)}
-.layer .win{margin-left:auto;font-size:10.5px;color:#6fe3a5;white-space:nowrap}
+.layer .win{margin-left:auto;font-size:10.5px;color:var(--green);white-space:nowrap;font-weight:700}
 
 /* 드로어 */
-.drawer{position:fixed;top:0;right:0;width:400px;max-width:94vw;height:100vh;background:#0f1522;
-  border-left:1px solid var(--line);box-shadow:-24px 0 60px #000a;transform:translateX(105%);
+.drawer{position:fixed;top:0;right:0;width:400px;max-width:94vw;height:100vh;background:var(--card);
+  border-left:1px solid var(--line);box-shadow:-24px 0 60px rgba(16,24,40,.14);transform:translateX(105%);
   transition:transform .22s cubic-bezier(.4,0,.2,1);z-index:50;display:flex;flex-direction:column}
 .drawer.on{transform:none}
 .drawer .dh{display:flex;align-items:center;gap:10px;padding:15px 16px;border-bottom:1px solid var(--line)}
-.drawer .dh b{font-size:14.5px}
+.drawer .dh b{font-size:14.5px;letter-spacing:-.3px}
 .drawer .dh .x{margin-left:auto;color:var(--mut);font-size:17px;line-height:1}
 .drawer .db{padding:14px 16px 30px;overflow:auto;flex:1}
-.kv{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed #1e2740;font-size:12px}
-.kv .k{width:86px;color:var(--dim);flex:0 0 auto}
+.kv{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--line2);font-size:12px}
+.kv .k{width:86px;color:var(--dim);flex:0 0 auto;font-weight:600}
 .kv .v{flex:1;min-width:0;word-break:break-all}
-.scrim{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:.22s;z-index:49}
-.scrim.on{opacity:.45;pointer-events:auto}
+.scrim{position:fixed;inset:0;background:#0F172A;opacity:0;pointer-events:none;transition:.22s;z-index:49}
+.scrim.on{opacity:.32;pointer-events:auto}
 
-/* 토스트 */
-.toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,16px);background:#1d2a45;border:1px solid #3a4a73;
-  color:#dfe9ff;padding:9px 18px;border-radius:999px;font-size:12.5px;opacity:0;pointer-events:none;transition:.18s;z-index:80}
+.toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,16px);background:#111827;
+  color:#fff;padding:9px 18px;border-radius:999px;font-size:12.5px;opacity:0;pointer-events:none;
+  transition:.18s;z-index:80;box-shadow:0 8px 24px rgba(16,24,40,.25)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
-.hintbar{display:flex;align-items:center;gap:8px;background:#141c2e;border:1px solid #23325a;border-radius:10px;
-  padding:8px 12px;font-size:11.5px;color:var(--mut);margin-bottom:12px;flex-wrap:wrap}
-.hintbar code{font-family:Consolas,monospace;color:#9cc2ff;background:#101728;padding:1px 6px;border-radius:5px}
+.hintbar{display:flex;align-items:center;gap:8px;background:var(--blueSoft);border:1px solid var(--blueLine);
+  border-radius:var(--r2);padding:8px 12px;font-size:11.5px;color:var(--mut);margin-bottom:var(--gap);flex-wrap:wrap}
+.hintbar code{font-family:Consolas,monospace;color:var(--blue);background:var(--card);
+  padding:1px 6px;border-radius:5px;border:1px solid var(--blueLine)}
 
-/* ===== 오류·결측 안내 (조용히 삼키지 않기 위한 표시) ===== */
-.failbox{flex:1 1 100%;width:100%;border:1px solid #5a2a30;background:#2a161a;border-radius:11px;
-  padding:10px 12px;margin:8px 0 0;font-size:11.5px;color:#f5b6bc;line-height:1.6}
-.failbox b{color:#ffd7db}
-.failbox .fx{display:block;color:#c99aa0;font-size:10.5px;margin-top:2px}
-.failbox code{font-family:Consolas,monospace;font-size:10px;color:#e79aa3;background:#1d0f12;
+/* 오류·결측 안내 */
+.failbox{flex:1 1 100%;width:100%;border:1px solid #FCA5A5;background:#FEF2F2;border-radius:11px;
+  padding:10px 12px;margin:8px 0 0;font-size:11.5px;color:#991B1B;line-height:1.6}
+.failbox b{color:#7F1D1D}
+.failbox .fx{display:block;color:#B91C1C;font-size:10.5px;margin-top:2px}
+.failbox code{font-family:Consolas,monospace;font-size:10px;color:#7F1D1D;background:#FEE2E2;
   border-radius:5px;padding:1px 5px;display:inline-block;margin-top:4px;word-break:break-all}
-.failbar{display:none;align-items:center;gap:8px;border:1px solid #5a2a30;background:#2a161a;color:#f5b6bc;
-  border-radius:10px;padding:9px 12px;font-size:11.5px;margin-bottom:12px;flex-wrap:wrap}
+.failbar{display:none;align-items:center;gap:8px;border:1px solid #FCA5A5;background:#FEF2F2;color:#991B1B;
+  border-radius:var(--r2);padding:9px 12px;font-size:11.5px;margin-bottom:var(--gap);flex-wrap:wrap}
 .failbar.on{display:flex}
 
 /* ===== 반응형 ===== */
-@media (max-width:1500px){
-  body{overflow:auto}
-  .pipe{flex-wrap:wrap;overflow-x:visible;row-gap:8px}
-  .pnode{flex:1 1 15%;min-width:96px}
-  .parw{flex:0 0 66px}
-  .botrow{grid-template-columns:repeat(4,1fr)}
-  .skillcols{grid-template-columns:repeat(2,1fr)}
-  .wide3{grid-template-columns:1fr 1fr}
+@media (max-width:1400px){
+  .skgroups{grid-template-columns:repeat(2,1fr)}
+  .botrow{grid-template-columns:repeat(3,1fr)}
+  .flowwrap{grid-template-columns:1fr 190px}
 }
-@media (max-width:1100px){
+@media (max-width:1150px){
+  body{overflow:auto}
+  .kpis,.skstat{grid-template-columns:repeat(2,1fr)}
   .wide2,.wide3{grid-template-columns:1fr}
   .botrow{grid-template-columns:repeat(2,1fr)}
+  .flowwrap{grid-template-columns:1fr}
+  .flow svg{display:none}
+  .fgrid{grid-template-columns:1fr;min-height:0;gap:8px}
+  .fcol{flex-direction:row;flex-wrap:wrap}
+  .fcol>*{flex:1 1 130px}
 }
-@media (max-width:760px){
+@media (max-width:820px){
   .app{flex-direction:column;height:auto}
-  .side{width:100%;flex:0 0 auto;border-right:none;border-bottom:1px solid var(--line);padding:12px}
-  .brand{padding:0 4px 10px}
-  .nav{flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:2px}
-  .nav button{white-space:nowrap;padding:7px 10px}
-  .side .foot{display:none}
-  .top{flex-wrap:wrap;padding:10px 12px;gap:8px}
+  .side{width:100%;flex:0 0 auto;padding:10px}
+  .brand{padding:0 4px 9px}
+  .nav{flex-direction:row;overflow-x:auto;gap:5px;padding-bottom:2px}
+  .nav button{white-space:nowrap;padding:7px 11px;width:auto}
+  .nav button .cnt{margin-left:5px}
+  .side .foot,.themebtn{display:none}
+  .top{flex-wrap:wrap;padding:10px 12px;gap:8px;min-height:0}
   .top .spacer{display:none}
   .search{width:100%;max-width:100%;order:3}
-  .who{font-size:10.5px}
-  .scroll{padding:10px 10px 30px;overflow:visible}
-  .botrow,.skillcols{grid-template-columns:1fr}
-  .pipe{flex-direction:column;overflow-x:visible}
-  .parw{flex:0 0 auto;padding:2px 0}
-  .parw .ar{transform:rotate(90deg)}
+  .scroll{padding:10px 10px 24px;overflow:visible}
+  .kpis,.skstat,.botrow,.skgroups{grid-template-columns:1fr}
   .stores{flex-direction:column;align-items:stretch}
   .sarw{flex:0 0 auto;padding:6px 0}
   .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
   .tbl thead{display:none}
-  .tbl tr{border:1px solid var(--line);border-radius:11px;margin-bottom:9px;padding:8px;background:#111829}
+  .tbl tr{border:1px solid var(--line);border-radius:11px;margin-bottom:9px;padding:9px;background:var(--card)}
   .tbl td{border:none;padding:4px 2px}
-  .tbl td:before{content:attr(data-l);display:block;font-size:10px;color:var(--dim);margin-bottom:2px}
+  .tbl td:before{content:attr(data-l);display:block;font-size:10px;color:var(--dim);margin-bottom:2px;font-weight:700}
   .drawer{width:100%;max-width:100%}
+  .skbar{gap:6px}
+}
+@media (max-width:430px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .kpi .num{font-size:24px}
 }
 </style>
 </head>
@@ -256,12 +393,14 @@ button{background:none;border:none;cursor:pointer}
     </div>
     <nav class="nav" id="nav">
       <button class="on" data-v="org"><span class="ico">🏛</span>구조도</button>
-      <button data-v="fix"><span class="ico">🔧</span>보수 찾기</button>
-      <button data-v="skill"><span class="ico">🧩</span>스킬 지도</button>
-      <button data-v="cron"><span class="ico">⏱</span>자동작업</button>
-      <button data-v="conn"><span class="ico">🔗</span>연결·저장소</button>
+      <button data-v="skill"><span class="ico">🧩</span>스킬<span class="cnt" id="nc-skill"></span></button>
+      <button data-v="cron"><span class="ico">⏱</span>자동작업<span class="cnt" id="nc-cron"></span></button>
+      <button data-v="fix"><span class="ico">🔧</span>보수 찾기<span class="cnt" id="nc-fix"></span></button>
+      <button data-v="conn"><span class="ico">🔗</span>연결·저장소<span class="cnt" id="nc-conn"></span></button>
     </nav>
-    <div class="foot">구조를 눈으로 보고,<br>고칠 곳을 바로 찾는다.<br><span style="opacity:.6" id="genfoot">마지막 갱신: —</span></div>
+    <button class="themebtn" id="themebtn"><span>🌙</span><span id="themelab">어두운 화면</span></button>
+    <div class="foot">구조를 눈으로 보고,<br>고칠 곳을 바로 찾는다.<br>
+      <span style="opacity:.75" id="genfoot">마지막 갱신: —</span></div>
   </aside>
 
   <!-- ===== 본문 ===== -->
@@ -273,7 +412,7 @@ button{background:none;border:none;cursor:pointer}
       </div>
       <div class="spacer"></div>
       <div class="search">
-        <span style="color:#5f6b83">🔍</span>
+        <span style="color:#94A3B8">🔍</span>
         <input id="q" placeholder="봇·스킬·자동작업·파일명 아무거나 검색" autocomplete="off">
         <span class="kbd" id="qclear" style="cursor:pointer;display:none">지우기</span>
       </div>
@@ -282,10 +421,7 @@ button{background:none;border:none;cursor:pointer}
 
     <div class="scroll" id="scroll">
 
-    <!-- 렌더 실패 전역 안내 (기본 숨김, 실패 시에만 노출) -->
-    <div class="failbar" id="failbar">
-      <span>⚠️</span><span id="failbartxt"></span>
-    </div>
+    <div class="failbar" id="failbar"><span>⚠️</span><span id="failbartxt"></span></div>
 
     <!-- ===== 검색 결과 ===== -->
     <section class="view" id="v-search">
@@ -296,86 +432,92 @@ button{background:none;border:none;cursor:pointer}
 
     <!-- ============ 1. 구조도 ============ -->
     <section class="view on" id="v-org">
-      <div class="hintbar">
-        <span>📌</span><span><code>&lt;hermes&gt;</code> = 내 PC의 헤르메스 폴더. 경로를 누르면 그대로 복사됩니다.</span>
-        <span style="margin-left:auto" class="muted" id="gen1"></span>
-      </div>
 
-      <div class="card" style="margin-bottom:12px">
-        <h3>🏛 조직도<span class="hint">봇 카드를 누르면 파일 경로까지 나옵니다</span></h3>
+      <!-- 상단 KPI 4장 -->
+      <div class="kpis" id="kpis"></div>
+
+      <!-- 중앙 흐름도 (크게) -->
+      <div class="card row12">
+        <h3>🔀 일이 흘러가는 모양<span class="hint">가운데가 도비서. 지시가 퍼져 나가고 결과가 모인다</span></h3>
         <div class="body">
-          <div class="org">
-            <div class="lvl"><div class="onode boss"><div class="nm">👑 라라페님</div><div class="ro">고용주 · 최종 결정</div></div></div>
-            <div class="vline"></div>
-            <div class="lvl"><div class="onode sec clk" onclick="D('bot:all')"><div class="nm">🤖 도비서 (all)</div><div class="ro">총괄 · 지시 분배 · 검수</div></div></div>
-            <div class="vline"></div>
-            <div class="hline"></div>
-            <div class="botrow" id="botrow"></div>
+          <div class="flowwrap">
+            <div class="flow" id="flow"></div>
+            <div class="legend">
+              <h5>범례</h5>
+              <div class="lgi"><i class="ln"></i>작업 지시</div>
+              <div class="lgi"><i class="ln g"></i>결과 반납</div>
+              <div class="lgi"><i class="ln p"></i>지침서 적용</div>
+              <div class="lgi"><i class="ln a"></i>도구 호출</div>
+              <div class="lgi"><i class="ln s"></i>기록·보관</div>
+              <div class="note" id="flownote"></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="card" style="margin-bottom:12px">
-        <h3>🔀 작업 흐름 파이프라인<span class="hint">무엇이 어떤 순서로 누구에게 넘어가는가</span></h3>
-        <div class="body"><div class="pipe" id="pipe"></div></div>
+      <!-- 봇 카드 -->
+      <div class="card row12">
+        <h3>🤖 하위봇<span class="hint">카드를 누르면 인격·스킬·고칠 파일 경로까지 나옵니다</span></h3>
+        <div class="body"><div class="botrow" id="botrow"></div></div>
       </div>
 
-      <div class="wide2">
+      <!-- 하단 3단 (초안의 하단 3칸 구성) -->
+      <div class="wide3">
         <div class="card">
-          <h3>📚 규칙 계층도<span class="hint">위에서부터 읽히고, 충돌하면 위가 이긴다</span></h3>
+          <h3>📚 규칙 계층도<span class="hint">위가 이긴다</span></h3>
           <div class="body" id="layers"></div>
         </div>
         <div class="card">
-          <h3>ℹ️ 이 지도는 어떻게 갱신되나<span class="hint">대시보드 자기 설명</span></h3>
+          <h3>⏱ 오늘 도는 자동작업<span class="hint" id="cronmini-h"></span></h3>
+          <div class="body" id="cronmini"></div>
+        </div>
+        <div class="card">
+          <h3>ℹ️ 이 지도는 어떻게 갱신되나<span class="hint">자기 설명</span></h3>
           <div class="body">
-            <p style="font-size:12.5px;line-height:1.7">
-              이 화면은 헤르메스 폴더를 훑어 만든 <b>구조 스냅샷</b>입니다.
-              매일 새벽 자동작업이 봇·스킬·자동작업·연결 목록을 다시 읽어, 이 파일 안의
-              <code class="path" style="cursor:default">__DATA_START__ ~ __DATA_END__</code> 블록만 통째로 갈아끼웁니다.
-              화면 코드는 건드리지 않습니다. <b>화면을 고치려면 코드가 아니라 데이터를 보면 됩니다.</b>
-            </p>
+            <p style="font-size:11.5px;line-height:1.7;color:var(--mut)">
+              헤르메스 폴더를 훑어 만든 <b style="color:var(--txt)">구조 스냅샷</b>입니다.
+              매일 새벽 자동작업이 목록을 다시 읽어 이 파일 안의
+              <code class="path" style="cursor:default">__DATA_START__ ~ __DATA_END__</code>
+              블록만 갈아끼웁니다. 화면 코드는 건드리지 않습니다.</p>
             <div class="sec-t">현재 표시 중인 데이터</div>
-            <div class="li"><span class="t">마지막 갱신 시각</span><span class="m" id="gen2"></span></div>
-            <div class="li"><span class="t">데이터 출처</span><span class="m">이 파일 내장 DATA 블록 (마커 교체 방식)</span></div>
+            <div class="li"><span class="t">마지막 갱신</span><span class="m" id="gen2"></span></div>
+            <div class="li"><span class="t">데이터 출처</span><span class="m">내장 DATA 블록</span></div>
             <div class="li"><span class="t">집계 대상</span><span class="m" id="counts"></span></div>
+            <div class="li"><span class="t">경로 표기</span><span class="m">&lt;hermes&gt; 자리표시</span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ 2. 보수 찾기 ============ -->
-    <section class="view" id="v-fix">
-      <div class="hintbar">
-        <span>🔧</span><span>하고 싶은 일을 왼쪽에서 찾고, 가운데 <b>경로를 눌러 복사</b>해 그 파일을 여세요. <code>&lt;hermes&gt;</code> = 내 PC의 헤르메스 폴더, <code>&lt;봇&gt;</code> = s/pm/uxui/dp/qa/marketer/jilmuni 중 하나.</span>
-      </div>
-      <div class="card">
-        <h3>🔧 보수 찾기표<span class="hint">경로 클릭 = 복사</span></h3>
-        <div class="body">
-          <table class="tbl">
-            <thead><tr><th style="width:30%">하고 싶은 일</th><th style="width:40%">열 파일 (원본)</th><th style="width:30%">볼트 사본 (읽기 전용)</th></tr></thead>
-            <tbody id="fixbody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ 3. 스킬 지도 ============ -->
+    <!-- ============ 2. 스킬 (그룹형 카드) ============ -->
     <section class="view" id="v-skill">
-      <div class="hintbar">
-        <span>🧩</span><span>스킬 = 봇이 따르는 <b>작업 절차서</b>. 위 검색창에 스킬 이름을 치면 <b>어느 봇이 그걸 가졌는지</b> 바로 나옵니다.</span>
-        <span class="tag cmn">공용</span><span class="tag cst">★맞춤</span>
+      <div class="skstat" id="skstat"></div>
+
+      <div class="skbar">
+        <div class="skfilter" id="skfilter">
+          <button class="on" data-f="all">전체</button>
+          <button data-f="custom">★ 맞춤만</button>
+          <button data-f="common">공용만</button>
+        </div>
+        <div class="botfilter" id="botfilter"></div>
+        <span style="margin-left:auto;display:flex;gap:6px">
+          <button class="chip" id="expandall">모두 펼치기</button>
+          <button class="chip" id="collapseall">모두 접기</button>
+        </span>
       </div>
-      <div class="card" style="margin-bottom:12px">
-        <h3>🧩 봇별 스킬 보유 현황<span class="hint">스킬 이름을 누르면 원본 경로와 보유 봇이 나옵니다</span></h3>
-        <div class="body"><div class="skillcols" id="skillcols"></div></div>
+
+      <div class="card row12">
+        <h3>🧩 분류별 스킬<span class="hint" id="skhint">칸을 누르면 그 분류의 스킬이 펼쳐집니다 · 스킬을 누르면 원본 경로·보유 봇</span></h3>
+        <div class="body"><div class="skgroups" id="skgroups"></div></div>
       </div>
+
       <div class="card">
-        <h3>📊 스킬 수 요약<span class="hint">★ = 우리 팀 전용으로 직접 만든 스킬</span></h3>
+        <h3>📊 봇별 보유량<span class="hint">★ = 우리 팀이 직접 만든 스킬</span></h3>
         <div class="body" id="skillsum"></div>
       </div>
     </section>
 
-    <!-- ============ 4. 자동작업 ============ -->
+    <!-- ============ 3. 자동작업 ============ -->
     <section class="view" id="v-cron">
       <div class="hintbar">
         <span>⏱</span><span>뭐가 <b>언제 저절로</b> 도는가. <b>AI</b>=토큰을 쓰는 작업, <b>무토큰</b>=스크립트만 도는 작업.</span>
@@ -384,8 +526,25 @@ button{background:none;border:none;cursor:pointer}
         <h3>⏱ 자동작업(크론) 지도<span class="hint" id="cronhint"></span></h3>
         <div class="body">
           <table class="tbl">
-            <thead><tr><th style="width:34%">이름</th><th style="width:22%">주기</th><th style="width:14%">모드</th><th style="width:16%">대상 프로필</th><th style="width:14%">분류</th></tr></thead>
+            <thead><tr><th style="width:36%">이름</th><th style="width:22%">주기</th><th style="width:12%">모드</th><th style="width:14%">대상 프로필</th><th style="width:16%">분류</th></tr></thead>
             <tbody id="cronbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. 보수 찾기 ============ -->
+    <section class="view" id="v-fix">
+      <div class="hintbar">
+        <span>🔧</span><span>하고 싶은 일을 왼쪽에서 찾고, 가운데 <b>경로를 눌러 복사</b>해 그 파일을 여세요.
+        <code>&lt;hermes&gt;</code> = 내 PC의 헤르메스 폴더, <code>&lt;봇&gt;</code> = s/pm/uxui/dp/qa/marketer/jilmuni 중 하나.</span>
+      </div>
+      <div class="card">
+        <h3>🔧 보수 찾기표<span class="hint">경로 클릭 = 복사</span></h3>
+        <div class="body">
+          <table class="tbl">
+            <thead><tr><th style="width:30%">하고 싶은 일</th><th style="width:42%">열 파일 (원본)</th><th style="width:28%">볼트 사본 (읽기 전용)</th></tr></thead>
+            <tbody id="fixbody"></tbody>
           </table>
         </div>
       </div>
@@ -393,12 +552,13 @@ button{background:none;border:none;cursor:pointer}
 
     <!-- ============ 5. 연결·저장소 ============ -->
     <section class="view" id="v-conn">
-      <div class="card" style="margin-bottom:12px">
+      <div class="card row12">
         <h3>🗄 저장소 지도<span class="hint">무엇이 원본이고, 무엇이 사본인가</span></h3>
         <div class="body">
           <div class="stores" id="stores"></div>
           <div class="hintbar" style="margin:12px 0 0">
-            <span>⚠️</span><span><b>헤르메스가 원본입니다.</b> 옵시디언은 매일 04:50 통째로 덮어쓰는 <b>읽기 전용 사본</b>이라 거기서 고치면 사라집니다. 결정·상태의 정본은 노션입니다.</span>
+            <span>⚠️</span><span><b>헤르메스가 원본입니다.</b> 옵시디언은 매일 04:50 통째로 덮어쓰는
+            <b>읽기 전용 사본</b>이라 거기서 고치면 사라집니다. 결정·상태의 정본은 노션입니다.</span>
           </div>
         </div>
       </div>
@@ -445,49 +605,71 @@ button{background:none;border:none;cursor:pointer}
    정규식 중괄호 짝맞추기는 쓰지 마세요. 마커 split이 안전합니다.
 
    ------------------------------------------------------------------
-   [이 화면이 요구하는 데이터 키 전수 목록]
-   최상위(8):
-     generated_at : str  ISO8601. 푸터/헤더 "마지막 갱신"에 사용. 없으면 "—".
-     bots         : []   조직도·스킬지도·검색
-     pipeline     : []   작업 흐름 파이프라인
-     repair_map   : []   보수 찾기표
-     skills       : []   스킬 지도
-     crons        : []   자동작업표
-     mcp          : []   바깥 연결표
-     stores       : []   저장소 지도
-     flows        : []   저장소 사이 화살표 (stores 길이-1 개 필요)
-     rule_layers  : []   규칙 계층도
+   [이 화면이 요구하는 데이터 키 전수 목록]  ※키 추가 없음. 기존 계약 그대로.
+   최상위(10):
+     generated_at : str  ISO8601. 푸터 "마지막 갱신"에 사용. 없으면 "—".
+     bots, pipeline, repair_map, skills, crons, mcp, stores, flows, rule_layers
 
    bots[] : id, name, role, model,
-            skill_count  (int|null),
-            custom_count (int|null),
-            soul_chars   (int|null),
-            cron_count   (int|null)  ★null = 크론 설정 파일 없음. 0개와 다름.
-                                       화면에 "— (크론 설정 파일 없음)"으로 표시.
-            color        (str, #RRGGBB  카드 좌측 띠·점 색)
-            soul_path, skills_path,
-            cron_path    (str|null  null이면 해당 행 미표시)
-            vault_path
+            skill_count(int|null), custom_count(int|null), soul_chars(int|null),
+            cron_count(int|null)  ★null = 크론 설정 파일 없음. 0개와 다름.
+            color(#RRGGBB), soul_path, skills_path, cron_path(str|null), vault_path
    pipeline[]   : from, to, label            (from/to 는 bots[].id 또는 "도비서")
    repair_map[] : want, file, vault
    skills[]     : name, desc, owners[](bots[].id), custom(bool), path
-   crons[]      : name, schedule, mode("AI"|"무토큰"), profile, kind(분류 태그)
-   mcp[]        : name, label(한글 설명), url, auth, enabled(bool), profiles[]
+   crons[]      : name, schedule, mode("AI"|"무토큰"), profile, kind
+   mcp[]        : name, label, url, auth, enabled(bool), profiles[]
    stores[]     : name, role, note, path, color
    flows[]      : from, to, label
-   rule_layers[]: layer(int), name, desc, path, win(우선순위 문구)
+   rule_layers[]: layer(int), name, desc, path, win
+
+   [스킬 분류(그룹)는 어디서 오나]  ★새 키를 만들지 않았습니다.
+     skills[].path 의 폴더 구조에서 읽습니다.
+        <hermes>/skills/<분류>/<스킬명>                  → 공용
+        <hermes>/profiles/<봇>/skills/<분류>/<스킬명>    → 그 봇 전용
+     즉 path 에 분류 폴더만 포함되면 화면이 알아서 묶습니다.
+     분류 구간을 못 읽으면 "기타"로 묶고 화면은 죽지 않습니다.
 
    [경로 표기 규칙] 절대경로·윈도우 사용자명 금지.
      <hermes> = 헤르메스 폴더, <vault> = 옵시디언 볼트, <봇> = 프로필 id.
 
    [견고성 원칙] 키가 빠져도 페이지는 죽지 않습니다.
-     - 누락 키는 아래 normalizeData()에서 빈 배열/기본값으로 채워집니다.
-     - 개별 렌더 함수가 터져도 safe()가 그 구역에만 한글 안내를 띄우고
-       나머지 화면과 이벤트 등록은 정상 진행됩니다(오류는 콘솔에도 남깁니다).
+     - 누락 키는 normalizeData()에서 빈 배열/기본값으로 채워집니다.
+     - 개별 렌더가 터져도 safe()가 그 구역에만 한글 안내를 띄우고
+       나머지 화면과 이벤트 등록은 정상 진행됩니다.
+   ================================================================== */
+
+/* ==================================================================
+   ⛔ 더미 데이터 작성 금지 규칙  (2026-09-16 확정 · 위반 시 배포 중단)
+
+   아래 __DATA_START__ ~ __DATA_END__ 블록은 **예시용 더미**다.
+   빌드 때 실제 데이터로 통째 교체되지만, **이 템플릿 파일 자체가
+   저장소에 올라가거나 공유되면 여기 적힌 글자가 그대로 샌다.**
+
+   ▶ 실제 설치본에서 이름·경로를 복사해 붙여넣지 말 것. ◀
+     (더미 사고는 전부 "실물 복붙"에서 났다. 손으로 지어내라.)
+
+   [넣으면 안 되는 것 — 종류로 적는다. 실제 단어를 여기 쓰면
+    이 주석 자체가 유출물이 되므로 예시어는 일부러 뺐다.]
+     1. 학업 식별어 : 학교·학사 시스템·과목·학번 등 실제 명칭
+                      → 더미에는 "(비공개) …" 로만 쓴다. kind 는 그대로 둔다.
+     2. 개인 경로   : 윈도우 드라이브 절대경로, 사용자 계정 폴더,
+                      앱 데이터 폴더, 클라우드 동기화 폴더, 개인 볼트 이름
+                      → <hermes> / <vault> / <봇> 치환 표기만 쓴다.
+     3. 자격증명    : 노션·오픈AI·깃허브·구글·AWS 등 발급 토큰 접두사로
+                      시작하는 문자열, 인증 헤더 값
+     4. 연락처      : 개인 메일 주소(포털·웹메일 도메인), 휴대전화 번호
+
+   [검사 방법 — 고친 뒤 반드시 직접 돌릴 것]
+     python _secscan.py team_map_v1.html
+     원문 + 6종 언이스케이프(유니코드·HTML엔티티·URL·백슬래시·hex·base64)를
+     2중으로 훑는다. **0건이 아니면 배포 금지.**
+     금지어 원문 목록은 _secscan.py 의 PATTERNS 에만 둔다
+     (그 파일은 내부 검사 도구이므로 공개 배포물에 포함하지 말 것).
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-09-16T06:39:53+09:00",
+  "generated_at": "2026-09-16T08:50:53+09:00",
   "bots": [
     {
       "id": "all",
@@ -495,7 +677,7 @@ var DATA =
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "claude-opus-5",
       "skill_count": 115,
-      "custom_count": 34,
+      "custom_count": 35,
       "soul_chars": 6115,
       "cron_count": 26,
       "color": "#fbcf5a",
@@ -553,10 +735,10 @@ var DATA =
       "id": "dp",
       "name": "개발 담당",
       "role": "코드 작성·수정·배포",
-      "model": "gpt-5.3-codex-spark",
+      "model": "claude-opus-5",
       "skill_count": 93,
       "custom_count": 15,
-      "soul_chars": 7580,
+      "soul_chars": 7526,
       "cron_count": null,
       "color": "#5b9dfb",
       "soul_path": "<hermes>/profiles/dp/SOUL.md",
@@ -752,7 +934,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/agent-runtime-tuning/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/agent-runtime-tuning"
     },
     {
       "name": "airtable",
@@ -768,7 +950,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/airtable/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/airtable"
     },
     {
       "name": "app-code-maintenance",
@@ -777,7 +959,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/software-development/app-code-maintenance/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/app-code-maintenance"
     },
     {
       "name": "app-project-handover",
@@ -786,7 +968,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/software-development/app-project-handover/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/app-project-handover"
     },
     {
       "name": "app-store-naming-and-aso",
@@ -795,7 +977,7 @@ var DATA =
         "marketer"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/marketer/skills/productivity/app-store-naming-and-aso/SKILL.md"
+      "path": "<hermes>/profiles/marketer/skills/productivity/app-store-naming-and-aso"
     },
     {
       "name": "apple-notes",
@@ -810,7 +992,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/s/skills/apple/apple-notes/SKILL.md"
+      "path": "<hermes>/profiles/s/skills/apple/apple-notes"
     },
     {
       "name": "apple-reminders",
@@ -825,7 +1007,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/s/skills/apple/apple-reminders/SKILL.md"
+      "path": "<hermes>/profiles/s/skills/apple/apple-reminders"
     },
     {
       "name": "architecture-diagram",
@@ -841,7 +1023,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/architecture-diagram/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/architecture-diagram"
     },
     {
       "name": "arxiv",
@@ -857,7 +1039,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/arxiv/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/arxiv"
     },
     {
       "name": "ascii-art",
@@ -872,7 +1054,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/ascii-art/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/ascii-art"
     },
     {
       "name": "ascii-video",
@@ -888,7 +1070,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/ascii-video/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/ascii-video"
     },
     {
       "name": "baoyu-infographic",
@@ -904,7 +1086,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/baoyu-infographic/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/baoyu-infographic"
     },
     {
       "name": "blocked-page-recovery",
@@ -920,7 +1102,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/web/blocked-page-recovery/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/web/blocked-page-recovery"
     },
     {
       "name": "blogwatcher",
@@ -935,7 +1117,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/blogwatcher/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/blogwatcher"
     },
     {
       "name": "box",
@@ -951,7 +1133,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/box/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/box"
     },
     {
       "name": "business-idea-discovery",
@@ -960,7 +1142,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/business-idea-discovery/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/business-idea-discovery"
     },
     {
       "name": "claude-code",
@@ -976,7 +1158,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/claude-code/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/claude-code"
     },
     {
       "name": "claude-design",
@@ -992,7 +1174,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/claude-design/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/claude-design"
     },
     {
       "name": "codebase-inspection",
@@ -1008,7 +1190,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/codebase-inspection/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/codebase-inspection"
     },
     {
       "name": "codex",
@@ -1024,7 +1206,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/codex/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/codex"
     },
     {
       "name": "comfyui",
@@ -1039,7 +1221,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/comfyui/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/comfyui"
     },
     {
       "name": "competitor-news-monitor",
@@ -1055,7 +1237,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/competitor-news-monitor/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/competitor-news-monitor"
     },
     {
       "name": "computer-use",
@@ -1071,7 +1253,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/computer-use/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/computer-use"
     },
     {
       "name": "context-budget-architecture",
@@ -1080,7 +1262,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/context-budget-architecture/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/context-budget-architecture"
     },
     {
       "name": "credential-intake",
@@ -1089,7 +1271,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/credential-intake/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/credential-intake"
     },
     {
       "name": "decision-override-protocol",
@@ -1098,7 +1280,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/decision-override-protocol/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/decision-override-protocol"
     },
     {
       "name": "design-md",
@@ -1114,7 +1296,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/design-md/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/design-md"
     },
     {
       "name": "design-review-loop",
@@ -1123,7 +1305,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/design-review-loop/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/design-review-loop"
     },
     {
       "name": "diagram-image-delivery",
@@ -1132,7 +1314,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/creative/diagram-image-delivery/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/diagram-image-delivery"
     },
     {
       "name": "dobiseo-ops",
@@ -1141,7 +1323,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/dobiseo-ops/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/dobiseo-ops"
     },
     {
       "name": "dobiseo-toolbox",
@@ -1150,7 +1332,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/toolbox/dobiseo-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/toolbox/dobiseo-toolbox"
     },
     {
       "name": "document-to-action-items",
@@ -1166,7 +1348,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/document-to-action-items/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/document-to-action-items"
     },
     {
       "name": "docx",
@@ -1182,7 +1364,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/docx/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/docx"
     },
     {
       "name": "dogfood",
@@ -1198,7 +1380,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/dogfood/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/dogfood"
     },
     {
       "name": "dp-toolbox",
@@ -1207,7 +1389,7 @@ var DATA =
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/toolbox/dp-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/toolbox/dp-toolbox"
     },
     {
       "name": "email-inbox-triage",
@@ -1223,7 +1405,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/email/email-inbox-triage/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/email/email-inbox-triage"
     },
     {
       "name": "evaluating-llms-harness",
@@ -1238,7 +1420,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/evaluation/evaluating-llms-harness/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/mlops/evaluation/evaluating-llms-harness"
     },
     {
       "name": "excalidraw",
@@ -1253,7 +1435,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/excalidraw/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/excalidraw"
     },
     {
       "name": "external-tool-evaluation",
@@ -1262,7 +1444,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/external-tool-evaluation/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/external-tool-evaluation"
     },
     {
       "name": "findmy",
@@ -1277,7 +1459,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/s/skills/apple/findmy/SKILL.md"
+      "path": "<hermes>/profiles/s/skills/apple/findmy"
     },
     {
       "name": "fix-blast-radius",
@@ -1286,7 +1468,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/software-development/fix-blast-radius/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/fix-blast-radius"
     },
     {
       "name": "gif-search",
@@ -1302,7 +1484,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/media/gif-search/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/media/gif-search"
     },
     {
       "name": "github",
@@ -1318,7 +1500,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/github/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/github"
     },
     {
       "name": "github-auth",
@@ -1333,7 +1515,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-auth/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-auth"
     },
     {
       "name": "github-code-review",
@@ -1348,7 +1530,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-code-review/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-code-review"
     },
     {
       "name": "github-issue-to-pr",
@@ -1363,7 +1545,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-issue-to-pr/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-issue-to-pr"
     },
     {
       "name": "github-issues",
@@ -1378,7 +1560,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-issues/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-issues"
     },
     {
       "name": "github-pr-workflow",
@@ -1393,7 +1575,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-pr-workflow/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-pr-workflow"
     },
     {
       "name": "github-repo-management",
@@ -1408,7 +1590,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-repo-management/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-repo-management"
     },
     {
       "name": "google-workspace",
@@ -1424,7 +1606,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/google-workspace/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/google-workspace"
     },
     {
       "name": "grounded-citations",
@@ -1440,7 +1622,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/grounded-citations/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/grounded-citations"
     },
     {
       "name": "hermes-agent",
@@ -1456,7 +1638,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-agent"
     },
     {
       "name": "hermes-agent-skill-authoring",
@@ -1472,7 +1654,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/hermes-agent-skill-authoring"
     },
     {
       "name": "hermes-cron-reports",
@@ -1481,7 +1663,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-cron-reports/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-cron-reports"
     },
     {
       "name": "hermes-gateway-bots",
@@ -1490,7 +1672,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-gateway-bots/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-gateway-bots"
     },
     {
       "name": "hermes-mcp-connections",
@@ -1499,7 +1681,7 @@ var DATA =
         "all"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-mcp-connections/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-mcp-connections"
     },
     {
       "name": "hermes-provider-auth",
@@ -1508,7 +1690,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-provider-auth/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-provider-auth"
     },
     {
       "name": "hermes-skill-porting",
@@ -1517,7 +1699,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-skill-porting/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-skill-porting"
     },
     {
       "name": "hermes-voice-io",
@@ -1526,7 +1708,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/hermes-voice-io/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/hermes-voice-io"
     },
     {
       "name": "himalaya",
@@ -1542,7 +1724,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/email/himalaya/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/email/himalaya"
     },
     {
       "name": "huggingface-hub",
@@ -1557,7 +1739,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/huggingface-hub/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/mlops/huggingface-hub"
     },
     {
       "name": "humanize-korean",
@@ -1573,7 +1755,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/creative/humanize-korean/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/humanize-korean"
     },
     {
       "name": "imessage",
@@ -1588,7 +1770,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/s/skills/apple/imessage/SKILL.md"
+      "path": "<hermes>/profiles/s/skills/apple/imessage"
     },
     {
       "name": "inspecting-hermes-desktop-dom",
@@ -1604,7 +1786,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/inspecting-hermes-desktop-dom/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/inspecting-hermes-desktop-dom"
     },
     {
       "name": "llama-cpp",
@@ -1619,7 +1801,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/inference/llama-cpp/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/mlops/inference/llama-cpp"
     },
     {
       "name": "llm-wiki",
@@ -1635,7 +1817,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/llm-wiki/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/llm-wiki"
     },
     {
       "name": "lms-course-automation",
@@ -1644,7 +1826,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/lms-course-automation/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/lms-course-automation"
     },
     {
       "name": "logged-in-site-automation",
@@ -1653,7 +1835,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/logged-in-site-automation/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/logged-in-site-automation"
     },
     {
       "name": "manim-video",
@@ -1669,7 +1851,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/manim-video/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/manim-video"
     },
     {
       "name": "maps",
@@ -1685,7 +1867,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/maps/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/maps"
     },
     {
       "name": "marketer-toolbox",
@@ -1694,7 +1876,7 @@ var DATA =
         "marketer"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/marketer/skills/toolbox/marketer-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/marketer/skills/toolbox/marketer-toolbox"
     },
     {
       "name": "meeting-action-items",
@@ -1710,7 +1892,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/meeting-action-items/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/meeting-action-items"
     },
     {
       "name": "merge-reconciler",
@@ -1725,7 +1907,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/merge-reconciler/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/merge-reconciler"
     },
     {
       "name": "model-tiering",
@@ -1734,7 +1916,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/model-tiering/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/model-tiering"
     },
     {
       "name": "nano-pdf",
@@ -1749,7 +1931,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/nano-pdf/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/nano-pdf"
     },
     {
       "name": "node-inspect-debugger",
@@ -1765,7 +1947,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/node-inspect-debugger/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/node-inspect-debugger"
     },
     {
       "name": "notion",
@@ -1781,7 +1963,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/notion/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/notion"
     },
     {
       "name": "notion-business-hq",
@@ -1790,7 +1972,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/notion-business-hq/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/notion-business-hq"
     },
     {
       "name": "obsidian",
@@ -1806,7 +1988,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/note-taking/obsidian/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/note-taking/obsidian"
     },
     {
       "name": "obsidian-memory-mirror",
@@ -1815,7 +1997,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/obsidian-memory-mirror/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/obsidian-memory-mirror"
     },
     {
       "name": "ocr-and-documents",
@@ -1830,7 +2012,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/ocr-and-documents/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/ocr-and-documents"
     },
     {
       "name": "opencode",
@@ -1846,7 +2028,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/opencode/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/opencode"
     },
     {
       "name": "openhue",
@@ -1861,7 +2043,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/smart-home/openhue/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/smart-home/openhue"
     },
     {
       "name": "p5js",
@@ -1877,7 +2059,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/p5js/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/p5js"
     },
     {
       "name": "pdf",
@@ -1893,7 +2075,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/pdf/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/pdf"
     },
     {
       "name": "plan",
@@ -1908,7 +2090,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/plan/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/plan"
     },
     {
       "name": "pm-toolbox",
@@ -1917,7 +2099,7 @@ var DATA =
         "pm"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/pm/skills/toolbox/pm-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/pm/skills/toolbox/pm-toolbox"
     },
     {
       "name": "ponytail",
@@ -1926,7 +2108,7 @@ var DATA =
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail"
     },
     {
       "name": "ponytail-audit",
@@ -1935,7 +2117,7 @@ var DATA =
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-audit/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-audit"
     },
     {
       "name": "ponytail-debt",
@@ -1944,7 +2126,7 @@ var DATA =
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-debt/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-debt"
     },
     {
       "name": "ponytail-help",
@@ -1953,7 +2135,7 @@ var DATA =
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-help/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-help"
     },
     {
       "name": "ponytail-review",
@@ -1962,7 +2144,7 @@ var DATA =
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-review/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-review"
     },
     {
       "name": "popular-web-designs",
@@ -1978,7 +2160,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/popular-web-designs/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/popular-web-designs"
     },
     {
       "name": "portfolio-showcase-site",
@@ -1987,7 +2169,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/software-development/portfolio-showcase-site/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/portfolio-showcase-site"
     },
     {
       "name": "powerpoint",
@@ -2003,7 +2185,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/powerpoint/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/powerpoint"
     },
     {
       "name": "pretext",
@@ -2018,7 +2200,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/pretext/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/pretext"
     },
     {
       "name": "product-3d-model",
@@ -2027,7 +2209,7 @@ var DATA =
         "uxui"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/uxui/skills/creative/product-3d-model/SKILL.md"
+      "path": "<hermes>/profiles/uxui/skills/creative/product-3d-model"
     },
     {
       "name": "product-price-monitor",
@@ -2043,7 +2225,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/product-price-monitor/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/product-price-monitor"
     },
     {
       "name": "public-artifact-sanitization",
@@ -2052,7 +2234,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/public-artifact-sanitization/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/public-artifact-sanitization"
     },
     {
       "name": "python-debugpy",
@@ -2068,7 +2250,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/python-debugpy/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/python-debugpy"
     },
     {
       "name": "qa-review",
@@ -2077,7 +2259,7 @@ var DATA =
         "qa"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/qa-review/SKILL.md"
+      "path": "<hermes>/profiles/qa/skills/devops/qa-review"
     },
     {
       "name": "qa-toolbox",
@@ -2086,7 +2268,7 @@ var DATA =
         "qa"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/qa/skills/toolbox/qa-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/qa/skills/toolbox/qa-toolbox"
     },
     {
       "name": "react-native-expo-mvp-dev",
@@ -2095,7 +2277,7 @@ var DATA =
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/react-native-expo-mvp-dev/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/react-native-expo-mvp-dev"
     },
     {
       "name": "requesting-code-review",
@@ -2111,7 +2293,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/requesting-code-review/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/requesting-code-review"
     },
     {
       "name": "research-paper-writing",
@@ -2126,7 +2308,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/research-paper-writing/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/research-paper-writing"
     },
     {
       "name": "role-based-delegation",
@@ -2135,7 +2317,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/role-based-delegation/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/role-based-delegation"
     },
     {
       "name": "s-toolbox",
@@ -2144,7 +2326,7 @@ var DATA =
         "s"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/s/skills/toolbox/s-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/s/skills/toolbox/s-toolbox"
     },
     {
       "name": "saved-content-digest",
@@ -2153,7 +2335,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/saved-content-digest/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/saved-content-digest"
     },
     {
       "name": "sdlc-review",
@@ -2169,7 +2351,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/devops/sdlc-review/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/sdlc-review"
     },
     {
       "name": "serving-llms-vllm",
@@ -2184,7 +2366,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/inference/serving-llms-vllm/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/mlops/inference/serving-llms-vllm"
     },
     {
       "name": "session-librarian",
@@ -2199,7 +2381,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/session-librarian/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/session-librarian"
     },
     {
       "name": "simplify-code",
@@ -2215,7 +2397,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/simplify-code/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/simplify-code"
     },
     {
       "name": "single-file-html-prototyping",
@@ -2224,7 +2406,7 @@ var DATA =
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/single-file-html-prototyping/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/single-file-html-prototyping"
     },
     {
       "name": "sketch",
@@ -2239,7 +2421,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/sketch/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/sketch"
     },
     {
       "name": "songsee",
@@ -2255,7 +2437,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/media/songsee/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/media/songsee"
     },
     {
       "name": "songwriting-and-ai-music",
@@ -2271,7 +2453,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/songwriting-and-ai-music/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/songwriting-and-ai-music"
     },
     {
       "name": "spec-driven-qa-planning",
@@ -2280,7 +2462,7 @@ var DATA =
         "qa"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/qa/skills/software-development/spec-driven-qa-planning/SKILL.md"
+      "path": "<hermes>/profiles/qa/skills/software-development/spec-driven-qa-planning"
     },
     {
       "name": "spike",
@@ -2296,7 +2478,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/spike/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/spike"
     },
     {
       "name": "stage-end-session-cleanup",
@@ -2305,7 +2487,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/stage-end-session-cleanup/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/stage-end-session-cleanup"
     },
     {
       "name": "stuck-recovery",
@@ -2314,7 +2496,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/stuck-recovery/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/stuck-recovery"
     },
     {
       "name": "systematic-debugging",
@@ -2330,7 +2512,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/systematic-debugging/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/systematic-debugging"
     },
     {
       "name": "taste-skill",
@@ -2341,7 +2523,7 @@ var DATA =
         "dp"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/taste-skill/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/taste-skill"
     },
     {
       "name": "teams-meeting-pipeline",
@@ -2357,7 +2539,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/teams-meeting-pipeline/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/teams-meeting-pipeline"
     },
     {
       "name": "test-driven-development",
@@ -2373,7 +2555,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/test-driven-development/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/test-driven-development"
     },
     {
       "name": "thread-close",
@@ -2382,7 +2564,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/thread-close/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/thread-close"
     },
     {
       "name": "toolbox-scoring",
@@ -2391,7 +2573,7 @@ var DATA =
         "qa"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/qa/skills/toolbox/toolbox-scoring/SKILL.md"
+      "path": "<hermes>/profiles/qa/skills/toolbox/toolbox-scoring"
     },
     {
       "name": "touchdesigner-mcp",
@@ -2406,7 +2588,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/touchdesigner-mcp/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/touchdesigner-mcp"
     },
     {
       "name": "uxui-toolbox",
@@ -2415,7 +2597,7 @@ var DATA =
         "uxui"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/uxui/skills/toolbox/uxui-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/uxui/skills/toolbox/uxui-toolbox"
     },
     {
       "name": "web-design-guidelines",
@@ -2426,7 +2608,7 @@ var DATA =
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/creative/web-design-guidelines/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/web-design-guidelines"
     },
     {
       "name": "web-session-automation",
@@ -2435,7 +2617,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/web-session-automation/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/web-session-automation"
     },
     {
       "name": "weekly-review-planning",
@@ -2451,7 +2633,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/weekly-review-planning/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/weekly-review-planning"
     },
     {
       "name": "weights-and-biases",
@@ -2466,7 +2648,7 @@ var DATA =
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/evaluation/weights-and-biases/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/mlops/evaluation/weights-and-biases"
     },
     {
       "name": "windows-desktop-browser-control",
@@ -2475,7 +2657,7 @@ var DATA =
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/windows-desktop-browser-control/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/windows-desktop-browser-control"
     },
     {
       "name": "windows-portable-cli-install",
@@ -2484,7 +2666,7 @@ var DATA =
         "all"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/devops/windows-portable-cli-install/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/windows-portable-cli-install"
     },
     {
       "name": "xlsx",
@@ -2500,7 +2682,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/xlsx/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/xlsx"
     },
     {
       "name": "xurl",
@@ -2516,7 +2698,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/social-media/xurl/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/social-media/xurl"
     },
     {
       "name": "youtube-content",
@@ -2532,7 +2714,7 @@ var DATA =
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/media/youtube-content/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/media/youtube-content"
     }
   ],
   "crons": [
@@ -2831,12 +3013,11 @@ var DATA =
 }/*__DATA_END__*/
 ;
 
-/* ================= 데이터 기본값 보정 (없는 키 때문에 안 터지게) ================= */
-var MISSING=[];   // 정규화 중 채워 넣은(=실데이터에 없던) 키 기록
+/* ================= 데이터 기본값 보정 ================= */
+var MISSING=[];
 function isArr(v){return Object.prototype.toString.call(v)==='[object Array]'}
 function needArr(o,k,label){
   if(!isArr(o[k])){ o[k]=[]; MISSING.push(label||k); return o[k]; }
-  /* null·문자열 등 항목이 섞이면 렌더·검색이 모두 터진다. 객체만 남긴다. */
   var clean=o[k].filter(function(x){return x&&typeof x==='object'});
   if(clean.length!==o[k].length)MISSING.push((label||k)+'의 잘못된 항목 '+(o[k].length-clean.length)+'개');
   o[k]=clean;
@@ -2850,7 +3031,7 @@ function normalizeData(){
   needArr(DATA,'stores');needArr(DATA,'flows');needArr(DATA,'rule_layers');
 
   DATA.bots.forEach(function(b){
-    if(b.color==null)b.color='#3a4a73';
+    if(b.color==null)b.color='#2B80FD';
     if(b.id==null)b.id='?';
     if(b.name==null)b.name='(이름 없음)';
     if(b.role==null)b.role='—';
@@ -2858,19 +3039,25 @@ function normalizeData(){
     if(!('cron_count' in b))b.cron_count=null;
     if(!('cron_path' in b))b.cron_path=null;
   });
-  DATA.skills.forEach(function(s){if(!isArr(s.owners))s.owners=[]});
+  DATA.skills.forEach(function(s){
+    if(!isArr(s.owners))s.owners=[];
+    if(s.name==null)s.name='(이름 없음)';
+    if(s.desc==null)s.desc='';
+    if(s.path==null)s.path='';
+  });
   DATA.mcp.forEach(function(m){if(!isArr(m.profiles))m.profiles=[];if(m.label==null)m.label=''});
   DATA.crons.forEach(function(c){if(c.kind==null)c.kind='—'});
-  DATA.stores.forEach(function(s){if(s.color==null)s.color='#3a4a73';if(s.path==null)s.path='—'});
+  DATA.stores.forEach(function(s){if(s.color==null)s.color='#2B80FD';if(s.path==null)s.path='—'});
   DATA.rule_layers.forEach(function(l){if(l.win==null)l.win='—'});
 }
 
 /* ================= 유틸 ================= */
-function esc(s){return String(s==null?'':s).replace(/[&<>\"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function n(v){return v==null?'—':v}
-/* cron_count: int 와 null 이 섞인다. null = 크론 설정 파일 없음(0개와 다름). */
 function cronText(v){return v==null?'— (크론 설정 파일 없음)':(v+'개')}
 function bot(id){var a=isArr(DATA.bots)?DATA.bots:[];for(var i=0;i<a.length;i++){if(a[i].id===id)return a[i]}return null}
+function botColor(id){var b=bot(id);return b?b.color:'#94A3B8'}
 function subbots(){return (isArr(DATA.bots)?DATA.bots:[]).filter(function(b){return b.id!=='all'})}
 function toast(msg){var t=document.getElementById('toast');t.textContent=msg||'복사됨';t.classList.add('on');
   clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('on')},1200)}
@@ -2884,11 +3071,142 @@ function copyPath(el,txt){
 function P(path,cls){return '<span class="path '+(cls||'')+'" onclick="copyPath(this)">'+esc(path)+'</span>'}
 function row(k,v){return '<div class="kv"><span class="k">'+k+'</span><span class="v">'+v+'</span></div>'}
 
-/* ================= 렌더 ================= */
+/* ================= 스킬 분류 (path 에서 유도 — 새 키 아님) ================= */
+var CATMETA={
+  'productivity'         :['업무·문서','📄','#F1F7FE'],
+  'software-development' :['개발','💻','#EEF2FF'],
+  'creative'             :['디자인·창작','🎨','#F6F3FF'],
+  'devops'               :['운영·규칙','⚙️','#FFF8EC'],
+  'autonomous-ai-agents' :['에이전트 운영','🤖','#F3FEF9'],
+  'toolbox'              :['도구함','🧰','#FEF6F7'],
+  'research'             :['조사','🔎','#F1F7FE'],
+  'github'               :['깃허브','🐙','#F4F5F7'],
+  'mlops'                :['모델·ML','📈','#F3FEF9'],
+  'media'                :['미디어','🎬','#F6F3FF'],
+  'email'                :['메일','✉️','#F1F7FE'],
+  'web'                  :['웹 수집','🌐','#F1F7FE'],
+  'note-taking'          :['노트','📝','#FFF8EC'],
+  'smart-home'           :['스마트홈','💡','#FFF8EC'],
+  'social-media'         :['소셜','📣','#FEF6F7'],
+  'apple'                :['애플 기기','🍎','#FEF6F7'],
+  '기타'                  :['기타','📦','#F4F5F7']
+};
+/* path 예: <hermes>/skills/devops/foo  또는  <hermes>/profiles/dp/skills/toolbox/bar */
+function catOf(s){
+  var p=String(s&&s.path||'');
+  var m=p.split('/skills/')[1];
+  if(!m)return '기타';
+  var parts=m.split('/').filter(function(x){return x});
+  if(parts.length<2)return '기타';        /* 분류 폴더 없이 바로 스킬명이면 기타 */
+  return parts[0];
+}
+/* CATMETA 에 없는 새 분류 폴더가 생겨도 영어로 튀거나 레이아웃이 깨지지 않게 —
+   '새 분류 (폴더명)' 으로 한글 병기하고, 아주 긴 폴더명은 잘라 준다. */
+function catLabel(c){
+  var m=CATMETA[c];if(m)return m[0];
+  var k=String(c==null?'':c).replace(/[\r\n\t]+/g,' ').replace(/\s+/g,' ');
+  if(!k)return '기타';
+  if(k.length>20)k=k.slice(0,20)+'…';
+  return '새 분류 ('+k+')';
+}
+function catIcon(c){var m=CATMETA[c];return m?m[1]:'📦'}
+function catTint(c){var m=CATMETA[c];return m?m[2]:'#F4F5F7'}
+
+/* ================= 렌더: KPI ================= */
+function renderKpis(){
+  var bots=DATA.bots.length, sk=DATA.skills.length,
+      cst=DATA.skills.filter(function(s){return s.custom}).length,
+      cr=DATA.crons.length,
+      nt=DATA.crons.filter(function(c){return c.mode==='무토큰'}).length,
+      mc=DATA.mcp.length,
+      on=DATA.mcp.filter(function(m){return m.enabled}).length,
+      subs=subbots().length;
+  var items=[
+    ['t1','🤖','봇',        bots,'대','b','총괄 1 + 하위 '+subs,'org'],
+    ['t2','🧩','스킬',      sk,  '개','r','★맞춤 '+cst,'skill'],
+    ['t3','⏱','자동작업',   cr,  '개','g','무토큰 '+nt,'cron'],
+    ['t4','🔗','바깥 연결', mc,  '개','m',(on===mc?'모두 켜짐':on+'개 켜짐'),'conn']
+  ];
+  document.getElementById('kpis').innerHTML=items.map(function(it){
+    return '<div class="kpi '+it[0]+'" onclick="show(\''+it[7]+'\')">'+
+      '<div class="lab"><span class="i">'+it[1]+'</span>'+esc(it[2])+'</div>'+
+      '<div class="num">'+it[3]+'<span class="u">'+it[4]+'</span></div>'+
+      '<div class="dt '+it[5]+'">'+esc(it[6])+'</div></div>';
+  }).join('');
+}
+
+/* ================= 렌더: 흐름도 (허브형 + SVG 선) ================= */
+function renderFlow(){
+  var subs=subbots(), half=Math.ceil(subs.length/2);
+  var L=subs.slice(0,half), R=subs.slice(half);
+  var ico={s:'🔎',pm:'📋',uxui:'🎨',dp:'💻',qa:'✅',marketer:'📣',jilmuni:'💬'};
+  function nd(b){
+    return '<div class="fnode tint" style="--c:'+esc(b.color)+'" onclick="D(\'bot:'+esc(b.id)+'\')">'+
+      '<div class="e">'+(ico[b.id]||'🤖')+'</div>'+
+      '<div class="n">'+esc(b.id)+'</div><div class="r">'+esc(b.name)+'</div></div>';
+  }
+  var hub=bot('all');
+  document.getElementById('flow').innerHTML=
+    '<svg id="flowsvg" aria-hidden="true"></svg>'+
+    '<div class="fgrid">'+
+      '<div class="fcol"><div class="fnode ext" data-k="user"><div class="e">🙋</div><div class="n">라라페님</div><div class="r">요청·최종 결정</div></div></div>'+
+      '<div class="fcol">'+L.map(nd).join('')+'</div>'+
+      '<div class="fcol"><div class="fnode hub" data-k="hub" onclick="D(\'bot:all\')">'+
+        '<div class="e">👑</div><div class="n">'+esc(hub?hub.name:'도비서')+'</div>'+
+        '<div class="r">총괄 · 지시 분배 · 검수</div></div></div>'+
+      '<div class="fcol">'+R.map(nd).join('')+'</div>'+
+      '<div class="fcol"><div class="fnode out" data-k="out"><div class="e">📦</div><div class="n">결과물</div><div class="r">노션 · 볼트 · 파일</div></div></div>'+
+    '</div>';
+  drawFlowLines();
+
+  var st=DATA.stores.map(function(s){return s.name}).join(' · ');
+  document.getElementById('flownote').innerHTML=
+    '봇 '+DATA.bots.length+'대가 '+DATA.skills.length+'개 절차서를 나눠 갖고 있습니다.<br>'+
+    '결과는 '+esc(st||'—')+'로 남습니다.';
+}
+
+/* 흐름선: 실제 노드 좌표를 재서 곡선을 긋는다 (뷰박스 왜곡 방지) */
+function drawFlowLines(){
+  var wrap=document.getElementById('flow'), svg=document.getElementById('flowsvg');
+  if(!wrap||!svg)return;
+  var W=wrap.clientWidth, H=wrap.clientHeight;
+  if(!W||!H)return;
+  var base=wrap.getBoundingClientRect();
+  function box(el){var r=el.getBoundingClientRect();
+    return {l:r.left-base.left,r:r.right-base.left,cx:r.left-base.left+r.width/2,cy:r.top-base.top+r.height/2}}
+  var hubEl=wrap.querySelector('[data-k="hub"]'); if(!hubEl)return;
+  var hub=box(hubEl);
+  var cols=wrap.querySelectorAll('.fgrid > .fcol');
+  var d='';
+  function curve(x1,y1,x2,y2,col,w,dash){
+    var mx=(x1+x2)/2;
+    d+='<path d="M'+x1.toFixed(1)+','+y1.toFixed(1)+' C'+mx.toFixed(1)+','+y1.toFixed(1)+
+       ' '+mx.toFixed(1)+','+y2.toFixed(1)+' '+x2.toFixed(1)+','+y2.toFixed(1)+
+       '" fill="none" stroke="'+col+'" stroke-width="'+w+'"'+
+       (dash?' stroke-dasharray="'+dash+'"':'')+' opacity=".7"/>';
+  }
+  /* 라라페님 → 허브 */
+  if(cols[0]&&cols[0].firstChild){var u=box(cols[0].firstChild);curve(u.r,u.cy,hub.l,hub.cy,'#2B80FD',1.6);}
+  /* 허브 → 왼쪽 봇 (지시) */
+  if(cols[1])[].forEach.call(cols[1].children,function(el){var b=box(el);curve(hub.l,hub.cy,b.r,b.cy,'#2B80FD',1.2);});
+  /* 오른쪽 봇 → 허브 (반납) */
+  if(cols[3])[].forEach.call(cols[3].children,function(el){var b=box(el);curve(hub.r,hub.cy,b.l,b.cy,'#10B981',1.2);});
+  /* 허브 → 결과물 */
+  if(cols[4]&&cols[4].firstChild){var o=box(cols[4].firstChild);curve(hub.r,hub.cy,o.l,o.cy,'#64748B',1.6,'5 4');}
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  svg.setAttribute('preserveAspectRatio','none');
+  svg.innerHTML=d;
+}
+var _flowT;
+window.addEventListener('resize',function(){
+  clearTimeout(_flowT);_flowT=setTimeout(function(){try{drawFlowLines()}catch(e){}},140);
+});
+
+/* ================= 렌더: 봇 카드 ================= */
 function renderBots(){
   document.getElementById('botrow').innerHTML = subbots().map(function(b){
-    return '<div class="bcard" style="--c:'+b.color+'" onclick="D(\'bot:'+b.id+'\')">'+
-      '<div class="hd"><span class="av">'+esc(b.id.slice(0,2))+'</span>'+
+    return '<div class="bcard" style="--c:'+esc(b.color)+'" onclick="D(\'bot:'+esc(b.id)+'\')">'+
+      '<div class="hd"><span class="av">'+esc(String(b.id).slice(0,2))+'</span>'+
       '<span><span class="id">'+esc(b.id)+'</span> <span class="nm2">'+esc(b.name)+'</span></span></div>'+
       '<div class="ro">'+esc(b.role)+'</div>'+
       '<div class="mdl">'+esc(b.model)+'</div>'+
@@ -2897,28 +3215,132 @@ function renderBots(){
     '</div>';
   }).join('');
 }
-function renderPipe(){
-  var p=DATA.pipeline,html='',ico={s:'🔎',pm:'📋',uxui:'🎨',dp:'💻',qa:'✅',marketer:'📣','도비서':'🤖'};
-  function node(id){
-    var b=bot(id);var nm=b?b.name:'총괄';
-    var sec=(id==='도비서');
-    return '<div class="pnode '+(sec?'sec':'')+'" onclick="D(\'bot:'+(b?b.id:'all')+'\')">'+
-      '<div class="e">'+(ico[id]||'🤖')+'</div><div class="n">'+esc(id)+'</div><div class="r">'+esc(nm)+'</div></div>';
-  }
-  for(var i=0;i<p.length;i++){
-    if(i===0)html+=node(p[i].from);
-    html+='<div class="parw"><span class="lb">'+esc(p[i].label)+'</span><span class="ar">▶</span></div>';
-    html+=node(p[i].to);
-  }
-  document.getElementById('pipe').innerHTML=html;
-}
+
+/* ================= 렌더: 규칙 계층 ================= */
 function renderLayers(){
   document.getElementById('layers').innerHTML = DATA.rule_layers.map(function(l,i){
-    return '<div class="layer" onclick="D(\'layer:'+i+'\')"><span class="no">'+l.layer+'</span>'+
-      '<span><span class="nm">'+esc(l.name)+'</span><br><span class="ds">'+esc(l.desc)+'</span></span>'+
+    return '<div class="layer" onclick="D(\'layer:'+i+'\')"><span class="no">'+esc(l.layer)+'</span>'+
+      '<span style="min-width:0"><span class="nm">'+esc(l.name)+'</span><br>'+
+      '<span class="ds">'+esc(l.desc)+'</span></span>'+
       '<span class="win">'+esc(l.win)+'</span></div>';
   }).join('');
 }
+
+/* ================= 렌더: 하단 자동작업 미리보기 ================= */
+function renderCronMini(){
+  var cs=DATA.crons.slice(0,8);
+  document.getElementById('cronmini').innerHTML = cs.map(function(c){
+    var i=DATA.crons.indexOf(c);
+    var md=c.mode==='AI'?'<span class="chip" style="background:var(--purpleSoft);color:#7C3AED;border-color:#E3D9FE">AI</span>'
+                        :'<span class="chip" style="background:var(--greenSoft);color:#047857;border-color:#C7F0DF">무토큰</span>';
+    return '<div class="li clk" onclick="D(\'cron:'+i+'\')"><span class="t">'+esc(c.name)+'</span>'+
+      '<span class="m">'+esc(c.schedule)+'</span>'+md+'</div>';
+  }).join('') + (DATA.crons.length>8 ?
+    '<div class="skall" onclick="show(\'cron\')">전체 '+DATA.crons.length+'개 보기 →</div>' : '');
+  var ai=DATA.crons.filter(function(c){return c.mode==='AI'}).length;
+  document.getElementById('cronmini-h').textContent='AI '+ai+' / 무토큰 '+(DATA.crons.length-ai);
+}
+
+/* =========================================================
+   렌더: 스킬 화면 — 그룹형 카드
+   ========================================================= */
+var SKFILTER='all', SKBOT='', SKOPEN={}, SKINIT=false;
+function skillsFiltered(){
+  return DATA.skills.filter(function(s){
+    if(SKFILTER==='custom'&&!s.custom)return false;
+    if(SKFILTER==='common'&&s.custom)return false;
+    if(SKBOT&&s.owners.indexOf(SKBOT)<0)return false;
+    return true;
+  });
+}
+function renderSkStat(){
+  var all=DATA.skills, cst=all.filter(function(s){return s.custom}).length;
+  var cats={};all.forEach(function(s){cats[catOf(s)]=1});
+  var ncat=0;for(var k in cats)if(cats.hasOwnProperty(k))ncat++;
+  var shared=all.length-cst;
+  var pc=all.length?Math.round(cst/all.length*100):0;
+  /* 모든 봇이 공통으로 가진 스킬 수 */
+  var nb=DATA.bots.length;
+  var everyone=all.filter(function(s){return s.owners.length>=nb&&nb>0}).length;
+  document.getElementById('skstat').innerHTML=
+    '<div class="ss"><div class="l">전체 스킬</div><div class="v">'+all.length+'</div>'+
+      '<div class="s">분류 '+ncat+'종</div>'+
+      '<div class="ssbar"><i style="width:'+pc+'%;background:var(--amber)"></i>'+
+      '<i style="width:'+(100-pc)+'%;background:var(--blue)"></i></div></div>'+
+    '<div class="ss"><div class="l">★ 맞춤 (직접 만든 것)</div><div class="v" style="color:#B45309">'+cst+'</div>'+
+      '<div class="s">전체의 '+pc+'%</div></div>'+
+    '<div class="ss"><div class="l">공용 (기본 제공)</div><div class="v" style="color:var(--blue)">'+shared+'</div>'+
+      '<div class="s">전체의 '+(100-pc)+'%</div></div>'+
+    '<div class="ss"><div class="l">봇 전원이 가진 스킬</div><div class="v">'+everyone+'</div>'+
+      '<div class="s">봇 '+nb+'대 공통</div></div>';
+}
+function renderBotFilter(){
+  document.getElementById('botfilter').innerHTML = DATA.bots.map(function(b){
+    return '<button class="botpill'+(SKBOT===b.id?' on':'')+'" data-b="'+esc(b.id)+'">'+
+      '<span class="d" style="--c:'+esc(b.color)+'">'+esc(String(b.id).slice(0,2))+'</span>'+
+      esc(b.id)+'</button>';
+  }).join('');
+}
+function renderSkGroups(){
+  var list=skillsFiltered(), g={};
+  list.forEach(function(s){var c=catOf(s);(g[c]=g[c]||[]).push(s)});
+  var keys=Object.keys(g).sort(function(a,b){return g[b].length-g[a].length || (a<b?-1:1)});
+  /* 첫 진입에서는 큰 분류 3개를 펼쳐 둔다 — 접힌 막대만 보이는 화면을 피한다 */
+  if(!SKINIT){SKINIT=true;keys.slice(0,3).forEach(function(k){SKOPEN[k]=true})}
+  if(!keys.length){
+    document.getElementById('skgroups').innerHTML=
+      '<p class="muted" style="padding:14px 4px;grid-column:1/-1">조건에 맞는 스킬이 없습니다. 위 필터를 바꿔 보세요.</p>';
+    document.getElementById('skhint').textContent='0개';
+    return;
+  }
+  document.getElementById('skgroups').innerHTML = keys.map(function(c){
+    var arr=g[c].slice().sort(function(a,b){
+      return (b.custom?1:0)-(a.custom?1:0) || (a.name<b.name?-1:1)});
+    var cst=arr.filter(function(s){return s.custom}).length, cmn=arr.length-cst;
+    var pc=arr.length?(cst/arr.length*100):0;
+    var open=!!SKOPEN[c];
+    return '<div class="skg'+(open?' open':'')+'" data-c="'+esc(c)+'">'+
+      '<div class="gh" data-t="'+esc(c)+'">'+
+        '<span class="gi" style="--gs:'+catTint(c)+'">'+catIcon(c)+'</span>'+
+        '<span class="gt"><b>'+esc(catLabel(c))+'</b>'+
+          '<span class="gs"><span class="tag cst" style="padding:0 5px">★'+cst+'</span>'+
+          '<span class="tag cmn" style="padding:0 5px">공용 '+cmn+'</span></span></span>'+
+        '<span class="gn">'+arr.length+'</span><span class="gcv">▶</span>'+
+      '</div>'+
+      '<div class="gbar"><i style="width:'+pc.toFixed(1)+'%;background:var(--amber)"></i>'+
+        '<i style="width:'+(100-pc).toFixed(1)+'%;background:var(--blue)"></i></div>'+
+      '<div class="gb">'+arr.map(function(s){
+        var ow=s.owners.slice(0,4).map(function(o){
+          return '<span class="odot" style="--c:'+esc(botColor(o))+'" title="'+esc(o)+'">'+
+                 esc(String(o).slice(0,2))+'</span>'}).join('');
+        if(s.owners.length>4)ow+='<span class="odot more" title="'+esc(s.owners.join(", "))+'">+'+(s.owners.length-4)+'</span>';
+        if(!s.owners.length)ow='<span class="odot more" title="보유 봇 정보 없음">—</span>';
+        return '<div class="skitem" onclick="D(\'skill:'+esc(s.name)+'\')" title="'+esc(s.desc)+'">'+
+          '<span class="st '+(s.custom?'c':'s')+'">'+(s.custom?'★':'·')+'</span>'+
+          '<span class="t">'+esc(s.name)+'</span>'+
+          '<span class="owners">'+ow+'</span></div>';
+      }).join('')+'</div></div>';
+  }).join('');
+  document.getElementById('skhint').textContent =
+    '분류 '+keys.length+'종 · 표시 '+list.length+'개 / 전체 '+DATA.skills.length+'개 · 칸을 눌러 펼치기';
+}
+function renderSkillSum(){
+  var max=0;DATA.bots.forEach(function(b){if((b.skill_count||0)>max)max=b.skill_count||0});
+  document.getElementById('skillsum').innerHTML = DATA.bots.map(function(b){
+    var w=max?Math.round((b.skill_count||0)/max*100):0;
+    return '<div class="li clk" onclick="D(\'bot:'+esc(b.id)+'\')">'+
+      '<span class="chip b" style="min-width:74px;justify-content:center">'+esc(b.id)+'</span>'+
+      '<span class="t">'+esc(b.name)+' <span class="muted">· '+esc(b.model)+'</span></span>'+
+      '<span style="flex:0 0 130px;height:6px;border-radius:99px;background:var(--line2);overflow:hidden">'+
+        '<i style="display:block;height:100%;width:'+w+'%;background:'+esc(b.color)+'"></i></span>'+
+      '<span class="chip">스킬 '+n(b.skill_count)+'</span>'+
+      '<span class="chip" style="background:var(--amberSoft);color:#B45309;border-color:#FDE4B4">★ '+n(b.custom_count)+'</span>'+
+      '<span class="m">'+esc(cronText(b.cron_count))+'</span></div>';
+  }).join('');
+}
+function renderSkills(){ renderSkStat(); renderBotFilter(); renderSkGroups(); }
+
+/* ================= 렌더: 표들 ================= */
 function renderFix(){
   document.getElementById('fixbody').innerHTML = DATA.repair_map.map(function(r){
     return '<tr><td data-l="하고 싶은 일">'+esc(r.want)+'</td>'+
@@ -2926,47 +3348,22 @@ function renderFix(){
       '<td data-l="볼트 사본">'+P(r.vault,'vault')+'</td></tr>';
   }).join('');
 }
-function renderSkills(){
-  var cols=DATA.bots.map(function(b){
-    var mine=DATA.skills.filter(function(s){return s.owners.indexOf(b.id)>=0});
-    return '<div class="skcol"><h4><i class="dotc" style="--c:'+b.color+'"></i>'+esc(b.id)+
-      ' <span class="muted" style="font-weight:400">'+esc(b.name)+'</span>'+
-      '<span class="badge" style="margin-left:auto">'+mine.length+'</span></h4>'+
-      (mine.length?mine.map(function(s){
-        return '<div class="sk" onclick="D(\'skill:'+esc(s.name)+'\')">'+
-          (s.custom?'<span class="star">★</span>':'<span class="muted">·</span>')+
-          '<span class="t">'+esc(s.name)+'</span></div>';
-      }).join(''):'<div class="muted" style="font-size:11px;padding:4px 6px">표시할 스킬 없음</div>')+
-      '<div class="muted" style="font-size:10px;padding:6px 6px 0;border-top:1px dashed #212b44;margin-top:6px">전체 보유 '+n(b.skill_count)+'개 중 주요 항목</div>'+
-      '</div>';
-  }).join('');
-  document.getElementById('skillcols').innerHTML=cols;
-
-  document.getElementById('skillsum').innerHTML = DATA.bots.map(function(b){
-    var pct=b.skill_count?Math.round(b.skill_count/93*100):0;
-    return '<div class="li clk" onclick="D(\'bot:'+b.id+'\')">'+
-      '<span class="chip b" style="min-width:74px;justify-content:center">'+esc(b.id)+'</span>'+
-      '<span class="t">'+esc(b.name)+' <span class="muted">· '+esc(b.model)+'</span></span>'+
-      '<span class="chip">스킬 '+n(b.skill_count)+'</span>'+
-      '<span class="chip" style="background:#3a2e13;color:#f9cd6e">★ '+n(b.custom_count)+'</span>'+
-      '<span class="m">'+esc(cronText(b.cron_count))+'</span></div>';
-  }).join('');
-}
 function renderCrons(){
   document.getElementById('cronbody').innerHTML = DATA.crons.map(function(c,i){
-    var md = c.mode==='AI' ? '<span class="chip" style="background:#241c3d;color:#c7b0ff">AI</span>'
-                           : '<span class="chip" style="background:#12301f;color:#6fe3a5">무토큰</span>';
+    var md = c.mode==='AI' ? '<span class="chip" style="background:var(--purpleSoft);color:#7C3AED;border-color:#E3D9FE">AI</span>'
+                           : '<span class="chip" style="background:var(--greenSoft);color:#047857;border-color:#C7F0DF">무토큰</span>';
     return '<tr class="clk" onclick="D(\'cron:'+i+'\')"><td data-l="이름">'+esc(c.name)+'</td>'+
       '<td data-l="주기">'+esc(c.schedule)+'</td><td data-l="모드">'+md+'</td>'+
       '<td data-l="대상 프로필"><span class="chip b">'+esc(c.profile)+'</span></td>'+
       '<td data-l="분류"><span class="tag">'+esc(c.kind)+'</span></td></tr>';
   }).join('');
   var ai=DATA.crons.filter(function(c){return c.mode==='AI'}).length;
-  document.getElementById('cronhint').textContent='전체 '+DATA.crons.length+'개 표시 · AI '+ai+'개 / 무토큰 '+(DATA.crons.length-ai)+'개 · 하위봇은 자동작업 없음';
+  document.getElementById('cronhint').textContent='전체 '+DATA.crons.length+'개 · AI '+ai+'개 / 무토큰 '+(DATA.crons.length-ai)+'개 · 하위봇은 자동작업 없음';
 }
 function renderMcp(){
   document.getElementById('mcpbody').innerHTML = DATA.mcp.map(function(m,i){
-    return '<tr class="clk" onclick="D(\'mcp:'+i+'\')"><td data-l="이름"><b>'+esc(m.name)+'</b><br><span class="muted" style="font-size:10.5px">'+esc(m.label)+'</span></td>'+
+    return '<tr class="clk" onclick="D(\'mcp:'+i+'\')"><td data-l="이름"><b>'+esc(m.name)+'</b><br>'+
+      '<span class="muted" style="font-size:10.5px">'+esc(m.label)+'</span></td>'+
       '<td data-l="주소">'+P(m.url)+'</td>'+
       '<td data-l="인증"><span class="tag">'+esc(m.auth)+'</span></td>'+
       '<td data-l="사용">'+(m.enabled?'<span class="badge green">켜짐</span>':'<span class="badge">꺼짐</span>')+'</td>'+
@@ -2976,7 +3373,7 @@ function renderMcp(){
 function renderStores(){
   var html='', stores=DATA.stores, flows=isArr(DATA.flows)?DATA.flows:[];
   stores.forEach(function(s,i){
-    var col=s.color||'#3a4a73';
+    var col=s.color||'#2B80FD';
     html+='<div class="store" onclick="D(\'store:'+i+'\')" style="border-left:3px solid '+esc(col)+'">'+
       '<div class="nm">'+esc(s.name)+'</div>'+
       '<div class="rl" style="color:'+esc(col)+'">'+esc(s.role)+'</div>'+
@@ -2991,17 +3388,17 @@ function renderStores(){
 function renderMeta(){
   var raw=DATA.generated_at;
   var g = raw ? String(raw).replace('T',' ').slice(0,16) : null;
-  document.getElementById('gen1').textContent = g ? ('마지막 갱신 '+g+' 기준') : '갱신 시각 정보 없음';
   document.getElementById('gen2').textContent = g ? (g+' 기준') : '— (generated_at 없음)';
   document.getElementById('genfoot').textContent = g ? ('마지막 갱신: '+g) : '마지막 갱신: 정보 없음';
   document.getElementById('counts').textContent='봇 '+DATA.bots.length+' · 스킬 '+DATA.skills.length+
     ' · 자동작업 '+DATA.crons.length+' · 연결 '+DATA.mcp.length+' · 보수항목 '+DATA.repair_map.length;
+  document.getElementById('nc-skill').textContent=DATA.skills.length;
+  document.getElementById('nc-cron').textContent=DATA.crons.length;
+  document.getElementById('nc-fix').textContent=DATA.repair_map.length;
+  document.getElementById('nc-conn').textContent=DATA.mcp.length;
 }
 
-/* ===== 구역 단위 오류 격리 =====
-   한 구역이 터져도 나머지 화면과 이벤트 등록은 계속됩니다.
-   오류를 조용히 삼키지 않도록 (1) 해당 칸에 한글 안내 (2) 상단 경고줄
-   (3) console.error 세 군데에 남깁니다. */
+/* ===== 구역 단위 오류 격리 (QA Critical 대응 — 유지) ===== */
 var FAILED=[];
 function safe(label, targetId, fn){
   try{ fn(); }
@@ -3030,11 +3427,14 @@ function reportProblems(){
 function renderAll(){
   MISSING=[];FAILED=[];
   try{ normalizeData(); }catch(e){ if(window.console)console.error('normalizeData 실패:',e); }
-  safe('조직도','botrow',renderBots);
-  safe('작업 흐름 파이프라인','pipe',renderPipe);
+  safe('상단 요약','kpis',renderKpis);
+  safe('일이 흘러가는 모양','flow',renderFlow);
+  safe('하위봇','botrow',renderBots);
   safe('규칙 계층도','layers',renderLayers);
+  safe('오늘 도는 자동작업','cronmini',renderCronMini);
+  safe('스킬 분류','skgroups',renderSkills);
+  safe('봇별 보유량','skillsum',renderSkillSum);
   safe('보수 찾기표','fixbody',renderFix);
-  safe('스킬 지도','skillcols',renderSkills);
   safe('자동작업표','cronbody',renderCrons);
   safe('바깥 연결표','mcpbody',renderMcp);
   safe('저장소 지도','stores',renderStores);
@@ -3042,6 +3442,45 @@ function renderAll(){
   try{ reportProblems(); }catch(e){ if(window.console)console.error(e); }
 }
 renderAll();
+/* 레이아웃이 확정된 뒤 흐름선을 한 번 더 그린다(폰트 로딩·스크롤바 반영) */
+if(window.requestAnimationFrame)requestAnimationFrame(function(){
+  requestAnimationFrame(function(){try{drawFlowLines()}catch(e){}});
+});
+window.addEventListener('load',function(){try{drawFlowLines()}catch(e){}});
+
+/* ================= 스킬 화면 이벤트 ================= */
+document.getElementById('skfilter').addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  SKFILTER=b.dataset.f;
+  [].forEach.call(this.children,function(c){c.classList.toggle('on',c===b)});
+  safe('스킬 분류','skgroups',renderSkGroups);
+});
+document.getElementById('botfilter').addEventListener('click',function(e){
+  var b=e.target.closest('.botpill');if(!b)return;
+  SKBOT=(SKBOT===b.dataset.b)?'':b.dataset.b;
+  renderBotFilter(); safe('스킬 분류','skgroups',renderSkGroups);
+});
+document.getElementById('skgroups').addEventListener('click',function(e){
+  var h=e.target.closest('.gh');if(!h)return;
+  var c=h.dataset.t; SKOPEN[c]=!SKOPEN[c];
+  h.parentNode.classList.toggle('open',!!SKOPEN[c]);
+});
+document.getElementById('expandall').addEventListener('click',function(){
+  [].forEach.call(document.querySelectorAll('#skgroups .skg'),function(g){
+    SKOPEN[g.dataset.c]=true;g.classList.add('open')});
+});
+document.getElementById('collapseall').addEventListener('click',function(){
+  SKOPEN={};
+  [].forEach.call(document.querySelectorAll('#skgroups .skg'),function(g){g.classList.remove('open')});
+});
+
+/* ================= 밝음/어둠 토글 (기본 밝음) ================= */
+document.getElementById('themebtn').addEventListener('click',function(){
+  var h=document.documentElement, d=h.getAttribute('data-theme')==='dark';
+  h.setAttribute('data-theme', d?'light':'dark');
+  this.firstElementChild.textContent = d?'🌙':'☀️';
+  document.getElementById('themelab').textContent = d?'어두운 화면':'밝은 화면';
+});
 
 /* ================= 상세 드로어 ================= */
 function DET(key){
@@ -3049,6 +3488,8 @@ function DET(key){
   if(kind==='bot'){
     var b=bot(id);if(!b)return ['상세','<p class="muted">없음</p>'];
     var mine=DATA.skills.filter(function(s){return s.owners.indexOf(b.id)>=0});
+    var cats={};mine.forEach(function(s){var c=catOf(s);cats[c]=(cats[c]||0)+1});
+    var ck=Object.keys(cats).sort(function(a,c){return cats[c]-cats[a]});
     var up=DATA.pipeline.filter(function(p){return p.to===b.id||(b.id==='all'&&p.to==='도비서')});
     var dn=DATA.pipeline.filter(function(p){return p.from===b.id||(b.id==='all'&&p.from==='도비서')});
     return [b.id+' · '+b.name,
@@ -3056,6 +3497,10 @@ function DET(key){
       row('보유 스킬',n(b.skill_count)+'개 (★맞춤 '+n(b.custom_count)+'개)')+
       row('인격 문서',b.soul_chars?b.soul_chars.toLocaleString()+'자':'—')+
       row('자동작업',esc(cronText(b.cron_count)))+
+      '<div class="sec-t">분류별 보유량</div>'+
+      (ck.length?'<div style="display:flex;flex-wrap:wrap;gap:4px">'+ck.map(function(c){
+        return '<span class="chip">'+catIcon(c)+' '+esc(catLabel(c))+' '+cats[c]+'</span>'}).join('')+'</div>'
+        :'<p class="muted">—</p>')+
       '<div class="sec-t">고칠 때 열 파일 (누르면 복사)</div>'+
       row('인격',P(b.soul_path))+row('스킬 폴더',P(b.skills_path))+
       (b.cron_path?row('자동작업',P(b.cron_path)):'')+
@@ -3063,37 +3508,44 @@ function DET(key){
       '<div class="sec-t">받는 것 / 넘기는 것</div>'+
       (up.length?up.map(function(p){return row('받음','← '+esc(p.from)+' : '+esc(p.label))}).join(''):row('받음','—'))+
       (dn.length?dn.map(function(p){return row('넘김','→ '+esc(p.to)+' : '+esc(p.label))}).join(''):row('넘김','—'))+
-      '<div class="sec-t">대표 스킬 '+mine.length+'개</div>'+
-      (mine.length?mine.map(function(s){return '<div class="li clk" onclick="D(\'skill:'+esc(s.name)+'\')">'+
-        (s.custom?'<span class="star">★</span>':'<span class="muted">·</span>')+
-        '<span class="t">'+esc(s.name)+'</span><span class="m">'+esc(s.desc)+'</span></div>'}).join(''):'<p class="muted">—</p>')
+      '<div class="sec-t">★맞춤 스킬 '+mine.filter(function(s){return s.custom}).length+'개</div>'+
+      (mine.filter(function(s){return s.custom}).length?
+        mine.filter(function(s){return s.custom}).map(function(s){
+          return '<div class="li clk" onclick="D(\'skill:'+esc(s.name)+'\')">'+
+          '<span class="st" style="color:var(--amber)">★</span>'+
+          '<span class="t">'+esc(s.name)+'</span><span class="m">'+esc(s.desc)+'</span></div>'}).join('')
+        :'<p class="muted">—</p>')
     ];
   }
   if(kind==='skill'){
     var s=null;DATA.skills.forEach(function(x){if(x.name===id)s=x});
     if(!s)return ['스킬','<p class="muted">없음</p>'];
+    var c=catOf(s);
     return [s.name+(s.custom?' ★':''),
-      row('하는 일',esc(s.desc))+
+      row('하는 일',esc(s.desc)||'<span class="muted">설명 없음</span>')+
+      row('분류',catIcon(c)+' '+esc(catLabel(c)))+
       row('구분',s.custom?'<span class="tag cst">★맞춤 (직접 만듦)</span>':'<span class="tag cmn">공용</span>')+
       row('원본 경로',P(s.path))+
       row('파일',P(s.path+'/SKILL.md'))+
       '<div class="sec-t">이 스킬을 가진 봇 '+s.owners.length+'대</div>'+
-      s.owners.map(function(o){var b=bot(o);
-        return '<div class="li clk" onclick="D(\'bot:'+o+'\')"><span class="chip b">'+esc(o)+'</span>'+
+      (s.owners.length?s.owners.map(function(o){var b=bot(o);
+        return '<div class="li clk" onclick="D(\'bot:'+esc(o)+'\')">'+
+        '<span class="odot" style="--c:'+esc(botColor(o))+'">'+esc(String(o).slice(0,2))+'</span>'+
         '<span class="t">'+esc(b?b.name:o)+'</span><span class="m">'+esc(b?b.model:'')+'</span></div>'}).join('')
+        :'<p class="muted">보유 봇 정보가 없습니다.</p>')
     ];
   }
   if(kind==='cron'){
-    var c=DATA.crons[+id];if(!c)return ['자동작업','<p class="muted">이 항목을 불러오지 못했습니다.</p>'];
-    return [c.name,row('주기',esc(c.schedule))+row('모드',c.mode==='AI'?'AI (토큰 사용)':'무토큰 (스크립트)')+
-      row('대상 프로필',esc(c.profile))+row('분류',esc(c.kind))+
-      row('설정 파일',P('<hermes>/profiles/'+c.profile+'/cron/'))+
-      '<p class="muted" style="margin-top:12px;font-size:11.5px">주기를 바꾸려면 위 폴더의 해당 설정 파일을 여세요. 내용(프롬프트)은 이 지도에 표시하지 않습니다.</p>'];
+    var c2=DATA.crons[+id];if(!c2)return ['자동작업','<p class="muted">이 항목을 불러오지 못했습니다.</p>'];
+    return [c2.name,row('주기',esc(c2.schedule))+row('모드',c2.mode==='AI'?'AI (토큰 사용)':'무토큰 (스크립트)')+
+      row('대상 프로필',esc(c2.profile))+row('분류',esc(c2.kind))+
+      row('설정 파일',P('<hermes>/profiles/'+c2.profile+'/cron/jobs.json'))+
+      '<p class="muted" style="margin-top:12px;font-size:11.5px">주기를 바꾸려면 위 파일의 해당 항목을 여세요. 내용(프롬프트)은 이 지도에 표시하지 않습니다.</p>'];
   }
   if(kind==='mcp'){
     var m=DATA.mcp[+id];if(!m)return ['바깥 연결','<p class="muted">이 항목을 불러오지 못했습니다.</p>'];
     return [m.name+' · '+m.label,row('주소',P(m.url))+row('인증 방식',esc(m.auth))+
-      row('사용 여부',m.enabled?'켜짐':'꺼짐')+row('붙은 프로필',m.profiles.join(', '))+
+      row('사용 여부',m.enabled?'켜짐':'꺼짐')+row('붙은 프로필',esc(m.profiles.join(', ')))+
       row('설정 파일',P('<hermes>/config.yaml'))+
       '<p class="muted" style="margin-top:12px;font-size:11.5px">MCP = 봇이 바깥 서비스에 붙는 연결 창구입니다. 연결이 끊기면 위 설정 파일의 해당 항목을 확인하세요.</p>'];
   }
@@ -3124,17 +3576,18 @@ function X(){document.getElementById('drawer').classList.remove('on');document.g
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){X();}});
 
 /* ================= 사이드바 전환 ================= */
-var TITLES={org:['구조도','우리 팀이 어떻게 생겼는가 · 조직도 · 흐름 · 규칙 계층'],
- fix:['보수 찾기','고치려면 어느 파일을 열어야 하나'],
- skill:['스킬 지도','어떤 절차서를 어느 봇이 가졌나'],
+var TITLES={org:['구조도','우리 팀이 어떻게 생겼는가 · 요약 · 흐름 · 봇 · 규칙'],
+ skill:['스킬','어떤 종류의 절차서가 얼마씩 있고 누가 가졌나'],
  cron:['자동작업','뭐가 언제 저절로 도는가'],
+ fix:['보수 찾기','고치려면 어느 파일을 열어야 하나'],
  conn:['연결·저장소','바깥 연결과 저장 위치 · 무엇이 원본인가'],
  search:['검색 결과','']};
 var curView='org';
 function show(v){
+  if(!TITLES[v])v='org';
   curView=v;
   [].forEach.call(document.querySelectorAll('.view'),function(s){s.classList.remove('on')});
-  document.getElementById('v-'+v).classList.add('on');
+  var el=document.getElementById('v-'+v); if(el)el.classList.add('on');
   document.getElementById('vtitle').textContent=TITLES[v][0];
   document.getElementById('vsub').textContent=TITLES[v][1];
   [].forEach.call(document.getElementById('nav').children,function(c){
@@ -3168,7 +3621,7 @@ function runSearchInner(q){
   if(curView!=='search')lastView=curView;
   var out='',cnt=0;
   var bs=A('bots').filter(function(b){return hit(b.id,q)||hit(b.name,q)||hit(b.role,q)||hit(b.model,q)||hit(b.soul_path,q)||hit(b.vault_path,q)});
-  var sk=A('skills').filter(function(s){return hit(s.name,q)||hit(s.desc,q)||hit(s.path,q)||(isArr(s.owners)?s.owners:[]).some(function(o){return hit(o,q)})});
+  var sk=A('skills').filter(function(s){return hit(s.name,q)||hit(s.desc,q)||hit(s.path,q)||hit(catLabel(catOf(s)),q)||(isArr(s.owners)?s.owners:[]).some(function(o){return hit(o,q)})});
   var cr=A('crons').filter(function(c){return hit(c.name,q)||hit(c.schedule,q)||hit(c.mode,q)||hit(c.kind,q)||hit(c.profile,q)});
   var mc=A('mcp').filter(function(m){return hit(m.name,q)||hit(m.label,q)||hit(m.url,q)||(isArr(m.profiles)?m.profiles:[]).some(function(p){return hit(p,q)})});
   var rp=A('repair_map').filter(function(r){return hit(r.want,q)||hit(r.file,q)||hit(r.vault,q)});
@@ -3176,12 +3629,17 @@ function runSearchInner(q){
   var ly=A('rule_layers').filter(function(l){return hit(l.name,q)||hit(l.desc,q)||hit(l.path,q)});
 
   if(bs.length){cnt+=bs.length;out+='<div class="sec-t">봇 '+bs.length+'</div>'+bs.map(function(b){
-    return '<div class="li clk" onclick="D(\'bot:'+b.id+'\')"><span class="chip b" style="min-width:70px;justify-content:center">'+esc(b.id)+'</span>'+
+    return '<div class="li clk" onclick="D(\'bot:'+esc(b.id)+'\')"><span class="chip b" style="min-width:70px;justify-content:center">'+esc(b.id)+'</span>'+
     '<span class="t">'+esc(b.name)+' · '+esc(b.role)+'</span><span class="m">'+esc(b.model)+'</span></div>'}).join('')}
-  if(sk.length){cnt+=sk.length;out+='<div class="sec-t">스킬 '+sk.length+' <span class="muted">— 이 스킬을 가진 봇이 함께 표시됩니다</span></div>'+sk.map(function(s){
-    return '<div class="li clk" onclick="D(\'skill:'+esc(s.name)+'\')">'+(s.custom?'<span class="star">★</span>':'<span class="muted">·</span>')+
+  if(sk.length){cnt+=sk.length;out+='<div class="sec-t">스킬 '+sk.length+' <span class="muted">— 분류와 보유 봇이 함께 표시됩니다</span></div>'+sk.map(function(s){
+    var c=catOf(s);
+    return '<div class="li clk" onclick="D(\'skill:'+esc(s.name)+'\')">'+
+    '<span class="st '+(s.custom?'c':'s')+'" style="width:13px;text-align:center;color:'+(s.custom?'var(--amber)':'var(--dim)')+'">'+(s.custom?'★':'·')+'</span>'+
     '<span class="t">'+esc(s.name)+' <span class="muted">'+esc(s.desc)+'</span></span>'+
-    s.owners.map(function(o){return '<span class="chip b">'+esc(o)+'</span>'}).join(' ')+'</div>'}).join('')}
+    '<span class="chip">'+catIcon(c)+' '+esc(catLabel(c))+'</span>'+
+    '<span class="owners">'+s.owners.slice(0,5).map(function(o){
+      return '<span class="odot" style="--c:'+esc(botColor(o))+'" title="'+esc(o)+'">'+esc(String(o).slice(0,2))+'</span>'}).join('')+
+      (s.owners.length>5?'<span class="odot more">+'+(s.owners.length-5)+'</span>':'')+'</span></div>'}).join('')}
   if(rp.length){cnt+=rp.length;out+='<div class="sec-t">보수 찾기 '+rp.length+'</div>'+rp.map(function(r){
     return '<div class="li"><span class="t">'+esc(r.want)+'</span>'+P(r.file)+'</div>'}).join('')}
   if(cr.length){cnt+=cr.length;out+='<div class="sec-t">자동작업 '+cr.length+'</div>'+cr.map(function(c){
@@ -3192,9 +3650,9 @@ function runSearchInner(q){
   if(so.length){cnt+=so.length;out+='<div class="sec-t">저장소 '+so.length+'</div>'+so.map(function(s){
     return '<div class="li clk" onclick="D(\'store:'+DATA.stores.indexOf(s)+'\')"><span class="t">'+esc(s.name)+' · '+esc(s.role)+'</span><span class="m">'+esc(s.note)+'</span></div>'}).join('')}
   if(ly.length){cnt+=ly.length;out+='<div class="sec-t">규칙 계층 '+ly.length+'</div>'+ly.map(function(l){
-    return '<div class="li clk" onclick="D(\'layer:'+DATA.rule_layers.indexOf(l)+'\')"><span class="no badge">'+l.layer+'</span><span class="t">'+esc(l.name)+'</span><span class="m">'+esc(l.win)+'</span></div>'}).join('')}
+    return '<div class="li clk" onclick="D(\'layer:'+DATA.rule_layers.indexOf(l)+'\')"><span class="badge">'+esc(l.layer)+'</span><span class="t">'+esc(l.name)+'</span><span class="m">'+esc(l.win)+'</span></div>'}).join('')}
 
-  if(!cnt)out='<p class="muted" style="padding:16px 4px">"'+esc(q)+'" 에 해당하는 항목이 없습니다. 봇 이름(dp), 스킬 이름(notion), 자동작업 이름(미러링), 파일명(SOUL) 등으로 찾아보세요.</p>';
+  if(!cnt)out='<p class="muted" style="padding:16px 4px">"'+esc(q)+'" 에 해당하는 항목이 없습니다. 봇 이름(dp), 스킬 이름(notion), 분류(개발), 자동작업 이름(미러링), 파일명(SOUL) 등으로 찾아보세요.</p>';
   document.getElementById('qres').innerHTML=out;
   document.getElementById('qhint').textContent='"'+q+'" · '+cnt+'건';
   show('search');

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T06:39:53+09:00",
+  "generated_at": "2026-09-16T08:50:53+09:00",
   "bots": [
     {
       "id": "all",
@@ -7,7 +7,7 @@
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "claude-opus-5",
       "skill_count": 115,
-      "custom_count": 34,
+      "custom_count": 35,
       "soul_chars": 6115,
       "cron_count": 26,
       "color": "#fbcf5a",
@@ -65,10 +65,10 @@
       "id": "dp",
       "name": "개발 담당",
       "role": "코드 작성·수정·배포",
-      "model": "gpt-5.3-codex-spark",
+      "model": "claude-opus-5",
       "skill_count": 93,
       "custom_count": 15,
-      "soul_chars": 7580,
+      "soul_chars": 7526,
       "cron_count": null,
       "color": "#5b9dfb",
       "soul_path": "<hermes>/profiles/dp/SOUL.md",
@@ -264,7 +264,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/agent-runtime-tuning/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/agent-runtime-tuning"
     },
     {
       "name": "airtable",
@@ -280,7 +280,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/airtable/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/airtable"
     },
     {
       "name": "app-code-maintenance",
@@ -289,7 +289,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/software-development/app-code-maintenance/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/app-code-maintenance"
     },
     {
       "name": "app-project-handover",
@@ -298,7 +298,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/software-development/app-project-handover/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/app-project-handover"
     },
     {
       "name": "app-store-naming-and-aso",
@@ -307,7 +307,7 @@
         "marketer"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/marketer/skills/productivity/app-store-naming-and-aso/SKILL.md"
+      "path": "<hermes>/profiles/marketer/skills/productivity/app-store-naming-and-aso"
     },
     {
       "name": "apple-notes",
@@ -322,7 +322,7 @@
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/s/skills/apple/apple-notes/SKILL.md"
+      "path": "<hermes>/profiles/s/skills/apple/apple-notes"
     },
     {
       "name": "apple-reminders",
@@ -337,7 +337,7 @@
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/s/skills/apple/apple-reminders/SKILL.md"
+      "path": "<hermes>/profiles/s/skills/apple/apple-reminders"
     },
     {
       "name": "architecture-diagram",
@@ -353,7 +353,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/architecture-diagram/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/architecture-diagram"
     },
     {
       "name": "arxiv",
@@ -369,7 +369,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/arxiv/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/arxiv"
     },
     {
       "name": "ascii-art",
@@ -384,7 +384,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/ascii-art/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/ascii-art"
     },
     {
       "name": "ascii-video",
@@ -400,7 +400,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/ascii-video/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/ascii-video"
     },
     {
       "name": "baoyu-infographic",
@@ -416,7 +416,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/baoyu-infographic/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/baoyu-infographic"
     },
     {
       "name": "blocked-page-recovery",
@@ -432,7 +432,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/web/blocked-page-recovery/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/web/blocked-page-recovery"
     },
     {
       "name": "blogwatcher",
@@ -447,7 +447,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/blogwatcher/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/blogwatcher"
     },
     {
       "name": "box",
@@ -463,7 +463,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/box/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/box"
     },
     {
       "name": "business-idea-discovery",
@@ -472,7 +472,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/business-idea-discovery/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/business-idea-discovery"
     },
     {
       "name": "claude-code",
@@ -488,7 +488,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/claude-code/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/claude-code"
     },
     {
       "name": "claude-design",
@@ -504,7 +504,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/claude-design/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/claude-design"
     },
     {
       "name": "codebase-inspection",
@@ -520,7 +520,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/codebase-inspection/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/codebase-inspection"
     },
     {
       "name": "codex",
@@ -536,7 +536,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/codex/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/codex"
     },
     {
       "name": "comfyui",
@@ -551,7 +551,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/comfyui/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/comfyui"
     },
     {
       "name": "competitor-news-monitor",
@@ -567,7 +567,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/competitor-news-monitor/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/competitor-news-monitor"
     },
     {
       "name": "computer-use",
@@ -583,7 +583,7 @@
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/computer-use/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/computer-use"
     },
     {
       "name": "context-budget-architecture",
@@ -592,7 +592,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/context-budget-architecture/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/context-budget-architecture"
     },
     {
       "name": "credential-intake",
@@ -601,7 +601,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/credential-intake/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/credential-intake"
     },
     {
       "name": "decision-override-protocol",
@@ -610,7 +610,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/decision-override-protocol/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/decision-override-protocol"
     },
     {
       "name": "design-md",
@@ -626,7 +626,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/design-md/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/design-md"
     },
     {
       "name": "design-review-loop",
@@ -635,7 +635,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/design-review-loop/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/design-review-loop"
     },
     {
       "name": "diagram-image-delivery",
@@ -644,7 +644,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/creative/diagram-image-delivery/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/diagram-image-delivery"
     },
     {
       "name": "dobiseo-ops",
@@ -653,7 +653,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/dobiseo-ops/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/dobiseo-ops"
     },
     {
       "name": "dobiseo-toolbox",
@@ -662,7 +662,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/toolbox/dobiseo-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/toolbox/dobiseo-toolbox"
     },
     {
       "name": "document-to-action-items",
@@ -678,7 +678,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/document-to-action-items/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/document-to-action-items"
     },
     {
       "name": "docx",
@@ -694,7 +694,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/docx/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/docx"
     },
     {
       "name": "dogfood",
@@ -710,7 +710,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/dogfood/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/dogfood"
     },
     {
       "name": "dp-toolbox",
@@ -719,7 +719,7 @@
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/toolbox/dp-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/toolbox/dp-toolbox"
     },
     {
       "name": "email-inbox-triage",
@@ -735,7 +735,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/email/email-inbox-triage/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/email/email-inbox-triage"
     },
     {
       "name": "evaluating-llms-harness",
@@ -750,7 +750,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/evaluation/evaluating-llms-harness/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/mlops/evaluation/evaluating-llms-harness"
     },
     {
       "name": "excalidraw",
@@ -765,7 +765,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/excalidraw/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/excalidraw"
     },
     {
       "name": "external-tool-evaluation",
@@ -774,7 +774,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/external-tool-evaluation/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/external-tool-evaluation"
     },
     {
       "name": "findmy",
@@ -789,7 +789,7 @@
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/s/skills/apple/findmy/SKILL.md"
+      "path": "<hermes>/profiles/s/skills/apple/findmy"
     },
     {
       "name": "fix-blast-radius",
@@ -798,7 +798,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/software-development/fix-blast-radius/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/fix-blast-radius"
     },
     {
       "name": "gif-search",
@@ -814,7 +814,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/media/gif-search/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/media/gif-search"
     },
     {
       "name": "github",
@@ -830,7 +830,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/github/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/github"
     },
     {
       "name": "github-auth",
@@ -845,7 +845,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-auth/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-auth"
     },
     {
       "name": "github-code-review",
@@ -860,7 +860,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-code-review/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-code-review"
     },
     {
       "name": "github-issue-to-pr",
@@ -875,7 +875,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-issue-to-pr/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-issue-to-pr"
     },
     {
       "name": "github-issues",
@@ -890,7 +890,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-issues/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-issues"
     },
     {
       "name": "github-pr-workflow",
@@ -905,7 +905,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-pr-workflow/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-pr-workflow"
     },
     {
       "name": "github-repo-management",
@@ -920,7 +920,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/github/github-repo-management/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/github/github-repo-management"
     },
     {
       "name": "google-workspace",
@@ -936,7 +936,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/google-workspace/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/google-workspace"
     },
     {
       "name": "grounded-citations",
@@ -952,7 +952,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/grounded-citations/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/grounded-citations"
     },
     {
       "name": "hermes-agent",
@@ -968,7 +968,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-agent"
     },
     {
       "name": "hermes-agent-skill-authoring",
@@ -984,7 +984,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/hermes-agent-skill-authoring"
     },
     {
       "name": "hermes-cron-reports",
@@ -993,7 +993,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-cron-reports/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-cron-reports"
     },
     {
       "name": "hermes-gateway-bots",
@@ -1002,7 +1002,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-gateway-bots/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-gateway-bots"
     },
     {
       "name": "hermes-mcp-connections",
@@ -1011,7 +1011,7 @@
         "all"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-mcp-connections/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-mcp-connections"
     },
     {
       "name": "hermes-provider-auth",
@@ -1020,7 +1020,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-provider-auth/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-provider-auth"
     },
     {
       "name": "hermes-skill-porting",
@@ -1029,7 +1029,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-skill-porting/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-skill-porting"
     },
     {
       "name": "hermes-voice-io",
@@ -1038,7 +1038,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/hermes-voice-io/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/hermes-voice-io"
     },
     {
       "name": "himalaya",
@@ -1054,7 +1054,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/email/himalaya/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/email/himalaya"
     },
     {
       "name": "huggingface-hub",
@@ -1069,7 +1069,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/huggingface-hub/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/mlops/huggingface-hub"
     },
     {
       "name": "humanize-korean",
@@ -1085,7 +1085,7 @@
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/creative/humanize-korean/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/humanize-korean"
     },
     {
       "name": "imessage",
@@ -1100,7 +1100,7 @@
         "jilmuni"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/s/skills/apple/imessage/SKILL.md"
+      "path": "<hermes>/profiles/s/skills/apple/imessage"
     },
     {
       "name": "inspecting-hermes-desktop-dom",
@@ -1116,7 +1116,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/inspecting-hermes-desktop-dom/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/inspecting-hermes-desktop-dom"
     },
     {
       "name": "llama-cpp",
@@ -1131,7 +1131,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/inference/llama-cpp/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/mlops/inference/llama-cpp"
     },
     {
       "name": "llm-wiki",
@@ -1147,7 +1147,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/llm-wiki/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/llm-wiki"
     },
     {
       "name": "lms-course-automation",
@@ -1156,7 +1156,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/lms-course-automation/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/lms-course-automation"
     },
     {
       "name": "logged-in-site-automation",
@@ -1165,7 +1165,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/logged-in-site-automation/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/logged-in-site-automation"
     },
     {
       "name": "manim-video",
@@ -1181,7 +1181,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/manim-video/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/manim-video"
     },
     {
       "name": "maps",
@@ -1197,7 +1197,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/maps/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/maps"
     },
     {
       "name": "marketer-toolbox",
@@ -1206,7 +1206,7 @@
         "marketer"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/marketer/skills/toolbox/marketer-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/marketer/skills/toolbox/marketer-toolbox"
     },
     {
       "name": "meeting-action-items",
@@ -1222,7 +1222,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/meeting-action-items/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/meeting-action-items"
     },
     {
       "name": "merge-reconciler",
@@ -1237,7 +1237,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/merge-reconciler/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/merge-reconciler"
     },
     {
       "name": "model-tiering",
@@ -1246,7 +1246,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/model-tiering/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/model-tiering"
     },
     {
       "name": "nano-pdf",
@@ -1261,7 +1261,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/nano-pdf/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/nano-pdf"
     },
     {
       "name": "node-inspect-debugger",
@@ -1277,7 +1277,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/node-inspect-debugger/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/node-inspect-debugger"
     },
     {
       "name": "notion",
@@ -1293,7 +1293,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/notion/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/notion"
     },
     {
       "name": "notion-business-hq",
@@ -1302,7 +1302,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/notion-business-hq/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/notion-business-hq"
     },
     {
       "name": "obsidian",
@@ -1318,7 +1318,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/note-taking/obsidian/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/note-taking/obsidian"
     },
     {
       "name": "obsidian-memory-mirror",
@@ -1327,7 +1327,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/obsidian-memory-mirror/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/obsidian-memory-mirror"
     },
     {
       "name": "ocr-and-documents",
@@ -1342,7 +1342,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/ocr-and-documents/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/ocr-and-documents"
     },
     {
       "name": "opencode",
@@ -1358,7 +1358,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/opencode/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/opencode"
     },
     {
       "name": "openhue",
@@ -1373,7 +1373,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/smart-home/openhue/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/smart-home/openhue"
     },
     {
       "name": "p5js",
@@ -1389,7 +1389,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/p5js/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/p5js"
     },
     {
       "name": "pdf",
@@ -1405,7 +1405,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/pdf/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/pdf"
     },
     {
       "name": "plan",
@@ -1420,7 +1420,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/plan/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/plan"
     },
     {
       "name": "pm-toolbox",
@@ -1429,7 +1429,7 @@
         "pm"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/pm/skills/toolbox/pm-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/pm/skills/toolbox/pm-toolbox"
     },
     {
       "name": "ponytail",
@@ -1438,7 +1438,7 @@
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail"
     },
     {
       "name": "ponytail-audit",
@@ -1447,7 +1447,7 @@
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-audit/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-audit"
     },
     {
       "name": "ponytail-debt",
@@ -1456,7 +1456,7 @@
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-debt/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-debt"
     },
     {
       "name": "ponytail-help",
@@ -1465,7 +1465,7 @@
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-help/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-help"
     },
     {
       "name": "ponytail-review",
@@ -1474,7 +1474,7 @@
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-review/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-review"
     },
     {
       "name": "popular-web-designs",
@@ -1490,7 +1490,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/popular-web-designs/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/popular-web-designs"
     },
     {
       "name": "portfolio-showcase-site",
@@ -1499,7 +1499,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/software-development/portfolio-showcase-site/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/portfolio-showcase-site"
     },
     {
       "name": "powerpoint",
@@ -1515,7 +1515,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/powerpoint/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/powerpoint"
     },
     {
       "name": "pretext",
@@ -1530,7 +1530,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/pretext/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/pretext"
     },
     {
       "name": "product-3d-model",
@@ -1539,7 +1539,7 @@
         "uxui"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/uxui/skills/creative/product-3d-model/SKILL.md"
+      "path": "<hermes>/profiles/uxui/skills/creative/product-3d-model"
     },
     {
       "name": "product-price-monitor",
@@ -1555,7 +1555,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/product-price-monitor/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/product-price-monitor"
     },
     {
       "name": "public-artifact-sanitization",
@@ -1564,7 +1564,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/public-artifact-sanitization/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/public-artifact-sanitization"
     },
     {
       "name": "python-debugpy",
@@ -1580,7 +1580,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/python-debugpy/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/python-debugpy"
     },
     {
       "name": "qa-review",
@@ -1589,7 +1589,7 @@
         "qa"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/qa-review/SKILL.md"
+      "path": "<hermes>/profiles/qa/skills/devops/qa-review"
     },
     {
       "name": "qa-toolbox",
@@ -1598,7 +1598,7 @@
         "qa"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/qa/skills/toolbox/qa-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/qa/skills/toolbox/qa-toolbox"
     },
     {
       "name": "react-native-expo-mvp-dev",
@@ -1607,7 +1607,7 @@
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/react-native-expo-mvp-dev/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/react-native-expo-mvp-dev"
     },
     {
       "name": "requesting-code-review",
@@ -1623,7 +1623,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/requesting-code-review/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/requesting-code-review"
     },
     {
       "name": "research-paper-writing",
@@ -1638,7 +1638,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/research-paper-writing/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/research/research-paper-writing"
     },
     {
       "name": "role-based-delegation",
@@ -1647,7 +1647,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/role-based-delegation/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/role-based-delegation"
     },
     {
       "name": "s-toolbox",
@@ -1656,7 +1656,7 @@
         "s"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/s/skills/toolbox/s-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/s/skills/toolbox/s-toolbox"
     },
     {
       "name": "saved-content-digest",
@@ -1665,7 +1665,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/saved-content-digest/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/saved-content-digest"
     },
     {
       "name": "sdlc-review",
@@ -1681,7 +1681,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/devops/sdlc-review/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/sdlc-review"
     },
     {
       "name": "serving-llms-vllm",
@@ -1696,7 +1696,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/inference/serving-llms-vllm/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/mlops/inference/serving-llms-vllm"
     },
     {
       "name": "session-librarian",
@@ -1711,7 +1711,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/session-librarian/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/session-librarian"
     },
     {
       "name": "simplify-code",
@@ -1727,7 +1727,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/simplify-code/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/simplify-code"
     },
     {
       "name": "single-file-html-prototyping",
@@ -1736,7 +1736,7 @@
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/single-file-html-prototyping/SKILL.md"
+      "path": "<hermes>/profiles/dp/skills/software-development/single-file-html-prototyping"
     },
     {
       "name": "sketch",
@@ -1751,7 +1751,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/sketch/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/sketch"
     },
     {
       "name": "songsee",
@@ -1767,7 +1767,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/media/songsee/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/media/songsee"
     },
     {
       "name": "songwriting-and-ai-music",
@@ -1783,7 +1783,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/songwriting-and-ai-music/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/songwriting-and-ai-music"
     },
     {
       "name": "spec-driven-qa-planning",
@@ -1792,7 +1792,7 @@
         "qa"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/qa/skills/software-development/spec-driven-qa-planning/SKILL.md"
+      "path": "<hermes>/profiles/qa/skills/software-development/spec-driven-qa-planning"
     },
     {
       "name": "spike",
@@ -1808,7 +1808,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/spike/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/spike"
     },
     {
       "name": "stage-end-session-cleanup",
@@ -1817,7 +1817,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/stage-end-session-cleanup/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/stage-end-session-cleanup"
     },
     {
       "name": "stuck-recovery",
@@ -1826,7 +1826,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/stuck-recovery/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/stuck-recovery"
     },
     {
       "name": "systematic-debugging",
@@ -1842,7 +1842,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/systematic-debugging/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/systematic-debugging"
     },
     {
       "name": "taste-skill",
@@ -1853,7 +1853,7 @@
         "dp"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/taste-skill/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/taste-skill"
     },
     {
       "name": "teams-meeting-pipeline",
@@ -1869,7 +1869,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/teams-meeting-pipeline/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/teams-meeting-pipeline"
     },
     {
       "name": "test-driven-development",
@@ -1885,7 +1885,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/test-driven-development/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/software-development/test-driven-development"
     },
     {
       "name": "thread-close",
@@ -1894,7 +1894,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/thread-close/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/thread-close"
     },
     {
       "name": "toolbox-scoring",
@@ -1903,7 +1903,7 @@
         "qa"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/qa/skills/toolbox/toolbox-scoring/SKILL.md"
+      "path": "<hermes>/profiles/qa/skills/toolbox/toolbox-scoring"
     },
     {
       "name": "touchdesigner-mcp",
@@ -1918,7 +1918,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/touchdesigner-mcp/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/touchdesigner-mcp"
     },
     {
       "name": "uxui-toolbox",
@@ -1927,7 +1927,7 @@
         "uxui"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/uxui/skills/toolbox/uxui-toolbox/SKILL.md"
+      "path": "<hermes>/profiles/uxui/skills/toolbox/uxui-toolbox"
     },
     {
       "name": "web-design-guidelines",
@@ -1938,7 +1938,7 @@
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/creative/web-design-guidelines/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/creative/web-design-guidelines"
     },
     {
       "name": "web-session-automation",
@@ -1947,7 +1947,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/web-session-automation/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/web-session-automation"
     },
     {
       "name": "weekly-review-planning",
@@ -1963,7 +1963,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/weekly-review-planning/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/weekly-review-planning"
     },
     {
       "name": "weights-and-biases",
@@ -1978,7 +1978,7 @@
         "marketer"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/evaluation/weights-and-biases/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/mlops/evaluation/weights-and-biases"
     },
     {
       "name": "windows-desktop-browser-control",
@@ -1987,7 +1987,7 @@
         "all"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/windows-desktop-browser-control/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/windows-desktop-browser-control"
     },
     {
       "name": "windows-portable-cli-install",
@@ -1996,7 +1996,7 @@
         "all"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/devops/windows-portable-cli-install/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/devops/windows-portable-cli-install"
     },
     {
       "name": "xlsx",
@@ -2012,7 +2012,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/xlsx/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/productivity/xlsx"
     },
     {
       "name": "xurl",
@@ -2028,7 +2028,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/social-media/xurl/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/social-media/xurl"
     },
     {
       "name": "youtube-content",
@@ -2044,7 +2044,7 @@
         "jilmuni"
       ],
       "custom": false,
-      "path": "<hermes>/profiles/all/skills/media/youtube-content/SKILL.md"
+      "path": "<hermes>/profiles/all/skills/media/youtube-content"
     }
   ],
   "crons": [
