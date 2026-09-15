@@ -1,0 +1,2334 @@
+{
+  "generated_at": "2026-09-16T02:47:36+09:00",
+  "bots": [
+    {
+      "id": "all",
+      "name": "도비서",
+      "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
+      "model": "claude-opus-5",
+      "skill_count": 114,
+      "custom_count": 33,
+      "soul_chars": 6115,
+      "cron_count": 26,
+      "color": "#fbcf5a",
+      "soul_path": "<hermes>/profiles/all/SOUL.md",
+      "skills_path": "<hermes>/profiles/all/skills",
+      "cron_path": "<hermes>/profiles/all/cron/jobs.json",
+      "vault_path": "05_도비서/"
+    },
+    {
+      "id": "s",
+      "name": "조사 담당",
+      "role": "웹·문서 조사, 사실 확인, 출처 수집",
+      "model": "claude-opus-5",
+      "skill_count": 84,
+      "custom_count": 7,
+      "soul_chars": 3113,
+      "cron_count": null,
+      "color": "#f5717a",
+      "soul_path": "<hermes>/profiles/s/SOUL.md",
+      "skills_path": "<hermes>/profiles/s/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/s/"
+    },
+    {
+      "id": "pm",
+      "name": "기획 담당",
+      "role": "요구사항 정리, 계획 수립, 일정·범위 관리",
+      "model": "claude-opus-5",
+      "skill_count": 84,
+      "custom_count": 7,
+      "soul_chars": 3646,
+      "cron_count": null,
+      "color": "#f5bd4f",
+      "soul_path": "<hermes>/profiles/pm/SOUL.md",
+      "skills_path": "<hermes>/profiles/pm/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/pm/"
+    },
+    {
+      "id": "uxui",
+      "name": "디자인 담당",
+      "role": "화면 설계, HTML·CSS 시안, 사용성 검토",
+      "model": "claude-opus-5",
+      "skill_count": 87,
+      "custom_count": 9,
+      "soul_chars": 3119,
+      "cron_count": null,
+      "color": "#a98bfa",
+      "soul_path": "<hermes>/profiles/uxui/SOUL.md",
+      "skills_path": "<hermes>/profiles/uxui/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/uxui/"
+    },
+    {
+      "id": "dp",
+      "name": "개발 담당",
+      "role": "코드 작성·수정·배포",
+      "model": "gpt-5.3-codex-spark",
+      "skill_count": 93,
+      "custom_count": 15,
+      "soul_chars": 7580,
+      "cron_count": null,
+      "color": "#5b9dfb",
+      "soul_path": "<hermes>/profiles/dp/SOUL.md",
+      "skills_path": "<hermes>/profiles/dp/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/dp/"
+    },
+    {
+      "id": "qa",
+      "name": "검수 담당",
+      "role": "산출물 검증, 실행 테스트, 결함 보고",
+      "model": "claude-opus-5",
+      "skill_count": 87,
+      "custom_count": 10,
+      "soul_chars": 4482,
+      "cron_count": null,
+      "color": "#43d787",
+      "soul_path": "<hermes>/profiles/qa/SOUL.md",
+      "skills_path": "<hermes>/profiles/qa/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/qa/"
+    },
+    {
+      "id": "marketer",
+      "name": "마케팅 담당",
+      "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
+      "model": "claude-opus-5",
+      "skill_count": 85,
+      "custom_count": 8,
+      "soul_chars": 4252,
+      "cron_count": null,
+      "color": "#2fd3c0",
+      "soul_path": "<hermes>/profiles/marketer/SOUL.md",
+      "skills_path": "<hermes>/profiles/marketer/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/marketer/"
+    },
+    {
+      "id": "jilmuni",
+      "name": "질문이",
+      "role": "짧은 질문에 빠르게 답하는 만능 Q&A",
+      "model": "gemini-3-flash-preview",
+      "skill_count": 58,
+      "custom_count": 6,
+      "soul_chars": 1869,
+      "cron_count": null,
+      "color": "#8e9bb3",
+      "soul_path": "<hermes>/profiles/jilmuni/SOUL.md",
+      "skills_path": "<hermes>/profiles/jilmuni/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/jilmuni/"
+    }
+  ],
+  "pipeline": [
+    {
+      "from": "라라페",
+      "to": "도비서",
+      "label": "지시"
+    },
+    {
+      "from": "도비서",
+      "to": "s",
+      "label": "조사 의뢰"
+    },
+    {
+      "from": "s",
+      "to": "도비서",
+      "label": "조사결과"
+    },
+    {
+      "from": "도비서",
+      "to": "pm",
+      "label": "기획 의뢰"
+    },
+    {
+      "from": "pm",
+      "to": "도비서",
+      "label": "계획서"
+    },
+    {
+      "from": "도비서",
+      "to": "uxui",
+      "label": "화면 의뢰"
+    },
+    {
+      "from": "uxui",
+      "to": "dp",
+      "label": "시안 전달"
+    },
+    {
+      "from": "도비서",
+      "to": "dp",
+      "label": "개발 의뢰"
+    },
+    {
+      "from": "dp",
+      "to": "qa",
+      "label": "검수 요청"
+    },
+    {
+      "from": "qa",
+      "to": "도비서",
+      "label": "검수 결과"
+    },
+    {
+      "from": "도비서",
+      "to": "marketer",
+      "label": "홍보 의뢰"
+    },
+    {
+      "from": "marketer",
+      "to": "도비서",
+      "label": "홍보안"
+    },
+    {
+      "from": "jilmuni",
+      "to": "라라페",
+      "label": "즉답"
+    },
+    {
+      "from": "도비서",
+      "to": "라라페",
+      "label": "최종 보고"
+    }
+  ],
+  "repair_map": [
+    {
+      "want": "도비서 성격·행동규칙을 바꾸고 싶다",
+      "file": "<hermes>/profiles/all/SOUL.md",
+      "vault": "05_도비서/10_인격규칙/SOUL.md"
+    },
+    {
+      "want": "하위 봇 성격·행동규칙을 바꾸고 싶다",
+      "file": "<hermes>/profiles/<봇>/SOUL.md",
+      "vault": "05_봇/<봇>/SOUL.md"
+    },
+    {
+      "want": "도비서가 기억하는 내용을 고치고 싶다",
+      "file": "<hermes>/profiles/all/memories/MEMORY.md",
+      "vault": "05_도비서/20_장기기억/MEMORY.md"
+    },
+    {
+      "want": "내 프로필(취향·호칭)을 고치고 싶다",
+      "file": "<hermes>/profiles/all/memories/USER.md",
+      "vault": "05_도비서/20_장기기억/USER.md"
+    },
+    {
+      "want": "일하는 절차(스킬)를 고치고 싶다",
+      "file": "<hermes>/profiles/all/skills",
+      "vault": "05_도비서/30_절차/"
+    },
+    {
+      "want": "특정 봇의 절차를 고치고 싶다",
+      "file": "<hermes>/profiles/<봇>/skills",
+      "vault": "05_봇/<봇>/스킬 목록.md"
+    },
+    {
+      "want": "정해진 시각 자동실행을 고치고 싶다",
+      "file": "<hermes>/profiles/all/cron/jobs.json",
+      "vault": "05_도비서/40_자동화/크론 목록.md"
+    },
+    {
+      "want": "자동실행 스크립트를 고치고 싶다",
+      "file": "<hermes>/profiles/all/scripts",
+      "vault": "05_도비서/40_자동화/스크립트 목록.md"
+    },
+    {
+      "want": "쓰는 AI 모델을 바꾸고 싶다",
+      "file": "<hermes>/profiles/<프로필>/config.yaml",
+      "vault": "05_하네스/프로필별 설정 비교.md"
+    },
+    {
+      "want": "전체 기본값을 바꾸고 싶다",
+      "file": "<hermes>/config.yaml",
+      "vault": "05_하네스/전역 설정.md"
+    },
+    {
+      "want": "바깥 서비스 연결(MCP)을 바꾸고 싶다",
+      "file": "<hermes>/profiles/all/config.yaml",
+      "vault": "05_하네스/MCP 목록.md"
+    },
+    {
+      "want": "API 키·비밀번호를 바꾸고 싶다",
+      "file": "<hermes>/.env",
+      "vault": "(없음 — 일부러 안 옮김)"
+    }
+  ],
+  "skills": [
+    {
+      "name": "agent-runtime-tuning",
+      "desc": "봇마다 결과 품질이 다를 때. 모델·effort 실측·변경·검증.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/agent-runtime-tuning/SKILL.md"
+    },
+    {
+      "name": "airtable",
+      "desc": "Airtable REST API via curl. Records CRUD, filters, upserts.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/airtable/SKILL.md"
+    },
+    {
+      "name": "app-code-maintenance",
+      "desc": "Use when (비공개) 앱 코드를 직접 고칠 때. git 없는 프로젝트 백업·검증·빌드 절차.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/app-code-maintenance/SKILL.md"
+    },
+    {
+      "name": "app-project-handover",
+      "desc": "Use when 외부 개발 앱 프로젝트를 인수할 때.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/app-project-handover/SKILL.md"
+    },
+    {
+      "name": "app-store-naming-and-aso",
+      "desc": "Name apps with measured store data; ASO + watermark specs.",
+      "owners": [
+        "marketer"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/marketer/skills/productivity/app-store-naming-and-aso/SKILL.md"
+    },
+    {
+      "name": "apple-notes",
+      "desc": "Manage Apple Notes via memo CLI: create, search, edit.",
+      "owners": [
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/apple/apple-notes/SKILL.md"
+    },
+    {
+      "name": "apple-reminders",
+      "desc": "Apple Reminders via remindctl: add, list, complete.",
+      "owners": [
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/apple/apple-reminders/SKILL.md"
+    },
+    {
+      "name": "architecture-diagram",
+      "desc": "Dark-themed SVG architecture/cloud/infra diagrams as HTML.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/architecture-diagram/SKILL.md"
+    },
+    {
+      "name": "arxiv",
+      "desc": "Search arXiv papers by keyword, author, category, or ID.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/arxiv/SKILL.md"
+    },
+    {
+      "name": "ascii-art",
+      "desc": "ASCII art: pyfiglet, cowsay, boxes, image-to-ascii.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/ascii-art/SKILL.md"
+    },
+    {
+      "name": "ascii-video",
+      "desc": "ASCII video: convert video/audio to colored ASCII MP4/GIF.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/ascii-video/SKILL.md"
+    },
+    {
+      "name": "baoyu-infographic",
+      "desc": "Infographics: 21 layouts x 21 styles (信息图, 可视化).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/baoyu-infographic/SKILL.md"
+    },
+    {
+      "name": "blocked-page-recovery",
+      "desc": "Use when a fetch fails: 403/429, paywall, WAF, bot wall.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/web/blocked-page-recovery/SKILL.md"
+    },
+    {
+      "name": "blogwatcher",
+      "desc": "Monitor blogs and RSS/Atom feeds via blogwatcher-cli tool.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/blogwatcher/SKILL.md"
+    },
+    {
+      "name": "box",
+      "desc": "Box manages cloud files, sharing, search, and metadata.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/box/SKILL.md"
+    },
+    {
+      "name": "business-idea-discovery",
+      "desc": "신규 사업 아이디어 발굴·판정 시. (비공개) 5문항 기준표와 루트 4종.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/business-idea-discovery/SKILL.md"
+    },
+    {
+      "name": "claude-code",
+      "desc": "Delegate coding to Claude Code CLI (features, PRs).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/claude-code/SKILL.md"
+    },
+    {
+      "name": "claude-design",
+      "desc": "Design one-off HTML artifacts (landing, deck, prototype).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/claude-design/SKILL.md"
+    },
+    {
+      "name": "codebase-inspection",
+      "desc": "Inspect codebases w/ pygount: LOC, languages, ratios.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/codebase-inspection/SKILL.md"
+    },
+    {
+      "name": "codex",
+      "desc": "Delegate coding to OpenAI Codex CLI (features, PRs).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/codex/SKILL.md"
+    },
+    {
+      "name": "comfyui",
+      "desc": "Generate images, video, and audio via diffusion workflows.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/comfyui/SKILL.md"
+    },
+    {
+      "name": "competitor-news-monitor",
+      "desc": "Watch named companies for material news; cited digests.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/competitor-news-monitor/SKILL.md"
+    },
+    {
+      "name": "computer-use",
+      "desc": "화면을 직접 보고 클릭·입력해야 할 때. 앱·설정창·실기기 확인 등 다른 도구로 안 되는 일. Drive the desktop background-first; escalate on signal.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/computer-use/SKILL.md"
+    },
+    {
+      "name": "context-budget-architecture",
+      "desc": "Use when 외부 AI 설계초안 검토·스킬 비대화·토큰 절감 구조 설계 시.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/context-budget-architecture/SKILL.md"
+    },
+    {
+      "name": "credential-intake",
+      "desc": "계정·API 키 전달받으면 표준 저장·검증 절차 수행.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/credential-intake/SKILL.md"
+    },
+    {
+      "name": "decision-override-protocol",
+      "desc": "(비공개)님이 내 반대·추천과 다른 결정을 할 때. 재반박도 즉시착수도 아니고 이유부터 묻는다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/decision-override-protocol/SKILL.md"
+    },
+    {
+      "name": "design-md",
+      "desc": "Author/validate/export Google's DESIGN.md token spec files.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/design-md/SKILL.md"
+    },
+    {
+      "name": "design-review-loop",
+      "desc": "설계안을 QA와 N라운드 왕복 검증할 때. 공유 파일 1개·판정 필수·계산은 코드로.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/design-review-loop/SKILL.md"
+    },
+    {
+      "name": "diagram-image-delivery",
+      "desc": "(비공개)님에게 구조·흐름을 그림으로 설명할 때. HTML→PNG 렌더 후 디스코드 첨부.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/creative/diagram-image-delivery/SKILL.md"
+    },
+    {
+      "name": "dobiseo-ops",
+      "desc": "(비공개) 운영규칙 원본. 승인범위·봇ID·경로·규칙저장·작업분배 판단 시 연다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/dobiseo-ops/SKILL.md"
+    },
+    {
+      "name": "dobiseo-toolbox",
+      "desc": "Use when 도비서가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/toolbox/dobiseo-toolbox/SKILL.md"
+    },
+    {
+      "name": "document-to-action-items",
+      "desc": "Extract cited obligations, deadlines, tasks from documents.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/document-to-action-items/SKILL.md"
+    },
+    {
+      "name": "docx",
+      "desc": "Create, read, edit, template, and review Word .docx files.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/docx/SKILL.md"
+    },
+    {
+      "name": "dogfood",
+      "desc": "Exploratory QA of web apps: find bugs, evidence, reports.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/dogfood/SKILL.md"
+    },
+    {
+      "name": "dp-toolbox",
+      "desc": "Use when dp가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/toolbox/dp-toolbox/SKILL.md"
+    },
+    {
+      "name": "email-inbox-triage",
+      "desc": "Triage an inbox: prioritize threads, draft replies safely.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/email/email-inbox-triage/SKILL.md"
+    },
+    {
+      "name": "evaluating-llms-harness",
+      "desc": "lm-eval-harness: benchmark LLMs (MMLU, GSM8K, etc.).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/mlops/evaluation/evaluating-llms-harness/SKILL.md"
+    },
+    {
+      "name": "excalidraw",
+      "desc": "Hand-drawn Excalidraw JSON diagrams (arch, flow, seq).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/excalidraw/SKILL.md"
+    },
+    {
+      "name": "external-tool-evaluation",
+      "desc": "Use when 외부 도구·스킬 도입 검토 시. 실측 후 판정.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/external-tool-evaluation/SKILL.md"
+    },
+    {
+      "name": "findmy",
+      "desc": "Track Apple devices/AirTags via FindMy.app on macOS.",
+      "owners": [
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/apple/findmy/SKILL.md"
+    },
+    {
+      "name": "fix-blast-radius",
+      "desc": "Use when declaring a bug fix done. Sweep all paths first.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/fix-blast-radius/SKILL.md"
+    },
+    {
+      "name": "gif-search",
+      "desc": "Search/download GIFs from Tenor via curl + jq.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/media/gif-search/SKILL.md"
+    },
+    {
+      "name": "github",
+      "desc": "GitHub via gh CLI: PRs, issues, reviews, repos, auth.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/github/SKILL.md"
+    },
+    {
+      "name": "github-auth",
+      "desc": "GitHub auth setup: HTTPS tokens, SSH keys, gh CLI login.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-auth/SKILL.md"
+    },
+    {
+      "name": "github-code-review",
+      "desc": "Review PRs: diffs, inline comments via gh or REST.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-code-review/SKILL.md"
+    },
+    {
+      "name": "github-issue-to-pr",
+      "desc": "Carry a GitHub issue to a verified PR with honest CI state.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-issue-to-pr/SKILL.md"
+    },
+    {
+      "name": "github-issues",
+      "desc": "Create, triage, label, assign GitHub issues via gh or REST.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-issues/SKILL.md"
+    },
+    {
+      "name": "github-pr-workflow",
+      "desc": "GitHub PR lifecycle: branch, commit, open, CI, merge.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-pr-workflow/SKILL.md"
+    },
+    {
+      "name": "github-repo-management",
+      "desc": "Clone/create/fork repos; manage remotes, releases.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-repo-management/SKILL.md"
+    },
+    {
+      "name": "google-workspace",
+      "desc": "Gmail, Calendar, Drive, Docs, Sheets via gws CLI or Python.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/google-workspace/SKILL.md"
+    },
+    {
+      "name": "grounded-citations",
+      "desc": "Ground answers and documents in cited, verifiable sources.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/grounded-citations/SKILL.md"
+    },
+    {
+      "name": "hermes-agent",
+      "desc": "Use, configure, theme, extend, and orchestrate Hermes Agent.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
+    },
+    {
+      "name": "hermes-agent-skill-authoring",
+      "desc": "Author in-repo SKILL.md files: frontmatter and structure.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+    },
+    {
+      "name": "hermes-cron-reports",
+      "desc": "Use when building/debugging Hermes cron reports & monitors.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-cron-reports/SKILL.md"
+    },
+    {
+      "name": "hermes-gateway-bots",
+      "desc": "Wake and troubleshoot Hermes gateway bots per profile.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-gateway-bots/SKILL.md"
+    },
+    {
+      "name": "hermes-mcp-connections",
+      "desc": "Connect MCP servers to Hermes: catalog, OAuth, PlayMCP.",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-mcp-connections/SKILL.md"
+    },
+    {
+      "name": "hermes-provider-auth",
+      "desc": "Connect AI providers to Hermes: auth types, keys.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-provider-auth/SKILL.md"
+    },
+    {
+      "name": "hermes-skill-porting",
+      "desc": "외부 스킬 설치·이식, 스킬 신규 작성·수정 시 사용. Use when installing external Claude skills into Hermes or writing/editing any skill.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-skill-porting/SKILL.md"
+    },
+    {
+      "name": "hermes-voice-io",
+      "desc": "Use when 헤르메스 음성 설정·문제. 받아쓰기·목소리·속도.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/hermes-voice-io/SKILL.md"
+    },
+    {
+      "name": "himalaya",
+      "desc": "Himalaya CLI: IMAP/SMTP email from terminal.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/email/himalaya/SKILL.md"
+    },
+    {
+      "name": "huggingface-hub",
+      "desc": "HuggingFace hf CLI: search/download/upload models, datasets.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/mlops/huggingface-hub/SKILL.md"
+    },
+    {
+      "name": "humanize-korean",
+      "desc": "AI가 쓴 한글을 사람 글처럼 윤문. 보고서·게시글·메일 등 한국어 초안 다듬기.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/creative/humanize-korean/SKILL.md"
+    },
+    {
+      "name": "imessage",
+      "desc": "Send and receive iMessages/SMS via the imsg CLI on macOS.",
+      "owners": [
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/apple/imessage/SKILL.md"
+    },
+    {
+      "name": "inspecting-hermes-desktop-dom",
+      "desc": "Read the live Hermes desktop DOM/CSS over CDP.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/inspecting-hermes-desktop-dom/SKILL.md"
+    },
+    {
+      "name": "llama-cpp",
+      "desc": "llama.cpp local GGUF inference + HF Hub model discovery.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/mlops/inference/llama-cpp/SKILL.md"
+    },
+    {
+      "name": "llm-wiki",
+      "desc": "Karpathy's LLM Wiki: build/query interlinked markdown KB.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/llm-wiki/SKILL.md"
+    },
+    {
+      "name": "lms-course-automation",
+      "desc": "Use for 대학 LMS 대리수강/과제 자동화. Script videos, AI only drafts.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/lms-course-automation/SKILL.md"
+    },
+    {
+      "name": "logged-in-site-automation",
+      "desc": "Use when 로그인된 사이트를 대신 조작할 때. 세션 재사용 구조.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/logged-in-site-automation/SKILL.md"
+    },
+    {
+      "name": "manim-video",
+      "desc": "Manim CE animations: 3Blue1Brown math/algo videos.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/manim-video/SKILL.md"
+    },
+    {
+      "name": "maps",
+      "desc": "Geocode, POIs, routes, timezones via OpenStreetMap/OSRM.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/maps/SKILL.md"
+    },
+    {
+      "name": "marketer-toolbox",
+      "desc": "Use when marketer가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "marketer"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/marketer/skills/toolbox/marketer-toolbox/SKILL.md"
+    },
+    {
+      "name": "meeting-action-items",
+      "desc": "Turn meeting notes into cited decisions, owners, tickets.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/meeting-action-items/SKILL.md"
+    },
+    {
+      "name": "merge-reconciler",
+      "desc": "Neutral third-party resolution of agent merge conflicts.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/merge-reconciler/SKILL.md"
+    },
+    {
+      "name": "model-tiering",
+      "desc": "Use when 새 프로젝트·작업·크론·봇 생성 시. 크론/봇/스크립트 실행형태 + 모델 등급 결정.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/model-tiering/SKILL.md"
+    },
+    {
+      "name": "nano-pdf",
+      "desc": "Edit text in existing PDFs via natural-language prompts.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/nano-pdf/SKILL.md"
+    },
+    {
+      "name": "node-inspect-debugger",
+      "desc": "Debug Node.js via --inspect + Chrome DevTools Protocol CLI.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/node-inspect-debugger/SKILL.md"
+    },
+    {
+      "name": "notion",
+      "desc": "Notion API + ntn CLI: pages, databases, markdown, Workers.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/notion/SKILL.md"
+    },
+    {
+      "name": "notion-business-hq",
+      "desc": "노션 사업 HQ 기록 시. (비공개) HQ DB를 MCP로 자동 관리.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/notion-business-hq/SKILL.md"
+    },
+    {
+      "name": "obsidian",
+      "desc": "Read, search, create, and edit notes in the Obsidian vault.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/note-taking/obsidian/SKILL.md"
+    },
+    {
+      "name": "obsidian-memory-mirror",
+      "desc": "Use when 옵시디언 05_도비서·되돌리기·미러링 관련. 기억 볼트 복제.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/obsidian-memory-mirror/SKILL.md"
+    },
+    {
+      "name": "ocr-and-documents",
+      "desc": "Extract text from PDFs/scans (pymupdf, marker-pdf).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/ocr-and-documents/SKILL.md"
+    },
+    {
+      "name": "opencode",
+      "desc": "Delegate coding to OpenCode CLI (features, PR review).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/opencode/SKILL.md"
+    },
+    {
+      "name": "openhue",
+      "desc": "Control Philips Hue lights, scenes, rooms via OpenHue CLI.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/smart-home/openhue/SKILL.md"
+    },
+    {
+      "name": "p5js",
+      "desc": "p5.js sketches: gen art, shaders, interactive, 3D.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/p5js/SKILL.md"
+    },
+    {
+      "name": "pdf",
+      "desc": "PDF files: create, read, merge, fill, OCR, edit text.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/pdf/SKILL.md"
+    },
+    {
+      "name": "plan",
+      "desc": "Write a markdown plan to .hermes/plans/; no execution.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/plan/SKILL.md"
+    },
+    {
+      "name": "pm-toolbox",
+      "desc": "Use when pm가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "pm"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/pm/skills/toolbox/pm-toolbox/SKILL.md"
+    },
+    {
+      "name": "ponytail",
+      "desc": ">",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail/SKILL.md"
+    },
+    {
+      "name": "ponytail-audit",
+      "desc": ">",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-audit/SKILL.md"
+    },
+    {
+      "name": "ponytail-debt",
+      "desc": ">",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-debt/SKILL.md"
+    },
+    {
+      "name": "ponytail-help",
+      "desc": ">",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-help/SKILL.md"
+    },
+    {
+      "name": "ponytail-review",
+      "desc": ">",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-review/SKILL.md"
+    },
+    {
+      "name": "popular-web-designs",
+      "desc": "54 real design systems (Stripe, Linear, Vercel) as HTML/CSS.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/popular-web-designs/SKILL.md"
+    },
+    {
+      "name": "portfolio-showcase-site",
+      "desc": "Use when (비공개) wants a portfolio site for a real business.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/portfolio-showcase-site/SKILL.md"
+    },
+    {
+      "name": "powerpoint",
+      "desc": "Create, read, edit .pptx decks with python-pptx.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/powerpoint/SKILL.md"
+    },
+    {
+      "name": "pretext",
+      "desc": "Build creative browser demos with DOM-free text layout.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/pretext/SKILL.md"
+    },
+    {
+      "name": "product-3d-model",
+      "desc": "Product photos to 3D model, viewer page, and shareable delivery.",
+      "owners": [
+        "uxui"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/uxui/skills/creative/product-3d-model/SKILL.md"
+    },
+    {
+      "name": "product-price-monitor",
+      "desc": "Watch product, flight, or listing prices; alert on target.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/product-price-monitor/SKILL.md"
+    },
+    {
+      "name": "python-debugpy",
+      "desc": "Debug Python: pdb REPL + debugpy remote (DAP).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/python-debugpy/SKILL.md"
+    },
+    {
+      "name": "qa-review",
+      "desc": "검수 의뢰가 오면 연다. 코드뿐 아니라 규칙·스크립트·크론·문서·도비서 산출물까지 검수. 문제만 목록, 판정 없음.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/qa-review/SKILL.md"
+    },
+    {
+      "name": "qa-toolbox",
+      "desc": "Use when qa가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/toolbox/qa-toolbox/SKILL.md"
+    },
+    {
+      "name": "react-native-expo-mvp-dev",
+      "desc": "Build RN+Expo apps — compositing, themes, Windows quirks.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/react-native-expo-mvp-dev/SKILL.md"
+    },
+    {
+      "name": "requesting-code-review",
+      "desc": "Pre-commit review: security scan, quality gates, auto-fix.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/requesting-code-review/SKILL.md"
+    },
+    {
+      "name": "research-paper-writing",
+      "desc": "Write ML papers for NeurIPS/ICML/ICLR: design→submit.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/research-paper-writing/SKILL.md"
+    },
+    {
+      "name": "role-based-delegation",
+      "desc": "Use when 실무를 직접 할지 하위봇에 맡길지 판단할 때. 역할 나뉜 일은 지침서와 함께 배분.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/role-based-delegation/SKILL.md"
+    },
+    {
+      "name": "s-toolbox",
+      "desc": "Use when s가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "s"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/toolbox/s-toolbox/SKILL.md"
+    },
+    {
+      "name": "saved-content-digest",
+      "desc": "Use when 인스타·유튜브 저장 콘텐츠를 요약해 노션에 쌓을 때. 수집=스크립트, 요약=저가 모델.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/saved-content-digest/SKILL.md"
+    },
+    {
+      "name": "sdlc-review",
+      "desc": "Review Kanban handoffs and route verified outcomes.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/devops/sdlc-review/SKILL.md"
+    },
+    {
+      "name": "serving-llms-vllm",
+      "desc": "vLLM: high-throughput LLM serving, OpenAI API, quantization.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/mlops/inference/serving-llms-vllm/SKILL.md"
+    },
+    {
+      "name": "session-librarian",
+      "desc": "Organize sessions by prompt: find, rename, archive, prune.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/session-librarian/SKILL.md"
+    },
+    {
+      "name": "simplify-code",
+      "desc": "Parallel 4-agent cleanup of recent code changes.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/simplify-code/SKILL.md"
+    },
+    {
+      "name": "single-file-html-prototyping",
+      "desc": "Build/verify single-file HTML app prototypes.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/single-file-html-prototyping/SKILL.md"
+    },
+    {
+      "name": "sketch",
+      "desc": "Throwaway HTML mockups: 2-3 design variants to compare.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/sketch/SKILL.md"
+    },
+    {
+      "name": "songsee",
+      "desc": "Audio spectrograms/features (mel, chroma, MFCC) via CLI.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/media/songsee/SKILL.md"
+    },
+    {
+      "name": "songwriting-and-ai-music",
+      "desc": "Songwriting craft and Suno AI music prompts.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/songwriting-and-ai-music/SKILL.md"
+    },
+    {
+      "name": "spec-driven-qa-planning",
+      "desc": "Build a QA test plan from a spec before any build exists.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/software-development/spec-driven-qa-planning/SKILL.md"
+    },
+    {
+      "name": "spike",
+      "desc": "Throwaway experiments to validate an idea before build.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/spike/SKILL.md"
+    },
+    {
+      "name": "stage-end-session-cleanup",
+      "desc": "단계 종료/긴 스레드 시 옵시디언 요약+세션 정리 루틴.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/stage-end-session-cleanup/SKILL.md"
+    },
+    {
+      "name": "stuck-recovery",
+      "desc": "막혔거나 '안 된다'고 말하기 전. 대안·도구 탐색 5단계.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/stuck-recovery/SKILL.md"
+    },
+    {
+      "name": "systematic-debugging",
+      "desc": "4-phase root cause debugging: understand bugs before fixing.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/systematic-debugging/SKILL.md"
+    },
+    {
+      "name": "taste-skill",
+      "desc": ">-",
+      "owners": [
+        "all",
+        "uxui",
+        "dp"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/taste-skill/SKILL.md"
+    },
+    {
+      "name": "teams-meeting-pipeline",
+      "desc": "Teams meeting summaries, job replay, Graph subscriptions.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/teams-meeting-pipeline/SKILL.md"
+    },
+    {
+      "name": "test-driven-development",
+      "desc": "TDD: enforce RED-GREEN-REFACTOR, tests before code.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/test-driven-development/SKILL.md"
+    },
+    {
+      "name": "thread-close",
+      "desc": "Use when (비공개) says '스레드 닫음'. 인수인계·사용법·결정 저장 후 ✅ 보관.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/thread-close/SKILL.md"
+    },
+    {
+      "name": "toolbox-scoring",
+      "desc": "Use when 노션 도구함 항목을 채점·판정할 때. (비공개) 확정 v3 기준표.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/toolbox/toolbox-scoring/SKILL.md"
+    },
+    {
+      "name": "touchdesigner-mcp",
+      "desc": "Control TouchDesigner via twozero MCP.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/touchdesigner-mcp/SKILL.md"
+    },
+    {
+      "name": "uxui-toolbox",
+      "desc": "Use when uxui가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "uxui"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/uxui/skills/toolbox/uxui-toolbox/SKILL.md"
+    },
+    {
+      "name": "web-design-guidelines",
+      "desc": "Review UI code for Web Interface Guidelines compliance.",
+      "owners": [
+        "all",
+        "uxui",
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/creative/web-design-guidelines/SKILL.md"
+    },
+    {
+      "name": "web-session-automation",
+      "desc": "Use when (비공개) 계정 사이트를 대신 조작할 때. 세션 재사용.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/web-session-automation/SKILL.md"
+    },
+    {
+      "name": "weekly-review-planning",
+      "desc": "Weekly reset: commitments, stalled work, next-week plan.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/weekly-review-planning/SKILL.md"
+    },
+    {
+      "name": "weights-and-biases",
+      "desc": "W&B: log ML experiments, sweeps, model registry, dashboards.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/mlops/evaluation/weights-and-biases/SKILL.md"
+    },
+    {
+      "name": "windows-desktop-browser-control",
+      "desc": "computer_use로 PC 브라우저를 직접 조작할 때 쓸 윈도우 요령.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/windows-desktop-browser-control/SKILL.md"
+    },
+    {
+      "name": "windows-portable-cli-install",
+      "desc": "Use when Windows CLI install hits UAC/admin block.",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/devops/windows-portable-cli-install/SKILL.md"
+    },
+    {
+      "name": "xlsx",
+      "desc": "Create, read, edit Excel .xlsx workbooks and CSVs.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/xlsx/SKILL.md"
+    },
+    {
+      "name": "xurl",
+      "desc": "X/Twitter via xurl CLI: raw post search, posting, DM, media.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/social-media/xurl/SKILL.md"
+    },
+    {
+      "name": "youtube-content",
+      "desc": "YouTube transcripts to summaries, threads, blogs.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/media/youtube-content/SKILL.md"
+    }
+  ],
+  "crons": [
+    {
+      "name": "(비공개) 일일 수강",
+      "schedule": "매일 04:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "학습",
+      "profile": "all"
+    },
+    {
+      "name": "(비공개) 일정·퀴즈 감시",
+      "schedule": "매일 05:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "학습",
+      "profile": "all"
+    },
+    {
+      "name": "AI 도구 자동발굴 (0토큰)",
+      "schedule": "매일 03:50",
+      "mode": "무토큰",
+      "kind": "수집",
+      "profile": "all"
+    },
+    {
+      "name": "Google→노션 캘린더 복제 (0토큰)",
+      "schedule": "매일 07:00",
+      "mode": "무토큰",
+      "kind": "백업",
+      "profile": "all"
+    },
+    {
+      "name": "개인 비즈니스 시장 흐름 보고서 (월·목 10시)",
+      "schedule": "매주 월·목 10:00",
+      "mode": "AI",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "기한 도래 승격 (실험실+진행현황, 0토큰)",
+      "schedule": "매일 08:10",
+      "mode": "무토큰",
+      "kind": "정리",
+      "profile": "all"
+    },
+    {
+      "name": "노션 결재·댓글 통합 반영 (30분)",
+      "schedule": "30분마다 (8-23시대)",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "동기화",
+      "profile": "all"
+    },
+    {
+      "name": "노션 상태 동기화 점검 (0토큰)",
+      "schedule": "매주 월 08:00",
+      "mode": "무토큰",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "도구 사용빈도 주간 보고",
+      "schedule": "매주 금 09:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "도구함 일일 수집·요약·적용 분석",
+      "schedule": "매일 04:30",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "도구함 흐름 점검 (확정 흐름 v4)",
+      "schedule": "매일 10:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "보유 자원 색인 갱신 (0토큰)",
+      "schedule": "매주 월·목 03:00",
+      "mode": "무토큰",
+      "kind": "동기화",
+      "profile": "all"
+    },
+    {
+      "name": "볼트 미러링 (헤르메스→옵시디언, 0토큰)",
+      "schedule": "매일 04:50",
+      "mode": "무토큰",
+      "kind": "백업",
+      "profile": "all"
+    },
+    {
+      "name": "상태값 빠른 감시 (3분, 0토큰)",
+      "schedule": "3분마다 (8-23시대)",
+      "mode": "무토큰",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "상황판 갱신 (A안, 0토큰)",
+      "schedule": "매일 07:00 · 12:00 · 18:00 · 23:00",
+      "mode": "무토큰",
+      "kind": "동기화",
+      "profile": "all"
+    },
+    {
+      "name": "새벽 게이트웨이 재시작(설정 반영)",
+      "schedule": "매일 04:00",
+      "mode": "무토큰",
+      "kind": "동기화",
+      "profile": "all"
+    },
+    {
+      "name": "앱 리뷰 마이닝 (시범 2주·28회)",
+      "schedule": "매일 06:00 · 18:00",
+      "mode": "무토큰",
+      "kind": "수집",
+      "profile": "all"
+    },
+    {
+      "name": "운영 오류·원복 요청 감시 (3분, 로컬)",
+      "schedule": "3분마다",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "운영 요약 (09시·18시)",
+      "schedule": "매일 09:00 · 18:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "월1회 감사 (메모리 + 측정체계)",
+      "schedule": "매월 1일 10:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "정리",
+      "profile": "all"
+    },
+    {
+      "name": "정기점검 ①자동화생존 ②대기열 (0토큰)",
+      "schedule": "매일 08:00 · 20:00",
+      "mode": "무토큰",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "주간 AI 뉴스",
+      "schedule": "매주 토 15:00",
+      "mode": "AI",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "주간 아이디어 요약 1장 (시범 2회)",
+      "schedule": "매주 월 10:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "주간 정부지원·복지혜택 브리핑(비공개)",
+      "schedule": "매주 월 10:00",
+      "mode": "AI",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "지원사업 공고 감시 (기업마당·K-Startup)",
+      "schedule": "매일 07:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "회의안건 감시 (0토큰)",
+      "schedule": "매일 09:00 · 21:00",
+      "mode": "무토큰",
+      "kind": "점검",
+      "profile": "all"
+    }
+  ],
+  "mcp": [
+    {
+      "name": "notion",
+      "label": "노션 연동 (기록·결정 정본)",
+      "url": "https://mcp.notion.com/mcp",
+      "auth": "oauth",
+      "enabled": true,
+      "profiles": [
+        "all"
+      ]
+    },
+    {
+      "name": "playmcp",
+      "label": "플레이MCP (브라우저 조작)",
+      "url": "https://playmcp.kakao.com/mcp",
+      "auth": "header",
+      "enabled": true,
+      "profiles": [
+        "all"
+      ]
+    },
+    {
+      "name": "vercel",
+      "label": "버셀 연동 (웹 배포)",
+      "url": "https://mcp.vercel.com",
+      "auth": "oauth",
+      "enabled": true,
+      "profiles": [
+        "all"
+      ]
+    }
+  ],
+  "stores": [
+    {
+      "name": "헤르메스",
+      "role": "원본",
+      "path": "<hermes>/",
+      "color": "#5b9dfb",
+      "note": "모든 규칙·기억·스킬의 진짜 원본. 수정은 여기서만 한다"
+    },
+    {
+      "name": "옵시디언 볼트",
+      "role": "읽기 전용 사본",
+      "path": "<vault>/",
+      "color": "#a98bfa",
+      "note": "매일 04:50 자동 미러링. 여기서 고쳐도 다음 날 덮어씌워진다"
+    },
+    {
+      "name": "노션",
+      "role": "결정 기록",
+      "path": "notion.so",
+      "color": "#43d787",
+      "note": "승인·결재·진행현황 등 '정해진 것'을 남기는 곳 (이 스크립트는 읽지 않는다)"
+    }
+  ],
+  "flows": [
+    {
+      "from": "헤르메스",
+      "to": "옵시디언 볼트",
+      "label": "매일 04:50 통째로 덮어쓰기"
+    },
+    {
+      "from": "헤르메스",
+      "to": "노션",
+      "label": "결정·상태 기록"
+    }
+  ],
+  "rule_layers": [
+    {
+      "layer": 1,
+      "name": "SOUL",
+      "desc": "인격·행동규칙. 그 봇이 누구이고 어떻게 말하는가",
+      "path": "<hermes>/profiles/<프로필>/SOUL.md",
+      "win": "최우선",
+      "win_top": true
+    },
+    {
+      "layer": 2,
+      "name": "장기기억",
+      "desc": "겪은 일·사용자 취향. 대화가 바뀌어도 남는 기억",
+      "path": "<hermes>/profiles/all/memories/",
+      "win": "2순위",
+      "win_top": false
+    },
+    {
+      "layer": 3,
+      "name": "스킬",
+      "desc": "일하는 절차서. '이 상황에는 이 순서로'",
+      "path": "<hermes>/profiles/<프로필>/skills/",
+      "win": "3순위",
+      "win_top": false
+    },
+    {
+      "layer": 4,
+      "name": "설정",
+      "desc": "쓰는 AI 모델·도구·MCP 연결 같은 기계 설정",
+      "path": "<hermes>/profiles/<프로필>/config.yaml",
+      "win": "4순위",
+      "win_top": false
+    },
+    {
+      "layer": 5,
+      "name": "크론",
+      "desc": "정해진 시각에 저절로 도는 자동실행",
+      "path": "<hermes>/profiles/all/cron/jobs.json",
+      "win": "5순위",
+      "win_top": false
+    }
+  ]
+}

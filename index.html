@@ -1,0 +1,3198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>팀 구조 지도 · 보수 찾기표</title>
+<style>
+:root{
+  --bg:#0a0e16; --side:#0d1220; --panel:#131a29; --panel2:#182033; --line:#26304a;
+  --txt:#e8eefb; --mut:#8e9bb3; --dim:#5f6b83;
+  --blue:#5b9dfb; --green:#43d787; --purple:#a98bfa; --amber:#f5bd4f; --red:#f5717a;
+  --teal:#2fd3c0; --gold:#fbcf5a;
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--txt);
+  font-family:"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo","Segoe UI",sans-serif;
+  font-size:13px;line-height:1.45;overflow:hidden;
+}
+button,input{font:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer}
+::-webkit-scrollbar{width:7px;height:7px}
+::-webkit-scrollbar-thumb{background:#2c3550;border-radius:6px}
+::-webkit-scrollbar-track{background:transparent}
+
+/* ===== 레이아웃 ===== */
+.app{display:flex;height:100vh;overflow:hidden}
+.side{width:212px;flex:0 0 212px;background:var(--side);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;padding:18px 12px 14px}
+.brand{display:flex;gap:10px;align-items:center;padding:0 8px 18px}
+.brand .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(140deg,#5b9dfb,#a98bfa);
+  display:grid;place-items:center;font-size:15px}
+.brand b{font-size:15px;letter-spacing:-.2px;display:block}
+.brand small{color:var(--dim);font-size:10.5px}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav button{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;color:var(--mut);font-size:13px;width:100%;text-align:left}
+.nav button .ico{width:16px;text-align:center;opacity:.9}
+.nav button:hover{background:#151d30;color:var(--txt)}
+.nav button.on{background:linear-gradient(90deg,#1b2a47,#162034);color:#fff;box-shadow:inset 2px 0 0 var(--blue)}
+.side .foot{margin-top:auto;padding:12px 10px 0;color:var(--dim);font-size:10.5px;border-top:1px solid #1a2234}
+
+.main{flex:1;display:flex;flex-direction:column;min-width:0}
+.top{min-height:54px;flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:0 20px;
+  border-bottom:1px solid var(--line);background:#0c1120}
+.top .ttl{font-size:14.5px;font-weight:700}
+.top .sub{color:var(--dim);font-size:11.5px}
+.top .spacer{flex:1}
+.search{display:flex;align-items:center;gap:7px;background:#141c2e;border:1px solid var(--line);
+  border-radius:10px;padding:6px 11px;width:330px;max-width:42vw}
+.search input{background:none;border:none;outline:none;flex:1;min-width:0;font-size:12.5px}
+.search input::placeholder{color:var(--dim)}
+.search .kbd{color:var(--dim);font-size:10px;border:1px solid #2b3550;border-radius:5px;padding:1px 5px}
+.who{display:flex;align-items:center;gap:7px;padding:4px 10px;border-radius:999px;background:#151d30;border:1px solid var(--line);font-size:11.5px}
+.who .av{width:20px;height:20px;border-radius:50%;background:var(--gold);color:#241a00;display:grid;place-items:center;font-size:10px;font-weight:800}
+
+.scroll{flex:1;overflow:auto;padding:14px 16px 24px}
+.view{display:none}
+.view.on{display:block}
+
+/* ===== 카드 ===== */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  display:flex;flex-direction:column;overflow:hidden;min-height:0}
+.card>h3{display:flex;align-items:center;gap:8px;padding:11px 13px 9px;font-size:13px;font-weight:700;letter-spacing:-.2px;flex-wrap:wrap}
+.card>h3 .hint{margin-left:auto;color:var(--dim);font-size:10.5px;font-weight:500}
+.body{padding:0 13px 13px;overflow:auto;flex:1;min-height:0}
+.badge{display:inline-grid;place-items:center;min-width:20px;height:19px;padding:0 6px;border-radius:7px;
+  font-size:11px;font-weight:800;background:#243049;color:#cfe0ff}
+.badge.gold{background:#3a2e13;color:#f9cd6e}
+.badge.green{background:#12301f;color:#6fe3a5}
+.badge.purple{background:#241c3d;color:#c7b0ff}
+.clk{cursor:pointer;transition:.13s}
+.clk:hover{background:var(--panel2);border-color:#35446a}
+.muted{color:var(--dim)}
+.sec-t{font-size:11px;color:var(--dim);margin:13px 0 6px;letter-spacing:.3px}
+.tag{font-size:10px;padding:2px 7px;border-radius:6px;background:#1e2740;color:var(--mut);white-space:nowrap}
+.tag.cst{background:#3a2e13;color:#f9cd6e}
+.tag.cmn{background:#1e2b46;color:#9cc2ff}
+
+.wide2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.wide3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stack{display:flex;flex-direction:column;gap:12px}
+
+/* ===== 조직도 ===== */
+.org{padding:6px 4px 2px}
+.org .lvl{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.org .conn{height:18px;border-left:2px solid #2b3550}
+.vline{width:2px;height:16px;background:#2c3550;margin:0 auto}
+.hline{height:2px;background:#2b3550;margin:0 14px}
+.onode{border:1px solid var(--line);border-radius:12px;background:#111829;padding:10px 13px;text-align:center;min-width:150px}
+.onode.boss{border-color:#5a4a1c;background:linear-gradient(140deg,#1d1a10,#111829)}
+.onode.sec{border-color:#3a4a73;background:linear-gradient(140deg,#131c31,#111829)}
+.onode .nm{font-weight:800;font-size:13px}
+.onode .ro{font-size:10.5px;color:var(--dim);margin-top:2px}
+.botrow{display:grid;grid-template-columns:repeat(7,1fr);gap:9px;margin-top:2px}
+.bcard{border:1px solid var(--line);border-radius:12px;background:#111829;padding:10px 10px 9px;cursor:pointer;transition:.13s;position:relative;overflow:hidden}
+.bcard:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c,#3a4a73)}
+.bcard:hover{background:#1a2338;border-color:#3a4a73;transform:translateY(-2px)}
+.bcard .hd{display:flex;align-items:center;gap:7px}
+.bcard .av{width:23px;height:23px;border-radius:7px;display:grid;place-items:center;font-size:11px;font-weight:800;color:#0b0f17;background:var(--c,#5b9dfb)}
+.bcard .id{font-weight:800;font-size:12px}
+.bcard .nm2{font-size:10.5px;color:var(--mut)}
+.bcard .ro{font-size:10.5px;color:var(--dim);margin-top:6px;height:28px;overflow:hidden}
+.bcard .mdl{font-size:9.5px;color:#9cc2ff;background:#16223a;border-radius:6px;padding:2px 6px;display:inline-block;margin-top:4px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bcard .st{margin-top:7px;display:flex;justify-content:space-between;font-size:10.5px;color:var(--mut);border-top:1px dashed #212b44;padding-top:6px}
+.bcard .st b{color:#cfe0ff}
+.bcard .st .cst{color:#f9cd6e}
+
+/* ===== 파이프라인 ===== */
+.pipe{display:flex;align-items:stretch;overflow-x:auto;padding:4px 2px 8px;gap:0}
+.pnode{flex:1 1 0;min-width:86px;border:1px solid var(--line);border-radius:11px;padding:9px 6px;text-align:center;background:#111829;cursor:pointer;transition:.13s}
+.pnode:hover{background:#1b2440;border-color:#46598c;transform:translateY(-2px)}
+.pnode.sec{border-color:#5a4a1c}
+.pnode .e{font-size:16px}
+.pnode .n{font-size:11.5px;font-weight:700;margin-top:2px}
+.pnode .r{font-size:9.5px;color:var(--dim)}
+.parw{flex:0 0 74px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.parw .lb{font-size:9.5px;color:#9cc2ff;background:#16223a;border:1px solid #23325a;border-radius:6px;padding:1px 5px;white-space:nowrap}
+.parw .ar{color:#3b496d;font-size:13px;line-height:1}
+
+/* ===== 표 ===== */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{text-align:left;color:var(--dim);font-weight:600;font-size:10.5px;padding:6px 8px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel);z-index:2}
+.tbl td{padding:7px 8px;border-bottom:1px dashed #1e2740;vertical-align:top}
+.tbl tr:hover td{background:#161e30}
+.path{font-family:Consolas,"D2Coding",monospace;font-size:11px;color:#9cc2ff;background:#141c2e;border:1px solid #23325a;
+  border-radius:7px;padding:3px 7px;cursor:pointer;display:inline-block;word-break:break-all;transition:.13s}
+.path:hover{background:#1d2a45;border-color:#3a4a73;color:#cfe0ff}
+.path:active{transform:scale(.98)}
+.path.vault{color:#c7b0ff;border-color:#33285a;background:#181430}
+.path.vault:hover{background:#221b42}
+
+/* ===== 목록 ===== */
+.li{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;border:1px solid transparent}
+.li+.li{margin-top:3px}
+.li .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li .m{color:var(--dim);font-size:10.5px;white-space:nowrap}
+.li:hover{background:var(--panel2);border-color:#2f3a59}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 7px;border-radius:999px;background:#1e2740;color:var(--mut);white-space:nowrap}
+.chip.b{background:#16223a;color:#9cc2ff}
+
+/* 스킬 지도 */
+.skillcols{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.skcol{border:1px solid var(--line);border-radius:11px;background:#111829;padding:9px}
+.skcol h4{font-size:11.5px;display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.skcol .dotc{width:8px;height:8px;border-radius:3px;background:var(--c,#5b9dfb)}
+.sk{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:7px;cursor:pointer;font-size:11.5px}
+.sk:hover{background:#1b2440}
+.sk .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.star{color:#f9cd6e}
+
+/* 저장소 지도 */
+.stores{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.store{flex:1 1 0;min-width:150px;border:1px solid var(--line);border-radius:12px;background:#111829;padding:11px 12px;cursor:pointer;transition:.13s}
+.store:hover{background:#1a2338;border-color:#3a4a73}
+.store .nm{font-weight:800;font-size:13px}
+.store .rl{font-size:10.5px;margin-top:2px}
+.store .nt{font-size:10.5px;color:var(--dim);margin-top:6px}
+.sarw{flex:0 0 128px;text-align:center;color:#3b496d;font-size:11px;padding:0 6px}
+.sarw b{display:block;color:#9cc2ff;font-size:10px;font-weight:600;line-height:1.35;margin-top:2px}
+
+/* 규칙 계층 */
+.layer{display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:11px;background:#111829;padding:10px 12px;cursor:pointer;transition:.13s}
+.layer:hover{background:#1a2338;border-color:#3a4a73}
+.layer+.layer{margin-top:7px}
+.layer .no{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:12px;background:#22304d;color:#a8c3f2;flex:0 0 auto}
+.layer .nm{font-weight:700}
+.layer .ds{font-size:10.5px;color:var(--dim)}
+.layer .win{margin-left:auto;font-size:10.5px;color:#6fe3a5;white-space:nowrap}
+
+/* 드로어 */
+.drawer{position:fixed;top:0;right:0;width:400px;max-width:94vw;height:100vh;background:#0f1522;
+  border-left:1px solid var(--line);box-shadow:-24px 0 60px #000a;transform:translateX(105%);
+  transition:transform .22s cubic-bezier(.4,0,.2,1);z-index:50;display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.drawer .dh{display:flex;align-items:center;gap:10px;padding:15px 16px;border-bottom:1px solid var(--line)}
+.drawer .dh b{font-size:14.5px}
+.drawer .dh .x{margin-left:auto;color:var(--mut);font-size:17px;line-height:1}
+.drawer .db{padding:14px 16px 30px;overflow:auto;flex:1}
+.kv{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed #1e2740;font-size:12px}
+.kv .k{width:86px;color:var(--dim);flex:0 0 auto}
+.kv .v{flex:1;min-width:0;word-break:break-all}
+.scrim{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:.22s;z-index:49}
+.scrim.on{opacity:.45;pointer-events:auto}
+
+/* 토스트 */
+.toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,16px);background:#1d2a45;border:1px solid #3a4a73;
+  color:#dfe9ff;padding:9px 18px;border-radius:999px;font-size:12.5px;opacity:0;pointer-events:none;transition:.18s;z-index:80}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+.hintbar{display:flex;align-items:center;gap:8px;background:#141c2e;border:1px solid #23325a;border-radius:10px;
+  padding:8px 12px;font-size:11.5px;color:var(--mut);margin-bottom:12px;flex-wrap:wrap}
+.hintbar code{font-family:Consolas,monospace;color:#9cc2ff;background:#101728;padding:1px 6px;border-radius:5px}
+
+/* ===== 오류·결측 안내 (조용히 삼키지 않기 위한 표시) ===== */
+.failbox{flex:1 1 100%;width:100%;border:1px solid #5a2a30;background:#2a161a;border-radius:11px;
+  padding:10px 12px;margin:8px 0 0;font-size:11.5px;color:#f5b6bc;line-height:1.6}
+.failbox b{color:#ffd7db}
+.failbox .fx{display:block;color:#c99aa0;font-size:10.5px;margin-top:2px}
+.failbox code{font-family:Consolas,monospace;font-size:10px;color:#e79aa3;background:#1d0f12;
+  border-radius:5px;padding:1px 5px;display:inline-block;margin-top:4px;word-break:break-all}
+.failbar{display:none;align-items:center;gap:8px;border:1px solid #5a2a30;background:#2a161a;color:#f5b6bc;
+  border-radius:10px;padding:9px 12px;font-size:11.5px;margin-bottom:12px;flex-wrap:wrap}
+.failbar.on{display:flex}
+
+/* ===== 반응형 ===== */
+@media (max-width:1500px){
+  body{overflow:auto}
+  .pipe{flex-wrap:wrap;overflow-x:visible;row-gap:8px}
+  .pnode{flex:1 1 15%;min-width:96px}
+  .parw{flex:0 0 66px}
+  .botrow{grid-template-columns:repeat(4,1fr)}
+  .skillcols{grid-template-columns:repeat(2,1fr)}
+  .wide3{grid-template-columns:1fr 1fr}
+}
+@media (max-width:1100px){
+  .wide2,.wide3{grid-template-columns:1fr}
+  .botrow{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  .app{flex-direction:column;height:auto}
+  .side{width:100%;flex:0 0 auto;border-right:none;border-bottom:1px solid var(--line);padding:12px}
+  .brand{padding:0 4px 10px}
+  .nav{flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:2px}
+  .nav button{white-space:nowrap;padding:7px 10px}
+  .side .foot{display:none}
+  .top{flex-wrap:wrap;padding:10px 12px;gap:8px}
+  .top .spacer{display:none}
+  .search{width:100%;max-width:100%;order:3}
+  .who{font-size:10.5px}
+  .scroll{padding:10px 10px 30px;overflow:visible}
+  .botrow,.skillcols{grid-template-columns:1fr}
+  .pipe{flex-direction:column;overflow-x:visible}
+  .parw{flex:0 0 auto;padding:2px 0}
+  .parw .ar{transform:rotate(90deg)}
+  .stores{flex-direction:column;align-items:stretch}
+  .sarw{flex:0 0 auto;padding:6px 0}
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+  .tbl thead{display:none}
+  .tbl tr{border:1px solid var(--line);border-radius:11px;margin-bottom:9px;padding:8px;background:#111829}
+  .tbl td{border:none;padding:4px 2px}
+  .tbl td:before{content:attr(data-l);display:block;font-size:10px;color:var(--dim);margin-bottom:2px}
+  .drawer{width:100%;max-width:100%}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== 사이드바 ===== -->
+  <aside class="side">
+    <div class="brand">
+      <div class="mark">🗺</div>
+      <div><b>팀 구조 지도</b><small>무엇이 어디에 있는지</small></div>
+    </div>
+    <nav class="nav" id="nav">
+      <button class="on" data-v="org"><span class="ico">🏛</span>구조도</button>
+      <button data-v="fix"><span class="ico">🔧</span>보수 찾기</button>
+      <button data-v="skill"><span class="ico">🧩</span>스킬 지도</button>
+      <button data-v="cron"><span class="ico">⏱</span>자동작업</button>
+      <button data-v="conn"><span class="ico">🔗</span>연결·저장소</button>
+    </nav>
+    <div class="foot">구조를 눈으로 보고,<br>고칠 곳을 바로 찾는다.<br><span style="opacity:.6" id="genfoot">마지막 갱신: —</span></div>
+  </aside>
+
+  <!-- ===== 본문 ===== -->
+  <div class="main">
+    <header class="top">
+      <div>
+        <div class="ttl" id="vtitle">구조도</div>
+        <div class="sub" id="vsub">우리 팀이 어떻게 생겼는가</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="search">
+        <span style="color:#5f6b83">🔍</span>
+        <input id="q" placeholder="봇·스킬·자동작업·파일명 아무거나 검색" autocomplete="off">
+        <span class="kbd" id="qclear" style="cursor:pointer;display:none">지우기</span>
+      </div>
+      <span class="who"><span class="av">라</span>라라페님</span>
+    </header>
+
+    <div class="scroll" id="scroll">
+
+    <!-- 렌더 실패 전역 안내 (기본 숨김, 실패 시에만 노출) -->
+    <div class="failbar" id="failbar">
+      <span>⚠️</span><span id="failbartxt"></span>
+    </div>
+
+    <!-- ===== 검색 결과 ===== -->
+    <section class="view" id="v-search">
+      <div class="card"><h3>🔍 검색 결과<span class="hint" id="qhint"></span></h3>
+        <div class="body" id="qres"></div>
+      </div>
+    </section>
+
+    <!-- ============ 1. 구조도 ============ -->
+    <section class="view on" id="v-org">
+      <div class="hintbar">
+        <span>📌</span><span><code>&lt;hermes&gt;</code> = 내 PC의 헤르메스 폴더. 경로를 누르면 그대로 복사됩니다.</span>
+        <span style="margin-left:auto" class="muted" id="gen1"></span>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <h3>🏛 조직도<span class="hint">봇 카드를 누르면 파일 경로까지 나옵니다</span></h3>
+        <div class="body">
+          <div class="org">
+            <div class="lvl"><div class="onode boss"><div class="nm">👑 라라페님</div><div class="ro">고용주 · 최종 결정</div></div></div>
+            <div class="vline"></div>
+            <div class="lvl"><div class="onode sec clk" onclick="D('bot:all')"><div class="nm">🤖 도비서 (all)</div><div class="ro">총괄 · 지시 분배 · 검수</div></div></div>
+            <div class="vline"></div>
+            <div class="hline"></div>
+            <div class="botrow" id="botrow"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <h3>🔀 작업 흐름 파이프라인<span class="hint">무엇이 어떤 순서로 누구에게 넘어가는가</span></h3>
+        <div class="body"><div class="pipe" id="pipe"></div></div>
+      </div>
+
+      <div class="wide2">
+        <div class="card">
+          <h3>📚 규칙 계층도<span class="hint">위에서부터 읽히고, 충돌하면 위가 이긴다</span></h3>
+          <div class="body" id="layers"></div>
+        </div>
+        <div class="card">
+          <h3>ℹ️ 이 지도는 어떻게 갱신되나<span class="hint">대시보드 자기 설명</span></h3>
+          <div class="body">
+            <p style="font-size:12.5px;line-height:1.7">
+              이 화면은 헤르메스 폴더를 훑어 만든 <b>구조 스냅샷</b>입니다.
+              매일 새벽 자동작업이 봇·스킬·자동작업·연결 목록을 다시 읽어, 이 파일 안의
+              <code class="path" style="cursor:default">__DATA_START__ ~ __DATA_END__</code> 블록만 통째로 갈아끼웁니다.
+              화면 코드는 건드리지 않습니다. <b>화면을 고치려면 코드가 아니라 데이터를 보면 됩니다.</b>
+            </p>
+            <div class="sec-t">현재 표시 중인 데이터</div>
+            <div class="li"><span class="t">마지막 갱신 시각</span><span class="m" id="gen2"></span></div>
+            <div class="li"><span class="t">데이터 출처</span><span class="m">이 파일 내장 DATA 블록 (마커 교체 방식)</span></div>
+            <div class="li"><span class="t">집계 대상</span><span class="m" id="counts"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. 보수 찾기 ============ -->
+    <section class="view" id="v-fix">
+      <div class="hintbar">
+        <span>🔧</span><span>하고 싶은 일을 왼쪽에서 찾고, 가운데 <b>경로를 눌러 복사</b>해 그 파일을 여세요. <code>&lt;hermes&gt;</code> = 내 PC의 헤르메스 폴더, <code>&lt;봇&gt;</code> = s/pm/uxui/dp/qa/marketer/jilmuni 중 하나.</span>
+      </div>
+      <div class="card">
+        <h3>🔧 보수 찾기표<span class="hint">경로 클릭 = 복사</span></h3>
+        <div class="body">
+          <table class="tbl">
+            <thead><tr><th style="width:30%">하고 싶은 일</th><th style="width:40%">열 파일 (원본)</th><th style="width:30%">볼트 사본 (읽기 전용)</th></tr></thead>
+            <tbody id="fixbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. 스킬 지도 ============ -->
+    <section class="view" id="v-skill">
+      <div class="hintbar">
+        <span>🧩</span><span>스킬 = 봇이 따르는 <b>작업 절차서</b>. 위 검색창에 스킬 이름을 치면 <b>어느 봇이 그걸 가졌는지</b> 바로 나옵니다.</span>
+        <span class="tag cmn">공용</span><span class="tag cst">★맞춤</span>
+      </div>
+      <div class="card" style="margin-bottom:12px">
+        <h3>🧩 봇별 스킬 보유 현황<span class="hint">스킬 이름을 누르면 원본 경로와 보유 봇이 나옵니다</span></h3>
+        <div class="body"><div class="skillcols" id="skillcols"></div></div>
+      </div>
+      <div class="card">
+        <h3>📊 스킬 수 요약<span class="hint">★ = 우리 팀 전용으로 직접 만든 스킬</span></h3>
+        <div class="body" id="skillsum"></div>
+      </div>
+    </section>
+
+    <!-- ============ 4. 자동작업 ============ -->
+    <section class="view" id="v-cron">
+      <div class="hintbar">
+        <span>⏱</span><span>뭐가 <b>언제 저절로</b> 도는가. <b>AI</b>=토큰을 쓰는 작업, <b>무토큰</b>=스크립트만 도는 작업.</span>
+      </div>
+      <div class="card">
+        <h3>⏱ 자동작업(크론) 지도<span class="hint" id="cronhint"></span></h3>
+        <div class="body">
+          <table class="tbl">
+            <thead><tr><th style="width:34%">이름</th><th style="width:22%">주기</th><th style="width:14%">모드</th><th style="width:16%">대상 프로필</th><th style="width:14%">분류</th></tr></thead>
+            <tbody id="cronbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. 연결·저장소 ============ -->
+    <section class="view" id="v-conn">
+      <div class="card" style="margin-bottom:12px">
+        <h3>🗄 저장소 지도<span class="hint">무엇이 원본이고, 무엇이 사본인가</span></h3>
+        <div class="body">
+          <div class="stores" id="stores"></div>
+          <div class="hintbar" style="margin:12px 0 0">
+            <span>⚠️</span><span><b>헤르메스가 원본입니다.</b> 옵시디언은 매일 04:50 통째로 덮어쓰는 <b>읽기 전용 사본</b>이라 거기서 고치면 사라집니다. 결정·상태의 정본은 노션입니다.</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🔗 바깥 연결 (MCP · 바깥 서비스 연결 창구)<span class="hint">어느 프로필이 무엇에 붙어 있나</span></h3>
+        <div class="body">
+          <table class="tbl">
+            <thead><tr><th style="width:22%">이름</th><th style="width:34%">주소</th><th style="width:14%">인증</th><th style="width:12%">사용</th><th style="width:18%">붙은 프로필</th></tr></thead>
+            <tbody id="mcpbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    </div><!-- /scroll -->
+  </div>
+</div>
+
+<div class="scrim" id="scrim" onclick="X()"></div>
+<aside class="drawer" id="drawer">
+  <div class="dh"><b id="dt">상세</b><button class="x" onclick="X()">✕</button></div>
+  <div class="db" id="dbody"></div>
+</aside>
+<div class="toast" id="toast">복사됨</div>
+
+<script>
+/* ==================================================================
+   팀 구조 지도 — 데이터 계약 (DATA CONTRACT)
+   ------------------------------------------------------------------
+   [교체 방법]  file:// 에서는 fetch('data.json')이 브라우저 보안(CORS)에
+   막힙니다. 그래서 이 화면은 "데이터 통째 교체" 방식입니다.
+   생성 스크립트(team_map_export.py)는 아래 두 마커 사이의 텍스트만
+   새 JSON 객체 리터럴로 갈아끼웁니다. 마커 줄 자체는 남겨 두세요.
+
+       /*__DATA_START__* /            <- 이 줄 다음부터
+       { ... JSON ... }
+       /*__DATA_END__* /              <- 이 줄 앞까지  (교체 대상)
+
+   (파이썬 예시)
+       s = html.split("/*__DATA_START__*" + "/")
+       body, rest = s[1].split("/*__DATA_END__*" + "/")
+       new_html = s[0] + "/*__DATA_START__*" + "/\n" + json.dumps(d,...) \
+                  + "\n" + "/*__DATA_END__*" + "/" + rest
+   정규식 중괄호 짝맞추기는 쓰지 마세요. 마커 split이 안전합니다.
+
+   ------------------------------------------------------------------
+   [이 화면이 요구하는 데이터 키 전수 목록]
+   최상위(8):
+     generated_at : str  ISO8601. 푸터/헤더 "마지막 갱신"에 사용. 없으면 "—".
+     bots         : []   조직도·스킬지도·검색
+     pipeline     : []   작업 흐름 파이프라인
+     repair_map   : []   보수 찾기표
+     skills       : []   스킬 지도
+     crons        : []   자동작업표
+     mcp          : []   바깥 연결표
+     stores       : []   저장소 지도
+     flows        : []   저장소 사이 화살표 (stores 길이-1 개 필요)
+     rule_layers  : []   규칙 계층도
+
+   bots[] : id, name, role, model,
+            skill_count  (int|null),
+            custom_count (int|null),
+            soul_chars   (int|null),
+            cron_count   (int|null)  ★null = 크론 설정 파일 없음. 0개와 다름.
+                                       화면에 "— (크론 설정 파일 없음)"으로 표시.
+            color        (str, #RRGGBB  카드 좌측 띠·점 색)
+            soul_path, skills_path,
+            cron_path    (str|null  null이면 해당 행 미표시)
+            vault_path
+   pipeline[]   : from, to, label            (from/to 는 bots[].id 또는 "도비서")
+   repair_map[] : want, file, vault
+   skills[]     : name, desc, owners[](bots[].id), custom(bool), path
+   crons[]      : name, schedule, mode("AI"|"무토큰"), profile, kind(분류 태그)
+   mcp[]        : name, label(한글 설명), url, auth, enabled(bool), profiles[]
+   stores[]     : name, role, note, path, color
+   flows[]      : from, to, label
+   rule_layers[]: layer(int), name, desc, path, win(우선순위 문구)
+
+   [경로 표기 규칙] 절대경로·윈도우 사용자명 금지.
+     <hermes> = 헤르메스 폴더, <vault> = 옵시디언 볼트, <봇> = 프로필 id.
+
+   [견고성 원칙] 키가 빠져도 페이지는 죽지 않습니다.
+     - 누락 키는 아래 normalizeData()에서 빈 배열/기본값으로 채워집니다.
+     - 개별 렌더 함수가 터져도 safe()가 그 구역에만 한글 안내를 띄우고
+       나머지 화면과 이벤트 등록은 정상 진행됩니다(오류는 콘솔에도 남깁니다).
+   ================================================================== */
+var DATA =
+/*__DATA_START__*/{
+  "generated_at": "2026-09-16T02:47:36+09:00",
+  "bots": [
+    {
+      "id": "all",
+      "name": "도비서",
+      "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
+      "model": "claude-opus-5",
+      "skill_count": 114,
+      "custom_count": 33,
+      "soul_chars": 6115,
+      "cron_count": 26,
+      "color": "#fbcf5a",
+      "soul_path": "<hermes>/profiles/all/SOUL.md",
+      "skills_path": "<hermes>/profiles/all/skills",
+      "cron_path": "<hermes>/profiles/all/cron/jobs.json",
+      "vault_path": "05_도비서/"
+    },
+    {
+      "id": "s",
+      "name": "조사 담당",
+      "role": "웹·문서 조사, 사실 확인, 출처 수집",
+      "model": "claude-opus-5",
+      "skill_count": 84,
+      "custom_count": 7,
+      "soul_chars": 3113,
+      "cron_count": null,
+      "color": "#f5717a",
+      "soul_path": "<hermes>/profiles/s/SOUL.md",
+      "skills_path": "<hermes>/profiles/s/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/s/"
+    },
+    {
+      "id": "pm",
+      "name": "기획 담당",
+      "role": "요구사항 정리, 계획 수립, 일정·범위 관리",
+      "model": "claude-opus-5",
+      "skill_count": 84,
+      "custom_count": 7,
+      "soul_chars": 3646,
+      "cron_count": null,
+      "color": "#f5bd4f",
+      "soul_path": "<hermes>/profiles/pm/SOUL.md",
+      "skills_path": "<hermes>/profiles/pm/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/pm/"
+    },
+    {
+      "id": "uxui",
+      "name": "디자인 담당",
+      "role": "화면 설계, HTML·CSS 시안, 사용성 검토",
+      "model": "claude-opus-5",
+      "skill_count": 87,
+      "custom_count": 9,
+      "soul_chars": 3119,
+      "cron_count": null,
+      "color": "#a98bfa",
+      "soul_path": "<hermes>/profiles/uxui/SOUL.md",
+      "skills_path": "<hermes>/profiles/uxui/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/uxui/"
+    },
+    {
+      "id": "dp",
+      "name": "개발 담당",
+      "role": "코드 작성·수정·배포",
+      "model": "gpt-5.3-codex-spark",
+      "skill_count": 93,
+      "custom_count": 15,
+      "soul_chars": 7580,
+      "cron_count": null,
+      "color": "#5b9dfb",
+      "soul_path": "<hermes>/profiles/dp/SOUL.md",
+      "skills_path": "<hermes>/profiles/dp/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/dp/"
+    },
+    {
+      "id": "qa",
+      "name": "검수 담당",
+      "role": "산출물 검증, 실행 테스트, 결함 보고",
+      "model": "claude-opus-5",
+      "skill_count": 87,
+      "custom_count": 10,
+      "soul_chars": 4482,
+      "cron_count": null,
+      "color": "#43d787",
+      "soul_path": "<hermes>/profiles/qa/SOUL.md",
+      "skills_path": "<hermes>/profiles/qa/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/qa/"
+    },
+    {
+      "id": "marketer",
+      "name": "마케팅 담당",
+      "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
+      "model": "claude-opus-5",
+      "skill_count": 85,
+      "custom_count": 8,
+      "soul_chars": 4252,
+      "cron_count": null,
+      "color": "#2fd3c0",
+      "soul_path": "<hermes>/profiles/marketer/SOUL.md",
+      "skills_path": "<hermes>/profiles/marketer/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/marketer/"
+    },
+    {
+      "id": "jilmuni",
+      "name": "질문이",
+      "role": "짧은 질문에 빠르게 답하는 만능 Q&A",
+      "model": "gemini-3-flash-preview",
+      "skill_count": 58,
+      "custom_count": 6,
+      "soul_chars": 1869,
+      "cron_count": null,
+      "color": "#8e9bb3",
+      "soul_path": "<hermes>/profiles/jilmuni/SOUL.md",
+      "skills_path": "<hermes>/profiles/jilmuni/skills",
+      "cron_path": null,
+      "vault_path": "05_봇/jilmuni/"
+    }
+  ],
+  "pipeline": [
+    {
+      "from": "라라페",
+      "to": "도비서",
+      "label": "지시"
+    },
+    {
+      "from": "도비서",
+      "to": "s",
+      "label": "조사 의뢰"
+    },
+    {
+      "from": "s",
+      "to": "도비서",
+      "label": "조사결과"
+    },
+    {
+      "from": "도비서",
+      "to": "pm",
+      "label": "기획 의뢰"
+    },
+    {
+      "from": "pm",
+      "to": "도비서",
+      "label": "계획서"
+    },
+    {
+      "from": "도비서",
+      "to": "uxui",
+      "label": "화면 의뢰"
+    },
+    {
+      "from": "uxui",
+      "to": "dp",
+      "label": "시안 전달"
+    },
+    {
+      "from": "도비서",
+      "to": "dp",
+      "label": "개발 의뢰"
+    },
+    {
+      "from": "dp",
+      "to": "qa",
+      "label": "검수 요청"
+    },
+    {
+      "from": "qa",
+      "to": "도비서",
+      "label": "검수 결과"
+    },
+    {
+      "from": "도비서",
+      "to": "marketer",
+      "label": "홍보 의뢰"
+    },
+    {
+      "from": "marketer",
+      "to": "도비서",
+      "label": "홍보안"
+    },
+    {
+      "from": "jilmuni",
+      "to": "라라페",
+      "label": "즉답"
+    },
+    {
+      "from": "도비서",
+      "to": "라라페",
+      "label": "최종 보고"
+    }
+  ],
+  "repair_map": [
+    {
+      "want": "도비서 성격·행동규칙을 바꾸고 싶다",
+      "file": "<hermes>/profiles/all/SOUL.md",
+      "vault": "05_도비서/10_인격규칙/SOUL.md"
+    },
+    {
+      "want": "하위 봇 성격·행동규칙을 바꾸고 싶다",
+      "file": "<hermes>/profiles/<봇>/SOUL.md",
+      "vault": "05_봇/<봇>/SOUL.md"
+    },
+    {
+      "want": "도비서가 기억하는 내용을 고치고 싶다",
+      "file": "<hermes>/profiles/all/memories/MEMORY.md",
+      "vault": "05_도비서/20_장기기억/MEMORY.md"
+    },
+    {
+      "want": "내 프로필(취향·호칭)을 고치고 싶다",
+      "file": "<hermes>/profiles/all/memories/USER.md",
+      "vault": "05_도비서/20_장기기억/USER.md"
+    },
+    {
+      "want": "일하는 절차(스킬)를 고치고 싶다",
+      "file": "<hermes>/profiles/all/skills",
+      "vault": "05_도비서/30_절차/"
+    },
+    {
+      "want": "특정 봇의 절차를 고치고 싶다",
+      "file": "<hermes>/profiles/<봇>/skills",
+      "vault": "05_봇/<봇>/스킬 목록.md"
+    },
+    {
+      "want": "정해진 시각 자동실행을 고치고 싶다",
+      "file": "<hermes>/profiles/all/cron/jobs.json",
+      "vault": "05_도비서/40_자동화/크론 목록.md"
+    },
+    {
+      "want": "자동실행 스크립트를 고치고 싶다",
+      "file": "<hermes>/profiles/all/scripts",
+      "vault": "05_도비서/40_자동화/스크립트 목록.md"
+    },
+    {
+      "want": "쓰는 AI 모델을 바꾸고 싶다",
+      "file": "<hermes>/profiles/<프로필>/config.yaml",
+      "vault": "05_하네스/프로필별 설정 비교.md"
+    },
+    {
+      "want": "전체 기본값을 바꾸고 싶다",
+      "file": "<hermes>/config.yaml",
+      "vault": "05_하네스/전역 설정.md"
+    },
+    {
+      "want": "바깥 서비스 연결(MCP)을 바꾸고 싶다",
+      "file": "<hermes>/profiles/all/config.yaml",
+      "vault": "05_하네스/MCP 목록.md"
+    },
+    {
+      "want": "API 키·비밀번호를 바꾸고 싶다",
+      "file": "<hermes>/.env",
+      "vault": "(없음 — 일부러 안 옮김)"
+    }
+  ],
+  "skills": [
+    {
+      "name": "agent-runtime-tuning",
+      "desc": "봇마다 결과 품질이 다를 때. 모델·effort 실측·변경·검증.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/agent-runtime-tuning/SKILL.md"
+    },
+    {
+      "name": "airtable",
+      "desc": "Airtable REST API via curl. Records CRUD, filters, upserts.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/airtable/SKILL.md"
+    },
+    {
+      "name": "app-code-maintenance",
+      "desc": "Use when (비공개) 앱 코드를 직접 고칠 때. git 없는 프로젝트 백업·검증·빌드 절차.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/app-code-maintenance/SKILL.md"
+    },
+    {
+      "name": "app-project-handover",
+      "desc": "Use when 외부 개발 앱 프로젝트를 인수할 때.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/app-project-handover/SKILL.md"
+    },
+    {
+      "name": "app-store-naming-and-aso",
+      "desc": "Name apps with measured store data; ASO + watermark specs.",
+      "owners": [
+        "marketer"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/marketer/skills/productivity/app-store-naming-and-aso/SKILL.md"
+    },
+    {
+      "name": "apple-notes",
+      "desc": "Manage Apple Notes via memo CLI: create, search, edit.",
+      "owners": [
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/apple/apple-notes/SKILL.md"
+    },
+    {
+      "name": "apple-reminders",
+      "desc": "Apple Reminders via remindctl: add, list, complete.",
+      "owners": [
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/apple/apple-reminders/SKILL.md"
+    },
+    {
+      "name": "architecture-diagram",
+      "desc": "Dark-themed SVG architecture/cloud/infra diagrams as HTML.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/architecture-diagram/SKILL.md"
+    },
+    {
+      "name": "arxiv",
+      "desc": "Search arXiv papers by keyword, author, category, or ID.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/arxiv/SKILL.md"
+    },
+    {
+      "name": "ascii-art",
+      "desc": "ASCII art: pyfiglet, cowsay, boxes, image-to-ascii.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/ascii-art/SKILL.md"
+    },
+    {
+      "name": "ascii-video",
+      "desc": "ASCII video: convert video/audio to colored ASCII MP4/GIF.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/ascii-video/SKILL.md"
+    },
+    {
+      "name": "baoyu-infographic",
+      "desc": "Infographics: 21 layouts x 21 styles (信息图, 可视化).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/baoyu-infographic/SKILL.md"
+    },
+    {
+      "name": "blocked-page-recovery",
+      "desc": "Use when a fetch fails: 403/429, paywall, WAF, bot wall.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/web/blocked-page-recovery/SKILL.md"
+    },
+    {
+      "name": "blogwatcher",
+      "desc": "Monitor blogs and RSS/Atom feeds via blogwatcher-cli tool.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/blogwatcher/SKILL.md"
+    },
+    {
+      "name": "box",
+      "desc": "Box manages cloud files, sharing, search, and metadata.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/box/SKILL.md"
+    },
+    {
+      "name": "business-idea-discovery",
+      "desc": "신규 사업 아이디어 발굴·판정 시. (비공개) 5문항 기준표와 루트 4종.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/business-idea-discovery/SKILL.md"
+    },
+    {
+      "name": "claude-code",
+      "desc": "Delegate coding to Claude Code CLI (features, PRs).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/claude-code/SKILL.md"
+    },
+    {
+      "name": "claude-design",
+      "desc": "Design one-off HTML artifacts (landing, deck, prototype).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/claude-design/SKILL.md"
+    },
+    {
+      "name": "codebase-inspection",
+      "desc": "Inspect codebases w/ pygount: LOC, languages, ratios.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/codebase-inspection/SKILL.md"
+    },
+    {
+      "name": "codex",
+      "desc": "Delegate coding to OpenAI Codex CLI (features, PRs).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/codex/SKILL.md"
+    },
+    {
+      "name": "comfyui",
+      "desc": "Generate images, video, and audio via diffusion workflows.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/comfyui/SKILL.md"
+    },
+    {
+      "name": "competitor-news-monitor",
+      "desc": "Watch named companies for material news; cited digests.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/competitor-news-monitor/SKILL.md"
+    },
+    {
+      "name": "computer-use",
+      "desc": "화면을 직접 보고 클릭·입력해야 할 때. 앱·설정창·실기기 확인 등 다른 도구로 안 되는 일. Drive the desktop background-first; escalate on signal.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/computer-use/SKILL.md"
+    },
+    {
+      "name": "context-budget-architecture",
+      "desc": "Use when 외부 AI 설계초안 검토·스킬 비대화·토큰 절감 구조 설계 시.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/context-budget-architecture/SKILL.md"
+    },
+    {
+      "name": "credential-intake",
+      "desc": "계정·API 키 전달받으면 표준 저장·검증 절차 수행.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/credential-intake/SKILL.md"
+    },
+    {
+      "name": "decision-override-protocol",
+      "desc": "(비공개)님이 내 반대·추천과 다른 결정을 할 때. 재반박도 즉시착수도 아니고 이유부터 묻는다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/decision-override-protocol/SKILL.md"
+    },
+    {
+      "name": "design-md",
+      "desc": "Author/validate/export Google's DESIGN.md token spec files.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/design-md/SKILL.md"
+    },
+    {
+      "name": "design-review-loop",
+      "desc": "설계안을 QA와 N라운드 왕복 검증할 때. 공유 파일 1개·판정 필수·계산은 코드로.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/design-review-loop/SKILL.md"
+    },
+    {
+      "name": "diagram-image-delivery",
+      "desc": "(비공개)님에게 구조·흐름을 그림으로 설명할 때. HTML→PNG 렌더 후 디스코드 첨부.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/creative/diagram-image-delivery/SKILL.md"
+    },
+    {
+      "name": "dobiseo-ops",
+      "desc": "(비공개) 운영규칙 원본. 승인범위·봇ID·경로·규칙저장·작업분배 판단 시 연다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/dobiseo-ops/SKILL.md"
+    },
+    {
+      "name": "dobiseo-toolbox",
+      "desc": "Use when 도비서가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/toolbox/dobiseo-toolbox/SKILL.md"
+    },
+    {
+      "name": "document-to-action-items",
+      "desc": "Extract cited obligations, deadlines, tasks from documents.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/document-to-action-items/SKILL.md"
+    },
+    {
+      "name": "docx",
+      "desc": "Create, read, edit, template, and review Word .docx files.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/docx/SKILL.md"
+    },
+    {
+      "name": "dogfood",
+      "desc": "Exploratory QA of web apps: find bugs, evidence, reports.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/dogfood/SKILL.md"
+    },
+    {
+      "name": "dp-toolbox",
+      "desc": "Use when dp가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/toolbox/dp-toolbox/SKILL.md"
+    },
+    {
+      "name": "email-inbox-triage",
+      "desc": "Triage an inbox: prioritize threads, draft replies safely.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/email/email-inbox-triage/SKILL.md"
+    },
+    {
+      "name": "evaluating-llms-harness",
+      "desc": "lm-eval-harness: benchmark LLMs (MMLU, GSM8K, etc.).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/mlops/evaluation/evaluating-llms-harness/SKILL.md"
+    },
+    {
+      "name": "excalidraw",
+      "desc": "Hand-drawn Excalidraw JSON diagrams (arch, flow, seq).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/excalidraw/SKILL.md"
+    },
+    {
+      "name": "external-tool-evaluation",
+      "desc": "Use when 외부 도구·스킬 도입 검토 시. 실측 후 판정.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/external-tool-evaluation/SKILL.md"
+    },
+    {
+      "name": "findmy",
+      "desc": "Track Apple devices/AirTags via FindMy.app on macOS.",
+      "owners": [
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/apple/findmy/SKILL.md"
+    },
+    {
+      "name": "fix-blast-radius",
+      "desc": "Use when declaring a bug fix done. Sweep all paths first.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/fix-blast-radius/SKILL.md"
+    },
+    {
+      "name": "gif-search",
+      "desc": "Search/download GIFs from Tenor via curl + jq.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/media/gif-search/SKILL.md"
+    },
+    {
+      "name": "github",
+      "desc": "GitHub via gh CLI: PRs, issues, reviews, repos, auth.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/github/SKILL.md"
+    },
+    {
+      "name": "github-auth",
+      "desc": "GitHub auth setup: HTTPS tokens, SSH keys, gh CLI login.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-auth/SKILL.md"
+    },
+    {
+      "name": "github-code-review",
+      "desc": "Review PRs: diffs, inline comments via gh or REST.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-code-review/SKILL.md"
+    },
+    {
+      "name": "github-issue-to-pr",
+      "desc": "Carry a GitHub issue to a verified PR with honest CI state.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-issue-to-pr/SKILL.md"
+    },
+    {
+      "name": "github-issues",
+      "desc": "Create, triage, label, assign GitHub issues via gh or REST.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-issues/SKILL.md"
+    },
+    {
+      "name": "github-pr-workflow",
+      "desc": "GitHub PR lifecycle: branch, commit, open, CI, merge.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-pr-workflow/SKILL.md"
+    },
+    {
+      "name": "github-repo-management",
+      "desc": "Clone/create/fork repos; manage remotes, releases.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/github/github-repo-management/SKILL.md"
+    },
+    {
+      "name": "google-workspace",
+      "desc": "Gmail, Calendar, Drive, Docs, Sheets via gws CLI or Python.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/google-workspace/SKILL.md"
+    },
+    {
+      "name": "grounded-citations",
+      "desc": "Ground answers and documents in cited, verifiable sources.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/grounded-citations/SKILL.md"
+    },
+    {
+      "name": "hermes-agent",
+      "desc": "Use, configure, theme, extend, and orchestrate Hermes Agent.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
+    },
+    {
+      "name": "hermes-agent-skill-authoring",
+      "desc": "Author in-repo SKILL.md files: frontmatter and structure.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+    },
+    {
+      "name": "hermes-cron-reports",
+      "desc": "Use when building/debugging Hermes cron reports & monitors.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-cron-reports/SKILL.md"
+    },
+    {
+      "name": "hermes-gateway-bots",
+      "desc": "Wake and troubleshoot Hermes gateway bots per profile.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-gateway-bots/SKILL.md"
+    },
+    {
+      "name": "hermes-mcp-connections",
+      "desc": "Connect MCP servers to Hermes: catalog, OAuth, PlayMCP.",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-mcp-connections/SKILL.md"
+    },
+    {
+      "name": "hermes-provider-auth",
+      "desc": "Connect AI providers to Hermes: auth types, keys.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-provider-auth/SKILL.md"
+    },
+    {
+      "name": "hermes-skill-porting",
+      "desc": "외부 스킬 설치·이식, 스킬 신규 작성·수정 시 사용. Use when installing external Claude skills into Hermes or writing/editing any skill.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-skill-porting/SKILL.md"
+    },
+    {
+      "name": "hermes-voice-io",
+      "desc": "Use when 헤르메스 음성 설정·문제. 받아쓰기·목소리·속도.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/hermes-voice-io/SKILL.md"
+    },
+    {
+      "name": "himalaya",
+      "desc": "Himalaya CLI: IMAP/SMTP email from terminal.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/email/himalaya/SKILL.md"
+    },
+    {
+      "name": "huggingface-hub",
+      "desc": "HuggingFace hf CLI: search/download/upload models, datasets.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/mlops/huggingface-hub/SKILL.md"
+    },
+    {
+      "name": "humanize-korean",
+      "desc": "AI가 쓴 한글을 사람 글처럼 윤문. 보고서·게시글·메일 등 한국어 초안 다듬기.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/creative/humanize-korean/SKILL.md"
+    },
+    {
+      "name": "imessage",
+      "desc": "Send and receive iMessages/SMS via the imsg CLI on macOS.",
+      "owners": [
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/apple/imessage/SKILL.md"
+    },
+    {
+      "name": "inspecting-hermes-desktop-dom",
+      "desc": "Read the live Hermes desktop DOM/CSS over CDP.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/inspecting-hermes-desktop-dom/SKILL.md"
+    },
+    {
+      "name": "llama-cpp",
+      "desc": "llama.cpp local GGUF inference + HF Hub model discovery.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/mlops/inference/llama-cpp/SKILL.md"
+    },
+    {
+      "name": "llm-wiki",
+      "desc": "Karpathy's LLM Wiki: build/query interlinked markdown KB.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/llm-wiki/SKILL.md"
+    },
+    {
+      "name": "lms-course-automation",
+      "desc": "Use for 대학 LMS 대리수강/과제 자동화. Script videos, AI only drafts.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/lms-course-automation/SKILL.md"
+    },
+    {
+      "name": "logged-in-site-automation",
+      "desc": "Use when 로그인된 사이트를 대신 조작할 때. 세션 재사용 구조.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/logged-in-site-automation/SKILL.md"
+    },
+    {
+      "name": "manim-video",
+      "desc": "Manim CE animations: 3Blue1Brown math/algo videos.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/manim-video/SKILL.md"
+    },
+    {
+      "name": "maps",
+      "desc": "Geocode, POIs, routes, timezones via OpenStreetMap/OSRM.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/maps/SKILL.md"
+    },
+    {
+      "name": "marketer-toolbox",
+      "desc": "Use when marketer가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "marketer"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/marketer/skills/toolbox/marketer-toolbox/SKILL.md"
+    },
+    {
+      "name": "meeting-action-items",
+      "desc": "Turn meeting notes into cited decisions, owners, tickets.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/meeting-action-items/SKILL.md"
+    },
+    {
+      "name": "merge-reconciler",
+      "desc": "Neutral third-party resolution of agent merge conflicts.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/merge-reconciler/SKILL.md"
+    },
+    {
+      "name": "model-tiering",
+      "desc": "Use when 새 프로젝트·작업·크론·봇 생성 시. 크론/봇/스크립트 실행형태 + 모델 등급 결정.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/model-tiering/SKILL.md"
+    },
+    {
+      "name": "nano-pdf",
+      "desc": "Edit text in existing PDFs via natural-language prompts.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/nano-pdf/SKILL.md"
+    },
+    {
+      "name": "node-inspect-debugger",
+      "desc": "Debug Node.js via --inspect + Chrome DevTools Protocol CLI.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/node-inspect-debugger/SKILL.md"
+    },
+    {
+      "name": "notion",
+      "desc": "Notion API + ntn CLI: pages, databases, markdown, Workers.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/notion/SKILL.md"
+    },
+    {
+      "name": "notion-business-hq",
+      "desc": "노션 사업 HQ 기록 시. (비공개) HQ DB를 MCP로 자동 관리.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/notion-business-hq/SKILL.md"
+    },
+    {
+      "name": "obsidian",
+      "desc": "Read, search, create, and edit notes in the Obsidian vault.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/note-taking/obsidian/SKILL.md"
+    },
+    {
+      "name": "obsidian-memory-mirror",
+      "desc": "Use when 옵시디언 05_도비서·되돌리기·미러링 관련. 기억 볼트 복제.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/obsidian-memory-mirror/SKILL.md"
+    },
+    {
+      "name": "ocr-and-documents",
+      "desc": "Extract text from PDFs/scans (pymupdf, marker-pdf).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/ocr-and-documents/SKILL.md"
+    },
+    {
+      "name": "opencode",
+      "desc": "Delegate coding to OpenCode CLI (features, PR review).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/opencode/SKILL.md"
+    },
+    {
+      "name": "openhue",
+      "desc": "Control Philips Hue lights, scenes, rooms via OpenHue CLI.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/smart-home/openhue/SKILL.md"
+    },
+    {
+      "name": "p5js",
+      "desc": "p5.js sketches: gen art, shaders, interactive, 3D.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/p5js/SKILL.md"
+    },
+    {
+      "name": "pdf",
+      "desc": "PDF files: create, read, merge, fill, OCR, edit text.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/pdf/SKILL.md"
+    },
+    {
+      "name": "plan",
+      "desc": "Write a markdown plan to .hermes/plans/; no execution.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/plan/SKILL.md"
+    },
+    {
+      "name": "pm-toolbox",
+      "desc": "Use when pm가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "pm"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/pm/skills/toolbox/pm-toolbox/SKILL.md"
+    },
+    {
+      "name": "ponytail",
+      "desc": ">",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail/SKILL.md"
+    },
+    {
+      "name": "ponytail-audit",
+      "desc": ">",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-audit/SKILL.md"
+    },
+    {
+      "name": "ponytail-debt",
+      "desc": ">",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-debt/SKILL.md"
+    },
+    {
+      "name": "ponytail-help",
+      "desc": ">",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-help/SKILL.md"
+    },
+    {
+      "name": "ponytail-review",
+      "desc": ">",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-review/SKILL.md"
+    },
+    {
+      "name": "popular-web-designs",
+      "desc": "54 real design systems (Stripe, Linear, Vercel) as HTML/CSS.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/popular-web-designs/SKILL.md"
+    },
+    {
+      "name": "portfolio-showcase-site",
+      "desc": "Use when (비공개) wants a portfolio site for a real business.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/portfolio-showcase-site/SKILL.md"
+    },
+    {
+      "name": "powerpoint",
+      "desc": "Create, read, edit .pptx decks with python-pptx.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/powerpoint/SKILL.md"
+    },
+    {
+      "name": "pretext",
+      "desc": "Build creative browser demos with DOM-free text layout.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/pretext/SKILL.md"
+    },
+    {
+      "name": "product-3d-model",
+      "desc": "Product photos to 3D model, viewer page, and shareable delivery.",
+      "owners": [
+        "uxui"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/uxui/skills/creative/product-3d-model/SKILL.md"
+    },
+    {
+      "name": "product-price-monitor",
+      "desc": "Watch product, flight, or listing prices; alert on target.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/product-price-monitor/SKILL.md"
+    },
+    {
+      "name": "python-debugpy",
+      "desc": "Debug Python: pdb REPL + debugpy remote (DAP).",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/python-debugpy/SKILL.md"
+    },
+    {
+      "name": "qa-review",
+      "desc": "검수 의뢰가 오면 연다. 코드뿐 아니라 규칙·스크립트·크론·문서·도비서 산출물까지 검수. 문제만 목록, 판정 없음.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/qa-review/SKILL.md"
+    },
+    {
+      "name": "qa-toolbox",
+      "desc": "Use when qa가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/toolbox/qa-toolbox/SKILL.md"
+    },
+    {
+      "name": "react-native-expo-mvp-dev",
+      "desc": "Build RN+Expo apps — compositing, themes, Windows quirks.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/react-native-expo-mvp-dev/SKILL.md"
+    },
+    {
+      "name": "requesting-code-review",
+      "desc": "Pre-commit review: security scan, quality gates, auto-fix.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/requesting-code-review/SKILL.md"
+    },
+    {
+      "name": "research-paper-writing",
+      "desc": "Write ML papers for NeurIPS/ICML/ICLR: design→submit.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/research/research-paper-writing/SKILL.md"
+    },
+    {
+      "name": "role-based-delegation",
+      "desc": "Use when 실무를 직접 할지 하위봇에 맡길지 판단할 때. 역할 나뉜 일은 지침서와 함께 배분.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/role-based-delegation/SKILL.md"
+    },
+    {
+      "name": "s-toolbox",
+      "desc": "Use when s가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "s"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/toolbox/s-toolbox/SKILL.md"
+    },
+    {
+      "name": "saved-content-digest",
+      "desc": "Use when 인스타·유튜브 저장 콘텐츠를 요약해 노션에 쌓을 때. 수집=스크립트, 요약=저가 모델.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/saved-content-digest/SKILL.md"
+    },
+    {
+      "name": "sdlc-review",
+      "desc": "Review Kanban handoffs and route verified outcomes.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/devops/sdlc-review/SKILL.md"
+    },
+    {
+      "name": "serving-llms-vllm",
+      "desc": "vLLM: high-throughput LLM serving, OpenAI API, quantization.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/mlops/inference/serving-llms-vllm/SKILL.md"
+    },
+    {
+      "name": "session-librarian",
+      "desc": "Organize sessions by prompt: find, rename, archive, prune.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/session-librarian/SKILL.md"
+    },
+    {
+      "name": "simplify-code",
+      "desc": "Parallel 4-agent cleanup of recent code changes.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/simplify-code/SKILL.md"
+    },
+    {
+      "name": "single-file-html-prototyping",
+      "desc": "Build/verify single-file HTML app prototypes.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/single-file-html-prototyping/SKILL.md"
+    },
+    {
+      "name": "sketch",
+      "desc": "Throwaway HTML mockups: 2-3 design variants to compare.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/sketch/SKILL.md"
+    },
+    {
+      "name": "songsee",
+      "desc": "Audio spectrograms/features (mel, chroma, MFCC) via CLI.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/media/songsee/SKILL.md"
+    },
+    {
+      "name": "songwriting-and-ai-music",
+      "desc": "Songwriting craft and Suno AI music prompts.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/songwriting-and-ai-music/SKILL.md"
+    },
+    {
+      "name": "spec-driven-qa-planning",
+      "desc": "Build a QA test plan from a spec before any build exists.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/software-development/spec-driven-qa-planning/SKILL.md"
+    },
+    {
+      "name": "spike",
+      "desc": "Throwaway experiments to validate an idea before build.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/spike/SKILL.md"
+    },
+    {
+      "name": "stage-end-session-cleanup",
+      "desc": "단계 종료/긴 스레드 시 옵시디언 요약+세션 정리 루틴.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/stage-end-session-cleanup/SKILL.md"
+    },
+    {
+      "name": "stuck-recovery",
+      "desc": "막혔거나 '안 된다'고 말하기 전. 대안·도구 탐색 5단계.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/stuck-recovery/SKILL.md"
+    },
+    {
+      "name": "systematic-debugging",
+      "desc": "4-phase root cause debugging: understand bugs before fixing.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/systematic-debugging/SKILL.md"
+    },
+    {
+      "name": "taste-skill",
+      "desc": ">-",
+      "owners": [
+        "all",
+        "uxui",
+        "dp"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/taste-skill/SKILL.md"
+    },
+    {
+      "name": "teams-meeting-pipeline",
+      "desc": "Teams meeting summaries, job replay, Graph subscriptions.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/teams-meeting-pipeline/SKILL.md"
+    },
+    {
+      "name": "test-driven-development",
+      "desc": "TDD: enforce RED-GREEN-REFACTOR, tests before code.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/software-development/test-driven-development/SKILL.md"
+    },
+    {
+      "name": "thread-close",
+      "desc": "Use when (비공개) says '스레드 닫음'. 인수인계·사용법·결정 저장 후 ✅ 보관.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/thread-close/SKILL.md"
+    },
+    {
+      "name": "toolbox-scoring",
+      "desc": "Use when 노션 도구함 항목을 채점·판정할 때. (비공개) 확정 v3 기준표.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/toolbox/toolbox-scoring/SKILL.md"
+    },
+    {
+      "name": "touchdesigner-mcp",
+      "desc": "Control TouchDesigner via twozero MCP.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/touchdesigner-mcp/SKILL.md"
+    },
+    {
+      "name": "uxui-toolbox",
+      "desc": "Use when uxui가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "owners": [
+        "uxui"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/uxui/skills/toolbox/uxui-toolbox/SKILL.md"
+    },
+    {
+      "name": "web-design-guidelines",
+      "desc": "Review UI code for Web Interface Guidelines compliance.",
+      "owners": [
+        "all",
+        "uxui",
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/creative/web-design-guidelines/SKILL.md"
+    },
+    {
+      "name": "web-session-automation",
+      "desc": "Use when (비공개) 계정 사이트를 대신 조작할 때. 세션 재사용.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/web-session-automation/SKILL.md"
+    },
+    {
+      "name": "weekly-review-planning",
+      "desc": "Weekly reset: commitments, stalled work, next-week plan.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/weekly-review-planning/SKILL.md"
+    },
+    {
+      "name": "weights-and-biases",
+      "desc": "W&B: log ML experiments, sweeps, model registry, dashboards.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/mlops/evaluation/weights-and-biases/SKILL.md"
+    },
+    {
+      "name": "windows-desktop-browser-control",
+      "desc": "computer_use로 PC 브라우저를 직접 조작할 때 쓸 윈도우 요령.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/windows-desktop-browser-control/SKILL.md"
+    },
+    {
+      "name": "windows-portable-cli-install",
+      "desc": "Use when Windows CLI install hits UAC/admin block.",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/devops/windows-portable-cli-install/SKILL.md"
+    },
+    {
+      "name": "xlsx",
+      "desc": "Create, read, edit Excel .xlsx workbooks and CSVs.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/productivity/xlsx/SKILL.md"
+    },
+    {
+      "name": "xurl",
+      "desc": "X/Twitter via xurl CLI: raw post search, posting, DM, media.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/social-media/xurl/SKILL.md"
+    },
+    {
+      "name": "youtube-content",
+      "desc": "YouTube transcripts to summaries, threads, blogs.",
+      "owners": [
+        "all",
+        "s",
+        "pm",
+        "uxui",
+        "dp",
+        "qa",
+        "marketer",
+        "jilmuni"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/media/youtube-content/SKILL.md"
+    }
+  ],
+  "crons": [
+    {
+      "name": "(비공개) 일일 수강",
+      "schedule": "매일 04:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "학습",
+      "profile": "all"
+    },
+    {
+      "name": "(비공개) 일정·퀴즈 감시",
+      "schedule": "매일 05:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "학습",
+      "profile": "all"
+    },
+    {
+      "name": "AI 도구 자동발굴 (0토큰)",
+      "schedule": "매일 03:50",
+      "mode": "무토큰",
+      "kind": "수집",
+      "profile": "all"
+    },
+    {
+      "name": "Google→노션 캘린더 복제 (0토큰)",
+      "schedule": "매일 07:00",
+      "mode": "무토큰",
+      "kind": "백업",
+      "profile": "all"
+    },
+    {
+      "name": "개인 비즈니스 시장 흐름 보고서 (월·목 10시)",
+      "schedule": "매주 월·목 10:00",
+      "mode": "AI",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "기한 도래 승격 (실험실+진행현황, 0토큰)",
+      "schedule": "매일 08:10",
+      "mode": "무토큰",
+      "kind": "정리",
+      "profile": "all"
+    },
+    {
+      "name": "노션 결재·댓글 통합 반영 (30분)",
+      "schedule": "30분마다 (8-23시대)",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "동기화",
+      "profile": "all"
+    },
+    {
+      "name": "노션 상태 동기화 점검 (0토큰)",
+      "schedule": "매주 월 08:00",
+      "mode": "무토큰",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "도구 사용빈도 주간 보고",
+      "schedule": "매주 금 09:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "도구함 일일 수집·요약·적용 분석",
+      "schedule": "매일 04:30",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "도구함 흐름 점검 (확정 흐름 v4)",
+      "schedule": "매일 10:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "보유 자원 색인 갱신 (0토큰)",
+      "schedule": "매주 월·목 03:00",
+      "mode": "무토큰",
+      "kind": "동기화",
+      "profile": "all"
+    },
+    {
+      "name": "볼트 미러링 (헤르메스→옵시디언, 0토큰)",
+      "schedule": "매일 04:50",
+      "mode": "무토큰",
+      "kind": "백업",
+      "profile": "all"
+    },
+    {
+      "name": "상태값 빠른 감시 (3분, 0토큰)",
+      "schedule": "3분마다 (8-23시대)",
+      "mode": "무토큰",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "상황판 갱신 (A안, 0토큰)",
+      "schedule": "매일 07:00 · 12:00 · 18:00 · 23:00",
+      "mode": "무토큰",
+      "kind": "동기화",
+      "profile": "all"
+    },
+    {
+      "name": "새벽 게이트웨이 재시작(설정 반영)",
+      "schedule": "매일 04:00",
+      "mode": "무토큰",
+      "kind": "동기화",
+      "profile": "all"
+    },
+    {
+      "name": "앱 리뷰 마이닝 (시범 2주·28회)",
+      "schedule": "매일 06:00 · 18:00",
+      "mode": "무토큰",
+      "kind": "수집",
+      "profile": "all"
+    },
+    {
+      "name": "운영 오류·원복 요청 감시 (3분, 로컬)",
+      "schedule": "3분마다",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "운영 요약 (09시·18시)",
+      "schedule": "매일 09:00 · 18:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "월1회 감사 (메모리 + 측정체계)",
+      "schedule": "매월 1일 10:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "정리",
+      "profile": "all"
+    },
+    {
+      "name": "정기점검 ①자동화생존 ②대기열 (0토큰)",
+      "schedule": "매일 08:00 · 20:00",
+      "mode": "무토큰",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "주간 AI 뉴스",
+      "schedule": "매주 토 15:00",
+      "mode": "AI",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "주간 아이디어 요약 1장 (시범 2회)",
+      "schedule": "매주 월 10:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "주간 정부지원·복지혜택 브리핑(비공개)",
+      "schedule": "매주 월 10:00",
+      "mode": "AI",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "지원사업 공고 감시 (기업마당·K-Startup)",
+      "schedule": "매일 07:00",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "회의안건 감시 (0토큰)",
+      "schedule": "매일 09:00 · 21:00",
+      "mode": "무토큰",
+      "kind": "점검",
+      "profile": "all"
+    }
+  ],
+  "mcp": [
+    {
+      "name": "notion",
+      "label": "노션 연동 (기록·결정 정본)",
+      "url": "https://mcp.notion.com/mcp",
+      "auth": "oauth",
+      "enabled": true,
+      "profiles": [
+        "all"
+      ]
+    },
+    {
+      "name": "playmcp",
+      "label": "플레이MCP (브라우저 조작)",
+      "url": "https://playmcp.kakao.com/mcp",
+      "auth": "header",
+      "enabled": true,
+      "profiles": [
+        "all"
+      ]
+    },
+    {
+      "name": "vercel",
+      "label": "버셀 연동 (웹 배포)",
+      "url": "https://mcp.vercel.com",
+      "auth": "oauth",
+      "enabled": true,
+      "profiles": [
+        "all"
+      ]
+    }
+  ],
+  "stores": [
+    {
+      "name": "헤르메스",
+      "role": "원본",
+      "path": "<hermes>/",
+      "color": "#5b9dfb",
+      "note": "모든 규칙·기억·스킬의 진짜 원본. 수정은 여기서만 한다"
+    },
+    {
+      "name": "옵시디언 볼트",
+      "role": "읽기 전용 사본",
+      "path": "<vault>/",
+      "color": "#a98bfa",
+      "note": "매일 04:50 자동 미러링. 여기서 고쳐도 다음 날 덮어씌워진다"
+    },
+    {
+      "name": "노션",
+      "role": "결정 기록",
+      "path": "notion.so",
+      "color": "#43d787",
+      "note": "승인·결재·진행현황 등 '정해진 것'을 남기는 곳 (이 스크립트는 읽지 않는다)"
+    }
+  ],
+  "flows": [
+    {
+      "from": "헤르메스",
+      "to": "옵시디언 볼트",
+      "label": "매일 04:50 통째로 덮어쓰기"
+    },
+    {
+      "from": "헤르메스",
+      "to": "노션",
+      "label": "결정·상태 기록"
+    }
+  ],
+  "rule_layers": [
+    {
+      "layer": 1,
+      "name": "SOUL",
+      "desc": "인격·행동규칙. 그 봇이 누구이고 어떻게 말하는가",
+      "path": "<hermes>/profiles/<프로필>/SOUL.md",
+      "win": "최우선",
+      "win_top": true
+    },
+    {
+      "layer": 2,
+      "name": "장기기억",
+      "desc": "겪은 일·사용자 취향. 대화가 바뀌어도 남는 기억",
+      "path": "<hermes>/profiles/all/memories/",
+      "win": "2순위",
+      "win_top": false
+    },
+    {
+      "layer": 3,
+      "name": "스킬",
+      "desc": "일하는 절차서. '이 상황에는 이 순서로'",
+      "path": "<hermes>/profiles/<프로필>/skills/",
+      "win": "3순위",
+      "win_top": false
+    },
+    {
+      "layer": 4,
+      "name": "설정",
+      "desc": "쓰는 AI 모델·도구·MCP 연결 같은 기계 설정",
+      "path": "<hermes>/profiles/<프로필>/config.yaml",
+      "win": "4순위",
+      "win_top": false
+    },
+    {
+      "layer": 5,
+      "name": "크론",
+      "desc": "정해진 시각에 저절로 도는 자동실행",
+      "path": "<hermes>/profiles/all/cron/jobs.json",
+      "win": "5순위",
+      "win_top": false
+    }
+  ]
+}/*__DATA_END__*/
+;
+
+/* ================= 데이터 기본값 보정 (없는 키 때문에 안 터지게) ================= */
+var MISSING=[];   // 정규화 중 채워 넣은(=실데이터에 없던) 키 기록
+function isArr(v){return Object.prototype.toString.call(v)==='[object Array]'}
+function needArr(o,k,label){
+  if(!isArr(o[k])){ o[k]=[]; MISSING.push(label||k); return o[k]; }
+  /* null·문자열 등 항목이 섞이면 렌더·검색이 모두 터진다. 객체만 남긴다. */
+  var clean=o[k].filter(function(x){return x&&typeof x==='object'});
+  if(clean.length!==o[k].length)MISSING.push((label||k)+'의 잘못된 항목 '+(o[k].length-clean.length)+'개');
+  o[k]=clean;
+  return o[k];
+}
+function normalizeData(){
+  if(!DATA||typeof DATA!=='object'){DATA={};MISSING.push('DATA(최상위)')}
+  if(typeof DATA.generated_at!=='string'){DATA.generated_at=null;MISSING.push('generated_at')}
+  needArr(DATA,'bots');needArr(DATA,'pipeline');needArr(DATA,'repair_map');
+  needArr(DATA,'skills');needArr(DATA,'crons');needArr(DATA,'mcp');
+  needArr(DATA,'stores');needArr(DATA,'flows');needArr(DATA,'rule_layers');
+
+  DATA.bots.forEach(function(b){
+    if(b.color==null)b.color='#3a4a73';
+    if(b.id==null)b.id='?';
+    if(b.name==null)b.name='(이름 없음)';
+    if(b.role==null)b.role='—';
+    if(b.model==null)b.model='—';
+    if(!('cron_count' in b))b.cron_count=null;
+    if(!('cron_path' in b))b.cron_path=null;
+  });
+  DATA.skills.forEach(function(s){if(!isArr(s.owners))s.owners=[]});
+  DATA.mcp.forEach(function(m){if(!isArr(m.profiles))m.profiles=[];if(m.label==null)m.label=''});
+  DATA.crons.forEach(function(c){if(c.kind==null)c.kind='—'});
+  DATA.stores.forEach(function(s){if(s.color==null)s.color='#3a4a73';if(s.path==null)s.path='—'});
+  DATA.rule_layers.forEach(function(l){if(l.win==null)l.win='—'});
+}
+
+/* ================= 유틸 ================= */
+function esc(s){return String(s==null?'':s).replace(/[&<>\"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function n(v){return v==null?'—':v}
+/* cron_count: int 와 null 이 섞인다. null = 크론 설정 파일 없음(0개와 다름). */
+function cronText(v){return v==null?'— (크론 설정 파일 없음)':(v+'개')}
+function bot(id){var a=isArr(DATA.bots)?DATA.bots:[];for(var i=0;i<a.length;i++){if(a[i].id===id)return a[i]}return null}
+function subbots(){return (isArr(DATA.bots)?DATA.bots:[]).filter(function(b){return b.id!=='all'})}
+function toast(msg){var t=document.getElementById('toast');t.textContent=msg||'복사됨';t.classList.add('on');
+  clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('on')},1200)}
+function copyPath(el,txt){
+  var s=txt||el.textContent, done=false;
+  try{var ta=document.createElement('textarea');ta.value=s;ta.style.position='fixed';ta.style.top='-9999px';
+    document.body.appendChild(ta);ta.select();done=document.execCommand('copy');document.body.removeChild(ta);}catch(e){}
+  if(navigator.clipboard&&navigator.clipboard.writeText){try{navigator.clipboard.writeText(s);done=true}catch(e){}}
+  toast((done?'복사됨: ':'복사 실패 — 직접 선택하세요: ')+s);
+}
+function P(path,cls){return '<span class="path '+(cls||'')+'" onclick="copyPath(this)">'+esc(path)+'</span>'}
+function row(k,v){return '<div class="kv"><span class="k">'+k+'</span><span class="v">'+v+'</span></div>'}
+
+/* ================= 렌더 ================= */
+function renderBots(){
+  document.getElementById('botrow').innerHTML = subbots().map(function(b){
+    return '<div class="bcard" style="--c:'+b.color+'" onclick="D(\'bot:'+b.id+'\')">'+
+      '<div class="hd"><span class="av">'+esc(b.id.slice(0,2))+'</span>'+
+      '<span><span class="id">'+esc(b.id)+'</span> <span class="nm2">'+esc(b.name)+'</span></span></div>'+
+      '<div class="ro">'+esc(b.role)+'</div>'+
+      '<div class="mdl">'+esc(b.model)+'</div>'+
+      '<div class="st"><span>스킬 <b>'+n(b.skill_count)+'</b></span>'+
+      '<span class="cst">★ '+n(b.custom_count)+'</span></div>'+
+    '</div>';
+  }).join('');
+}
+function renderPipe(){
+  var p=DATA.pipeline,html='',ico={s:'🔎',pm:'📋',uxui:'🎨',dp:'💻',qa:'✅',marketer:'📣','도비서':'🤖'};
+  function node(id){
+    var b=bot(id);var nm=b?b.name:'총괄';
+    var sec=(id==='도비서');
+    return '<div class="pnode '+(sec?'sec':'')+'" onclick="D(\'bot:'+(b?b.id:'all')+'\')">'+
+      '<div class="e">'+(ico[id]||'🤖')+'</div><div class="n">'+esc(id)+'</div><div class="r">'+esc(nm)+'</div></div>';
+  }
+  for(var i=0;i<p.length;i++){
+    if(i===0)html+=node(p[i].from);
+    html+='<div class="parw"><span class="lb">'+esc(p[i].label)+'</span><span class="ar">▶</span></div>';
+    html+=node(p[i].to);
+  }
+  document.getElementById('pipe').innerHTML=html;
+}
+function renderLayers(){
+  document.getElementById('layers').innerHTML = DATA.rule_layers.map(function(l,i){
+    return '<div class="layer" onclick="D(\'layer:'+i+'\')"><span class="no">'+l.layer+'</span>'+
+      '<span><span class="nm">'+esc(l.name)+'</span><br><span class="ds">'+esc(l.desc)+'</span></span>'+
+      '<span class="win">'+esc(l.win)+'</span></div>';
+  }).join('');
+}
+function renderFix(){
+  document.getElementById('fixbody').innerHTML = DATA.repair_map.map(function(r){
+    return '<tr><td data-l="하고 싶은 일">'+esc(r.want)+'</td>'+
+      '<td data-l="열 파일 (원본)">'+P(r.file)+'</td>'+
+      '<td data-l="볼트 사본">'+P(r.vault,'vault')+'</td></tr>';
+  }).join('');
+}
+function renderSkills(){
+  var cols=DATA.bots.map(function(b){
+    var mine=DATA.skills.filter(function(s){return s.owners.indexOf(b.id)>=0});
+    return '<div class="skcol"><h4><i class="dotc" style="--c:'+b.color+'"></i>'+esc(b.id)+
+      ' <span class="muted" style="font-weight:400">'+esc(b.name)+'</span>'+
+      '<span class="badge" style="margin-left:auto">'+mine.length+'</span></h4>'+
+      (mine.length?mine.map(function(s){
+        return '<div class="sk" onclick="D(\'skill:'+esc(s.name)+'\')">'+
+          (s.custom?'<span class="star">★</span>':'<span class="muted">·</span>')+
+          '<span class="t">'+esc(s.name)+'</span></div>';
+      }).join(''):'<div class="muted" style="font-size:11px;padding:4px 6px">표시할 스킬 없음</div>')+
+      '<div class="muted" style="font-size:10px;padding:6px 6px 0;border-top:1px dashed #212b44;margin-top:6px">전체 보유 '+n(b.skill_count)+'개 중 주요 항목</div>'+
+      '</div>';
+  }).join('');
+  document.getElementById('skillcols').innerHTML=cols;
+
+  document.getElementById('skillsum').innerHTML = DATA.bots.map(function(b){
+    var pct=b.skill_count?Math.round(b.skill_count/93*100):0;
+    return '<div class="li clk" onclick="D(\'bot:'+b.id+'\')">'+
+      '<span class="chip b" style="min-width:74px;justify-content:center">'+esc(b.id)+'</span>'+
+      '<span class="t">'+esc(b.name)+' <span class="muted">· '+esc(b.model)+'</span></span>'+
+      '<span class="chip">스킬 '+n(b.skill_count)+'</span>'+
+      '<span class="chip" style="background:#3a2e13;color:#f9cd6e">★ '+n(b.custom_count)+'</span>'+
+      '<span class="m">'+esc(cronText(b.cron_count))+'</span></div>';
+  }).join('');
+}
+function renderCrons(){
+  document.getElementById('cronbody').innerHTML = DATA.crons.map(function(c,i){
+    var md = c.mode==='AI' ? '<span class="chip" style="background:#241c3d;color:#c7b0ff">AI</span>'
+                           : '<span class="chip" style="background:#12301f;color:#6fe3a5">무토큰</span>';
+    return '<tr class="clk" onclick="D(\'cron:'+i+'\')"><td data-l="이름">'+esc(c.name)+'</td>'+
+      '<td data-l="주기">'+esc(c.schedule)+'</td><td data-l="모드">'+md+'</td>'+
+      '<td data-l="대상 프로필"><span class="chip b">'+esc(c.profile)+'</span></td>'+
+      '<td data-l="분류"><span class="tag">'+esc(c.kind)+'</span></td></tr>';
+  }).join('');
+  var ai=DATA.crons.filter(function(c){return c.mode==='AI'}).length;
+  document.getElementById('cronhint').textContent='전체 '+DATA.crons.length+'개 표시 · AI '+ai+'개 / 무토큰 '+(DATA.crons.length-ai)+'개 · 하위봇은 자동작업 없음';
+}
+function renderMcp(){
+  document.getElementById('mcpbody').innerHTML = DATA.mcp.map(function(m,i){
+    return '<tr class="clk" onclick="D(\'mcp:'+i+'\')"><td data-l="이름"><b>'+esc(m.name)+'</b><br><span class="muted" style="font-size:10.5px">'+esc(m.label)+'</span></td>'+
+      '<td data-l="주소">'+P(m.url)+'</td>'+
+      '<td data-l="인증"><span class="tag">'+esc(m.auth)+'</span></td>'+
+      '<td data-l="사용">'+(m.enabled?'<span class="badge green">켜짐</span>':'<span class="badge">꺼짐</span>')+'</td>'+
+      '<td data-l="붙은 프로필">'+m.profiles.map(function(p){return '<span class="chip b">'+esc(p)+'</span>'}).join(' ')+'</td></tr>';
+  }).join('');
+}
+function renderStores(){
+  var html='', stores=DATA.stores, flows=isArr(DATA.flows)?DATA.flows:[];
+  stores.forEach(function(s,i){
+    var col=s.color||'#3a4a73';
+    html+='<div class="store" onclick="D(\'store:'+i+'\')" style="border-left:3px solid '+esc(col)+'">'+
+      '<div class="nm">'+esc(s.name)+'</div>'+
+      '<div class="rl" style="color:'+esc(col)+'">'+esc(s.role)+'</div>'+
+      '<div class="nt">'+esc(s.note)+'</div></div>';
+    if(i<stores.length-1){
+      var f=flows[i];
+      html+='<div class="sarw">▶<b>'+(f&&f.label?esc(f.label):'<span class="muted">연결 정보 없음</span>')+'</b></div>';
+    }
+  });
+  document.getElementById('stores').innerHTML=html;
+}
+function renderMeta(){
+  var raw=DATA.generated_at;
+  var g = raw ? String(raw).replace('T',' ').slice(0,16) : null;
+  document.getElementById('gen1').textContent = g ? ('마지막 갱신 '+g+' 기준') : '갱신 시각 정보 없음';
+  document.getElementById('gen2').textContent = g ? (g+' 기준') : '— (generated_at 없음)';
+  document.getElementById('genfoot').textContent = g ? ('마지막 갱신: '+g) : '마지막 갱신: 정보 없음';
+  document.getElementById('counts').textContent='봇 '+DATA.bots.length+' · 스킬 '+DATA.skills.length+
+    ' · 자동작업 '+DATA.crons.length+' · 연결 '+DATA.mcp.length+' · 보수항목 '+DATA.repair_map.length;
+}
+
+/* ===== 구역 단위 오류 격리 =====
+   한 구역이 터져도 나머지 화면과 이벤트 등록은 계속됩니다.
+   오류를 조용히 삼키지 않도록 (1) 해당 칸에 한글 안내 (2) 상단 경고줄
+   (3) console.error 세 군데에 남깁니다. */
+var FAILED=[];
+function safe(label, targetId, fn){
+  try{ fn(); }
+  catch(err){
+    FAILED.push(label);
+    if(window.console&&console.error)console.error('['+label+'] 렌더 실패:',err);
+    var el=document.getElementById(targetId);
+    if(el){
+      el.innerHTML='<div class="failbox">⚠️ <b>이 구역을 불러오지 못했습니다.</b>'+
+        '<span class="fx">데이터가 없는 것이 아니라, <b>'+esc(label)+'</b> 표시에 필요한 항목을 읽지 못했습니다. '+
+        '다른 구역과 검색은 그대로 쓰실 수 있습니다.</span>'+
+        '<code>'+esc(String(err&&err.message||err))+'</code></div>';
+    }
+  }
+}
+function reportProblems(){
+  var msgs=[];
+  if(MISSING.length)msgs.push('데이터에 빠진 항목 '+MISSING.length+'개(<b>'+MISSING.map(esc).join(', ')+'</b>)를 비운 채로 표시했습니다.');
+  if(FAILED.length)msgs.push('<b>'+FAILED.map(esc).join(', ')+'</b> 구역을 불러오지 못했습니다.');
+  var bar=document.getElementById('failbar');
+  if(!msgs.length){bar.classList.remove('on');return}
+  document.getElementById('failbartxt').innerHTML=msgs.join(' ')+' 나머지 화면·검색은 정상 동작합니다.';
+  bar.classList.add('on');
+}
+
+function renderAll(){
+  MISSING=[];FAILED=[];
+  try{ normalizeData(); }catch(e){ if(window.console)console.error('normalizeData 실패:',e); }
+  safe('조직도','botrow',renderBots);
+  safe('작업 흐름 파이프라인','pipe',renderPipe);
+  safe('규칙 계층도','layers',renderLayers);
+  safe('보수 찾기표','fixbody',renderFix);
+  safe('스킬 지도','skillcols',renderSkills);
+  safe('자동작업표','cronbody',renderCrons);
+  safe('바깥 연결표','mcpbody',renderMcp);
+  safe('저장소 지도','stores',renderStores);
+  safe('갱신 정보','counts',renderMeta);
+  try{ reportProblems(); }catch(e){ if(window.console)console.error(e); }
+}
+renderAll();
+
+/* ================= 상세 드로어 ================= */
+function DET(key){
+  var t=key.split(':'),kind=t[0],id=key.slice(kind.length+1);
+  if(kind==='bot'){
+    var b=bot(id);if(!b)return ['상세','<p class="muted">없음</p>'];
+    var mine=DATA.skills.filter(function(s){return s.owners.indexOf(b.id)>=0});
+    var up=DATA.pipeline.filter(function(p){return p.to===b.id||(b.id==='all'&&p.to==='도비서')});
+    var dn=DATA.pipeline.filter(function(p){return p.from===b.id||(b.id==='all'&&p.from==='도비서')});
+    return [b.id+' · '+b.name,
+      row('맡은 일',esc(b.role))+row('쓰는 모델',esc(b.model))+
+      row('보유 스킬',n(b.skill_count)+'개 (★맞춤 '+n(b.custom_count)+'개)')+
+      row('인격 문서',b.soul_chars?b.soul_chars.toLocaleString()+'자':'—')+
+      row('자동작업',esc(cronText(b.cron_count)))+
+      '<div class="sec-t">고칠 때 열 파일 (누르면 복사)</div>'+
+      row('인격',P(b.soul_path))+row('스킬 폴더',P(b.skills_path))+
+      (b.cron_path?row('자동작업',P(b.cron_path)):'')+
+      row('볼트 사본',P(b.vault_path,'vault'))+
+      '<div class="sec-t">받는 것 / 넘기는 것</div>'+
+      (up.length?up.map(function(p){return row('받음','← '+esc(p.from)+' : '+esc(p.label))}).join(''):row('받음','—'))+
+      (dn.length?dn.map(function(p){return row('넘김','→ '+esc(p.to)+' : '+esc(p.label))}).join(''):row('넘김','—'))+
+      '<div class="sec-t">대표 스킬 '+mine.length+'개</div>'+
+      (mine.length?mine.map(function(s){return '<div class="li clk" onclick="D(\'skill:'+esc(s.name)+'\')">'+
+        (s.custom?'<span class="star">★</span>':'<span class="muted">·</span>')+
+        '<span class="t">'+esc(s.name)+'</span><span class="m">'+esc(s.desc)+'</span></div>'}).join(''):'<p class="muted">—</p>')
+    ];
+  }
+  if(kind==='skill'){
+    var s=null;DATA.skills.forEach(function(x){if(x.name===id)s=x});
+    if(!s)return ['스킬','<p class="muted">없음</p>'];
+    return [s.name+(s.custom?' ★':''),
+      row('하는 일',esc(s.desc))+
+      row('구분',s.custom?'<span class="tag cst">★맞춤 (직접 만듦)</span>':'<span class="tag cmn">공용</span>')+
+      row('원본 경로',P(s.path))+
+      row('파일',P(s.path+'/SKILL.md'))+
+      '<div class="sec-t">이 스킬을 가진 봇 '+s.owners.length+'대</div>'+
+      s.owners.map(function(o){var b=bot(o);
+        return '<div class="li clk" onclick="D(\'bot:'+o+'\')"><span class="chip b">'+esc(o)+'</span>'+
+        '<span class="t">'+esc(b?b.name:o)+'</span><span class="m">'+esc(b?b.model:'')+'</span></div>'}).join('')
+    ];
+  }
+  if(kind==='cron'){
+    var c=DATA.crons[+id];if(!c)return ['자동작업','<p class="muted">이 항목을 불러오지 못했습니다.</p>'];
+    return [c.name,row('주기',esc(c.schedule))+row('모드',c.mode==='AI'?'AI (토큰 사용)':'무토큰 (스크립트)')+
+      row('대상 프로필',esc(c.profile))+row('분류',esc(c.kind))+
+      row('설정 파일',P('<hermes>/profiles/'+c.profile+'/cron/'))+
+      '<p class="muted" style="margin-top:12px;font-size:11.5px">주기를 바꾸려면 위 폴더의 해당 설정 파일을 여세요. 내용(프롬프트)은 이 지도에 표시하지 않습니다.</p>'];
+  }
+  if(kind==='mcp'){
+    var m=DATA.mcp[+id];if(!m)return ['바깥 연결','<p class="muted">이 항목을 불러오지 못했습니다.</p>'];
+    return [m.name+' · '+m.label,row('주소',P(m.url))+row('인증 방식',esc(m.auth))+
+      row('사용 여부',m.enabled?'켜짐':'꺼짐')+row('붙은 프로필',m.profiles.join(', '))+
+      row('설정 파일',P('<hermes>/config.yaml'))+
+      '<p class="muted" style="margin-top:12px;font-size:11.5px">MCP = 봇이 바깥 서비스에 붙는 연결 창구입니다. 연결이 끊기면 위 설정 파일의 해당 항목을 확인하세요.</p>'];
+  }
+  if(kind==='store'){
+    var st=DATA.stores[+id];if(!st)return ['저장소','<p class="muted">이 항목을 불러오지 못했습니다.</p>'];
+    var fl=(isArr(DATA.flows)?DATA.flows:[]).filter(function(f){return f.from===st.name||f.to===st.name});
+    return [st.name+' · '+st.role,row('역할',esc(st.role))+row('설명',esc(st.note))+row('위치',P(st.path))+
+      '<div class="sec-t">흐름</div>'+
+      (fl.length?fl.map(function(f){return row(f.from===st.name?'내보냄':'받음',esc(f.from)+' → '+esc(f.to)+' ('+esc(f.label)+')')}).join(''):row('흐름','—'))];
+  }
+  if(kind==='layer'){
+    var l=DATA.rule_layers[+id];if(!l)return ['규칙 계층','<p class="muted">이 항목을 불러오지 못했습니다.</p>'];
+    return [l.layer+'층 · '+l.name,row('내용',esc(l.desc))+row('우선순위',esc(l.win))+row('위치',P(l.path))+
+      '<p class="muted" style="margin-top:12px;font-size:11.5px">같은 사안에서 규칙이 서로 다르게 말하면 층 번호가 작은 쪽이 이깁니다.</p>'];
+  }
+  return ['상세','<p class="muted">표시할 상세 정보가 없습니다.</p>'];
+}
+function D(key){var d;
+  try{ d=DET(key); }catch(err){
+    if(window.console)console.error('상세 표시 실패:',err);
+    d=['상세','<div class="failbox">⚠️ <b>이 항목의 상세를 불러오지 못했습니다.</b><span class="fx">필요한 데이터 항목이 없습니다.</span><code>'+esc(String(err&&err.message||err))+'</code></div>'];
+  }
+  document.getElementById('dt').textContent=d[0];
+  document.getElementById('dbody').innerHTML=d[1];
+  document.getElementById('drawer').classList.add('on');
+  document.getElementById('scrim').classList.add('on');}
+function X(){document.getElementById('drawer').classList.remove('on');document.getElementById('scrim').classList.remove('on');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){X();}});
+
+/* ================= 사이드바 전환 ================= */
+var TITLES={org:['구조도','우리 팀이 어떻게 생겼는가 · 조직도 · 흐름 · 규칙 계층'],
+ fix:['보수 찾기','고치려면 어느 파일을 열어야 하나'],
+ skill:['스킬 지도','어떤 절차서를 어느 봇이 가졌나'],
+ cron:['자동작업','뭐가 언제 저절로 도는가'],
+ conn:['연결·저장소','바깥 연결과 저장 위치 · 무엇이 원본인가'],
+ search:['검색 결과','']};
+var curView='org';
+function show(v){
+  curView=v;
+  [].forEach.call(document.querySelectorAll('.view'),function(s){s.classList.remove('on')});
+  document.getElementById('v-'+v).classList.add('on');
+  document.getElementById('vtitle').textContent=TITLES[v][0];
+  document.getElementById('vsub').textContent=TITLES[v][1];
+  [].forEach.call(document.getElementById('nav').children,function(c){
+    c.classList.toggle('on',c.dataset.v===v)});
+  document.getElementById('scroll').scrollTop=0;
+}
+document.getElementById('nav').addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  document.getElementById('q').value='';document.getElementById('qclear').style.display='none';
+  show(b.dataset.v);X();
+});
+
+/* ================= 전역 검색 ================= */
+var lastView='org';
+function hit(s,q){return String(s==null?'':s).toLowerCase().indexOf(q)>=0}
+function runSearch(q){
+  try{ runSearchInner(q); }
+  catch(err){
+    if(window.console)console.error('검색 실패:',err);
+    document.getElementById('qres').innerHTML='<div class="failbox">⚠️ <b>검색을 수행하지 못했습니다.</b><span class="fx">검색 대상 데이터에 문제가 있습니다. 왼쪽 메뉴의 각 화면은 그대로 보실 수 있습니다.</span><code>'+esc(String(err&&err.message||err))+'</code></div>';
+    document.getElementById('qhint').textContent='검색 오류';
+    show('search');
+  }
+}
+function runSearchInner(q){
+  q=q.trim().toLowerCase();
+  var A=function(k){return isArr(DATA[k])?DATA[k]:[]};
+  var clr=document.getElementById('qclear');
+  if(!q){clr.style.display='none';show(lastView==='search'?'org':lastView);return}
+  clr.style.display='';
+  if(curView!=='search')lastView=curView;
+  var out='',cnt=0;
+  var bs=A('bots').filter(function(b){return hit(b.id,q)||hit(b.name,q)||hit(b.role,q)||hit(b.model,q)||hit(b.soul_path,q)||hit(b.vault_path,q)});
+  var sk=A('skills').filter(function(s){return hit(s.name,q)||hit(s.desc,q)||hit(s.path,q)||(isArr(s.owners)?s.owners:[]).some(function(o){return hit(o,q)})});
+  var cr=A('crons').filter(function(c){return hit(c.name,q)||hit(c.schedule,q)||hit(c.mode,q)||hit(c.kind,q)||hit(c.profile,q)});
+  var mc=A('mcp').filter(function(m){return hit(m.name,q)||hit(m.label,q)||hit(m.url,q)||(isArr(m.profiles)?m.profiles:[]).some(function(p){return hit(p,q)})});
+  var rp=A('repair_map').filter(function(r){return hit(r.want,q)||hit(r.file,q)||hit(r.vault,q)});
+  var so=A('stores').filter(function(s){return hit(s.name,q)||hit(s.role,q)||hit(s.note,q)||hit(s.path,q)});
+  var ly=A('rule_layers').filter(function(l){return hit(l.name,q)||hit(l.desc,q)||hit(l.path,q)});
+
+  if(bs.length){cnt+=bs.length;out+='<div class="sec-t">봇 '+bs.length+'</div>'+bs.map(function(b){
+    return '<div class="li clk" onclick="D(\'bot:'+b.id+'\')"><span class="chip b" style="min-width:70px;justify-content:center">'+esc(b.id)+'</span>'+
+    '<span class="t">'+esc(b.name)+' · '+esc(b.role)+'</span><span class="m">'+esc(b.model)+'</span></div>'}).join('')}
+  if(sk.length){cnt+=sk.length;out+='<div class="sec-t">스킬 '+sk.length+' <span class="muted">— 이 스킬을 가진 봇이 함께 표시됩니다</span></div>'+sk.map(function(s){
+    return '<div class="li clk" onclick="D(\'skill:'+esc(s.name)+'\')">'+(s.custom?'<span class="star">★</span>':'<span class="muted">·</span>')+
+    '<span class="t">'+esc(s.name)+' <span class="muted">'+esc(s.desc)+'</span></span>'+
+    s.owners.map(function(o){return '<span class="chip b">'+esc(o)+'</span>'}).join(' ')+'</div>'}).join('')}
+  if(rp.length){cnt+=rp.length;out+='<div class="sec-t">보수 찾기 '+rp.length+'</div>'+rp.map(function(r){
+    return '<div class="li"><span class="t">'+esc(r.want)+'</span>'+P(r.file)+'</div>'}).join('')}
+  if(cr.length){cnt+=cr.length;out+='<div class="sec-t">자동작업 '+cr.length+'</div>'+cr.map(function(c){
+    return '<div class="li clk" onclick="D(\'cron:'+DATA.crons.indexOf(c)+'\')"><span class="t">'+esc(c.name)+'</span>'+
+    '<span class="chip">'+esc(c.schedule)+'</span><span class="chip b">'+esc(c.mode)+'</span></div>'}).join('')}
+  if(mc.length){cnt+=mc.length;out+='<div class="sec-t">바깥 연결 '+mc.length+'</div>'+mc.map(function(m){
+    return '<div class="li clk" onclick="D(\'mcp:'+DATA.mcp.indexOf(m)+'\')"><span class="t">'+esc(m.name)+' · '+esc(m.label)+'</span><span class="m">'+esc(m.url)+'</span></div>'}).join('')}
+  if(so.length){cnt+=so.length;out+='<div class="sec-t">저장소 '+so.length+'</div>'+so.map(function(s){
+    return '<div class="li clk" onclick="D(\'store:'+DATA.stores.indexOf(s)+'\')"><span class="t">'+esc(s.name)+' · '+esc(s.role)+'</span><span class="m">'+esc(s.note)+'</span></div>'}).join('')}
+  if(ly.length){cnt+=ly.length;out+='<div class="sec-t">규칙 계층 '+ly.length+'</div>'+ly.map(function(l){
+    return '<div class="li clk" onclick="D(\'layer:'+DATA.rule_layers.indexOf(l)+'\')"><span class="no badge">'+l.layer+'</span><span class="t">'+esc(l.name)+'</span><span class="m">'+esc(l.win)+'</span></div>'}).join('')}
+
+  if(!cnt)out='<p class="muted" style="padding:16px 4px">"'+esc(q)+'" 에 해당하는 항목이 없습니다. 봇 이름(dp), 스킬 이름(notion), 자동작업 이름(미러링), 파일명(SOUL) 등으로 찾아보세요.</p>';
+  document.getElementById('qres').innerHTML=out;
+  document.getElementById('qhint').textContent='"'+q+'" · '+cnt+'건';
+  show('search');
+}
+document.getElementById('q').addEventListener('input',function(){runSearch(this.value)});
+document.getElementById('qclear').addEventListener('click',function(){
+  var q=document.getElementById('q');q.value='';runSearch('');q.focus();});
+</script>
+</body>
+</html>
