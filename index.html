@@ -487,15 +487,15 @@ button{background:none;border:none;cursor:pointer}
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-09-16T02:47:36+09:00",
+  "generated_at": "2026-09-16T06:38:04+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "claude-opus-5",
-      "skill_count": 114,
-      "custom_count": 33,
+      "skill_count": 115,
+      "custom_count": 34,
       "soul_chars": 6115,
       "cron_count": 26,
       "color": "#fbcf5a",
@@ -2044,6 +2044,15 @@ var DATA =
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/product-price-monitor/SKILL.md"
+    },
+    {
+      "name": "public-artifact-sanitization",
+      "desc": "내부 데이터를 공개 위치에 올릴 때 민감정보 차단.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/public-artifact-sanitization/SKILL.md"
     },
     {
       "name": "python-debugpy",
