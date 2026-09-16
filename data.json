@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-09-16T08:50:53+09:00",
+  "generated_at": "2026-09-16T22:53:44+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "claude-opus-5",
-      "skill_count": 115,
-      "custom_count": 35,
+      "skill_count": 117,
+      "custom_count": 36,
       "soul_chars": 6115,
-      "cron_count": 26,
+      "cron_count": 27,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -20,10 +20,10 @@
       "id": "s",
       "name": "조사 담당",
       "role": "웹·문서 조사, 사실 확인, 출처 수집",
-      "model": "claude-opus-5",
-      "skill_count": 84,
-      "custom_count": 7,
-      "soul_chars": 3113,
+      "model": "gemini-3.8-flash",
+      "skill_count": 86,
+      "custom_count": 9,
+      "soul_chars": 3444,
       "cron_count": null,
       "color": "#f5717a",
       "soul_path": "<hermes>/profiles/s/SOUL.md",
@@ -35,10 +35,10 @@
       "id": "pm",
       "name": "기획 담당",
       "role": "요구사항 정리, 계획 수립, 일정·범위 관리",
-      "model": "claude-opus-5",
-      "skill_count": 84,
-      "custom_count": 7,
-      "soul_chars": 3646,
+      "model": "gemini-3.5-flash-lite",
+      "skill_count": 85,
+      "custom_count": 8,
+      "soul_chars": 3549,
       "cron_count": null,
       "color": "#f5bd4f",
       "soul_path": "<hermes>/profiles/pm/SOUL.md",
@@ -51,9 +51,9 @@
       "name": "디자인 담당",
       "role": "화면 설계, HTML·CSS 시안, 사용성 검토",
       "model": "claude-opus-5",
-      "skill_count": 87,
-      "custom_count": 9,
-      "soul_chars": 3119,
+      "skill_count": 89,
+      "custom_count": 11,
+      "soul_chars": 4135,
       "cron_count": null,
       "color": "#a98bfa",
       "soul_path": "<hermes>/profiles/uxui/SOUL.md",
@@ -65,10 +65,10 @@
       "id": "dp",
       "name": "개발 담당",
       "role": "코드 작성·수정·배포",
-      "model": "claude-opus-5",
-      "skill_count": 93,
-      "custom_count": 15,
-      "soul_chars": 7526,
+      "model": "claude-fable-5-1",
+      "skill_count": 96,
+      "custom_count": 18,
+      "soul_chars": 3991,
       "cron_count": null,
       "color": "#5b9dfb",
       "soul_path": "<hermes>/profiles/dp/SOUL.md",
@@ -81,9 +81,9 @@
       "name": "검수 담당",
       "role": "산출물 검증, 실행 테스트, 결함 보고",
       "model": "claude-opus-5",
-      "skill_count": 87,
-      "custom_count": 10,
-      "soul_chars": 4482,
+      "skill_count": 91,
+      "custom_count": 14,
+      "soul_chars": 4407,
       "cron_count": null,
       "color": "#43d787",
       "soul_path": "<hermes>/profiles/qa/SOUL.md",
@@ -96,9 +96,9 @@
       "name": "마케팅 담당",
       "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
       "model": "claude-opus-5",
-      "skill_count": 85,
-      "custom_count": 8,
-      "soul_chars": 4252,
+      "skill_count": 86,
+      "custom_count": 9,
+      "soul_chars": 3834,
       "cron_count": null,
       "color": "#2fd3c0",
       "soul_path": "<hermes>/profiles/marketer/SOUL.md",
@@ -113,7 +113,7 @@
       "model": "gemini-3-flash-preview",
       "skill_count": 58,
       "custom_count": 6,
-      "soul_chars": 1869,
+      "soul_chars": 2617,
       "cron_count": null,
       "color": "#8e9bb3",
       "soul_path": "<hermes>/profiles/jilmuni/SOUL.md",
@@ -466,6 +466,15 @@
       "path": "<hermes>/profiles/all/skills/productivity/box"
     },
     {
+      "name": "browser-skill",
+      "desc": "|",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/browser-skill"
+    },
+    {
       "name": "business-idea-discovery",
       "desc": "신규 사업 아이디어 발굴·판정 시. (비공개) 5문항 기준표와 루트 4종.",
       "owners": [
@@ -473,6 +482,24 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/business-idea-discovery"
+    },
+    {
+      "name": "checker-validation",
+      "desc": "Use when 검사기·린터가 정말 잡는지 검증할 때. 변이 주입으로 시험.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/devops/checker-validation"
+    },
+    {
+      "name": "checker-verification",
+      "desc": "Use when verifying someone else's checker or audit script.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/checker-verification"
     },
     {
       "name": "claude-code",
@@ -630,7 +657,7 @@
     },
     {
       "name": "design-review-loop",
-      "desc": "설계안을 QA와 N라운드 왕복 검증할 때. 공유 파일 1개·판정 필수·계산은 코드로.",
+      "desc": "설계안 QA 왕복 검증·기간제 실험 개설/결산 시. 공유 파일 1개·판정 필수·계산은 코드로.",
       "owners": [
         "all"
       ],
@@ -711,6 +738,15 @@
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/dogfood"
+    },
+    {
+      "name": "dp-harness",
+      "desc": "Use when dp가 코드 작성·수정·배포 지시서를 받았을 때. 착수 전 반드시 연다. 개발 5단계 실행 순서, 앱 2종 스택, 검수 2회 루프, 제출 형식.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/devops/dp-harness"
     },
     {
       "name": "dp-toolbox",
@@ -939,6 +975,16 @@
       "path": "<hermes>/profiles/all/skills/productivity/google-workspace"
     },
     {
+      "name": "graphify",
+      "desc": "코드베이스·문서 뭉치를 지식그래프로 만들어 구조를 묻고 답하는 도구",
+      "owners": [
+        "all",
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/graphify"
+    },
+    {
       "name": "grounded-citations",
       "desc": "Ground answers and documents in cited, verifiable sources.",
       "owners": [
@@ -1055,6 +1101,15 @@
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/email/himalaya"
+    },
+    {
+      "name": "html-mockup-verification",
+      "desc": "Use when shipping an HTML mockup: measure, don't guess.",
+      "owners": [
+        "uxui"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/uxui/skills/creative/html-mockup-verification"
     },
     {
       "name": "huggingface-hub",
@@ -1198,6 +1253,15 @@
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/maps"
+    },
+    {
+      "name": "marketer-harness",
+      "desc": "Use when marketer가 마케팅 계획·카피·콘텐츠 지시서를 받았을 때",
+      "owners": [
+        "marketer"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/marketer/skills/devops/marketer-harness"
     },
     {
       "name": "marketer-toolbox",
@@ -1423,6 +1487,15 @@
       "path": "<hermes>/profiles/all/skills/software-development/plan"
     },
     {
+      "name": "pm-harness",
+      "desc": "Use when pm이 일정·할일·진행추적 지시서를 받았을 때. 착수 전 반드시 연다. 일정 수립 5단계와 진행현황표 규격, 검수 루프 기간 반영.",
+      "owners": [
+        "pm"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/pm/skills/devops/pm-harness"
+    },
+    {
       "name": "pm-toolbox",
       "desc": "Use when pm가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
       "owners": [
@@ -1641,6 +1714,15 @@
       "path": "<hermes>/profiles/all/skills/research/research-paper-writing"
     },
     {
+      "name": "restore-point-verification",
+      "desc": "Use when 백업·되돌리기 지점이 유효한지 확인할 때.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/restore-point-verification"
+    },
+    {
       "name": "role-based-delegation",
       "desc": "Use when 실무를 직접 할지 하위봇에 맡길지 판단할 때. 역할 나뉜 일은 지침서와 함께 배분.",
       "owners": [
@@ -1648,6 +1730,24 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/role-based-delegation"
+    },
+    {
+      "name": "rule-enforcement-audit",
+      "desc": "Use when 규칙·조문이 실제로 이행됐는지 기록으로 감사할 때. 문서 실재가 아니라 발동 여부를 본다.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/rule-enforcement-audit"
+    },
+    {
+      "name": "s-harness",
+      "desc": "Use when s가 조사·시장분석·경쟁사·법규 지시서를 받았을 때. 착수 전 반드시 연다. 조사 5단계와 출처 의무.",
+      "owners": [
+        "s"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/devops/s-harness"
     },
     {
       "name": "s-toolbox",
@@ -1786,6 +1886,15 @@
       "path": "<hermes>/profiles/all/skills/creative/songwriting-and-ai-music"
     },
     {
+      "name": "soul-harness-migration-review",
+      "desc": "Use when SOUL 조항을 하네스 스킬로 옮긴 건을 검수할 때.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/soul-harness-migration-review"
+    },
+    {
       "name": "spec-driven-qa-planning",
       "desc": "Build a QA test plan from a spec before any build exists.",
       "owners": [
@@ -1897,6 +2006,15 @@
       "path": "<hermes>/profiles/all/skills/productivity/thread-close"
     },
     {
+      "name": "tool-adoption-vetting",
+      "desc": "Use when vetting a tool for adoption. No install.",
+      "owners": [
+        "s"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/research/tool-adoption-vetting"
+    },
+    {
       "name": "toolbox-scoring",
       "desc": "Use when 노션 도구함 항목을 채점·판정할 때. (비공개) 확정 v3 기준표.",
       "owners": [
@@ -1919,6 +2037,15 @@
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/touchdesigner-mcp"
+    },
+    {
+      "name": "uxui-harness",
+      "desc": "Use when uxui가 시안·화면·와이어프레임 지시서를 받았을 때. 착수 전 반드시 연다. 디자인 5단계 실행 순서와 레퍼런스 의무.",
+      "owners": [
+        "uxui"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/uxui/skills/devops/uxui-harness"
     },
     {
       "name": "uxui-toolbox",
@@ -2221,6 +2348,13 @@
       "schedule": "매일 07:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "하네스 감사 주간 스냅샷 (0토큰)",
+      "schedule": "매주 월 04:45",
+      "mode": "무토큰",
+      "kind": "정리",
       "profile": "all"
     },
     {
