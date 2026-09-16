@@ -669,7 +669,7 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-09-17T04:50:40+09:00",
+  "generated_at": "2026-09-17T07:15:56+09:00",
   "bots": [
     {
       "id": "all",
@@ -736,8 +736,8 @@ var DATA =
       "name": "개발 담당",
       "role": "코드 작성·수정·배포",
       "model": "claude-fable-5-1",
-      "skill_count": 97,
-      "custom_count": 19,
+      "skill_count": 98,
+      "custom_count": 20,
       "soul_chars": 4226,
       "cron_count": null,
       "color": "#5b9dfb",
@@ -751,8 +751,8 @@ var DATA =
       "name": "검수 담당",
       "role": "산출물 검증, 실행 테스트, 결함 보고",
       "model": "claude-opus-5",
-      "skill_count": 92,
-      "custom_count": 15,
+      "skill_count": 93,
+      "custom_count": 16,
       "soul_chars": 4642,
       "cron_count": null,
       "color": "#43d787",
@@ -1164,7 +1164,7 @@ var DATA =
     },
     {
       "name": "checker-verification",
-      "desc": "Use when verifying someone else's checker or audit script.",
+      "desc": "Use when verifying someone else's checker, gate, or blocking hook.",
       "owners": [
         "qa"
       ],
@@ -1746,6 +1746,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-provider-auth"
+    },
+    {
+      "name": "hermes-shell-hooks",
+      "desc": "Use when Hermes 셸 훅을 만들·등록·시험할 때. 규격·관찰/차단모드·잠금파일·재시작 함정.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/devops/hermes-shell-hooks"
     },
     {
       "name": "hermes-skill-porting",
@@ -2701,6 +2710,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/thread-organize"
+    },
+    {
+      "name": "tool-adoption-verification",
+      "desc": "Use when 도구 도입 실측·채점 보고를 재현 검증할 때. 결함 주장의 숫자와 인과를 갈라 확인한다.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/tool-adoption-verification"
     },
     {
       "name": "tool-adoption-vetting",
