@@ -669,17 +669,17 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-09-17T07:21:03+09:00",
+  "generated_at": "2026-09-18T04:50:39+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "claude-opus-5",
-      "skill_count": 118,
-      "custom_count": 38,
+      "skill_count": 120,
+      "custom_count": 40,
       "soul_chars": 6115,
-      "cron_count": 27,
+      "cron_count": 29,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -736,8 +736,8 @@ var DATA =
       "name": "개발 담당",
       "role": "코드 작성·수정·배포",
       "model": "claude-fable-5-1",
-      "skill_count": 98,
-      "custom_count": 20,
+      "skill_count": 105,
+      "custom_count": 27,
       "soul_chars": 4226,
       "cron_count": null,
       "color": "#5b9dfb",
@@ -766,8 +766,8 @@ var DATA =
       "name": "마케팅 담당",
       "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
       "model": "claude-opus-5",
-      "skill_count": 86,
-      "custom_count": 9,
+      "skill_count": 87,
+      "custom_count": 10,
       "soul_chars": 4069,
       "cron_count": null,
       "color": "#2fd3c0",
@@ -1311,7 +1311,7 @@ var DATA =
     },
     {
       "name": "defect-fix-verification",
-      "desc": "Use when 개발자 수정본이 실제로 고쳤는지 검증할 때.",
+      "desc": "Use when 개발자 수정본·신설 모드가 실제로 고쳤는지(또는 상태를 안 바꾸는지) 검증할 때. dry-run·no-op 포함.",
       "owners": [
         "qa"
       ],
@@ -1481,6 +1481,15 @@ var DATA =
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/excalidraw"
+    },
+    {
+      "name": "external-call-stub-testing",
+      "desc": "Use when 외부 호출이 차단됐거나(429) 실호출이 부작용(발송·봇 깨움)을 내서 못 돌릴 때. 호출만 스텁으로 검증.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/external-call-stub-testing"
     },
     {
       "name": "external-tool-evaluation",
@@ -1860,6 +1869,24 @@ var DATA =
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/inspecting-hermes-desktop-dom"
+    },
+    {
+      "name": "json-state-migration",
+      "desc": "Use when 상태 JSON 파일을 1회 소급 채움·병합할 때. 백업→dry→assert.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/devops/json-state-migration"
+    },
+    {
+      "name": "korean-text-matching",
+      "desc": "Use when 한글 문서 유사도·자동첨부를 외부 라이브러리 없이 만들 때.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/korean-text-matching"
     },
     {
       "name": "llama-cpp",
@@ -2303,6 +2330,15 @@ var DATA =
       "path": "<hermes>/profiles/uxui/skills/creative/product-3d-model"
     },
     {
+      "name": "product-copy-claim-verification",
+      "desc": "Use when writing product copy. Verify claims vs source.",
+      "owners": [
+        "marketer"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/marketer/skills/marketing/product-copy-claim-verification"
+    },
+    {
       "name": "product-price-monitor",
       "desc": "Watch product, flight, or listing prices; alert on target.",
       "owners": [
@@ -2411,6 +2447,15 @@ var DATA =
       "path": "<hermes>/profiles/qa/skills/devops/restore-point-verification"
     },
     {
+      "name": "review-verdict-and-rework",
+      "desc": "검수 결과서를 받아 판정·재작업 배분할 때 연다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/review-verdict-and-rework"
+    },
+    {
       "name": "role-based-delegation",
       "desc": "Use when 실무를 직접 할지 하위봇에 맡길지 판단할 때. 역할 나뉜 일은 지침서와 함께 배분.",
       "owners": [
@@ -2445,6 +2490,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/toolbox/s-toolbox"
+    },
+    {
+      "name": "saramin-job-search",
+      "desc": "Use when (비공개) asks 사람인 구인글 검색. 지역코드·URL·파싱·함정.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/saramin-job-search"
     },
     {
       "name": "saved-content-digest",
@@ -2500,6 +2554,33 @@ var DATA =
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/session-librarian"
+    },
+    {
+      "name": "settle-queue-ops",
+      "desc": "Use when 도구 정착 큐·apply_tool·settle_check 고칠 때. 정본·불변식·회귀.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/devops/settle-queue-ops"
+    },
+    {
+      "name": "shared-script-concurrent-edit",
+      "desc": "Use when 공유 스크립트 patch 중 sibling 동시편집 경고가 뜨면. 재읽기·중복방지.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/devops/shared-script-concurrent-edit"
+    },
+    {
+      "name": "side-effect-script-dryrun",
+      "desc": "Use when 발송·기록 스크립트에 --dry-run을 넣거나 검증할 때. 누수 0 증명.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/side-effect-script-dryrun"
     },
     {
       "name": "simplify-code",
@@ -2606,6 +2687,15 @@ var DATA =
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/spike"
+    },
+    {
+      "name": "sqlite-lock-contention",
+      "desc": "Use when SQLite 'database is locked'. busy_timeout·WAL 실측.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/devops/sqlite-lock-contention"
     },
     {
       "name": "stage-end-session-cleanup",
@@ -2996,6 +3086,13 @@ var DATA =
       "profile": "all"
     },
     {
+      "name": "봇 산출물 도착 감시 (30분, (비공개) 알림 없음)",
+      "schedule": "30분마다",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
       "name": "상태값 빠른 감시 (3분, 0토큰)",
       "schedule": "3분마다 (8-23시대)",
       "mode": "무토큰",
@@ -3017,8 +3114,8 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "앱 리뷰 마이닝 (시범 2주·28회)",
-      "schedule": "매일 06:00 · 18:00",
+      "name": "앱 리뷰 마이닝 (상시·매일 06시)",
+      "schedule": "매일 06:00",
       "mode": "무토큰",
       "kind": "수집",
       "profile": "all"
@@ -3048,6 +3145,13 @@ var DATA =
       "name": "주간 AI 뉴스",
       "schedule": "매주 토 15:00",
       "mode": "AI",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "주간 아이디어 요약 1장 (상시·매주 월 10시)",
+      "schedule": "매주 월 10:00",
+      "mode": "감시형(변화 있을 때만 AI)",
       "kind": "보고",
       "profile": "all"
     },
