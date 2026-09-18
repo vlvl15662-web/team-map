@@ -669,7 +669,7 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-09-18T04:50:39+09:00",
+  "generated_at": "2026-09-19T04:51:20+09:00",
   "bots": [
     {
       "id": "all",
@@ -736,8 +736,8 @@ var DATA =
       "name": "개발 담당",
       "role": "코드 작성·수정·배포",
       "model": "claude-fable-5-1",
-      "skill_count": 105,
-      "custom_count": 27,
+      "skill_count": 106,
+      "custom_count": 28,
       "soul_chars": 4226,
       "cron_count": null,
       "color": "#5b9dfb",
@@ -2575,7 +2575,7 @@ var DATA =
     },
     {
       "name": "side-effect-script-dryrun",
-      "desc": "Use when 발송·기록 스크립트에 --dry-run을 넣거나 검증할 때. 누수 0 증명.",
+      "desc": "Use when 발송·기록 스크립트에 --dry-run을 넣거나 검증할 때. 누수 0 증명. 크론 블록 단독 실행·읽기전용 증명(find -newer)·중복발송 차단 검수 포함.",
       "owners": [
         "dp"
       ],
@@ -2842,6 +2842,15 @@ var DATA =
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/touchdesigner-mcp"
+    },
+    {
+      "name": "untrusted-input-hardening",
+      "desc": "Use when 외부 텍스트를 자체검사 있는 산출물에 넣을 때. 정화·격리·적대시험.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/software-development/untrusted-input-hardening"
     },
     {
       "name": "uxui-harness",
