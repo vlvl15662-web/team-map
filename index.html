@@ -669,17 +669,17 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-09-19T04:51:20+09:00",
+  "generated_at": "2026-09-20T04:50:51+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
-      "model": "claude-opus-5",
-      "skill_count": 120,
-      "custom_count": 40,
-      "soul_chars": 6115,
-      "cron_count": 29,
+      "model": "gpt-5.6-sol",
+      "skill_count": 123,
+      "custom_count": 44,
+      "soul_chars": 6213,
+      "cron_count": 30,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -736,8 +736,8 @@ var DATA =
       "name": "개발 담당",
       "role": "코드 작성·수정·배포",
       "model": "claude-fable-5-1",
-      "skill_count": 106,
-      "custom_count": 28,
+      "skill_count": 108,
+      "custom_count": 30,
       "soul_chars": 4226,
       "cron_count": null,
       "color": "#5b9dfb",
@@ -750,7 +750,7 @@ var DATA =
       "id": "qa",
       "name": "검수 담당",
       "role": "산출물 검증, 실행 테스트, 결함 보고",
-      "model": "claude-opus-5",
+      "model": "gpt-5.6-luna",
       "skill_count": 93,
       "custom_count": 16,
       "soul_chars": 4642,
@@ -765,9 +765,9 @@ var DATA =
       "id": "marketer",
       "name": "마케팅 담당",
       "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
-      "model": "claude-opus-5",
-      "skill_count": 87,
-      "custom_count": 10,
+      "model": "gpt-5.6-luna",
+      "skill_count": 88,
+      "custom_count": 11,
       "soul_chars": 4069,
       "cron_count": null,
       "color": "#2fd3c0",
@@ -1073,6 +1073,15 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/creative/ascii-video"
     },
     {
+      "name": "automation-watchdog-design",
+      "desc": "자동화·봇이 죽었을 때 감시·자동복구 설계 판단 시. 알림 늘리지 말고 복구를 자동화한다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/automation-watchdog-design"
+    },
+    {
       "name": "baoyu-infographic",
       "desc": "Infographics: 21 layouts x 21 styles (信息图, 可视化).",
       "owners": [
@@ -1360,6 +1369,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/dobiseo-ops"
+    },
+    {
+      "name": "dobiseo-skill-standard",
+      "desc": "도비서 스킬 생성·개정 기준을 적용한다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/dobiseo-skill-standard"
     },
     {
       "name": "dobiseo-toolbox",
@@ -1739,6 +1757,15 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-gateway-bots"
     },
     {
+      "name": "hermes-gateway-forensics",
+      "desc": "Use when Hermes 게이트웨이(봇)가 죽었을 때. 복구·생존 실측·사망 원인 조사.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/devops/hermes-gateway-forensics"
+    },
+    {
       "name": "hermes-mcp-connections",
       "desc": "Connect MCP servers to Hermes: catalog, OAuth, PlayMCP.",
       "owners": [
@@ -1767,7 +1794,7 @@ var DATA =
     },
     {
       "name": "hermes-skill-porting",
-      "desc": "외부 스킬 설치·이식, 스킬 신규 작성·수정 시 사용. Use when installing external Claude skills into Hermes or writing/editing any skill.",
+      "desc": "외부 스킬을 Hermes 프로필에 안전하게 이식한다.",
       "owners": [
         "all"
       ],
@@ -1782,6 +1809,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/hermes-voice-io"
+    },
+    {
+      "name": "hermes-watchdog-cron-scripts",
+      "desc": "Use when 0토큰 감시·자동복구 크론 스크립트를 만들·고칠 때. 안전장치·알림·비항등식 시험.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/devops/hermes-watchdog-cron-scripts"
     },
     {
       "name": "himalaya",
@@ -1988,6 +2024,15 @@ var DATA =
       "path": "<hermes>/profiles/marketer/skills/toolbox/marketer-toolbox"
     },
     {
+      "name": "marketing-strategy-operations",
+      "desc": "Use when designing sales or revenue operations.",
+      "owners": [
+        "marketer"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/marketer/skills/marketing/marketing-strategy-operations"
+    },
+    {
       "name": "meeting-action-items",
       "desc": "Turn meeting notes into cited decisions, owners, tickets.",
       "owners": [
@@ -2076,7 +2121,7 @@ var DATA =
     },
     {
       "name": "notion-business-hq",
-      "desc": "노션 사업 HQ 기록 시. (비공개) HQ DB를 MCP로 자동 관리.",
+      "desc": "(비공개) 사업 HQ의 노션 기록과 승인 흐름을 관리한다.",
       "owners": [
         "all"
       ],
@@ -2405,6 +2450,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/dp/skills/software-development/react-native-expo-mvp-dev"
+    },
+    {
+      "name": "regulated-service-scoping",
+      "desc": "Use when 자격·면허·법정책임이 얽힌 대행사업 범위를 설계할 때. 독점업무와 보조업무를 분리한다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/regulated-service-scoping"
     },
     {
       "name": "requesting-code-review",
@@ -2932,11 +2986,11 @@ var DATA =
     },
     {
       "name": "windows-portable-cli-install",
-      "desc": "Use when Windows CLI install hits UAC/admin block.",
+      "desc": "Windows에서 관리자 없이 CLI를 안전하게 준비한다.",
       "owners": [
         "all"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/windows-portable-cli-install"
     },
     {
@@ -3029,6 +3083,13 @@ var DATA =
       "schedule": "매주 월·목 10:00",
       "mode": "AI",
       "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "게이트웨이 자동복구 감시 (1시간, 0토큰)",
+      "schedule": "매일 매시",
+      "mode": "무토큰",
+      "kind": "점검",
       "profile": "all"
     },
     {
