@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T04:50:35+09:00",
+  "generated_at": "2026-09-22T04:50:53+09:00",
   "bots": [
     {
       "id": "all",
@@ -9,7 +9,7 @@
       "skill_count": 126,
       "custom_count": 46,
       "soul_chars": 6598,
-      "cron_count": 30,
+      "cron_count": 32,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -66,8 +66,8 @@
       "name": "개발 담당",
       "role": "코드 작성·수정·배포",
       "model": "claude-fable-5-1",
-      "skill_count": 114,
-      "custom_count": 36,
+      "skill_count": 115,
+      "custom_count": 37,
       "soul_chars": 4226,
       "cron_count": null,
       "color": "#5b9dfb",
@@ -83,7 +83,7 @@
       "model": "gpt-5.6-luna",
       "skill_count": 96,
       "custom_count": 19,
-      "soul_chars": 4642,
+      "soul_chars": 4672,
       "cron_count": null,
       "color": "#43d787",
       "soul_path": "<hermes>/profiles/qa/SOUL.md",
@@ -410,6 +410,15 @@
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/ascii-video"
+    },
+    {
+      "name": "atomic-artifact-dispatch",
+      "desc": "Use when dispatchers reserve artifact paths safely.",
+      "owners": [
+        "dp"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/dp/skills/devops/atomic-artifact-dispatch"
     },
     {
       "name": "authenticated-web-session-automation",
@@ -2503,6 +2512,13 @@
       "profile": "all"
     },
     {
+      "name": "Google 보고서 2종 → 노션 (09:30 회수창)",
+      "schedule": "10분마다 (9-10시대)",
+      "mode": "무토큰",
+      "kind": "보고",
+      "profile": "all"
+    },
+    {
       "name": "Google→노션 캘린더 복제 (0토큰)",
       "schedule": "매일 07:00",
       "mode": "무토큰",
@@ -2517,8 +2533,8 @@
       "profile": "all"
     },
     {
-      "name": "개인 비즈니스 시장 흐름 보고서 (월·목 10시)",
-      "schedule": "매주 월·목 10:00",
+      "name": "개인 비즈니스 시장 흐름 보고서 (월·목 09:30)",
+      "schedule": "매주 월·목 09:30",
       "mode": "AI",
       "kind": "보고",
       "profile": "all"
@@ -2619,6 +2635,13 @@
       "schedule": "매일 04:00",
       "mode": "무토큰",
       "kind": "동기화",
+      "profile": "all"
+    },
+    {
+      "name": "스낵영상 신규 소재 5개 확인 알림",
+      "schedule": "매일 09:00",
+      "mode": "무토큰",
+      "kind": "점검",
       "profile": "all"
     },
     {
