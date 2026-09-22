@@ -669,17 +669,17 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-09-22T04:50:53+09:00",
+  "generated_at": "2026-09-23T04:50:41+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-5.6-sol",
-      "skill_count": 126,
-      "custom_count": 46,
+      "skill_count": 127,
+      "custom_count": 47,
       "soul_chars": 6598,
-      "cron_count": 32,
+      "cron_count": 33,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -691,8 +691,8 @@ var DATA =
       "name": "조사 담당",
       "role": "웹·문서 조사, 사실 확인, 출처 수집",
       "model": "gemini-3.8-flash",
-      "skill_count": 86,
-      "custom_count": 9,
+      "skill_count": 87,
+      "custom_count": 10,
       "soul_chars": 3679,
       "cron_count": null,
       "color": "#f5717a",
@@ -935,6 +935,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/agent-runtime-tuning"
+    },
+    {
+      "name": "ai-model-comparison-checks",
+      "desc": "Use when comparing AI models for searcher investigations.",
+      "owners": [
+        "s"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/devops/ai-model-comparison-checks"
     },
     {
       "name": "airtable",
@@ -1317,6 +1326,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/computer-use"
+    },
+    {
+      "name": "concurrent-file-write-safety",
+      "desc": "여러 프로세스가 같은 파일(JSON 상태·JSONL 로그)에 쓸 때. 잠금·병합·원자교체·시험격리 규약.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/concurrent-file-write-safety"
     },
     {
       "name": "construction-ai-bpo-scope",
@@ -2719,7 +2737,7 @@ var DATA =
     },
     {
       "name": "shared-script-concurrent-edit",
-      "desc": "Use when 공유 스크립트 patch 중 sibling 동시편집 경고가 뜨면. 재읽기·중복방지.",
+      "desc": "Use when 공유 스크립트 patch 중 sibling 동시편집 경고나 freeze_guard 잠금 차단이 뜨면. 재읽기·중복방지·후보파일 우회.",
       "owners": [
         "dp"
       ],
@@ -3281,14 +3299,14 @@ var DATA =
     },
     {
       "name": "봇 산출물 도착 감시 (30분, (비공개) 알림 없음)",
-      "schedule": "30분마다",
+      "schedule": "매일 매시",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "점검",
       "profile": "all"
     },
     {
       "name": "상태값 빠른 감시 (3분, 0토큰)",
-      "schedule": "3분마다 (8-23시대)",
+      "schedule": "매일 8-23",
       "mode": "무토큰",
       "kind": "점검",
       "profile": "all"
@@ -3322,8 +3340,8 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "운영 오류·원복 요청 감시 (3분, 로컬)",
-      "schedule": "3분마다",
+      "name": "운영 오류·원복 요청 감시 (매일 10·20시)",
+      "schedule": "매일 10:00 · 20:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "점검",
       "profile": "all"
@@ -3333,6 +3351,13 @@ var DATA =
       "schedule": "매월 1일 10:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "정리",
+      "profile": "all"
+    },
+    {
+      "name": "전 프로필 세션 자동 보관 (매일 03:20, 0토큰)",
+      "schedule": "매일 03:20",
+      "mode": "무토큰",
+      "kind": "기타",
       "profile": "all"
     },
     {
