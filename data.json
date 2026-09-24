@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-09-24T04:50:36+09:00",
+  "generated_at": "2026-09-25T04:51:16+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-5.6-sol",
-      "skill_count": 128,
-      "custom_count": 52,
+      "skill_count": 129,
+      "custom_count": 54,
       "soul_chars": 6598,
-      "cron_count": 35,
+      "cron_count": 38,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -51,8 +51,8 @@
       "name": "디자인 담당",
       "role": "화면 설계, HTML·CSS 시안, 사용성 검토",
       "model": "claude-opus-5",
-      "skill_count": 89,
-      "custom_count": 15,
+      "skill_count": 91,
+      "custom_count": 17,
       "soul_chars": 4369,
       "cron_count": null,
       "color": "#a98bfa",
@@ -65,7 +65,7 @@
       "id": "dp",
       "name": "개발 담당",
       "role": "코드 작성·수정·배포",
-      "model": "claude-fable-5-1",
+      "model": "claude-opus-5",
       "skill_count": 119,
       "custom_count": 45,
       "soul_chars": 4226,
@@ -81,8 +81,8 @@
       "name": "검수 담당",
       "role": "산출물 검증, 실행 테스트, 결함 보고",
       "model": "gpt-5.6-luna",
-      "skill_count": 97,
-      "custom_count": 24,
+      "skill_count": 98,
+      "custom_count": 25,
       "soul_chars": 4672,
       "cron_count": null,
       "color": "#43d787",
@@ -297,12 +297,12 @@
       "owners": [
         "all"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/antigravity-cli-bridge"
     },
     {
       "name": "antigravity-task-pipeline",
-      "desc": "Use when 반복업무를 안티그래비티 0토큰 파이프라인으로 만들 때. 관문·재지시·시험 골격.",
+      "desc": "Use when 안티그래비티로 반복업무·코드수정을 시킬 때. 관문·재지시·격리·시험 골격.",
       "owners": [
         "dp"
       ],
@@ -719,6 +719,15 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/customer-communications-automation"
+    },
+    {
+      "name": "data-injected-html-dashboard",
+      "desc": "Use when adding pages to a data-fed single-file dashboard.",
+      "owners": [
+        "uxui"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/uxui/skills/creative/data-injected-html-dashboard"
     },
     {
       "name": "decision-override-protocol",
@@ -1381,6 +1390,15 @@
       "path": "<hermes>/profiles/dp/skills/software-development/korean-text-matching"
     },
     {
+      "name": "live-data-dashboard-pages",
+      "desc": "Use when adding pages to a live single-file HTML dashboard.",
+      "owners": [
+        "uxui"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/uxui/skills/devops/live-data-dashboard-pages"
+    },
+    {
       "name": "llama-cpp",
       "desc": "llama.cpp local GGUF inference + HF Hub model discovery.",
       "owners": [
@@ -1690,6 +1708,15 @@
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/smart-home/openhue"
+    },
+    {
+      "name": "ops-dashboard-maintenance",
+      "desc": "Use when (비공개) 관리 대시보드 수정·버전업·자동갱신 시.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/ops-dashboard-maintenance"
     },
     {
       "name": "p5js",
@@ -2169,6 +2196,15 @@
       "path": "<hermes>/profiles/all/skills/creative/sketch"
     },
     {
+      "name": "skill-consistency-check",
+      "desc": "Use when 스킬·규칙 문서를 수정·추가한 직후, 또는 월 1회 감사 때. 조항끼리 서로 다른 값을 가리키는지(충돌·잔존·공백·중복·끊긴 참조)만 찾아 통과/불통과로 보고. 규칙의 타당성·문장은 보지 않는다.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/skill-consistency-check"
+    },
+    {
       "name": "songsee",
       "desc": "Audio spectrograms/features (mel, chroma, MFCC) via CLI.",
       "owners": [
@@ -2605,10 +2641,17 @@
       "profile": "all"
     },
     {
-      "name": "개인 비즈니스 시장 흐름 보고서 (월·목 09:30)",
-      "schedule": "매주 월·목 09:30",
-      "mode": "AI",
-      "kind": "보고",
+      "name": "prune 2차 실험 결산 (1회, 10-02)",
+      "schedule": "매일 09:30",
+      "mode": "무토큰",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
+      "name": "prune 2차 실험 일일기록 (0토큰, ~10-02)",
+      "schedule": "매일 00:05",
+      "mode": "무토큰",
+      "kind": "기타",
       "profile": "all"
     },
     {
@@ -2644,6 +2687,13 @@
       "schedule": "매주 월 08:00",
       "mode": "무토큰",
       "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "대시보드 30분 갱신 (0토큰)",
+      "schedule": "30분마다",
+      "mode": "무토큰",
+      "kind": "동기화",
       "profile": "all"
     },
     {
@@ -2724,6 +2774,13 @@
       "profile": "all"
     },
     {
+      "name": "안티그래비티 DP 스킬 동기화 (0토큰, 매시)",
+      "schedule": "every 60m",
+      "mode": "무토큰",
+      "kind": "동기화",
+      "profile": "all"
+    },
+    {
       "name": "운영 오류·원복 요청 감시 (매일 10·20시)",
       "schedule": "매일 10:00 · 20:00",
       "mode": "감시형(변화 있을 때만 AI)",
@@ -2731,7 +2788,7 @@
       "profile": "all"
     },
     {
-      "name": "월1회 감사 (메모리 + 측정체계)",
+      "name": "월1회 감사 (메모리·측정·하네스·스킬 일관성)",
       "schedule": "매월 1일 10:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "정리",
@@ -2752,16 +2809,16 @@
       "profile": "all"
     },
     {
-      "name": "제미나이리포트 → 도비서 의견 댓글",
-      "schedule": "매일 9-23",
-      "mode": "감시형(변화 있을 때만 AI)",
-      "kind": "보고",
+      "name": "정착 기회 결합기 (settle_link_builder, 0토큰)",
+      "schedule": "매일 8-23",
+      "mode": "무토큰",
+      "kind": "기타",
       "profile": "all"
     },
     {
-      "name": "주간 AI 뉴스",
-      "schedule": "매주 토 15:00",
-      "mode": "AI",
+      "name": "제미나이리포트 → 도비서 의견 댓글",
+      "schedule": "매일 9-23",
+      "mode": "감시형(변화 있을 때만 AI)",
       "kind": "보고",
       "profile": "all"
     },
