@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T04:51:16+09:00",
+  "generated_at": "2026-09-26T04:51:19+09:00",
   "bots": [
     {
       "id": "all",
@@ -8,7 +8,7 @@
       "model": "gpt-5.6-sol",
       "skill_count": 129,
       "custom_count": 54,
-      "soul_chars": 6598,
+      "soul_chars": 6662,
       "cron_count": 38,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
