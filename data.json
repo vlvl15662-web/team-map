@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-09-27T04:51:21+09:00",
+  "generated_at": "2026-09-28T04:51:18+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-5.6-sol",
-      "skill_count": 130,
-      "custom_count": 55,
-      "soul_chars": 6662,
-      "cron_count": 40,
+      "skill_count": 133,
+      "custom_count": 59,
+      "soul_chars": 6627,
+      "cron_count": 48,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -21,8 +21,8 @@
       "name": "조사 담당",
       "role": "웹·문서 조사, 사실 확인, 출처 수집",
       "model": "gemini-3.8-flash",
-      "skill_count": 87,
-      "custom_count": 14,
+      "skill_count": 92,
+      "custom_count": 20,
       "soul_chars": 3679,
       "cron_count": null,
       "color": "#f5717a",
@@ -37,7 +37,7 @@
       "role": "요구사항 정리, 계획 수립, 일정·범위 관리",
       "model": "gemini-3.5-flash-lite",
       "skill_count": 85,
-      "custom_count": 12,
+      "custom_count": 13,
       "soul_chars": 3784,
       "cron_count": null,
       "color": "#f5bd4f",
@@ -50,9 +50,9 @@
       "id": "uxui",
       "name": "디자인 담당",
       "role": "화면 설계, HTML·CSS 시안, 사용성 검토",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "skill_count": 91,
-      "custom_count": 17,
+      "custom_count": 18,
       "soul_chars": 4369,
       "cron_count": null,
       "color": "#a98bfa",
@@ -67,7 +67,7 @@
       "role": "코드 작성·수정·배포",
       "model": "claude-opus-5",
       "skill_count": 119,
-      "custom_count": 45,
+      "custom_count": 46,
       "soul_chars": 4226,
       "cron_count": null,
       "color": "#5b9dfb",
@@ -81,8 +81,8 @@
       "name": "검수 담당",
       "role": "산출물 검증, 실행 테스트, 결함 보고",
       "model": "gpt-5.6-luna",
-      "skill_count": 98,
-      "custom_count": 25,
+      "skill_count": 101,
+      "custom_count": 29,
       "soul_chars": 4672,
       "cron_count": null,
       "color": "#43d787",
@@ -97,7 +97,7 @@
       "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
       "model": "gpt-5.6-luna",
       "skill_count": 88,
-      "custom_count": 15,
+      "custom_count": 16,
       "soul_chars": 4069,
       "cron_count": null,
       "color": "#2fd3c0",
@@ -112,8 +112,8 @@
       "role": "짧은 질문에 빠르게 답하는 만능 Q&A",
       "model": "gemini-3-flash-preview",
       "skill_count": 58,
-      "custom_count": 10,
-      "soul_chars": 2617,
+      "custom_count": 11,
+      "soul_chars": 2609,
       "cron_count": null,
       "color": "#8e9bb3",
       "soul_path": "<hermes>/profiles/jilmuni/SOUL.md",
@@ -308,6 +308,15 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/dp/skills/devops/antigravity-task-pipeline"
+    },
+    {
+      "name": "api-blocking-response",
+      "desc": "Use when web tools hit API blocks in investigations.",
+      "owners": [
+        "s"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/devops/api-blocking-response"
     },
     {
       "name": "app-code-maintenance",
@@ -948,6 +957,24 @@
       "path": "<hermes>/profiles/all/skills/creative/excalidraw"
     },
     {
+      "name": "external-action-gate-verification",
+      "desc": "Use when verifying external action gates. Run safe probes.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/external-action-gate-verification"
+    },
+    {
+      "name": "external-agent-file-handoff",
+      "desc": "Use when Hermes가 외부 AI 팀과 inbox/outbox 파일로 작업을 주고받을 때.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/external-agent-file-handoff"
+    },
+    {
       "name": "external-call-stub-testing",
       "desc": "Use when 외부 호출이 차단됐거나(429) 실호출이 부작용(발송·봇 깨움)을 내서 못 돌릴 때. 호출만 스텁으로 검증.",
       "owners": [
@@ -955,6 +982,15 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/dp/skills/software-development/external-call-stub-testing"
+    },
+    {
+      "name": "external-deployment-qa",
+      "desc": "Use when verifying external file deployments. Prove gates.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/external-deployment-qa"
     },
     {
       "name": "external-execution-verification",
@@ -1379,6 +1415,24 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/dp/skills/devops/json-state-migration"
+    },
+    {
+      "name": "korean-company-data-research",
+      "desc": "Use when listing Korean SME companies from free public data.",
+      "owners": [
+        "s"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/research/korean-company-data-research"
+    },
+    {
+      "name": "korean-company-lead-research",
+      "desc": "Use when 한국 업체 후보 명단에 공개 대표번호·직원수 근거가 필요할 때.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/research/korean-company-lead-research"
     },
     {
       "name": "korean-text-matching",
@@ -1920,7 +1974,7 @@
     },
     {
       "name": "public-artifact-sanitization",
-      "desc": "내부 데이터를 공개 위치에 올릴 때 민감정보 차단.",
+      "desc": "내부 파일을 GitHub·호스팅 등 외부 서비스로 보낼 때 민감정보와 접근범위를 검증한다.",
       "owners": [
         "all"
       ],
@@ -1942,6 +1996,15 @@
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/python-debugpy"
+    },
+    {
+      "name": "qa-evidence-integrity",
+      "desc": "Use when verifying QA evidence integrity. Prove state.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/qa-evidence-integrity"
     },
     {
       "name": "qa-review",
@@ -2156,6 +2219,15 @@
       "path": "<hermes>/profiles/dp/skills/devops/shared-script-concurrent-edit"
     },
     {
+      "name": "shortform-visual-research",
+      "desc": "Use when researching shortform videos for benchmarking.",
+      "owners": [
+        "s"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/shortform-visual-research"
+    },
+    {
       "name": "side-effect-script-dryrun",
       "desc": "Use when 발송·기록·정리 스크립트에 --dry-run을 넣거나 검증할 때. 격리된 전후 스냅샷으로 누수 0을 증명하고 크론 실패를 영수증·경보로 연결한다.",
       "owners": [
@@ -2212,6 +2284,24 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/qa/skills/devops/skill-consistency-check"
+    },
+    {
+      "name": "social-media-account-automation",
+      "desc": "Use when SNS 계정 운영 자동화를 연결할 때. 공식 API 우선으로 권한·계정·검증을 분리한다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/social-media-account-automation"
+    },
+    {
+      "name": "social-media-content-patterns",
+      "desc": "Analyze social media content patterns for services.",
+      "owners": [
+        "s"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/social-media-content-patterns"
     },
     {
       "name": "songsee",
@@ -2385,7 +2475,7 @@
     },
     {
       "name": "thread-close",
-      "desc": "Use when (비공개) says '스레드 닫음'. 인수인계·사용법·결정 저장 후 ✅ 보관.",
+      "desc": "Use when (비공개) says '스레드 닫음'. 기록·인수인계를 저장하고 Discord 스레드를 백업 후 삭제한다.",
       "owners": [
         "all"
       ],
@@ -2491,6 +2581,15 @@
       "path": "<hermes>/profiles/all/skills/creative/web-design-guidelines"
     },
     {
+      "name": "web-retrieval-with-fallback",
+      "desc": "Use when web data retrieval needs fallback for blocks.",
+      "owners": [
+        "s"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/web-retrieval-with-fallback"
+    },
+    {
       "name": "web-session-automation",
       "desc": "Use when (비공개) 계정 사이트를 무인·크론으로 대신 조작할 때. 전용 프로필 세션 재사용. (비공개)님이 이미 로그인해 둔 브라우저를 그대로 빌리는 건 browser-skill.",
       "owners": [
@@ -2582,7 +2681,7 @@
     },
     {
       "name": "youtube-content",
-      "desc": "YouTube transcripts to summaries, threads, blogs.",
+      "desc": "Use when YouTube 링크를 요약할 때. 자막 우선, 없으면 Gemini가 공개 영상을 직접 분석한다.",
       "owners": [
         "all",
         "s",
@@ -2593,7 +2692,7 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/media/youtube-content"
     },
     {
@@ -2629,6 +2728,13 @@
       "profile": "all"
     },
     {
+      "name": "Claude 외부 스킬 역할 동기화 (0토큰, 매시)",
+      "schedule": "every 60m",
+      "mode": "무토큰",
+      "kind": "동기화",
+      "profile": "all"
+    },
+    {
       "name": "Google 보고서 → 노션 (제미나이 폴더 포함, 9~23시 20분마다)",
       "schedule": "20분마다 (9-23시대)",
       "mode": "무토큰",
@@ -2640,6 +2746,20 @@
       "schedule": "매일 07:00",
       "mode": "무토큰",
       "kind": "백업",
+      "profile": "all"
+    },
+    {
+      "name": "LMP 로그인 필요 감시·내부대기열 실행",
+      "schedule": "매일 09:10",
+      "mode": "무토큰",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "LMP 주간 운영현황 저장",
+      "schedule": "매주 월 09:20",
+      "mode": "무토큰",
+      "kind": "기타",
       "profile": "all"
     },
     {
@@ -2692,13 +2812,6 @@
       "profile": "all"
     },
     {
-      "name": "노션 상태 동기화 점검 (0토큰)",
-      "schedule": "매주 월 08:00",
-      "mode": "무토큰",
-      "kind": "점검",
-      "profile": "all"
-    },
-    {
       "name": "대시보드 30분 갱신 (0토큰)",
       "schedule": "30분마다",
       "mode": "무토큰",
@@ -2727,7 +2840,7 @@
       "profile": "all"
     },
     {
-      "name": "도구함 흐름 점검 (확정 흐름 v4)",
+      "name": "도구함 흐름 점검 (확정 흐름 v5)",
       "schedule": "매일 10:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "점검",
@@ -2818,6 +2931,27 @@
       "profile": "all"
     },
     {
+      "name": "인스타 lalapeai 게시 재시도(실패분만)",
+      "schedule": "매일 21:30",
+      "mode": "무토큰",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
+      "name": "인스타 lalapeai 일일 릴스 게시",
+      "schedule": "매일 19:00",
+      "mode": "무토큰",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
+      "name": "인스타 lalapeai 주간 성과개선·큐 보충",
+      "schedule": "매주 월 10:00",
+      "mode": "AI",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
       "name": "전 프로필 세션 자동 보관 (매일 03:20, 0토큰)",
       "schedule": "매일 03:20",
       "mode": "무토큰",
@@ -2846,10 +2980,10 @@
       "profile": "all"
     },
     {
-      "name": "주간 AI 뉴스 사후 감시",
-      "schedule": "매주 토 16:30",
-      "mode": "무토큰",
-      "kind": "점검",
+      "name": "주간 AI 뉴스",
+      "schedule": "매주 토 15:00",
+      "mode": "AI",
+      "kind": "보고",
       "profile": "all"
     },
     {
@@ -2857,6 +2991,13 @@
       "schedule": "매주 월 10:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "보고",
+      "profile": "all"
+    },
+    {
+      "name": "주간 운영 거버넌스 감사 (도구·스킬·자동화)",
+      "schedule": "매주 일 04:20",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "정리",
       "profile": "all"
     },
     {
@@ -2871,6 +3012,20 @@
       "schedule": "매일 07:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "진행현황 마감일 도비서 자동점검",
+      "schedule": "매일 08:00",
+      "mode": "AI",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "크론 실패 자동복구 (5분)",
+      "schedule": "every 5m",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "기타",
       "profile": "all"
     },
     {
@@ -2904,7 +3059,7 @@
       "label": "플레이MCP (브라우저 조작)",
       "url": "https://playmcp.kakao.com/mcp",
       "auth": "header",
-      "enabled": true,
+      "enabled": false,
       "profiles": [
         "all",
         "s",
