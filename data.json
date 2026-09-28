@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-28T04:51:18+09:00",
+  "generated_at": "2026-09-29T04:51:26+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-5.6-sol",
-      "skill_count": 133,
-      "custom_count": 59,
+      "skill_count": 118,
+      "custom_count": 68,
       "soul_chars": 6627,
       "cron_count": 48,
       "color": "#fbcf5a",
@@ -22,7 +22,7 @@
       "role": "웹·문서 조사, 사실 확인, 출처 수집",
       "model": "gemini-3.8-flash",
       "skill_count": 92,
-      "custom_count": 20,
+      "custom_count": 42,
       "soul_chars": 3679,
       "cron_count": null,
       "color": "#f5717a",
@@ -37,7 +37,7 @@
       "role": "요구사항 정리, 계획 수립, 일정·범위 관리",
       "model": "gemini-3.5-flash-lite",
       "skill_count": 85,
-      "custom_count": 13,
+      "custom_count": 35,
       "soul_chars": 3784,
       "cron_count": null,
       "color": "#f5bd4f",
@@ -52,7 +52,7 @@
       "role": "화면 설계, HTML·CSS 시안, 사용성 검토",
       "model": "claude-opus-5-5",
       "skill_count": 91,
-      "custom_count": 18,
+      "custom_count": 41,
       "soul_chars": 4369,
       "cron_count": null,
       "color": "#a98bfa",
@@ -67,7 +67,7 @@
       "role": "코드 작성·수정·배포",
       "model": "claude-opus-5",
       "skill_count": 119,
-      "custom_count": 46,
+      "custom_count": 69,
       "soul_chars": 4226,
       "cron_count": null,
       "color": "#5b9dfb",
@@ -81,8 +81,8 @@
       "name": "검수 담당",
       "role": "산출물 검증, 실행 테스트, 결함 보고",
       "model": "gpt-5.6-luna",
-      "skill_count": 101,
-      "custom_count": 29,
+      "skill_count": 103,
+      "custom_count": 53,
       "soul_chars": 4672,
       "cron_count": null,
       "color": "#43d787",
@@ -97,7 +97,7 @@
       "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
       "model": "gpt-5.6-luna",
       "skill_count": 88,
-      "custom_count": 16,
+      "custom_count": 38,
       "soul_chars": 4069,
       "cron_count": null,
       "color": "#2fd3c0",
@@ -112,7 +112,7 @@
       "role": "짧은 질문에 빠르게 답하는 만능 Q&A",
       "model": "gemini-3-flash-preview",
       "skill_count": 58,
-      "custom_count": 11,
+      "custom_count": 24,
       "soul_chars": 2609,
       "cron_count": null,
       "color": "#8e9bb3",
@@ -279,7 +279,6 @@
       "name": "airtable",
       "desc": "Airtable REST API via curl. Records CRUD, filters, upserts.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -288,8 +287,8 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/airtable"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/productivity/airtable"
     },
     {
       "name": "antigravity-cli-bridge",
@@ -426,7 +425,6 @@
       "name": "ascii-video",
       "desc": "ASCII video: convert video/audio to colored ASCII MP4/GIF.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -435,8 +433,8 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/ascii-video"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/creative/ascii-video"
     },
     {
       "name": "atomic-artifact-dispatch",
@@ -516,7 +514,6 @@
       "name": "box",
       "desc": "Box manages cloud files, sharing, search, and metadata.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -525,16 +522,16 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/box"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/productivity/box"
     },
     {
       "name": "browser-skill",
-      "desc": "|",
+      "desc": "(비공개)님이 로그인해 둔 크롬을 빌려 페이지 읽기·폼 입력·수집·탭 조작·UI 점검·사이트 디버깅할 때. bsk CLI·확장 필요.",
       "owners": [
         "all"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/browser-skill"
     },
     {
@@ -661,7 +658,7 @@
     },
     {
       "name": "computer-use",
-      "desc": "화면을 직접 보고 클릭·입력해야 할 때. 앱·설정창·실기기 확인 등 다른 도구로 안 되는 일. Drive the desktop background-first; escalate on signal.",
+      "desc": "화면을 직접 보고 클릭·입력해야 할 때. 앱·설정창·실기기 확인 등 다른 도구로 안 되는 일.",
       "owners": [
         "all",
         "s",
@@ -774,7 +771,7 @@
     },
     {
       "name": "design-review-loop",
-      "desc": "설계안 QA 왕복 검증·기간제 실험 개설/결산 시. 공유 파일 1개·판정 필수·계산은 코드로.",
+      "desc": "설계안 QA 왕복 검증·기간제 실험 개설/결산 시. 공유 파일 1개로 왕복하며 판정을 남긴다.",
       "owners": [
         "all"
       ],
@@ -801,7 +798,7 @@
     },
     {
       "name": "dobiseo-skill-standard",
-      "desc": "도비서 스킬 생성·개정 전용 기준. 새 스킬을 만들거나 기존 스킬을 고칠 때의 형식·절차·교훈 기록은 전부 여기. SKILL.md 문법 자체는 hermes-agent-skill-authoring.",
+      "desc": "스킬 만들어·고쳐·개정·통합 요청 시. 도비서 스킬의 형식·절차·교훈 기준.",
       "owners": [
         "all"
       ],
@@ -853,7 +850,7 @@
     },
     {
       "name": "docx",
-      "desc": "Create, read, edit, template, and review Word .docx files.",
+      "desc": "워드(.docx) 문서 만들기·읽기·수정·검토·서식 템플릿 작업 시.",
       "owners": [
         "all",
         "s",
@@ -864,7 +861,7 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/docx"
     },
     {
@@ -927,10 +924,18 @@
       "path": "<hermes>/profiles/all/skills/email/email-inbox-triage"
     },
     {
+      "name": "eval-harness",
+      "desc": "Use when 봇 규칙·스킬·하네스 변경 전후를 같은 시험으로 회귀 비교할 때.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/eval-harness"
+    },
+    {
       "name": "evaluating-llms-harness",
       "desc": "lm-eval-harness: benchmark LLMs (MMLU, GSM8K, etc.).",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -938,8 +943,8 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/evaluation/evaluating-llms-harness"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/mlops/evaluation/evaluating-llms-harness"
     },
     {
       "name": "excalidraw",
@@ -1011,6 +1016,15 @@
       "path": "<hermes>/profiles/all/skills/devops/external-tool-evaluation"
     },
     {
+      "name": "find-skills",
+      "desc": "Use when /스킬찾기·'이런 스킬 있어?' 외부 스킬 검색 시. skills.sh 검색·추천만, 설치는 이식 절차.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/find-skills"
+    },
+    {
       "name": "findmy",
       "desc": "Track Apple devices/AirTags via FindMy.app on macOS.",
       "owners": [
@@ -1038,7 +1052,6 @@
       "name": "gif-search",
       "desc": "Search/download GIFs from Tenor via curl + jq.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -1047,8 +1060,8 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/media/gif-search"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/media/gif-search"
     },
     {
       "name": "github",
@@ -1174,13 +1187,31 @@
     },
     {
       "name": "graphify",
-      "desc": "코드베이스·문서 뭉치를 지식그래프로 만들어 구조를 묻고 답하는 도구",
+      "desc": "그래프화·지식그래프·구조 파악해·코드베이스 분석·/graphify 요청 시. 코드·문서 뭉치를 지식그래프로 만들어 구조·의존성을 조회한다.",
       "owners": [
         "all",
         "dp"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/graphify"
+    },
+    {
+      "name": "grill-me",
+      "desc": "Use when (비공개) types /grill-me·/질문폭격. 계획을 질문 폭격으로 검증(grilling 호출).",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/grill-me"
+    },
+    {
+      "name": "grilling",
+      "desc": "Use when 계획을 질문으로 검증('grill','질문 폭격'). 라운드별 번호질문+추천답.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/grilling"
     },
     {
       "name": "grounded-citations",
@@ -1216,7 +1247,7 @@
     },
     {
       "name": "hermes-agent-skill-authoring",
-      "desc": "헤르메스 저장소 내 SKILL.md 파일의 프론트매터·구조 문법. 도비서가 자기 스킬을 새로 만들거나 고칠 때의 기준·절차는 이 스킬이 아니라 dobiseo-skill-standard 를 쓴다.",
+      "desc": "헤르메스 저장소 기여용 SKILL.md 프론트매터·구조 문법 확인 시. 도비서 스킬 개정 기준은 dobiseo-skill-standard.",
       "owners": [
         "all",
         "s",
@@ -1349,7 +1380,6 @@
       "name": "huggingface-hub",
       "desc": "HuggingFace hf CLI: search/download/upload models, datasets.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -1357,8 +1387,8 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/huggingface-hub"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/mlops/huggingface-hub"
     },
     {
       "name": "humanize-korean",
@@ -1456,7 +1486,6 @@
       "name": "llama-cpp",
       "desc": "llama.cpp local GGUF inference + HF Hub model discovery.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -1464,8 +1493,8 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/inference/llama-cpp"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/mlops/inference/llama-cpp"
     },
     {
       "name": "llm-draft-verification-pipeline",
@@ -1503,7 +1532,7 @@
     },
     {
       "name": "lms-course-automation",
-      "desc": "Use for 대학 LMS 대리수강/과제 자동화. Script videos, AI only drafts.",
+      "desc": "대학 LMS 대리수강·과제·토론 자동화 시. 영상은 스크립트, AI는 초안만.",
       "owners": [
         "all"
       ],
@@ -1512,7 +1541,7 @@
     },
     {
       "name": "logged-in-site-automation",
-      "desc": "Use when 로그인된 사이트를 무인·크론으로 대신 조작할 때. 전용 프로필 세션 재사용 구조. (비공개)님이 지금 켜둔 브라우저를 빌려 쓰는 건 browser-skill.",
+      "desc": "로그인된 사이트를 무인·크론으로 대신 조작할 때. 사이트별 전용 프로필 세션 재사용(켜둔 브라우저 빌리기는 browser-skill).",
       "owners": [
         "all"
       ],
@@ -1523,7 +1552,6 @@
       "name": "manim-video",
       "desc": "Manim CE animations: 3Blue1Brown math/algo videos.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -1532,8 +1560,8 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/manim-video"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/creative/manim-video"
     },
     {
       "name": "maps",
@@ -1598,7 +1626,6 @@
       "name": "merge-reconciler",
       "desc": "Neutral third-party resolution of agent merge conflicts.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -1606,8 +1633,8 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/merge-reconciler"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/autonomous-ai-agents/merge-reconciler"
     },
     {
       "name": "model-tiering",
@@ -1669,7 +1696,7 @@
     },
     {
       "name": "notion",
-      "desc": "일반 Notion API·ntn CLI 사용법(페이지·DB 생성, 마크다운). (비공개) 사업 HQ의 기록·승인·상태값 운영은 이 스킬이 아니라 notion-business-hq 를 쓴다.",
+      "desc": "일반 Notion API·ntn CLI 사용법(페이지·DB 생성, 마크다운). 사업 HQ 기록·승인·상태값 운영은 notion-business-hq.",
       "owners": [
         "all",
         "s",
@@ -1685,7 +1712,7 @@
     },
     {
       "name": "notion-business-hq",
-      "desc": "(비공개) 사업 HQ 노션 운영 전용. 도구함·진행현황·보고서·아이디어 DB의 등록·상태값 변경·승인 흐름은 전부 여기. 일반 Notion API 문법은 notion.",
+      "desc": "노션 도구함·진행현황·보고서·아이디어 DB 등록·상태값 변경·승인 흐름 작업 시. 사업 HQ 운영 정본(일반 API 문법은 notion).",
       "owners": [
         "all"
       ],
@@ -1694,7 +1721,7 @@
     },
     {
       "name": "obsidian",
-      "desc": "Read, search, create, and edit notes in the Obsidian vault. 도비서의 05_도비서 인수인계·기억 미러링 운영은 obsidian-memory-mirror.",
+      "desc": "옵시디언 볼트 노트 읽기·검색·작성·편집 시. 05_도비서 인수인계·기억 미러링은 obsidian-memory-mirror.",
       "owners": [
         "all",
         "s",
@@ -1710,7 +1737,7 @@
     },
     {
       "name": "obsidian-memory-mirror",
-      "desc": "도비서 옵시디언 운영 전용. 05_도비서 인수인계 메모·되돌리기·기억 볼트 미러링은 전부 여기. 일반 노트 편집은 obsidian.",
+      "desc": "인수인계 메모·'반영해'·기억 볼트 미러링·되돌리기 시. 05_도비서 옵시디언 운영 정본(일반 노트 편집은 obsidian).",
       "owners": [
         "all"
       ],
@@ -1736,7 +1763,6 @@
       "name": "opencode",
       "desc": "Delegate coding to OpenCode CLI (features, PR review).",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -1745,14 +1771,13 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/opencode"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/autonomous-ai-agents/opencode"
     },
     {
       "name": "openhue",
       "desc": "Control Philips Hue lights, scenes, rooms via OpenHue CLI.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -1760,8 +1785,8 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/smart-home/openhue"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/smart-home/openhue"
     },
     {
       "name": "ops-dashboard-maintenance",
@@ -1790,7 +1815,7 @@
     },
     {
       "name": "pdf",
-      "desc": "PDF files: create, read, merge, fill, OCR, edit text.",
+      "desc": "PDF 만들기·읽기·합치기·양식 채우기·글자 수정·OCR 시.",
       "owners": [
         "all",
         "s",
@@ -1801,7 +1826,7 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/pdf"
     },
     {
@@ -1900,7 +1925,7 @@
     },
     {
       "name": "portfolio-showcase-site",
-      "desc": "Use when (비공개) wants a portfolio site for a real business.",
+      "desc": "포트폴리오 사이트·실업체 소개 사이트 만들자는 요청 시. 실사→개발 배분→화면 검수→배포.",
       "owners": [
         "all"
       ],
@@ -1909,7 +1934,7 @@
     },
     {
       "name": "powerpoint",
-      "desc": "Create, read, edit .pptx decks with python-pptx.",
+      "desc": "PPT·발표자료·슬라이드 만들기·읽기·수정 시(.pptx, python-pptx).",
       "owners": [
         "all",
         "s",
@@ -1920,7 +1945,7 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/powerpoint"
     },
     {
@@ -2062,7 +2087,6 @@
       "name": "research-paper-writing",
       "desc": "Write ML papers for NeurIPS/ICML/ICLR: design→submit.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -2070,8 +2094,8 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/research/research-paper-writing"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/research/research-paper-writing"
     },
     {
       "name": "restore-point-verification",
@@ -2138,7 +2162,7 @@
     },
     {
       "name": "saramin-job-search",
-      "desc": "Use when (비공개) asks 사람인 구인글 검색. 지역코드·URL·파싱·함정.",
+      "desc": "(비공개)님이 사람인 구인글 검색을 요청할 때. 지역코드·URL·파싱 방법.",
       "owners": [
         "all"
       ],
@@ -2158,7 +2182,6 @@
       "name": "sdlc-review",
       "desc": "Review Kanban handoffs and route verified outcomes.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -2167,14 +2190,13 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/devops/sdlc-review"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/devops/sdlc-review"
     },
     {
       "name": "serving-llms-vllm",
       "desc": "vLLM: high-throughput LLM serving, OpenAI API, quantization.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -2182,8 +2204,8 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/inference/serving-llms-vllm"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/mlops/inference/serving-llms-vllm"
     },
     {
       "name": "session-librarian",
@@ -2259,7 +2281,7 @@
         "dp"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/single-file-html-prototyping"
+      "path": "<hermes>/profiles/dp/skills/.archive/single-file-html-prototyping"
     },
     {
       "name": "sketch",
@@ -2307,7 +2329,6 @@
       "name": "songsee",
       "desc": "Audio spectrograms/features (mel, chroma, MFCC) via CLI.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -2316,8 +2337,8 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/media/songsee"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/media/songsee"
     },
     {
       "name": "songwriting-and-ai-music",
@@ -2432,20 +2453,19 @@
     },
     {
       "name": "taste-skill",
-      "desc": ">-",
+      "desc": "/taste <url>'·사이트 디자인 분석·디자인 토큰 추출·'X처럼 만들어'·경쟁사 디자인 비교 요청 시. 색·글꼴·간격 토큰과 디자인 취향을 md·json으로 뽑는다.",
       "owners": [
         "all",
         "uxui",
         "dp"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/creative/taste-skill"
     },
     {
       "name": "teams-meeting-pipeline",
       "desc": "Teams meeting summaries, job replay, Graph subscriptions.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -2454,8 +2474,8 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/productivity/teams-meeting-pipeline"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/productivity/teams-meeting-pipeline"
     },
     {
       "name": "test-driven-development",
@@ -2522,7 +2542,6 @@
       "name": "touchdesigner-mcp",
       "desc": "Control TouchDesigner via twozero MCP.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -2530,8 +2549,8 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/creative/touchdesigner-mcp"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/creative/touchdesigner-mcp"
     },
     {
       "name": "ui-state-detector-verification",
@@ -2591,12 +2610,21 @@
     },
     {
       "name": "web-session-automation",
-      "desc": "Use when (비공개) 계정 사이트를 무인·크론으로 대신 조작할 때. 전용 프로필 세션 재사용. (비공개)님이 이미 로그인해 둔 브라우저를 그대로 빌리는 건 browser-skill.",
+      "desc": "로그인된 사이트를 무인·크론으로 대신 조작할 때(밴드 등). 전용 프로필 세션 재사용(켜둔 브라우저 빌리기는 browser-skill).",
       "owners": [
         "all"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/web-session-automation"
+    },
+    {
+      "name": "webapp-testing",
+      "desc": "Use when 웹앱 화면을 Playwright로 자동 실행·클릭·캡처해 검수할 때.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/software-development/webapp-testing"
     },
     {
       "name": "weekly-review-planning",
@@ -2618,7 +2646,6 @@
       "name": "weights-and-biases",
       "desc": "W&B: log ML experiments, sweeps, model registry, dashboards.",
       "owners": [
-        "all",
         "s",
         "pm",
         "uxui",
@@ -2626,8 +2653,8 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/mlops/evaluation/weights-and-biases"
+      "custom": true,
+      "path": "<hermes>/profiles/s/skills/mlops/evaluation/weights-and-biases"
     },
     {
       "name": "windows-desktop-browser-control",
@@ -2649,7 +2676,7 @@
     },
     {
       "name": "xlsx",
-      "desc": "Create, read, edit Excel .xlsx workbooks and CSVs.",
+      "desc": "엑셀·표·CSV 파일 만들기·읽기·수정 시(.xlsx).",
       "owners": [
         "all",
         "s",
@@ -2660,7 +2687,7 @@
         "marketer",
         "jilmuni"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/xlsx"
     },
     {
@@ -2722,7 +2749,7 @@
     },
     {
       "name": "AI 도구 자동발굴 (0토큰)",
-      "schedule": "매일 03:50",
+      "schedule": "매주 화·금 03:50",
       "mode": "무토큰",
       "kind": "수집",
       "profile": "all"
@@ -2833,15 +2860,15 @@
       "profile": "all"
     },
     {
-      "name": "도구함 일일 수집·요약·적용 분석",
-      "schedule": "매일 04:30",
+      "name": "도구함 수집·요약·적용 분석 (화·금)",
+      "schedule": "매주 화·금 04:30",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "보고",
       "profile": "all"
     },
     {
-      "name": "도구함 흐름 점검 (확정 흐름 v5)",
-      "schedule": "매일 10:00",
+      "name": "도구함 흐름 점검 (확정 흐름 v5, 화·금)",
+      "schedule": "매주 화·금 10:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "점검",
       "profile": "all"
