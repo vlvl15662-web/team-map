@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-10-02T04:51:18+09:00",
+  "generated_at": "2026-10-03T04:51:17+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-5.6-sol",
-      "skill_count": 123,
+      "skill_count": 124,
       "custom_count": 77,
       "soul_chars": 6623,
-      "cron_count": 53,
+      "cron_count": 51,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -105,21 +105,6 @@
       "skills_path": "<hermes>/profiles/marketer/skills",
       "cron_path": null,
       "vault_path": "05_봇/marketer/"
-    },
-    {
-      "id": "jilmuni",
-      "name": "질문이",
-      "role": "짧은 질문에 빠르게 답하는 만능 Q&A",
-      "model": "gemini-3-flash-preview",
-      "skill_count": 58,
-      "custom_count": 28,
-      "soul_chars": 2609,
-      "cron_count": null,
-      "color": "#8e9bb3",
-      "soul_path": "<hermes>/profiles/jilmuni/SOUL.md",
-      "skills_path": "<hermes>/profiles/jilmuni/skills",
-      "cron_path": null,
-      "vault_path": "05_봇/jilmuni/"
     }
   ],
   "pipeline": [
@@ -182,11 +167,6 @@
       "from": "marketer",
       "to": "도비서",
       "label": "홍보안"
-    },
-    {
-      "from": "jilmuni",
-      "to": "라라페",
-      "label": "즉답"
     },
     {
       "from": "도비서",
@@ -293,8 +273,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/productivity/airtable"
@@ -362,8 +341,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/apple/apple-notes"
@@ -377,8 +355,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/apple/apple-reminders"
@@ -393,8 +370,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/architecture-diagram"
@@ -409,8 +385,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/research/arxiv"
@@ -439,8 +414,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/creative/ascii-video"
@@ -482,8 +456,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/baoyu-infographic"
@@ -498,8 +471,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/web/blocked-page-recovery"
@@ -528,8 +500,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/productivity/box"
@@ -580,8 +551,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/claude-code"
@@ -596,8 +566,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/claude-design"
@@ -612,8 +581,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/codebase-inspection"
@@ -628,8 +596,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/codex"
@@ -659,8 +626,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/research/competitor-news-monitor"
@@ -675,8 +641,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/computer-use"
@@ -781,8 +746,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/design-md"
@@ -851,8 +815,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/document-to-action-items"
@@ -876,8 +839,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/docx"
@@ -892,8 +854,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/dogfood"
@@ -935,8 +896,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/email/email-inbox-triage"
@@ -1051,8 +1011,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/apple/findmy"
@@ -1075,8 +1034,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/media/gif-search"
@@ -1091,8 +1049,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/github"
@@ -1197,8 +1154,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/google-workspace"
@@ -1241,8 +1197,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/research/grounded-citations"
@@ -1266,8 +1221,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-agent"
@@ -1282,8 +1236,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/hermes-agent-skill-authoring"
@@ -1388,8 +1341,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/email/himalaya"
@@ -1427,8 +1379,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/creative/humanize-korean"
@@ -1442,8 +1393,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/apple/imessage"
@@ -1458,8 +1408,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/inspecting-hermes-desktop-dom"
@@ -1587,8 +1536,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/research/llm-wiki"
@@ -1620,8 +1568,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/creative/manim-video"
@@ -1636,8 +1583,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/maps"
@@ -1679,8 +1625,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/meeting-action-items"
@@ -1751,8 +1696,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/node-inspect-debugger"
@@ -1767,8 +1711,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/notion"
@@ -1792,8 +1735,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/note-taking/obsidian"
@@ -1831,8 +1773,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/autonomous-ai-agents/opencode"
@@ -1870,8 +1811,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/p5js"
@@ -1886,8 +1826,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/pdf"
@@ -1980,8 +1919,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/popular-web-designs"
@@ -2005,8 +1943,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/powerpoint"
@@ -2054,8 +1991,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/product-price-monitor"
@@ -2079,8 +2015,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/python-debugpy"
@@ -2140,8 +2075,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/requesting-code-review"
@@ -2250,8 +2184,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/devops/sdlc-review"
@@ -2304,6 +2237,15 @@
       "path": "<hermes>/profiles/dp/skills/devops/shared-script-concurrent-edit"
     },
     {
+      "name": "shortfilm-prompt",
+      "desc": "Generate cinematic AI shortfilm prompts (works with Seedance 2.0, Xiaoyunque, Sora, Kling, Jimeng, Veo) using the 5-stag",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/creative/shortfilm-prompt"
+    },
+    {
       "name": "shortform-visual-research",
       "desc": "Use when researching shortform videos for benchmarking.",
       "owners": [
@@ -2331,8 +2273,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/simplify-code"
@@ -2406,8 +2347,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/media/songsee"
@@ -2422,8 +2362,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/songwriting-and-ai-music"
@@ -2456,8 +2395,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/spike"
@@ -2517,8 +2455,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/systematic-debugging"
@@ -2543,8 +2480,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/productivity/teams-meeting-pipeline"
@@ -2559,8 +2495,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/test-driven-development"
@@ -2708,8 +2643,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/weekly-review-planning"
@@ -2756,8 +2690,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/xlsx"
@@ -2772,8 +2705,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/social-media/xurl"
@@ -2788,8 +2720,7 @@
         "uxui",
         "dp",
         "qa",
-        "marketer",
-        "jilmuni"
+        "marketer"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/media/youtube-content"
@@ -2820,8 +2751,8 @@
       "profile": "all"
     },
     {
-      "name": "AI 도구 자동발굴 (0토큰, 매일)",
-      "schedule": "매일 03:50",
+      "name": "AI 도구 자동발굴 (0토큰, 매주 금)",
+      "schedule": "매주 금 03:50",
       "mode": "무토큰",
       "kind": "수집",
       "profile": "all"
@@ -2890,13 +2821,6 @@
       "profile": "all"
     },
     {
-      "name": "prune 2차 실험 결산 (1회, 10-02)",
-      "schedule": "매일 09:30",
-      "mode": "무토큰",
-      "kind": "기타",
-      "profile": "all"
-    },
-    {
       "name": "게이트웨이 자동복구 감시 (1시간, 0토큰)",
       "schedule": "매일 매시",
       "mode": "무토큰",
@@ -2956,13 +2880,6 @@
       "name": "도구함 흐름 점검 (확정 흐름 v5, 매일)",
       "schedule": "매일 10:00",
       "mode": "감시형(변화 있을 때만 AI)",
-      "kind": "점검",
-      "profile": "all"
-    },
-    {
-      "name": "미끼글 구제 결과 1회 점검 (10-02)",
-      "schedule": "매일 05:30",
-      "mode": "무토큰",
       "kind": "점검",
       "profile": "all"
     },
