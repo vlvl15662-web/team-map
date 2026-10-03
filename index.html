@@ -669,16 +669,16 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-10-03T04:51:17+09:00",
+  "generated_at": "2026-10-04T04:51:09+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
-      "model": "gpt-5.6-sol",
-      "skill_count": 124,
-      "custom_count": 77,
-      "soul_chars": 6623,
+      "model": "claude-opus-5-5",
+      "skill_count": 125,
+      "custom_count": 78,
+      "soul_chars": 6812,
       "cron_count": 51,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
@@ -693,7 +693,7 @@ var DATA =
       "model": "gemini-3.8-flash",
       "skill_count": 92,
       "custom_count": 46,
-      "soul_chars": 3679,
+      "soul_chars": 3821,
       "cron_count": null,
       "color": "#f5717a",
       "soul_path": "<hermes>/profiles/s/SOUL.md",
@@ -708,7 +708,7 @@ var DATA =
       "model": "gemini-3.5-flash-lite",
       "skill_count": 85,
       "custom_count": 39,
-      "soul_chars": 3784,
+      "soul_chars": 3926,
       "cron_count": null,
       "color": "#f5bd4f",
       "soul_path": "<hermes>/profiles/pm/SOUL.md",
@@ -753,7 +753,7 @@ var DATA =
       "model": "claude-sonnet-5-5",
       "skill_count": 106,
       "custom_count": 60,
-      "soul_chars": 4826,
+      "soul_chars": 5177,
       "cron_count": null,
       "color": "#43d787",
       "soul_path": "<hermes>/profiles/qa/SOUL.md",
@@ -2315,6 +2315,15 @@ var DATA =
       "path": "<hermes>/profiles/s/skills/autonomous-ai-agents/merge-reconciler"
     },
     {
+      "name": "model-swap",
+      "desc": "Use when '최신모델 업데이트 옛-새' 호출 시. 봇·크론 모델 일괄 교체.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/model-swap"
+    },
+    {
       "name": "model-tiering",
       "desc": "Use when 새 프로젝트·작업·크론·봇 생성 시. 크론/봇/스크립트 실행형태 + 모델 등급 결정.",
       "owners": [
@@ -3421,6 +3430,20 @@ var DATA =
       "profile": "all"
     },
     {
+      "name": "AI 공모전 월간 전수조사 발주(매달 10일)",
+      "schedule": "매월 10일 09:00",
+      "mode": "무토큰",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
+      "name": "AI 공모전 일일 감시(0토큰)·참가 접수",
+      "schedule": "매일 07:10",
+      "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
       "name": "AI 도구 자동발굴 (0토큰, 매주 금)",
       "schedule": "매주 금 03:50",
       "mode": "무토큰",
@@ -3596,17 +3619,17 @@ var DATA =
       "profile": "all"
     },
     {
+      "name": "생성모델 장부 주간 갱신 (월 10:10, 알림 없음)",
+      "schedule": "매주 월 10:10",
+      "mode": "AI",
+      "kind": "동기화",
+      "profile": "all"
+    },
+    {
       "name": "스낵영상 신규 소재 5개 확인 알림",
       "schedule": "매일 09:00",
       "mode": "무토큰",
       "kind": "점검",
-      "profile": "all"
-    },
-    {
-      "name": "스킬 라우팅 시범 결산 → 노션 실험실 댓글 (10/03 1회)",
-      "schedule": "매일 09:00",
-      "mode": "무토큰",
-      "kind": "기타",
       "profile": "all"
     },
     {
@@ -3642,20 +3665,6 @@ var DATA =
       "schedule": "매월 1일 10:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "정리",
-      "profile": "all"
-    },
-    {
-      "name": "인스타 lalapeai 게시 재시도(실패분만)",
-      "schedule": "매일 21:30",
-      "mode": "무토큰",
-      "kind": "기타",
-      "profile": "all"
-    },
-    {
-      "name": "인스타 lalapeai 일일 릴스 게시",
-      "schedule": "매일 19:00",
-      "mode": "무토큰",
-      "kind": "기타",
       "profile": "all"
     },
     {
@@ -3765,6 +3774,16 @@ var DATA =
     }
   ],
   "mcp": [
+    {
+      "name": "figma",
+      "label": "바깥 서비스 연결",
+      "url": "https://mcp.figma.com/mcp",
+      "auth": "oauth",
+      "enabled": true,
+      "profiles": [
+        "all"
+      ]
+    },
     {
       "name": "notion",
       "label": "노션 연동 (기록·결정 정본)",
