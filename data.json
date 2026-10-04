@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-10-04T04:51:09+09:00",
+  "generated_at": "2026-10-05T04:51:14+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "claude-opus-5-5",
-      "skill_count": 125,
-      "custom_count": 78,
-      "soul_chars": 6812,
-      "cron_count": 51,
+      "skill_count": 135,
+      "custom_count": 79,
+      "soul_chars": 7201,
+      "cron_count": 53,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -22,7 +22,7 @@
       "role": "웹·문서 조사, 사실 확인, 출처 수집",
       "model": "gemini-3.8-flash",
       "skill_count": 92,
-      "custom_count": 46,
+      "custom_count": 47,
       "soul_chars": 3821,
       "cron_count": null,
       "color": "#f5717a",
@@ -37,7 +37,7 @@
       "role": "요구사항 정리, 계획 수립, 일정·범위 관리",
       "model": "gemini-3.5-flash-lite",
       "skill_count": 85,
-      "custom_count": 39,
+      "custom_count": 40,
       "soul_chars": 3926,
       "cron_count": null,
       "color": "#f5bd4f",
@@ -52,7 +52,7 @@
       "role": "화면 설계, HTML·CSS 시안, 사용성 검토",
       "model": "claude-opus-5-5",
       "skill_count": 91,
-      "custom_count": 45,
+      "custom_count": 46,
       "soul_chars": 4369,
       "cron_count": null,
       "color": "#a98bfa",
@@ -67,7 +67,7 @@
       "role": "코드 작성·수정·배포",
       "model": "claude-opus-5",
       "skill_count": 119,
-      "custom_count": 73,
+      "custom_count": 74,
       "soul_chars": 4226,
       "cron_count": null,
       "color": "#5b9dfb",
@@ -81,8 +81,8 @@
       "name": "검수 담당",
       "role": "산출물 검증, 실행 테스트, 결함 보고",
       "model": "claude-sonnet-5-5",
-      "skill_count": 106,
-      "custom_count": 60,
+      "skill_count": 108,
+      "custom_count": 63,
       "soul_chars": 5177,
       "cron_count": null,
       "color": "#43d787",
@@ -97,7 +97,7 @@
       "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
       "model": "gpt-5.6-luna",
       "skill_count": 88,
-      "custom_count": 42,
+      "custom_count": 43,
       "soul_chars": 4069,
       "cron_count": null,
       "color": "#2fd3c0",
@@ -463,7 +463,7 @@
     },
     {
       "name": "blocked-page-recovery",
-      "desc": "Use when a fetch fails: 403/429, paywall, WAF, bot wall.",
+      "desc": "웹페이지가 안 열리거나 403·429·차단·유료벽일 때. 공개 대체 경로(API·모바일·RSS) 순서.",
       "owners": [
         "all",
         "s",
@@ -663,6 +663,15 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/construction-ai-bpo-scope"
+    },
+    {
+      "name": "content-removal-verification",
+      "desc": "Use when verifying deleted skill/doc sections. Diff-prove.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/content-removal-verification"
     },
     {
       "name": "context-budget-architecture",
@@ -1385,6 +1394,87 @@
       "path": "<hermes>/profiles/all/skills/creative/humanize-korean"
     },
     {
+      "name": "hyperframes",
+      "desc": ">",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/hyperframes"
+    },
+    {
+      "name": "hyperframes-animation",
+      "desc": "All animation knowledge for HyperFrames — atomic motion rules, multi-phase scene blueprints, scene transitions, broader ",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/hyperframes-animation"
+    },
+    {
+      "name": "hyperframes-audio",
+      "desc": ">",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/hyperframes-audio"
+    },
+    {
+      "name": "hyperframes-cli",
+      "desc": ">",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/hyperframes-cli"
+    },
+    {
+      "name": "hyperframes-core",
+      "desc": "The HyperFrames composition contract — build one renderable project",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/hyperframes-core"
+    },
+    {
+      "name": "hyperframes-creative",
+      "desc": "Non-animation creative direction for HyperFrames videos",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/hyperframes-creative"
+    },
+    {
+      "name": "hyperframes-keyframes",
+      "desc": ">",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/hyperframes-keyframes"
+    },
+    {
+      "name": "hyperframes-registry",
+      "desc": "Search, install, and wire registry blocks and components into HyperFrames compositions",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/hyperframes-registry"
+    },
+    {
+      "name": "hyperframes-studio",
+      "desc": ">",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/hyperframes-studio"
+    },
+    {
       "name": "imessage",
       "desc": "Send and receive iMessages/SMS via the imsg CLI on macOS.",
       "owners": [
@@ -1614,6 +1704,15 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/marketer/skills/marketing/marketing-strategy-operations"
+    },
+    {
+      "name": "media-use",
+      "desc": "Agent Media OS, the single skill for every media need in a HyperFrames project",
+      "owners": [
+        "all"
+      ],
+      "custom": false,
+      "path": "<hermes>/profiles/all/skills/media-use"
     },
     {
       "name": "meeting-action-items",
@@ -2363,7 +2462,7 @@
     },
     {
       "name": "songwriting-and-ai-music",
-      "desc": "Songwriting craft and Suno AI music prompts.",
+      "desc": "배경음악·BGM·노래 만들기·Suno 프롬프트 시. 작사 요령과 무료판 상업이용 불가 주의.",
       "owners": [
         "all",
         "s",
@@ -2373,7 +2472,7 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/creative/songwriting-and-ai-music"
     },
     {
@@ -2546,6 +2645,15 @@
       "path": "<hermes>/profiles/s/skills/research/tool-adoption-vetting"
     },
     {
+      "name": "toolbox-reflection-review",
+      "desc": "Use when independently reviewing toolbox reflection or existing-guidance absorption records; verify source transfer, rou",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/toolbox-reflection-review"
+    },
+    {
       "name": "toolbox-scoring",
       "desc": "Use when 노션 도구함 항목을 채점·판정할 때. (비공개) 확정 v3 기준표.",
       "owners": [
@@ -2606,7 +2714,7 @@
     },
     {
       "name": "web-design-guidelines",
-      "desc": "Review UI code for Web Interface Guidelines compliance.",
+      "desc": "화면 시안·UI 검수·디자인 좀 봐줘·AI티 나는 디자인 점검 시. 글자크기·색대비·슬롭UI 점검표(Web Interface Guidelines).",
       "owners": [
         "all",
         "uxui",
@@ -2767,10 +2875,10 @@
       "profile": "all"
     },
     {
-      "name": "AI 공모전 일일 감시(0토큰)·참가 접수",
+      "name": "AI 공모전 일일 수집(스크립트 전용)",
       "schedule": "매일 07:10",
-      "mode": "감시형(변화 있을 때만 AI)",
-      "kind": "점검",
+      "mode": "무토큰",
+      "kind": "수집",
       "profile": "all"
     },
     {
@@ -2907,6 +3015,13 @@
       "profile": "all"
     },
     {
+      "name": "도비서 effort high 7일 비교 (1회)",
+      "schedule": "매일 10:00",
+      "mode": "무토큰",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
       "name": "보유 자원 색인 갱신 (0토큰)",
       "schedule": "매주 월·목 03:00",
       "mode": "무토큰",
@@ -2995,6 +3110,13 @@
       "schedule": "매월 1일 10:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "정리",
+      "profile": "all"
+    },
+    {
+      "name": "이전버전 보관함 7일 삭제·옛판 후보 기록 (이동 없음, 0토큰)",
+      "schedule": "매일 05:15",
+      "mode": "무토큰",
+      "kind": "기타",
       "profile": "all"
     },
     {
