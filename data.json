@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-10-07T04:51:24+09:00",
+  "generated_at": "2026-10-08T04:51:16+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "claude-opus-5-5",
-      "skill_count": 141,
-      "custom_count": 85,
-      "soul_chars": 7201,
+      "skill_count": 143,
+      "custom_count": 87,
+      "soul_chars": 7288,
       "cron_count": 56,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
@@ -248,6 +248,15 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/agency-agent-reuse"
+    },
+    {
+      "name": "agent-memory-hygiene",
+      "desc": "Use when 봇·팀별 기억 저장 위치·혼선·타팀 기억 활용·개선루프 연결 점검 시. 실측 후 분리·정본우선.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/agent-memory-hygiene"
     },
     {
       "name": "agent-runtime-tuning",
@@ -801,7 +810,7 @@
     },
     {
       "name": "diagram-image-delivery",
-      "desc": "(비공개)님에게 구조·흐름을 그림으로 설명할 때, 또는 'eli5'·'엘리5' 요청 시. HTML→PNG 렌더 후 디스코드 첨부.",
+      "desc": "(비공개)님에게 구조·흐름을 그림으로 설명할 때, 'eli5'·'엘리5'·ASD-STE100 문체 요청 시. HTML→PNG 렌더 후 디스코드 첨부.",
       "owners": [
         "all"
       ],
@@ -1678,6 +1687,15 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/logged-in-site-automation"
+    },
+    {
+      "name": "loop-review",
+      "desc": "Use when 크론·봇 반복 루프를 새로 만들거나 검수할 때. 루프 계약·8문항 판정.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/loop-review"
     },
     {
       "name": "manim-video",
