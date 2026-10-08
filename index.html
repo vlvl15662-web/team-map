@@ -669,17 +669,17 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-10-08T04:51:16+09:00",
+  "generated_at": "2026-10-09T04:51:44+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
-      "model": "claude-opus-5-5",
+      "model": "gpt-6.1-sol",
       "skill_count": 143,
       "custom_count": 87,
       "soul_chars": 7288,
-      "cron_count": 56,
+      "cron_count": 55,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -751,8 +751,8 @@ var DATA =
       "name": "검수 담당",
       "role": "산출물 검증, 실행 테스트, 결함 보고",
       "model": "claude-sonnet-5-5",
-      "skill_count": 112,
-      "custom_count": 67,
+      "skill_count": 115,
+      "custom_count": 70,
       "soul_chars": 5177,
       "cron_count": null,
       "color": "#43d787",
@@ -1480,7 +1480,7 @@ var DATA =
     },
     {
       "name": "diagram-image-delivery",
-      "desc": "(비공개)님에게 구조·흐름을 그림으로 설명할 때, 'eli5'·'엘리5'·ASD-STE100 문체 요청 시. HTML→PNG 렌더 후 디스코드 첨부.",
+      "desc": "(비공개)님에게 구조·흐름을 그림으로 설명할 때, 'eli5'·'엘리5'·'항공문법'·ASD-STE100 문체 요청 시. HTML→PNG 렌더 후 디스코드 첨부.",
       "owners": [
         "all"
       ],
@@ -1742,6 +1742,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/fix-blast-radius"
+    },
+    {
+      "name": "frozen-input-answer-key",
+      "desc": "Use when 동결 입력으로 독립 정답표를 먼저 만들 때.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/frozen-input-answer-key"
     },
     {
       "name": "gif-search",
@@ -2628,6 +2637,15 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/productivity/ops-dashboard-maintenance"
     },
     {
+      "name": "outbound-copy-prelaunch-verification",
+      "desc": "Use when verifying customer copy before external sending.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/outbound-copy-prelaunch-verification"
+    },
+    {
       "name": "p5js",
       "desc": "p5.js sketches: gen art, shaders, interactive, 3D.",
       "owners": [
@@ -2872,6 +2890,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/qa/skills/toolbox/qa-toolbox"
+    },
+    {
+      "name": "queue-replay-verification",
+      "desc": "Use when verifying pending/spool queue replay into SQLite.",
+      "owners": [
+        "qa"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/qa/skills/devops/queue-replay-verification"
     },
     {
       "name": "react-native-expo-mvp-dev",
@@ -3637,13 +3664,6 @@ var DATA =
       "schedule": "매일 05:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "학습",
-      "profile": "all"
-    },
-    {
-      "name": "AI 공모전 월간 전수조사 발주(매달 10일)",
-      "schedule": "매월 10일 09:00",
-      "mode": "무토큰",
-      "kind": "기타",
       "profile": "all"
     },
     {
