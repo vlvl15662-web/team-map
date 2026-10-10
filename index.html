@@ -669,16 +669,16 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-10-10T04:50:27+09:00",
+  "generated_at": "2026-10-11T04:52:34+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "claude-opus-5-5",
-      "skill_count": 143,
-      "custom_count": 88,
-      "soul_chars": 7203,
+      "skill_count": 145,
+      "custom_count": 90,
+      "soul_chars": 8112,
       "cron_count": 59,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
@@ -693,7 +693,7 @@ var DATA =
       "model": "gemini-3.8-flash",
       "skill_count": 93,
       "custom_count": 49,
-      "soul_chars": 3821,
+      "soul_chars": 4003,
       "cron_count": null,
       "color": "#f5717a",
       "soul_path": "<hermes>/profiles/s/SOUL.md",
@@ -708,7 +708,7 @@ var DATA =
       "model": "gemini-3.5-flash-lite",
       "skill_count": 86,
       "custom_count": 42,
-      "soul_chars": 3926,
+      "soul_chars": 4108,
       "cron_count": null,
       "color": "#f5bd4f",
       "soul_path": "<hermes>/profiles/pm/SOUL.md",
@@ -753,7 +753,7 @@ var DATA =
       "model": "claude-sonnet-5-5",
       "skill_count": 115,
       "custom_count": 71,
-      "soul_chars": 5177,
+      "soul_chars": 5460,
       "cron_count": null,
       "color": "#43d787",
       "soul_path": "<hermes>/profiles/qa/SOUL.md",
@@ -1154,7 +1154,7 @@ var DATA =
     },
     {
       "name": "blocked-page-recovery",
-      "desc": "웹페이지가 안 열리거나 403·429·차단·유료벽일 때. 공개 대체 경로(API·모바일·RSS) 순서.",
+      "desc": "페이지 차단·403·유료벽·notion.site 본문 안 읽힘. 공개 대체경로 순서.",
       "owners": [
         "all",
         "s",
@@ -1363,6 +1363,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/qa/skills/devops/content-removal-verification"
+    },
+    {
+      "name": "contest-pipeline-ops",
+      "desc": "Use when 공모전 수집·참가범위·노션 공모전 등록 작업 시. 일일+월간 운영.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/contest-pipeline-ops"
     },
     {
       "name": "context-budget-architecture",
@@ -1713,7 +1722,7 @@ var DATA =
     },
     {
       "name": "find-skills",
-      "desc": "Use when /스킬찾기·'이런 스킬 있어?' 외부 스킬 검색 시. skills.sh 검색·추천만, 설치는 이식 절차.",
+      "desc": "Use when /스킬찾기·외부 스킬 검색·우리 설계와 격차 비교 시. 설치 없이 추천만.",
       "owners": [
         "all"
       ],
@@ -2691,6 +2700,15 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/software-development/plan"
     },
     {
+      "name": "planning-grill",
+      "desc": "Use when /기획폭격 또는 도비서가 큰 일로 판단할 때. 목적을 질문폭격으로 확정.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/planning-grill"
+    },
+    {
       "name": "pm-harness",
       "desc": "Use when pm이 일정·할일·진행추적 지시서를 받았을 때. 착수 전 반드시 연다. 일정 수립 5단계와 진행현황표 규격, 검수 루프 기간 반영.",
       "owners": [
@@ -2770,7 +2788,7 @@ var DATA =
     },
     {
       "name": "portfolio-showcase-site",
-      "desc": "포트폴리오·업체 소개·스크롤 3D 웹사이트 제작 요청 시. 레퍼런스 분석→DP 배분→렌더 검수→배포.",
+      "desc": "웹사이트·포트폴리오 제작, 웹 제작방식 설계·비교 시. 배분→렌더 검수→배포.",
       "owners": [
         "all"
       ],
@@ -3871,7 +3889,7 @@ var DATA =
     },
     {
       "name": "상태값 빠른 감시 (3분, 0토큰)",
-      "schedule": "매일 8-23",
+      "schedule": "매일 7-23",
       "mode": "무토큰",
       "kind": "점검",
       "profile": "all"
@@ -3947,13 +3965,6 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "인스타 lalapeai 주간 성과개선·큐 보충",
-      "schedule": "매주 월 10:00",
-      "mode": "AI",
-      "kind": "기타",
-      "profile": "all"
-    },
-    {
       "name": "전 프로필 세션 자동 보관 (매일 03:20, 0토큰)",
       "schedule": "매일 03:20",
       "mode": "무토큰",
@@ -4021,6 +4032,13 @@ var DATA =
       "schedule": "매일 08:00",
       "mode": "AI",
       "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "칸반 심부름꾼(김팀장) 5분 — PC-20261011-01 시험",
+      "schedule": "every 5m",
+      "mode": "무토큰",
+      "kind": "기타",
       "profile": "all"
     },
     {
