@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-10-11T04:52:34+09:00",
+  "generated_at": "2026-10-12T04:51:04+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "claude-opus-5-5",
-      "skill_count": 145,
-      "custom_count": 90,
-      "soul_chars": 8112,
+      "skill_count": 146,
+      "custom_count": 92,
+      "soul_chars": 7931,
       "cron_count": 59,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
@@ -83,7 +83,7 @@
       "model": "claude-sonnet-5-5",
       "skill_count": 115,
       "custom_count": 71,
-      "soul_chars": 5460,
+      "soul_chars": 5788,
       "cron_count": null,
       "color": "#43d787",
       "soul_path": "<hermes>/profiles/qa/SOUL.md",
@@ -266,6 +266,15 @@
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/agent-runtime-tuning"
+    },
+    {
+      "name": "ai-image-generation",
+      "desc": "Use when 나노바나나·GPT로 인물사진·화보 생성·모델 비교·AI티 제거 편집 요청 시.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/creative/ai-image-generation"
     },
     {
       "name": "ai-interior-visualization",
@@ -1690,7 +1699,7 @@
     },
     {
       "name": "lms-course-automation",
-      "desc": "대학 LMS 대리수강·과제·토론 자동화 시. 영상은 스크립트, AI는 초안만.",
+      "desc": "대학 LMS·외부 (비공개)(수료증형) 대리수강·과제·토론 자동화 시. 영상은 스크립트, AI는 초안만.",
       "owners": [
         "all"
       ],
@@ -2470,7 +2479,7 @@
       "owners": [
         "all"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/creative/shortfilm-prompt"
     },
     {
@@ -3036,6 +3045,13 @@
       "profile": "all"
     },
     {
+      "name": "AI 캐릭터 인스타(restf_it) 매일 초안",
+      "schedule": "매일 08:30",
+      "mode": "AI",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
       "name": "Claude 외부 스킬 역할 동기화 (0토큰, 매시)",
       "schedule": "every 60m",
       "mode": "무토큰",
@@ -3180,13 +3196,6 @@
       "schedule": "매일 10:00",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "점검",
-      "profile": "all"
-    },
-    {
-      "name": "도비서 effort high 7일 비교 (1회)",
-      "schedule": "매일 10:00",
-      "mode": "무토큰",
-      "kind": "기타",
       "profile": "all"
     },
     {
@@ -3359,7 +3368,7 @@
     },
     {
       "name": "진행현황 마감일 도비서 자동점검",
-      "schedule": "매일 08:00",
+      "schedule": "매일 08:15",
       "mode": "AI",
       "kind": "점검",
       "profile": "all"
