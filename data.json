@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T04:51:41+09:00",
+  "generated_at": "2026-10-20T04:51:05+09:00",
   "bots": [
     {
       "id": "all",
@@ -7,7 +7,7 @@
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-6.1-sol",
       "skill_count": 146,
-      "custom_count": 96,
+      "custom_count": 97,
       "soul_chars": 7805,
       "cron_count": 58,
       "color": "#fbcf5a",
@@ -22,7 +22,7 @@
       "role": "웹·문서 조사, 사실 확인, 출처 수집",
       "model": "gemini-3.8-flash",
       "skill_count": 93,
-      "custom_count": 53,
+      "custom_count": 54,
       "soul_chars": 4003,
       "cron_count": null,
       "color": "#f5717a",
@@ -37,7 +37,7 @@
       "role": "요구사항 정리, 계획 수립, 일정·범위 관리",
       "model": "gemini-3.5-flash-lite",
       "skill_count": 86,
-      "custom_count": 46,
+      "custom_count": 47,
       "soul_chars": 4108,
       "cron_count": null,
       "color": "#f5bd4f",
@@ -52,7 +52,7 @@
       "role": "화면 설계, HTML·CSS 시안, 사용성 검토",
       "model": "claude-opus-5-5",
       "skill_count": 91,
-      "custom_count": 51,
+      "custom_count": 52,
       "soul_chars": 4369,
       "cron_count": null,
       "color": "#a98bfa",
@@ -67,7 +67,7 @@
       "role": "코드 작성·수정·배포",
       "model": "claude-opus-5",
       "skill_count": 119,
-      "custom_count": 79,
+      "custom_count": 80,
       "soul_chars": 4226,
       "cron_count": null,
       "color": "#5b9dfb",
@@ -82,7 +82,7 @@
       "role": "산출물 검증, 실행 테스트, 결함 보고",
       "model": "claude-sonnet-5-5",
       "skill_count": 117,
-      "custom_count": 77,
+      "custom_count": 78,
       "soul_chars": 5788,
       "cron_count": null,
       "color": "#43d787",
@@ -97,7 +97,7 @@
       "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
       "model": "gpt-5.6-luna",
       "skill_count": 88,
-      "custom_count": 48,
+      "custom_count": 49,
       "soul_chars": 4069,
       "cron_count": null,
       "color": "#2fd3c0",
@@ -705,7 +705,7 @@
     },
     {
       "name": "contest-pipeline-ops",
-      "desc": "Use when 공모전 수집·참가범위·노션 공모전 등록 작업 시. 일일+월간 운영.",
+      "desc": "공모전 수집·참가 검토·출품 서류 확인·제출·접수 증거 확인 시.",
       "owners": [
         "all"
       ],
@@ -2761,7 +2761,7 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/test-driven-development"
     },
     {
@@ -3371,13 +3371,6 @@
       "profile": "all"
     },
     {
-      "name": "지원사업 공고 감시 (기업마당·K-Startup)",
-      "schedule": "매일 07:00",
-      "mode": "감시형(변화 있을 때만 AI)",
-      "kind": "점검",
-      "profile": "all"
-    },
-    {
       "name": "진행현황 마감일 도비서 자동점검",
       "schedule": "매일 08:15",
       "mode": "AI",
@@ -3395,6 +3388,13 @@
       "name": "크론 실패 자동복구 (5분)",
       "schedule": "every 5m",
       "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
+      "name": "팀운영개선 · 최근7일 자료 에이전트 주간회의",
+      "schedule": "매주 금 17:00",
+      "mode": "AI",
       "kind": "기타",
       "profile": "all"
     },
