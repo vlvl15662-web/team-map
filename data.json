@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T04:51:05+09:00",
+  "generated_at": "2026-10-21T04:51:17+09:00",
   "bots": [
     {
       "id": "all",
@@ -7,9 +7,9 @@
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-6.1-sol",
       "skill_count": 146,
-      "custom_count": 97,
+      "custom_count": 99,
       "soul_chars": 7805,
-      "cron_count": 58,
+      "cron_count": 59,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -22,7 +22,7 @@
       "role": "웹·문서 조사, 사실 확인, 출처 수집",
       "model": "gemini-3.8-flash",
       "skill_count": 93,
-      "custom_count": 54,
+      "custom_count": 55,
       "soul_chars": 4003,
       "cron_count": null,
       "color": "#f5717a",
@@ -37,7 +37,7 @@
       "role": "요구사항 정리, 계획 수립, 일정·범위 관리",
       "model": "gemini-3.5-flash-lite",
       "skill_count": 86,
-      "custom_count": 47,
+      "custom_count": 48,
       "soul_chars": 4108,
       "cron_count": null,
       "color": "#f5bd4f",
@@ -52,7 +52,7 @@
       "role": "화면 설계, HTML·CSS 시안, 사용성 검토",
       "model": "claude-opus-5-5",
       "skill_count": 91,
-      "custom_count": 52,
+      "custom_count": 53,
       "soul_chars": 4369,
       "cron_count": null,
       "color": "#a98bfa",
@@ -67,7 +67,7 @@
       "role": "코드 작성·수정·배포",
       "model": "claude-opus-5",
       "skill_count": 119,
-      "custom_count": 80,
+      "custom_count": 81,
       "soul_chars": 4226,
       "cron_count": null,
       "color": "#5b9dfb",
@@ -82,7 +82,7 @@
       "role": "산출물 검증, 실행 테스트, 결함 보고",
       "model": "claude-sonnet-5-5",
       "skill_count": 117,
-      "custom_count": 78,
+      "custom_count": 79,
       "soul_chars": 5788,
       "cron_count": null,
       "color": "#43d787",
@@ -97,7 +97,7 @@
       "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
       "model": "gpt-5.6-luna",
       "skill_count": 88,
-      "custom_count": 49,
+      "custom_count": 50,
       "soul_chars": 4069,
       "cron_count": null,
       "color": "#2fd3c0",
@@ -1465,7 +1465,7 @@
       "owners": [
         "all"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/hyperframes"
     },
     {
@@ -1703,12 +1703,12 @@
         "qa",
         "marketer"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/research/llm-wiki"
     },
     {
       "name": "lms-course-automation",
-      "desc": "대학 LMS·외부 (비공개)(수료증형) 대리수강·과제·토론 자동화 시. 영상은 스크립트, AI는 초안만.",
+      "desc": "대학 LMS·외부 (비공개) 수강·과제 자동화. 재생은 스크립트, 인증 복구·초안은 AI.",
       "owners": [
         "all"
       ],
@@ -3030,7 +3030,7 @@
     {
       "name": "(비공개) 일일 수강",
       "schedule": "매일 04:00",
-      "mode": "감시형(변화 있을 때만 AI)",
+      "mode": "무토큰",
       "kind": "학습",
       "profile": "all"
     },
@@ -3163,7 +3163,7 @@
     {
       "name": "규칙 정기검진 (하루 1회)",
       "schedule": "매일 05:00",
-      "mode": "감시형(변화 있을 때만 AI)",
+      "mode": "AI",
       "kind": "기타",
       "profile": "all"
     },
@@ -3175,10 +3175,17 @@
       "profile": "all"
     },
     {
-      "name": "노션 결재·댓글 통합 반영 (30분)",
-      "schedule": "30분마다 (8-23시대)",
+      "name": "노션 결재·댓글 통합 반영 (5분·24시간)",
+      "schedule": "5분마다",
       "mode": "감시형(변화 있을 때만 AI)",
       "kind": "동기화",
+      "profile": "all"
+    },
+    {
+      "name": "노션 단일 전송 담당자 생존 확인",
+      "schedule": "매일 매시",
+      "mode": "무토큰",
+      "kind": "점검",
       "profile": "all"
     },
     {
@@ -3246,7 +3253,7 @@
     },
     {
       "name": "상태값 빠른 감시 (3분, 0토큰)",
-      "schedule": "매일 7-23",
+      "schedule": "매일 매시",
       "mode": "무토큰",
       "kind": "점검",
       "profile": "all"
@@ -3303,7 +3310,7 @@
     {
       "name": "월1회 감사 (메모리·측정·하네스·스킬 일관성)",
       "schedule": "매월 1일 10:00",
-      "mode": "감시형(변화 있을 때만 AI)",
+      "mode": "AI",
       "kind": "정리",
       "profile": "all"
     },
@@ -3359,7 +3366,7 @@
     {
       "name": "주간 운영 거버넌스 감사 (도구·스킬·자동화)",
       "schedule": "매주 일 04:20",
-      "mode": "감시형(변화 있을 때만 AI)",
+      "mode": "AI",
       "kind": "정리",
       "profile": "all"
     },
