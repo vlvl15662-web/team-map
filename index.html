@@ -669,17 +669,17 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-10-21T04:51:17+09:00",
+  "generated_at": "2026-10-22T04:51:47+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-6.1-sol",
-      "skill_count": 146,
-      "custom_count": 99,
-      "soul_chars": 7805,
-      "cron_count": 59,
+      "skill_count": 144,
+      "custom_count": 97,
+      "soul_chars": 7456,
+      "cron_count": 60,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -693,7 +693,7 @@ var DATA =
       "model": "gemini-3.8-flash",
       "skill_count": 93,
       "custom_count": 55,
-      "soul_chars": 4003,
+      "soul_chars": 4576,
       "cron_count": null,
       "color": "#f5717a",
       "soul_path": "<hermes>/profiles/s/SOUL.md",
@@ -751,9 +751,9 @@ var DATA =
       "name": "검수 담당",
       "role": "산출물 검증, 실행 테스트, 결함 보고",
       "model": "claude-sonnet-5-5",
-      "skill_count": 117,
-      "custom_count": 79,
-      "soul_chars": 5788,
+      "skill_count": 115,
+      "custom_count": 77,
+      "soul_chars": 751,
       "cron_count": null,
       "color": "#43d787",
       "soul_path": "<hermes>/profiles/qa/SOUL.md",
@@ -918,6 +918,15 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/agency-agent-reuse"
+    },
+    {
+      "name": "agency-tool-evaluator",
+      "desc": "새 도구 시험·비교 시 Tool Evaluator 보조 지침을 적용한다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/devops/agency-tool-evaluator"
     },
     {
       "name": "agent-memory-hygiene",
@@ -1477,15 +1486,6 @@ var DATA =
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/design-md"
-    },
-    {
-      "name": "design-review-loop",
-      "desc": "설계안 QA 왕복 검증·기간제 실험 개설/결산 시. 공유 파일 1개로 왕복하며 판정을 남긴다.",
-      "owners": [
-        "all"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/design-review-loop"
     },
     {
       "name": "destructive-file-cleanup-verification",
@@ -2910,15 +2910,6 @@ var DATA =
       "path": "<hermes>/profiles/qa/skills/devops/qa-evidence-integrity"
     },
     {
-      "name": "qa-review",
-      "desc": "검수 의뢰가 오면 연다. 코드뿐 아니라 규칙·스크립트·크론·문서·도비서 산출물까지 검수. 문제만 목록, 판정 없음.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/qa-review"
-    },
-    {
       "name": "qa-toolbox",
       "desc": "Use when qa가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
       "owners": [
@@ -2993,15 +2984,6 @@ var DATA =
       "path": "<hermes>/profiles/qa/skills/devops/restore-point-verification"
     },
     {
-      "name": "review-verdict-and-rework",
-      "desc": "검수 결과서를 받아 판정·재작업 배분할 때 연다.",
-      "owners": [
-        "all"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/review-verdict-and-rework"
-    },
-    {
       "name": "role-based-delegation",
       "desc": "Use when 실무를 직접 할지 하위봇에 맡길지 판단할 때. 역할 나뉜 일은 지침서와 함께 배분.",
       "owners": [
@@ -3027,15 +3009,6 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/qa/skills/devops/rule-enforcement-audit"
-    },
-    {
-      "name": "rule-to-hook-enforcement",
-      "desc": "Use when 규칙 반복 위반·후속 누락·자동화 퇴역 시. 기존 실행 경로를 우선한다.",
-      "owners": [
-        "all"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/all/skills/devops/rule-to-hook-enforcement"
     },
     {
       "name": "runtime-boundary-qa",
@@ -3226,15 +3199,6 @@ var DATA =
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/sketch"
-    },
-    {
-      "name": "skill-consistency-check",
-      "desc": "Use when 스킬·규칙 문서를 수정·추가한 직후, 또는 월 1회 감사 때. 조항끼리 서로 다른 값을 가리키는지(충돌·잔존·공백·중복·끊긴 참조)만 찾아 통과/불통과로 보고. 규칙의 타당성·문장은 보지 않는다.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/skill-consistency-check"
     },
     {
       "name": "sns-benchmark-watch",
@@ -3436,7 +3400,7 @@ var DATA =
     },
     {
       "name": "thread-close",
-      "desc": "Use when (비공개) says '스레드 닫음'. 기록·인수인계를 저장하고 Discord 스레드를 백업 후 삭제한다.",
+      "desc": "Use when (비공개) says '스레드 닫음'. 기록 저장·백업 후 Discord·Slack 스레드를 삭제한다.",
       "owners": [
         "all"
       ],
@@ -3789,24 +3753,38 @@ var DATA =
       "profile": "all"
     },
     {
+      "name": "PC-20261021-15_연장 멈춤선",
+      "schedule": "매일 23:48",
+      "mode": "AI",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
+      "name": "PC-20261022-01_멈춤선",
+      "schedule": "매일 07:16",
+      "mode": "AI",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
+      "name": "PC-20261022-02_멈춤선",
+      "schedule": "매일 09:40",
+      "mode": "AI",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
+      "name": "PC-20261022-03_멈춤선",
+      "schedule": "매일 05:42",
+      "mode": "AI",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
       "name": "PlayMCP 토큰 갱신(6시간)",
       "schedule": "매일 */6",
       "mode": "무토큰",
       "kind": "동기화",
-      "profile": "all"
-    },
-    {
-      "name": "QA 학습루프 주간 집계 (0토큰, 월 00:05)",
-      "schedule": "매주 월 00:05",
-      "mode": "무토큰",
-      "kind": "학습",
-      "profile": "all"
-    },
-    {
-      "name": "QA 학습루프 주간 회의·노션 게시 (월 09:00, 스크립트가 AI 16회 호출)",
-      "schedule": "매주 월 09:00",
-      "mode": "무토큰",
-      "kind": "학습",
       "profile": "all"
     },
     {
@@ -3828,6 +3806,13 @@ var DATA =
       "schedule": "매일 매시",
       "mode": "무토큰",
       "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "과거기억 분류 주간 20% (0토큰 시작기, 재검토 2026-12-03)",
+      "schedule": "매주 목 03:00",
+      "mode": "무토큰",
+      "kind": "기타",
       "profile": "all"
     },
     {
@@ -3978,7 +3963,7 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "월1회 감사 (메모리·측정·하네스·스킬 일관성)",
+      "name": "월1회 감사 (메모리·측정)",
       "schedule": "매월 1일 10:00",
       "mode": "AI",
       "kind": "정리",
@@ -4073,20 +4058,6 @@ var DATA =
       "schedule": "매주 금 17:00",
       "mode": "AI",
       "kind": "기타",
-      "profile": "all"
-    },
-    {
-      "name": "하네스 감사 주간 스냅샷 (0토큰)",
-      "schedule": "매주 월 04:45",
-      "mode": "무토큰",
-      "kind": "정리",
-      "profile": "all"
-    },
-    {
-      "name": "하네스 매시 감사",
-      "schedule": "every 60m",
-      "mode": "무토큰",
-      "kind": "정리",
       "profile": "all"
     },
     {
