@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-10-22T04:51:47+09:00",
+  "generated_at": "2026-10-23T04:52:14+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-6.1-sol",
-      "skill_count": 144,
-      "custom_count": 97,
-      "soul_chars": 7456,
-      "cron_count": 60,
+      "skill_count": 146,
+      "custom_count": 99,
+      "soul_chars": 7577,
+      "cron_count": 57,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -23,7 +23,7 @@
       "model": "gemini-3.8-flash",
       "skill_count": 93,
       "custom_count": 55,
-      "soul_chars": 4576,
+      "soul_chars": 4605,
       "cron_count": null,
       "color": "#f5717a",
       "soul_path": "<hermes>/profiles/s/SOUL.md",
@@ -714,7 +714,7 @@
     },
     {
       "name": "contest-pipeline-ops",
-      "desc": "공모전 수집·참가 검토·출품 서류 확인·제출·접수 증거 확인 시.",
+      "desc": "공모전 수집·참가 검토·주제 정하기(녹음·인터뷰 요약)·김팀장 착수·출품 서류·제출·접수 증거 확인 시.",
       "owners": [
         "all"
       ],
@@ -855,7 +855,7 @@
     },
     {
       "name": "dobiseo-toolbox",
-      "desc": "Use when 도비서가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "desc": "Use when 도구 도입·목차 등재·도구 빼기·막힘 대처 규칙이 필요할 때. 도구 고르기는 AGENTS.md 목차, 이 스킬은 규칙·원문 위치.",
       "owners": [
         "all"
       ],
@@ -2314,6 +2314,15 @@
       "path": "<hermes>/profiles/qa/skills/devops/restore-point-verification"
     },
     {
+      "name": "retro",
+      "desc": "레트로·/레트로 요청 시 작업 기록을 회고하고 환경 개선안을 제안한다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/software-development/retro"
+    },
+    {
       "name": "role-based-delegation",
       "desc": "Use when 실무를 직접 할지 하위봇에 맡길지 판단할 때. 역할 나뉜 일은 지침서와 함께 배분.",
       "owners": [
@@ -2360,7 +2369,7 @@
     },
     {
       "name": "s-toolbox",
-      "desc": "Use when s가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
+      "desc": "Use when 서쳐(s)가 조사 중 도구·수집 요령이 필요할 때. 짧은 목차에서 골라 원문만 연다.",
       "owners": [
         "s"
       ],
@@ -2369,7 +2378,7 @@
     },
     {
       "name": "saramin-job-search",
-      "desc": "Use when 지역 구인글·알바·프리랜서 일감 검색 요청 시. 사람인·알바몬 수집→노션 보고.",
+      "desc": "Use when 구인글·알바·프리랜서·외주·건당 일감 검색 시. 사람인·알바몬·외주플랫폼 수집→노션.",
       "owners": [
         "all"
       ],
@@ -2936,6 +2945,15 @@
       "path": "<hermes>/profiles/all/skills/devops/windows-portable-cli-install"
     },
     {
+      "name": "writing-for-agents",
+      "desc": "retro에서 에이전트용 문서 개선안을 작성할 때 참고한다.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/productivity/writing-for-agents"
+    },
+    {
       "name": "xlsx",
       "desc": "엑셀·표·CSV 파일 만들기·읽기·수정 시(.xlsx).",
       "owners": [
@@ -3083,29 +3101,8 @@
       "profile": "all"
     },
     {
-      "name": "PC-20261021-15_연장 멈춤선",
-      "schedule": "매일 23:48",
-      "mode": "AI",
-      "kind": "기타",
-      "profile": "all"
-    },
-    {
-      "name": "PC-20261022-01_멈춤선",
-      "schedule": "매일 07:16",
-      "mode": "AI",
-      "kind": "기타",
-      "profile": "all"
-    },
-    {
-      "name": "PC-20261022-02_멈춤선",
-      "schedule": "매일 09:40",
-      "mode": "AI",
-      "kind": "기타",
-      "profile": "all"
-    },
-    {
-      "name": "PC-20261022-03_멈춤선",
-      "schedule": "매일 05:42",
+      "name": "PC-20261023-04_멈춤선",
+      "schedule": "매일 05:13",
       "mode": "AI",
       "kind": "기타",
       "profile": "all"
