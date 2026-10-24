@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T04:53:43+09:00",
+  "generated_at": "2026-10-25T04:52:10+09:00",
   "bots": [
     {
       "id": "all",
@@ -3115,13 +3115,6 @@
       "profile": "all"
     },
     {
-      "name": "marketer 주간 운영 회의 (marketing-council+Agency 5인·2회차)",
-      "schedule": "매주 월 11:00",
-      "mode": "AI",
-      "kind": "기타",
-      "profile": "all"
-    },
-    {
       "name": "게이트웨이 자동복구 감시 (1시간, 0토큰)",
       "schedule": "매일 매시",
       "mode": "무토큰",
@@ -3147,6 +3140,13 @@
       "schedule": "매일 08:10",
       "mode": "무토큰",
       "kind": "정리",
+      "profile": "all"
+    },
+    {
+      "name": "김팀장 마케팅 주간 운영 회의 (marketing-council+Agency 5인·2회차)",
+      "schedule": "매주 월 11:00",
+      "mode": "AI",
+      "kind": "기타",
       "profile": "all"
     },
     {
