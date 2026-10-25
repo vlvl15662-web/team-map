@@ -669,7 +669,7 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-10-25T04:52:10+09:00",
+  "generated_at": "2026-10-26T04:52:22+09:00",
   "bots": [
     {
       "id": "all",
@@ -679,7 +679,7 @@ var DATA =
       "skill_count": 146,
       "custom_count": 99,
       "soul_chars": 7302,
-      "cron_count": 56,
+      "cron_count": 55,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -3694,20 +3694,6 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "AI 공모전 월간 전수조사 발주(매달 10일)",
-      "schedule": "매월 10일 09:00",
-      "mode": "무토큰",
-      "kind": "기타",
-      "profile": "all"
-    },
-    {
-      "name": "AI 공모전 일일 수집(스크립트 전용)",
-      "schedule": "매일 07:10",
-      "mode": "무토큰",
-      "kind": "수집",
-      "profile": "all"
-    },
-    {
       "name": "AI 도구 자동발굴 (0토큰, 매주 금)",
       "schedule": "매주 금 03:50",
       "mode": "무토큰",
@@ -3789,6 +3775,20 @@ var DATA =
       "schedule": "매일 매시",
       "mode": "무토큰",
       "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "공모전 일일 수집(3개 사이트·스크립트 전용)",
+      "schedule": "매일 07:10",
+      "mode": "무토큰",
+      "kind": "수집",
+      "profile": "all"
+    },
+    {
+      "name": "공모전 주간 추가조사 발주(월요일 09시)",
+      "schedule": "매주 월 09:00",
+      "mode": "무토큰",
+      "kind": "기타",
       "profile": "all"
     },
     {
@@ -4030,13 +4030,6 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "칸반 김팀장 작업 접수·결과 회수 (5분, 상시)",
-      "schedule": "every 5m",
-      "mode": "무토큰",
-      "kind": "기타",
-      "profile": "all"
-    },
-    {
       "name": "크론 실패 자동복구 (5분)",
       "schedule": "every 5m",
       "mode": "감시형(변화 있을 때만 AI)",
@@ -4044,8 +4037,8 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "팀운영개선 · 최근7일 자료 에이전트 주간회의",
-      "schedule": "매주 금 17:00",
+      "name": "팀운영개선 · 월요일 5인표결·도비서시험",
+      "schedule": "매주 월 10:00",
       "mode": "AI",
       "kind": "기타",
       "profile": "all"
