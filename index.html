@@ -669,17 +669,17 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-10-27T04:50:45+09:00",
+  "generated_at": "2026-10-28T04:54:08+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
-      "model": "gpt-6.1-sol",
-      "skill_count": 147,
-      "custom_count": 101,
-      "soul_chars": 7302,
-      "cron_count": 56,
+      "model": "gpt-6.1-terra",
+      "skill_count": 148,
+      "custom_count": 105,
+      "soul_chars": 7389,
+      "cron_count": 52,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -692,7 +692,7 @@ var DATA =
       "role": "웹·문서 조사, 사실 확인, 출처 수집",
       "model": "gemini-3.8-flash",
       "skill_count": 93,
-      "custom_count": 56,
+      "custom_count": 58,
       "soul_chars": 4605,
       "cron_count": null,
       "color": "#f5717a",
@@ -707,7 +707,7 @@ var DATA =
       "role": "요구사항 정리, 계획 수립, 일정·범위 관리",
       "model": "gemini-3.5-flash-lite",
       "skill_count": 86,
-      "custom_count": 49,
+      "custom_count": 51,
       "soul_chars": 4108,
       "cron_count": null,
       "color": "#f5bd4f",
@@ -722,7 +722,7 @@ var DATA =
       "role": "화면 설계, HTML·CSS 시안, 사용성 검토",
       "model": "claude-opus-5-5",
       "skill_count": 91,
-      "custom_count": 54,
+      "custom_count": 56,
       "soul_chars": 4369,
       "cron_count": null,
       "color": "#a98bfa",
@@ -737,7 +737,7 @@ var DATA =
       "role": "코드 작성·수정·배포",
       "model": "claude-opus-5",
       "skill_count": 119,
-      "custom_count": 82,
+      "custom_count": 84,
       "soul_chars": 4226,
       "cron_count": null,
       "color": "#5b9dfb",
@@ -752,7 +752,7 @@ var DATA =
       "role": "산출물 검증, 실행 테스트, 결함 보고",
       "model": "claude-sonnet-5-5",
       "skill_count": 115,
-      "custom_count": 78,
+      "custom_count": 80,
       "soul_chars": 751,
       "cron_count": null,
       "color": "#43d787",
@@ -767,7 +767,7 @@ var DATA =
       "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
       "model": "gpt-5.6-luna",
       "skill_count": 88,
-      "custom_count": 51,
+      "custom_count": 53,
       "soul_chars": 4069,
       "cron_count": null,
       "color": "#2fd3c0",
@@ -1384,7 +1384,7 @@ var DATA =
     },
     {
       "name": "contest-pipeline-ops",
-      "desc": "공모전 수집·참가 검토·주제 정하기(녹음·인터뷰 요약)·김팀장 착수·출품 서류·제출·접수 증거 확인 시.",
+      "desc": "공모전 수집·참가 검토·주제 정하기(녹음·인터뷰 요약)·제작 착수·출품 서류·제출·접수 증거 확인 시.",
       "owners": [
         "all"
       ],
@@ -1592,7 +1592,7 @@ var DATA =
         "qa",
         "marketer"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/dogfood"
     },
     {
@@ -1796,7 +1796,7 @@ var DATA =
         "qa",
         "marketer"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/github"
     },
     {
@@ -2473,7 +2473,7 @@ var DATA =
       "owners": [
         "all"
       ],
-      "custom": false,
+      "custom": true,
       "path": "<hermes>/profiles/all/skills/media-use"
     },
     {
@@ -3002,7 +3002,7 @@ var DATA =
     },
     {
       "name": "role-based-delegation",
-      "desc": "Use when 실무를 직접 할지 하위봇에 맡길지 판단할 때. 역할 나뉜 일은 지침서와 함께 배분.",
+      "desc": "Use when 직접 할지 배분할지·역할 통합/폐지 설계 시. 역할 나뉜 일은 지침서와 함께 배분.",
       "owners": [
         "all"
       ],
@@ -3520,6 +3520,15 @@ var DATA =
       "path": "<hermes>/profiles/uxui/skills/toolbox/uxui-toolbox"
     },
     {
+      "name": "video-director-brief",
+      "desc": "영상 프롬프트·영상 지시서 짜줘 요청 시. 생성기 입력 전 판단형 통합 양식.",
+      "owners": [
+        "all"
+      ],
+      "custom": true,
+      "path": "<hermes>/profiles/all/skills/creative/video-director-brief"
+    },
+    {
       "name": "wait-what",
       "desc": "/쉽게·/wait-what으로 직전 설명을 배경부터 쉬운 한국어로 다시 설명할 때.",
       "owners": [
@@ -3753,24 +3762,10 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "LMP 경쟁사 주간 감시",
-      "schedule": "매주 월 09:00",
-      "mode": "AI",
-      "kind": "점검",
-      "profile": "all"
-    },
-    {
       "name": "LMP 로그인 필요 감시·내부대기열 실행",
       "schedule": "매일 09:10",
       "mode": "무토큰",
       "kind": "점검",
-      "profile": "all"
-    },
-    {
-      "name": "LMP 주간 운영현황 저장",
-      "schedule": "매주 월 09:20",
-      "mode": "무토큰",
-      "kind": "기타",
       "profile": "all"
     },
     {
@@ -3785,6 +3780,13 @@ var DATA =
       "schedule": "매주 월 09:30",
       "mode": "AI",
       "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "marketer 마케팅 주간 운영 회의 (marketing-council+Agency 5인·2회차)",
+      "schedule": "매주 월 11:00",
+      "mode": "AI",
+      "kind": "기타",
       "profile": "all"
     },
     {
@@ -3827,13 +3829,6 @@ var DATA =
       "schedule": "매일 08:10",
       "mode": "무토큰",
       "kind": "정리",
-      "profile": "all"
-    },
-    {
-      "name": "김팀장 마케팅 주간 운영 회의 (marketing-council+Agency 5인·2회차)",
-      "schedule": "매주 월 11:00",
-      "mode": "AI",
-      "kind": "기타",
       "profile": "all"
     },
     {
@@ -3935,13 +3930,6 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "생성모델 장부 주간 갱신 (월 10:10, 알림 없음)",
-      "schedule": "매주 월 10:10",
-      "mode": "AI",
-      "kind": "동기화",
-      "profile": "all"
-    },
-    {
       "name": "스낵영상 신규 소재 5개 확인 알림",
       "schedule": "매일 09:00",
       "mode": "무토큰",
@@ -4022,13 +4010,6 @@ var DATA =
       "name": "주간 AI 뉴스",
       "schedule": "매주 토 15:00",
       "mode": "AI",
-      "kind": "보고",
-      "profile": "all"
-    },
-    {
-      "name": "주간 아이디어 요약 1장 (상시·매주 월 10시)",
-      "schedule": "매주 월 10:00",
-      "mode": "감시형(변화 있을 때만 AI)",
       "kind": "보고",
       "profile": "all"
     },
