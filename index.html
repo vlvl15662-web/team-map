@@ -669,17 +669,17 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-10-28T04:54:08+09:00",
+  "generated_at": "2026-10-29T04:53:59+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-6.1-terra",
-      "skill_count": 148,
-      "custom_count": 105,
+      "skill_count": 147,
+      "custom_count": 104,
       "soul_chars": 7389,
-      "cron_count": 52,
+      "cron_count": 53,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -694,11 +694,11 @@ var DATA =
       "skill_count": 93,
       "custom_count": 58,
       "soul_chars": 4605,
-      "cron_count": null,
+      "cron_count": 1,
       "color": "#f5717a",
       "soul_path": "<hermes>/profiles/s/SOUL.md",
       "skills_path": "<hermes>/profiles/s/skills",
-      "cron_path": null,
+      "cron_path": "<hermes>/profiles/s/cron/jobs.json",
       "vault_path": "05_봇/s/"
     },
     {
@@ -3520,15 +3520,6 @@ var DATA =
       "path": "<hermes>/profiles/uxui/skills/toolbox/uxui-toolbox"
     },
     {
-      "name": "video-director-brief",
-      "desc": "영상 프롬프트·영상 지시서 짜줘 요청 시. 생성기 입력 전 판단형 통합 양식.",
-      "owners": [
-        "all"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/all/skills/creative/video-director-brief"
-    },
-    {
       "name": "wait-what",
       "desc": "/쉽게·/wait-what으로 직전 설명을 배경부터 쉬운 한국어로 다시 설명할 때.",
       "owners": [
@@ -3951,6 +3942,13 @@ var DATA =
       "profile": "all"
     },
     {
+      "name": "완주군AI영상 기획안 회수 (1회성 10-29, PC-20261029-01)",
+      "schedule": "매일 03:00 · 05:00 · 07:00",
+      "mode": "AI",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
       "name": "운영 오류·원복 요청 감시 (매일 10·20시)",
       "schedule": "매일 10:00 · 20:00",
       "mode": "감시형(변화 있을 때만 AI)",
@@ -4042,8 +4040,8 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "팀운영개선 · 월요일 5인표결·도비서시험",
-      "schedule": "매주 월 10:00",
+      "name": "팀운영개선 · 매일06:30회의·08시결과",
+      "schedule": "매일 06:30",
       "mode": "AI",
       "kind": "기타",
       "profile": "all"
@@ -4068,6 +4066,13 @@ var DATA =
       "mode": "무토큰",
       "kind": "점검",
       "profile": "all"
+    },
+    {
+      "name": "팀운영개선 내부자료 사전조사",
+      "schedule": "매일 05:30",
+      "mode": "AI",
+      "kind": "기타",
+      "profile": "s"
     }
   ],
   "mcp": [
