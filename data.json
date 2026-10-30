@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T04:52:22+09:00",
+  "generated_at": "2026-10-31T04:52:54+09:00",
   "bots": [
     {
       "id": "all",
@@ -9,7 +9,7 @@
       "skill_count": 147,
       "custom_count": 104,
       "soul_chars": 7389,
-      "cron_count": 52,
+      "cron_count": 51,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -3127,13 +3127,6 @@
     {
       "name": "공모전 주간 추가조사 발주(월요일 09시)",
       "schedule": "매주 월 09:00",
-      "mode": "무토큰",
-      "kind": "기타",
-      "profile": "all"
-    },
-    {
-      "name": "과거기억 분류 주간 20% (0토큰 시작기, 재검토 2026-12-03)",
-      "schedule": "매주 목 03:00",
       "mode": "무토큰",
       "kind": "기타",
       "profile": "all"
