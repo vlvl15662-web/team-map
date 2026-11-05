@@ -669,17 +669,17 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-11-05T04:52:04+09:00",
+  "generated_at": "2026-11-06T04:51:30+09:00",
   "bots": [
     {
       "id": "all",
       "name": "도비서",
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-6.1-sol",
-      "skill_count": 147,
-      "custom_count": 102,
+      "skill_count": 146,
+      "custom_count": 101,
       "soul_chars": 7389,
-      "cron_count": 51,
+      "cron_count": 50,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -1447,7 +1447,7 @@ var DATA =
     },
     {
       "name": "decision-override-protocol",
-      "desc": "(비공개)님이 내 반대·추천과 다른 결정을 할 때. 재반박도 즉시착수도 아니고 이유부터 묻는다.",
+      "desc": "(비공개)님이 추천·반대와 다른 결정을 할 때. 이유를 재검하고 승인 범위에서 실행한다.",
       "owners": [
         "all"
       ],
@@ -2663,15 +2663,6 @@ var DATA =
       "path": "<hermes>/profiles/s/skills/smart-home/openhue"
     },
     {
-      "name": "ops-dashboard-maintenance",
-      "desc": "Use when (비공개) 관리 대시보드 수정·버전업·자동갱신 시.",
-      "owners": [
-        "all"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/all/skills/productivity/ops-dashboard-maintenance"
-    },
-    {
       "name": "outbound-copy-prelaunch-verification",
       "desc": "Use when verifying customer copy before external sending.",
       "owners": [
@@ -3827,13 +3818,6 @@ var DATA =
       "schedule": "매일 매시",
       "mode": "무토큰",
       "kind": "점검",
-      "profile": "all"
-    },
-    {
-      "name": "대시보드 30분 갱신 (0토큰)",
-      "schedule": "매일 매시",
-      "mode": "무토큰",
-      "kind": "동기화",
       "profile": "all"
     },
     {
