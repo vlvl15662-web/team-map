@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T04:51:56+09:00",
+  "generated_at": "2026-11-08T04:51:43+09:00",
   "bots": [
     {
       "id": "all",
@@ -8,8 +8,8 @@
       "model": "gpt-6.1-terra",
       "skill_count": 146,
       "custom_count": 102,
-      "soul_chars": 7389,
-      "cron_count": 50,
+      "soul_chars": 7281,
+      "cron_count": 51,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -269,7 +269,7 @@
     },
     {
       "name": "agent-runtime-tuning",
-      "desc": "봇마다 결과 품질이 다를 때. 모델·effort 실측·변경·검증.",
+      "desc": "봇 답변 지연·품질 차이를 진단하고 설정을 검증한다.",
       "owners": [
         "all"
       ],
@@ -3340,10 +3340,10 @@
       "profile": "all"
     },
     {
-      "name": "팀운영개선 · 매일06:30회의·08시결과",
+      "name": "팀운영개선 · 매일 06:30 회의·완료 후 보고",
       "schedule": "매일 06:30",
       "mode": "AI",
-      "kind": "기타",
+      "kind": "보고",
       "profile": "all"
     },
     {
@@ -3358,6 +3358,13 @@
       "schedule": "매주 금 6시",
       "mode": "무토큰",
       "kind": "기타",
+      "profile": "all"
+    },
+    {
+      "name": "헤르메스·업무도구 일일 업데이트 확인 (04:11, 0토큰)",
+      "schedule": "매일 04:11",
+      "mode": "무토큰",
+      "kind": "점검",
       "profile": "all"
     },
     {
