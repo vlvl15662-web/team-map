@@ -669,7 +669,7 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-11-10T04:51:39+09:00",
+  "generated_at": "2026-11-11T04:51:57+09:00",
   "bots": [
     {
       "id": "all",
@@ -677,9 +677,9 @@ var DATA =
       "role": "라라페님 직속 비서 — 지시 접수·판단·하위봇 배분·최종 보고",
       "model": "gpt-6.1-terra",
       "skill_count": 147,
-      "custom_count": 102,
-      "soul_chars": 7281,
-      "cron_count": 49,
+      "custom_count": 103,
+      "soul_chars": 7280,
+      "cron_count": 50,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -691,9 +691,9 @@ var DATA =
       "name": "조사 담당",
       "role": "웹·문서 조사, 사실 확인, 출처 수집",
       "model": "gemini-3.8-flash",
-      "skill_count": 94,
+      "skill_count": 93,
       "custom_count": 59,
-      "soul_chars": 4605,
+      "soul_chars": 4763,
       "cron_count": 1,
       "color": "#f5717a",
       "soul_path": "<hermes>/profiles/s/SOUL.md",
@@ -702,79 +702,49 @@ var DATA =
       "vault_path": "05_봇/s/"
     },
     {
-      "id": "pm",
-      "name": "기획 담당",
-      "role": "요구사항 정리, 계획 수립, 일정·범위 관리",
-      "model": "gemini-3.5-flash-lite",
-      "skill_count": 87,
-      "custom_count": 52,
-      "soul_chars": 4108,
+      "id": "claude-team",
+      "name": "Claude 팀",
+      "role": "video·design·marketer·claude-dp·qa — 도비서가 직접 지휘",
+      "model": "(외부 실행 담당)",
+      "skill_count": 0,
+      "custom_count": 0,
+      "soul_chars": 0,
       "cron_count": null,
-      "color": "#f5bd4f",
-      "soul_path": "<hermes>/profiles/pm/SOUL.md",
-      "skills_path": "<hermes>/profiles/pm/skills",
+      "color": "#8e9bb3",
+      "soul_path": null,
+      "skills_path": null,
       "cron_path": null,
-      "vault_path": "05_봇/pm/"
+      "vault_path": null
     },
     {
-      "id": "uxui",
-      "name": "디자인 담당",
-      "role": "화면 설계, HTML·CSS 시안, 사용성 검토",
-      "model": "claude-opus-5-5",
-      "skill_count": 92,
-      "custom_count": 57,
-      "soul_chars": 4369,
+      "id": "anti-dp",
+      "name": "Anti-DP",
+      "role": "코드 작성·수정",
+      "model": "(외부 실행 담당)",
+      "skill_count": 0,
+      "custom_count": 0,
+      "soul_chars": 0,
       "cron_count": null,
-      "color": "#a98bfa",
-      "soul_path": "<hermes>/profiles/uxui/SOUL.md",
-      "skills_path": "<hermes>/profiles/uxui/skills",
+      "color": "#8e9bb3",
+      "soul_path": null,
+      "skills_path": null,
       "cron_path": null,
-      "vault_path": "05_봇/uxui/"
+      "vault_path": null
     },
     {
-      "id": "dp",
-      "name": "개발 담당",
-      "role": "코드 작성·수정·배포",
-      "model": "claude-opus-5",
-      "skill_count": 120,
-      "custom_count": 85,
-      "soul_chars": 4226,
+      "id": "c-dp",
+      "name": "C-DP",
+      "role": "2차 코드 수정",
+      "model": "(외부 실행 담당)",
+      "skill_count": 0,
+      "custom_count": 0,
+      "soul_chars": 0,
       "cron_count": null,
-      "color": "#5b9dfb",
-      "soul_path": "<hermes>/profiles/dp/SOUL.md",
-      "skills_path": "<hermes>/profiles/dp/skills",
+      "color": "#8e9bb3",
+      "soul_path": null,
+      "skills_path": null,
       "cron_path": null,
-      "vault_path": "05_봇/dp/"
-    },
-    {
-      "id": "qa",
-      "name": "검수 담당",
-      "role": "산출물 검증, 실행 테스트, 결함 보고",
-      "model": "claude-sonnet-5-5",
-      "skill_count": 116,
-      "custom_count": 81,
-      "soul_chars": 751,
-      "cron_count": null,
-      "color": "#43d787",
-      "soul_path": "<hermes>/profiles/qa/SOUL.md",
-      "skills_path": "<hermes>/profiles/qa/skills",
-      "cron_path": null,
-      "vault_path": "05_봇/qa/"
-    },
-    {
-      "id": "marketer",
-      "name": "마케팅 담당",
-      "role": "홍보 문구, 채널 전략, 콘텐츠 기획",
-      "model": "gpt-5.6-luna",
-      "skill_count": 89,
-      "custom_count": 54,
-      "soul_chars": 4069,
-      "cron_count": null,
-      "color": "#2fd3c0",
-      "soul_path": "<hermes>/profiles/marketer/SOUL.md",
-      "skills_path": "<hermes>/profiles/marketer/skills",
-      "cron_path": null,
-      "vault_path": "05_봇/marketer/"
+      "vault_path": null
     }
   ],
   "pipeline": [
@@ -795,48 +765,33 @@ var DATA =
     },
     {
       "from": "도비서",
-      "to": "pm",
-      "label": "기획 의뢰"
-    },
-    {
-      "from": "pm",
-      "to": "도비서",
-      "label": "계획서"
+      "to": "claude-team",
+      "label": "claude_team_call.py --agent로 직접 지휘"
     },
     {
       "from": "도비서",
-      "to": "uxui",
-      "label": "화면 의뢰"
-    },
-    {
-      "from": "uxui",
-      "to": "dp",
-      "label": "시안 전달"
+      "to": "anti-dp",
+      "label": "agy_dp_task.py 코드 의뢰"
     },
     {
       "from": "도비서",
-      "to": "dp",
-      "label": "개발 의뢰"
+      "to": "c-dp",
+      "label": "2차 코드 의뢰"
     },
     {
-      "from": "dp",
-      "to": "qa",
-      "label": "검수 요청"
-    },
-    {
-      "from": "qa",
+      "from": "claude-team",
       "to": "도비서",
-      "label": "검수 결과"
+      "label": "담당 자기검수 후 도비서 검수"
     },
     {
-      "from": "도비서",
-      "to": "marketer",
-      "label": "홍보 의뢰"
-    },
-    {
-      "from": "marketer",
+      "from": "anti-dp",
       "to": "도비서",
-      "label": "홍보안"
+      "label": "담당 자기검수 후 도비서 검수"
+    },
+    {
+      "from": "c-dp",
+      "to": "도비서",
+      "label": "담당 자기검수 후 도비서 검수"
     },
     {
       "from": "도비서",
@@ -912,9 +867,7 @@ var DATA =
       "desc": "서브에이전트 역할 선택·Agency 지침 재사용·3건 후보 검토 시.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "qa"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/agency-agent-reuse"
@@ -977,12 +930,7 @@ var DATA =
       "name": "airtable",
       "desc": "Airtable REST API via curl. Records CRUD, filters, upserts.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/productivity/airtable"
@@ -995,15 +943,6 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/antigravity-cli-bridge"
-    },
-    {
-      "name": "antigravity-task-pipeline",
-      "desc": "Use when 안티그래비티로 반복업무·코드수정을 시킬 때. 관문·재지시·격리·시험 골격.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/antigravity-task-pipeline"
     },
     {
       "name": "api-blocking-response",
@@ -1033,24 +972,10 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/.archive/app-project-handover"
     },
     {
-      "name": "app-store-naming-and-aso",
-      "desc": "Name apps with measured store data; ASO + watermark specs.",
-      "owners": [
-        "marketer"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/marketer/skills/.archive/app-store-naming-and-aso"
-    },
-    {
       "name": "apple-notes",
       "desc": "Manage Apple Notes via memo CLI: create, search, edit.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/apple/apple-notes"
@@ -1059,12 +984,7 @@ var DATA =
       "name": "apple-reminders",
       "desc": "Apple Reminders via remindctl: add, list, complete.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/apple/apple-reminders"
@@ -1074,12 +994,7 @@ var DATA =
       "desc": "Dark-themed SVG architecture/cloud/infra diagrams as HTML.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/architecture-diagram"
@@ -1089,12 +1004,7 @@ var DATA =
       "desc": "Search arXiv papers by keyword, author, category, or ID.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/research/arxiv"
@@ -1104,12 +1014,7 @@ var DATA =
       "desc": "ASCII art: pyfiglet, cowsay, boxes, image-to-ascii.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/ascii-art"
@@ -1118,33 +1023,10 @@ var DATA =
       "name": "ascii-video",
       "desc": "ASCII video: convert video/audio to colored ASCII MP4/GIF.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/creative/ascii-video"
-    },
-    {
-      "name": "atomic-artifact-dispatch",
-      "desc": "Use when dispatchers reserve artifact paths safely.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/atomic-artifact-dispatch"
-    },
-    {
-      "name": "authenticated-web-session-automation",
-      "desc": "Use when 안전한 웹 로그인 세션 자동화를 추가·검증할 때.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/authenticated-web-session-automation"
     },
     {
       "name": "automation-watchdog-design",
@@ -1160,12 +1042,7 @@ var DATA =
       "desc": "Infographics: 21 layouts x 21 styles (信息图, 可视化).",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/baoyu-infographic"
@@ -1175,12 +1052,7 @@ var DATA =
       "desc": "페이지 차단·403·유료벽·notion.site 본문 안 읽힘. 공개 대체경로 순서.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/web/blocked-page-recovery"
@@ -1190,12 +1062,7 @@ var DATA =
       "desc": "Monitor blogs and RSS/Atom feeds via blogwatcher-cli tool.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/research/blogwatcher"
@@ -1204,12 +1071,7 @@ var DATA =
       "name": "box",
       "desc": "Box manages cloud files, sharing, search, and metadata.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/productivity/box"
@@ -1233,34 +1095,11 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/productivity/business-idea-discovery"
     },
     {
-      "name": "checker-validation",
-      "desc": "Use when 검사기·린터가 정말 잡는지 검증할 때. 변이 주입으로 시험.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/checker-validation"
-    },
-    {
-      "name": "checker-verification",
-      "desc": "Use when verifying someone else's checker, gate, or blocking hook.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/checker-verification"
-    },
-    {
       "name": "claude-code",
       "desc": "Delegate coding to Claude Code CLI (features, PRs).",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/claude-code"
@@ -1270,12 +1109,7 @@ var DATA =
       "desc": "Design one-off HTML artifacts (landing, deck, prototype).",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/creative/claude-design"
@@ -1285,12 +1119,7 @@ var DATA =
       "desc": "Inspect codebases w/ pygount: LOC, languages, ratios.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/codebase-inspection"
@@ -1300,12 +1129,7 @@ var DATA =
       "desc": "Delegate coding to OpenAI Codex CLI (features, PRs).",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/codex"
@@ -1315,12 +1139,7 @@ var DATA =
       "desc": "Generate images, video, and audio via diffusion workflows.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/comfyui"
@@ -1330,12 +1149,7 @@ var DATA =
       "desc": "Use when 경쟁사 분석·경쟁업체 조사·경쟁사 감시 요청 시. 기준선 조사 후 주간 감시, 인용 요약.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/research/competitor-news-monitor"
@@ -1345,12 +1159,7 @@ var DATA =
       "desc": "화면을 직접 보고 클릭·입력해야 할 때. 앱·설정창·실기기 확인 등 다른 도구로 안 되는 일.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/computer-use"
@@ -1372,15 +1181,6 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/construction-ai-bpo-scope"
-    },
-    {
-      "name": "content-removal-verification",
-      "desc": "Use when verifying deleted skill/doc sections. Diff-prove.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/content-removal-verification"
     },
     {
       "name": "contest-pipeline-ops",
@@ -1410,24 +1210,6 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/devops/credential-intake"
     },
     {
-      "name": "criteria-falsifiability-audit",
-      "desc": "Use when auditing whether review criteria can fail.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/.archive/criteria-falsifiability-audit"
-    },
-    {
-      "name": "cron-wrapper-scheduler-verification",
-      "desc": "Use when 헤르메스 크론 래퍼가 실제 스케줄러 경로와 맞물리는지 검증할 때.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/cron-wrapper-scheduler-verification"
-    },
-    {
       "name": "customer-communications-automation",
       "desc": "Use when 잠재고객 연락·동의 Form·커뮤니티 유입·Gmail·전화 흐름을 설계할 때.",
       "owners": [
@@ -1435,15 +1217,6 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/customer-communications-automation"
-    },
-    {
-      "name": "data-injected-html-dashboard",
-      "desc": "Use when adding pages to a data-fed single-file dashboard.",
-      "owners": [
-        "uxui"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/uxui/skills/.archive/data-injected-html-dashboard"
     },
     {
       "name": "decision-override-protocol",
@@ -1455,46 +1228,14 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/devops/decision-override-protocol"
     },
     {
-      "name": "defect-fix-verification",
-      "desc": "Use when 개발자 수정본·신설 모드가 실제로 고쳤는지(또는 상태를 안 바꾸는지) 검증할 때. dry-run·no-op 포함.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/defect-fix-verification"
-    },
-    {
-      "name": "delegated-agent-runtime-verification",
-      "desc": "Use when verifying delegated-agent runtime permissions.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/delegated-agent-runtime-verification"
-    },
-    {
       "name": "design-md",
       "desc": "Author/validate/export Google's DESIGN.md token spec files.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/design-md"
-    },
-    {
-      "name": "destructive-file-cleanup-verification",
-      "desc": "Use when verifying scripts that delete live files, or auditing a feature's deletion impact beforehand.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/destructive-file-cleanup-verification"
     },
     {
       "name": "diagram-image-delivery",
@@ -1533,49 +1274,21 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/toolbox/dobiseo-toolbox"
     },
     {
-      "name": "document-archive-sync",
-      "desc": "Use when syncing documents to Notion. Build safely.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/document-archive-sync"
-    },
-    {
       "name": "document-to-action-items",
       "desc": "Extract cited obligations, deadlines, tasks from documents.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/document-to-action-items"
-    },
-    {
-      "name": "document-transformation-qa",
-      "desc": "Use when verifying document/report conversion pipelines.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/document-transformation-qa"
     },
     {
       "name": "docx",
       "desc": "워드(.docx) 문서 만들기·읽기·수정·검토·서식 템플릿 작업 시.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/docx"
@@ -1585,77 +1298,26 @@ var DATA =
       "desc": "Exploratory QA of web apps: find bugs, evidence, reports.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/dogfood"
-    },
-    {
-      "name": "dp-harness",
-      "desc": "Use when dp가 코드 작성·수정·배포 지시서를 받았을 때. 착수 전 반드시 연다. 개발 5단계 실행 순서, 앱 2종 스택, 검수 2회 루프(+조건부 추가 2회), 제출 형식.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/devops/dp-harness"
-    },
-    {
-      "name": "dp-toolbox",
-      "desc": "Use when dp가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/toolbox/dp-toolbox"
-    },
-    {
-      "name": "durable-external-workflows",
-      "desc": "Use when queue workers need durable external retries.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/durable-external-workflows"
     },
     {
       "name": "email-inbox-triage",
       "desc": "Triage an inbox: prioritize threads, draft replies safely.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/email/email-inbox-triage"
     },
     {
-      "name": "eval-harness",
-      "desc": "Use when 봇 규칙·스킬·하네스 변경 전후를 같은 시험으로 회귀 비교할 때.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/eval-harness"
-    },
-    {
       "name": "evaluating-llms-harness",
       "desc": "lm-eval-harness: benchmark LLMs (MMLU, GSM8K, etc.).",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/mlops/evaluation/evaluating-llms-harness"
@@ -1665,24 +1327,10 @@ var DATA =
       "desc": "Hand-drawn Excalidraw JSON diagrams (arch, flow, seq).",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/excalidraw"
-    },
-    {
-      "name": "external-action-gate-verification",
-      "desc": "Use when verifying external action gates. Run safe probes.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/external-action-gate-verification"
     },
     {
       "name": "external-agent-file-handoff",
@@ -1692,33 +1340,6 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/external-agent-file-handoff"
-    },
-    {
-      "name": "external-call-stub-testing",
-      "desc": "Use when 외부 호출이 차단됐거나(429) 실호출이 부작용(발송·봇 깨움)을 내서 못 돌릴 때. 호출만 스텁으로 검증.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/external-call-stub-testing"
-    },
-    {
-      "name": "external-deployment-qa",
-      "desc": "Use when verifying external file deployments. Prove gates.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/.archive/external-deployment-qa"
-    },
-    {
-      "name": "external-execution-verification",
-      "desc": "Use when verifying external adapters. Test isolation.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/external-execution-verification"
     },
     {
       "name": "external-tool-evaluation",
@@ -1742,12 +1363,7 @@ var DATA =
       "name": "findmy",
       "desc": "Track Apple devices/AirTags via FindMy.app on macOS.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/apple/findmy"
@@ -1762,24 +1378,10 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/software-development/fix-blast-radius"
     },
     {
-      "name": "frozen-input-answer-key",
-      "desc": "Use when 동결 입력으로 독립 정답표를 먼저 만들 때.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/.archive/frozen-input-answer-key"
-    },
-    {
       "name": "gif-search",
       "desc": "Search/download GIFs from Tenor via curl + jq.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/media/gif-search"
@@ -1789,12 +1391,7 @@ var DATA =
       "desc": "GitHub via gh CLI: PRs, issues, reviews, repos, auth.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/github"
@@ -1804,12 +1401,7 @@ var DATA =
       "desc": "GitHub auth setup: HTTPS tokens, SSH keys, gh CLI login.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/github/github-auth"
@@ -1819,12 +1411,7 @@ var DATA =
       "desc": "Review PRs: diffs, inline comments via gh or REST.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/github/github-code-review"
@@ -1834,12 +1421,7 @@ var DATA =
       "desc": "Carry a GitHub issue to a verified PR with honest CI state.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/github/github-issue-to-pr"
@@ -1849,12 +1431,7 @@ var DATA =
       "desc": "Create, triage, label, assign GitHub issues via gh or REST.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/github/github-issues"
@@ -1864,12 +1441,7 @@ var DATA =
       "desc": "GitHub PR lifecycle: branch, commit, open, CI, merge.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/github/github-pr-workflow"
@@ -1879,12 +1451,7 @@ var DATA =
       "desc": "Clone/create/fork repos; manage remotes, releases.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/github/github-repo-management"
@@ -1894,12 +1461,7 @@ var DATA =
       "desc": "Gmail, Calendar, Drive, Docs, Sheets via gws CLI or Python.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/google-workspace"
@@ -1908,8 +1470,7 @@ var DATA =
       "name": "graphify",
       "desc": "그래프화·지식그래프·구조 파악해·코드베이스 분석·/graphify 요청 시. 코드·문서 뭉치를 지식그래프로 만들어 구조·의존성을 조회한다.",
       "owners": [
-        "all",
-        "dp"
+        "all"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/graphify"
@@ -1937,36 +1498,17 @@ var DATA =
       "desc": "Ground answers and documents in cited, verifiable sources.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/research/grounded-citations"
-    },
-    {
-      "name": "guard-hook-verification",
-      "desc": "Use when verifying pre/post tool-call guard hooks or gates.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/guard-hook-verification"
     },
     {
       "name": "hermes-agent",
       "desc": "Use, configure, theme, extend, and orchestrate Hermes Agent.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-agent"
@@ -1976,12 +1518,7 @@ var DATA =
       "desc": "헤르메스 저장소 기여용 SKILL.md 프론트매터·구조 문법 확인 시. 도비서 스킬 개정 기준은 dobiseo-skill-standard.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/hermes-agent-skill-authoring"
@@ -2005,15 +1542,6 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-gateway-bots"
     },
     {
-      "name": "hermes-gateway-forensics",
-      "desc": "Use when Hermes 게이트웨이(봇)가 죽었을 때. 복구·생존 실측·사망 원인 조사.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/hermes-gateway-forensics"
-    },
-    {
       "name": "hermes-mcp-connections",
       "desc": "Connect MCP servers to Hermes: catalog, OAuth, PlayMCP.",
       "owners": [
@@ -2023,15 +1551,6 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-mcp-connections"
     },
     {
-      "name": "hermes-profile-model-config",
-      "desc": "Use when 프로필 모델·제공자 설정을 교체할 때. 실측→3곳 교체→재가동.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/hermes-profile-model-config"
-    },
-    {
       "name": "hermes-provider-auth",
       "desc": "Connect AI providers to Hermes: auth types, keys.",
       "owners": [
@@ -2039,15 +1558,6 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/autonomous-ai-agents/hermes-provider-auth"
-    },
-    {
-      "name": "hermes-shell-hooks",
-      "desc": "Use when Hermes 셸 훅을 만들·등록·시험할 때. 규격·관찰/차단모드·잠금파일·재시작 함정.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/hermes-shell-hooks"
     },
     {
       "name": "hermes-skill-porting",
@@ -2068,65 +1578,23 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/devops/hermes-voice-io"
     },
     {
-      "name": "hermes-watchdog-cron-scripts",
-      "desc": "Use when 0토큰 감시·자동복구 크론 스크립트를 만들·고칠 때. 안전장치·알림·비항등식 시험.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/hermes-watchdog-cron-scripts"
-    },
-    {
       "name": "himalaya",
       "desc": "Himalaya CLI: IMAP/SMTP email from terminal.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/email/himalaya"
     },
     {
-      "name": "html-mockup-verification",
-      "desc": "Use when shipping an HTML mockup: measure, don't guess.",
-      "owners": [
-        "uxui"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/uxui/skills/.archive/html-mockup-verification"
-    },
-    {
       "name": "huggingface-hub",
       "desc": "HuggingFace hf CLI: search/download/upload models, datasets.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/mlops/huggingface-hub"
-    },
-    {
-      "name": "humanize-korean",
-      "desc": "AI(ChatGPT·Claude·Gemini 등)가 쓴 한글 텍스트를 \"사람이 쓴 글처럼\" 윤문해주는 오케스트레이터 스킬",
-      "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/s/skills/creative/humanize-korean"
     },
     {
       "name": "hyperframes",
@@ -2222,12 +1690,7 @@ var DATA =
       "name": "imessage",
       "desc": "Send and receive iMessages/SMS via the imsg CLI on macOS.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/apple/imessage"
@@ -2237,24 +1700,10 @@ var DATA =
       "desc": "Read the live Hermes desktop DOM/CSS over CDP.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/inspecting-hermes-desktop-dom"
-    },
-    {
-      "name": "installed-tool-update-verification",
-      "desc": "Use when verifying tool updates and old-version cleanup.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/installed-tool-update-verification"
     },
     {
       "name": "interior-floorplan-tour-video",
@@ -2284,15 +1733,6 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/productivity/job-application-drafting"
     },
     {
-      "name": "json-state-migration",
-      "desc": "Use when 상태 JSON 파일을 1회 소급 채움·병합할 때. 백업→dry→assert.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/json-state-migration"
-    },
-    {
       "name": "korean-business-email",
       "desc": "메일 초안 써줘·답장 써줘·교수님께 메일 요청 시. 한국어 업무 메일 초안을 쓴다.",
       "owners": [
@@ -2320,45 +1760,13 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/research/korean-company-lead-research"
     },
     {
-      "name": "korean-text-matching",
-      "desc": "Use when 한글 문서 유사도·자동첨부를 외부 라이브러리 없이 만들 때.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/korean-text-matching"
-    },
-    {
-      "name": "live-data-dashboard-pages",
-      "desc": "Use when adding pages to a live single-file HTML dashboard.",
-      "owners": [
-        "uxui"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/uxui/skills/.archive/live-data-dashboard-pages"
-    },
-    {
       "name": "llama-cpp",
       "desc": "llama.cpp local GGUF inference + HF Hub model discovery.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/mlops/inference/llama-cpp"
-    },
-    {
-      "name": "llm-draft-verification-pipeline",
-      "desc": "Use when LLM 초안을 0토큰 관문으로 검사·저장할 때.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/llm-draft-verification-pipeline"
     },
     {
       "name": "llm-sourced-report-pipeline",
@@ -2374,12 +1782,7 @@ var DATA =
       "desc": "Karpathy's LLM Wiki: build/query interlinked markdown KB.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/research/llm-wiki"
@@ -2415,12 +1818,7 @@ var DATA =
       "name": "manim-video",
       "desc": "Manim CE animations: 3Blue1Brown math/algo videos.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/creative/manim-video"
@@ -2430,42 +1828,10 @@ var DATA =
       "desc": "Geocode, POIs, routes, timezones via OpenStreetMap/OSRM.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/maps"
-    },
-    {
-      "name": "marketer-harness",
-      "desc": "Use when marketer가 마케팅 계획·카피·콘텐츠를 만들 때. 외부 자연어는 윤문한다.",
-      "owners": [
-        "marketer"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/marketer/skills/devops/marketer-harness"
-    },
-    {
-      "name": "marketer-toolbox",
-      "desc": "Use when marketer가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
-      "owners": [
-        "marketer"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/marketer/skills/toolbox/marketer-toolbox"
-    },
-    {
-      "name": "marketing-strategy-operations",
-      "desc": "Use when designing sales or revenue operations.",
-      "owners": [
-        "marketer"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/marketer/skills/.archive/marketing-strategy-operations"
     },
     {
       "name": "media-use",
@@ -2481,12 +1847,7 @@ var DATA =
       "desc": "Turn meeting notes into cited decisions, owners, tickets.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/meeting-action-items"
@@ -2495,12 +1856,7 @@ var DATA =
       "name": "merge-reconciler",
       "desc": "Neutral third-party resolution of agent merge conflicts.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/autonomous-ai-agents/merge-reconciler"
@@ -2510,12 +1866,7 @@ var DATA =
       "desc": "Create, read, and edit Word, PowerPoint, and Excel files.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/microsoft-office"
@@ -2539,34 +1890,11 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/devops/model-tiering"
     },
     {
-      "name": "multi-agent-code-change-validation",
-      "desc": "Use when shared code has concurrent edits. Revalidate.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/multi-agent-code-change-validation"
-    },
-    {
-      "name": "multi-consumer-event-routing",
-      "desc": "Use when one event can wake multiple bots or workers.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/multi-consumer-event-routing"
-    },
-    {
       "name": "nano-pdf",
       "desc": "Edit text in existing PDFs via natural-language prompts.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/nano-pdf"
@@ -2576,12 +1904,7 @@ var DATA =
       "desc": "Debug Node.js via --inspect + Chrome DevTools Protocol CLI.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/node-inspect-debugger"
@@ -2591,12 +1914,7 @@ var DATA =
       "desc": "일반 Notion API·ntn CLI 사용법(페이지·DB 생성, 마크다운). 사업 HQ 기록·승인·상태값 운영은 notion-business-hq.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/notion"
@@ -2615,12 +1933,7 @@ var DATA =
       "desc": "옵시디언 볼트 노트 읽기·검색·작성·편집 시. 05_도비서 인수인계·기억 미러링은 obsidian-memory-mirror.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/note-taking/obsidian"
@@ -2639,12 +1952,7 @@ var DATA =
       "desc": "Extract text from PDFs/scans (pymupdf, marker-pdf).",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/ocr-and-documents"
@@ -2653,12 +1961,7 @@ var DATA =
       "name": "opencode",
       "desc": "Delegate coding to OpenCode CLI (features, PR review).",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/autonomous-ai-agents/opencode"
@@ -2667,36 +1970,17 @@ var DATA =
       "name": "openhue",
       "desc": "Control Philips Hue lights, scenes, rooms via OpenHue CLI.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/smart-home/openhue"
-    },
-    {
-      "name": "outbound-copy-prelaunch-verification",
-      "desc": "Use when verifying customer copy before external sending.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/.archive/outbound-copy-prelaunch-verification"
     },
     {
       "name": "p5js",
       "desc": "p5.js sketches: gen art, shaders, interactive, 3D.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/p5js"
@@ -2706,12 +1990,7 @@ var DATA =
       "desc": "PDF 만들기·읽기·합치기·양식 채우기·글자 수정·OCR 시.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/pdf"
@@ -2721,12 +2000,7 @@ var DATA =
       "desc": "Write a markdown plan to .hermes/plans/; no execution.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/plan"
@@ -2741,79 +2015,11 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/productivity/planning-grill"
     },
     {
-      "name": "pm-harness",
-      "desc": "Use when pm이 일정·할일·진행추적 지시서를 받았을 때. 착수 전 반드시 연다. 일정 수립 5단계와 진행현황표 규격, 검수 루프 기간 반영.",
-      "owners": [
-        "pm"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/pm/skills/devops/pm-harness"
-    },
-    {
-      "name": "pm-toolbox",
-      "desc": "Use when pm가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
-      "owners": [
-        "pm"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/pm/skills/toolbox/pm-toolbox"
-    },
-    {
-      "name": "ponytail",
-      "desc": ">",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail"
-    },
-    {
-      "name": "ponytail-audit",
-      "desc": ">",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-audit"
-    },
-    {
-      "name": "ponytail-debt",
-      "desc": ">",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-debt"
-    },
-    {
-      "name": "ponytail-help",
-      "desc": ">",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-help"
-    },
-    {
-      "name": "ponytail-review",
-      "desc": ">",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/software-development/ponytail-review"
-    },
-    {
       "name": "popular-web-designs",
       "desc": "54 real design systems (Stripe, Linear, Vercel) as HTML/CSS.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/popular-web-designs"
@@ -2832,12 +2038,7 @@ var DATA =
       "desc": "PPT·발표자료·슬라이드 만들기·읽기·수정 시(.pptx, python-pptx).",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/powerpoint"
@@ -2847,45 +2048,17 @@ var DATA =
       "desc": "Build creative browser demos with DOM-free text layout.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/pretext"
-    },
-    {
-      "name": "product-3d-model",
-      "desc": "Product photos to 3D model, viewer page, and shareable delivery.",
-      "owners": [
-        "uxui"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/uxui/skills/.archive/product-3d-model"
-    },
-    {
-      "name": "product-copy-claim-verification",
-      "desc": "Use when writing product copy. Verify claims vs source.",
-      "owners": [
-        "marketer"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/marketer/skills/.archive/product-copy-claim-verification"
     },
     {
       "name": "product-price-monitor",
       "desc": "Watch product, flight, or listing prices; alert on target.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/product-price-monitor"
@@ -2904,51 +2077,10 @@ var DATA =
       "desc": "Debug Python: pdb REPL + debugpy remote (DAP).",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/python-debugpy"
-    },
-    {
-      "name": "qa-evidence-integrity",
-      "desc": "Use when verifying QA evidence integrity. Prove state.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/qa-evidence-integrity"
-    },
-    {
-      "name": "qa-toolbox",
-      "desc": "Use when qa가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/toolbox/qa-toolbox"
-    },
-    {
-      "name": "queue-replay-verification",
-      "desc": "Use when verifying pending/spool queue replay into SQLite.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/queue-replay-verification"
-    },
-    {
-      "name": "react-native-expo-mvp-dev",
-      "desc": "Build RN+Expo apps — compositing, themes, Windows quirks.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/react-native-expo-mvp-dev"
     },
     {
       "name": "regulated-service-scoping",
@@ -2964,12 +2096,7 @@ var DATA =
       "desc": "Pre-commit review: security scan, quality gates, auto-fix.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/requesting-code-review"
@@ -2978,24 +2105,10 @@ var DATA =
       "name": "research-paper-writing",
       "desc": "Write ML papers for NeurIPS/ICML/ICLR: design→submit.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/research/research-paper-writing"
-    },
-    {
-      "name": "restore-point-verification",
-      "desc": "Use when 백업·되돌리기 지점이 유효한지 확인할 때.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/restore-point-verification"
     },
     {
       "name": "retro",
@@ -3023,24 +2136,6 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/devops/role-playbook"
-    },
-    {
-      "name": "rule-enforcement-audit",
-      "desc": "Use when 규칙·조문이 실제로 이행됐는지 기록으로 감사할 때. 문서 실재가 아니라 발동 여부를 본다.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/rule-enforcement-audit"
-    },
-    {
-      "name": "runtime-boundary-qa",
-      "desc": "Use when verifying runtime-boundary fixes.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/runtime-boundary-qa"
     },
     {
       "name": "s-harness",
@@ -3088,24 +2183,10 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/devops/scripted-ai-panel"
     },
     {
-      "name": "scroll-motion-site-verification",
-      "desc": "Use when verifying a GSAP scroll-animated 2D site.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/scroll-motion-site-verification"
-    },
-    {
       "name": "sdlc-review",
       "desc": "Review Kanban handoffs and route verified outcomes.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/devops/sdlc-review"
@@ -3114,12 +2195,7 @@ var DATA =
       "name": "serving-llms-vllm",
       "desc": "vLLM: high-throughput LLM serving, OpenAI API, quantization.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/mlops/inference/serving-llms-vllm"
@@ -3129,33 +2205,10 @@ var DATA =
       "desc": "Organize sessions by prompt: find, rename, archive, prune.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/session-librarian"
-    },
-    {
-      "name": "settle-queue-ops",
-      "desc": "Use when 도구 정착 큐·apply_tool·settle_check 고칠 때. 정본·불변식·회귀.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/settle-queue-ops"
-    },
-    {
-      "name": "shared-script-concurrent-edit",
-      "desc": "Use when 공유 스크립트 patch 중 sibling 동시편집 경고나 freeze_guard 잠금 차단이 뜨거나, 지시서에 `--files` 선점 잠금·`candidate/` 반영 문구가 있을 때",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/shared-script-concurrent-edit"
     },
     {
       "name": "shortfilm-prompt",
@@ -3176,49 +2229,21 @@ var DATA =
       "path": "<hermes>/profiles/s/skills/.archive/shortform-visual-research"
     },
     {
-      "name": "side-effect-script-dryrun",
-      "desc": "Use when 발송·기록·정리 스크립트에 --dry-run을 넣거나 검증할 때. 격리된 전후 스냅샷으로 누수 0을 증명하고 크론 실패를 영수증·경보로 연결한다.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/side-effect-script-dryrun"
-    },
-    {
       "name": "simplify-code",
       "desc": "Parallel 4-agent cleanup of recent code changes.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/software-development/simplify-code"
-    },
-    {
-      "name": "single-file-html-prototyping",
-      "desc": "Build/verify single-file HTML app prototypes.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/single-file-html-prototyping"
     },
     {
       "name": "sketch",
       "desc": "Throwaway HTML mockups: 2-3 design variants to compare.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/creative/sketch"
@@ -3254,12 +2279,7 @@ var DATA =
       "name": "songsee",
       "desc": "Audio spectrograms/features (mel, chroma, MFCC) via CLI.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/media/songsee"
@@ -3269,57 +2289,20 @@ var DATA =
       "desc": "배경음악·BGM·노래 만들기·Suno 프롬프트 시. 작사 요령과 무료판 상업이용 불가 주의.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/creative/songwriting-and-ai-music"
-    },
-    {
-      "name": "soul-harness-migration-review",
-      "desc": "Use when 하네스 문서군(공통·로컬) 변경·설계안을 검수할 때 — SOUL 이관·조문 신설·복제 배포·신규 단계 설계 정합성.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/soul-harness-migration-review"
-    },
-    {
-      "name": "spec-driven-qa-planning",
-      "desc": "Build a QA test plan from a spec before any build exists.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/.archive/spec-driven-qa-planning"
     },
     {
       "name": "spike",
       "desc": "Throwaway experiments to validate an idea before build.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
-      ],
-      "custom": false,
-      "path": "<hermes>/profiles/all/skills/software-development/spike"
-    },
-    {
-      "name": "sqlite-lock-contention",
-      "desc": "Use when SQLite 'database is locked'. busy_timeout·WAL 실측.",
-      "owners": [
-        "dp"
+        "s"
       ],
       "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/sqlite-lock-contention"
+      "path": "<hermes>/profiles/all/skills/software-development/spike"
     },
     {
       "name": "stage-end-session-cleanup",
@@ -3329,24 +2312,6 @@ var DATA =
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/stage-end-session-cleanup"
-    },
-    {
-      "name": "stateful-synchronization",
-      "desc": "Use when building stateful synchronizers. Test safe retries.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/stateful-synchronization"
-    },
-    {
-      "name": "static-html-data-injection",
-      "desc": "Use when static HTML must show live data. 0-token build.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/static-html-data-injection"
     },
     {
       "name": "stuck-recovery",
@@ -3371,12 +2336,7 @@ var DATA =
       "desc": "4-phase root cause debugging: understand bugs before fixing.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/systematic-debugging"
@@ -3385,9 +2345,7 @@ var DATA =
       "name": "taste-skill",
       "desc": "/taste <url>'·사이트 디자인 분석·디자인 토큰 추출·'X처럼 만들어'·경쟁사 디자인 비교 요청 시. 색·글꼴·간격 토큰과 디자인 취향을 md·json으로 뽑는다.",
       "owners": [
-        "all",
-        "uxui",
-        "dp"
+        "all"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/creative/taste-skill"
@@ -3396,12 +2354,7 @@ var DATA =
       "name": "teams-meeting-pipeline",
       "desc": "Teams meeting summaries, job replay, Graph subscriptions.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/productivity/teams-meeting-pipeline"
@@ -3411,12 +2364,7 @@ var DATA =
       "desc": "TDD: enforce RED-GREEN-REFACTOR, tests before code.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/software-development/test-driven-development"
@@ -3440,15 +2388,6 @@ var DATA =
       "path": "<hermes>/profiles/all/skills/productivity/thread-organize"
     },
     {
-      "name": "tool-adoption-verification",
-      "desc": "Use when 도구 도입 실측·채점 보고를 재현 검증할 때. 결함 주장의 숫자와 인과를 갈라 확인한다.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/.archive/tool-adoption-verification"
-    },
-    {
       "name": "tool-adoption-vetting",
       "desc": "Use when vetting a tool for adoption. No install.",
       "owners": [
@@ -3458,72 +2397,13 @@ var DATA =
       "path": "<hermes>/profiles/s/skills/.archive/tool-adoption-vetting"
     },
     {
-      "name": "toolbox-reflection-review",
-      "desc": "Use when independently reviewing toolbox reflection or existing-guidance absorption records; verify source transfer, rou",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/.archive/toolbox-reflection-review"
-    },
-    {
-      "name": "toolbox-scoring",
-      "desc": "Use when 노션 도구함 항목을 채점·판정할 때. (비공개) 확정 v3 기준표.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/toolbox/toolbox-scoring"
-    },
-    {
       "name": "touchdesigner-mcp",
       "desc": "Control TouchDesigner via twozero MCP.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/creative/touchdesigner-mcp"
-    },
-    {
-      "name": "ui-state-detector-verification",
-      "desc": "Use when verifying UI/DOM state detectors. Test gates.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/ui-state-detector-verification"
-    },
-    {
-      "name": "untrusted-input-hardening",
-      "desc": "Use when 외부 텍스트를 자체검사 있는 산출물에 넣을 때. 정화·격리·적대시험.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/untrusted-input-hardening"
-    },
-    {
-      "name": "uxui-harness",
-      "desc": "Use when uxui가 시안·화면·와이어프레임 지시서를 받았을 때. 착수 전 반드시 연다. 디자인 5단계 실행 순서와 레퍼런스 의무.",
-      "owners": [
-        "uxui"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/uxui/skills/devops/uxui-harness"
-    },
-    {
-      "name": "uxui-toolbox",
-      "desc": "Use when uxui가 작업 중 도구·활용법이 필요할 때. (비공개)님이 도입 승인한 것만 모아둔 목록.",
-      "owners": [
-        "uxui"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/uxui/skills/toolbox/uxui-toolbox"
     },
     {
       "name": "wait-what",
@@ -3538,9 +2418,7 @@ var DATA =
       "name": "web-design-guidelines",
       "desc": "화면 시안·UI 검수·디자인 좀 봐줘·AI티 나는 디자인 점검 시. 글자크기·색대비·슬롭UI 점검표(Web Interface Guidelines).",
       "owners": [
-        "all",
-        "uxui",
-        "dp"
+        "all"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/creative/web-design-guidelines"
@@ -3555,34 +2433,11 @@ var DATA =
       "path": "<hermes>/profiles/s/skills/.archive/web-retrieval-with-fallback"
     },
     {
-      "name": "webapp-testing",
-      "desc": "Use when 웹앱 화면을 Playwright로 자동 실행·클릭·캡처해 검수할 때.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/software-development/webapp-testing"
-    },
-    {
-      "name": "webgl-scroll-site-verification",
-      "desc": "Use when verifying a scroll-driven 3D (WebGL) site.",
-      "owners": [
-        "qa"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/qa/skills/devops/webgl-scroll-site-verification"
-    },
-    {
       "name": "weekly-review-planning",
       "desc": "Weekly reset: commitments, stalled work, next-week plan.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/productivity/weekly-review-planning"
@@ -3591,12 +2446,7 @@ var DATA =
       "name": "weights-and-biases",
       "desc": "W&B: log ML experiments, sweeps, model registry, dashboards.",
       "owners": [
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/s/skills/mlops/evaluation/weights-and-biases"
@@ -3651,12 +2501,7 @@ var DATA =
       "desc": "엑셀·표·CSV 파일 만들기·읽기·수정 시(.xlsx).",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/productivity/xlsx"
@@ -3666,12 +2511,7 @@ var DATA =
       "desc": "X/Twitter via xurl CLI: raw post search, posting, DM, media.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": false,
       "path": "<hermes>/profiles/all/skills/social-media/xurl"
@@ -3681,24 +2521,10 @@ var DATA =
       "desc": "Use when YouTube 링크를 요약할 때. 자막 우선, 없으면 Gemini가 공개 영상을 직접 분석한다.",
       "owners": [
         "all",
-        "s",
-        "pm",
-        "uxui",
-        "dp",
-        "qa",
-        "marketer"
+        "s"
       ],
       "custom": true,
       "path": "<hermes>/profiles/all/skills/media/youtube-content"
-    },
-    {
-      "name": "zero-token-pipeline-scripts",
-      "desc": "Use when 0토큰 자동화 스크립트를 회차 지시서로 고칠 때. prep·runner·변이·URL 관문.",
-      "owners": [
-        "dp"
-      ],
-      "custom": true,
-      "path": "<hermes>/profiles/dp/skills/.archive/zero-token-pipeline-scripts"
     }
   ],
   "crons": [
@@ -3745,8 +2571,8 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "Google 보고서 → 노션 (제미나이 폴더 포함, 9~23시 20분마다)",
-      "schedule": "20분마다 (9-23시대)",
+      "name": "Google 보고서 → 노션 (제미나이 폴더 포함, 20분마다·24시간)",
+      "schedule": "20분마다",
       "mode": "무토큰",
       "kind": "보고",
       "profile": "all"
@@ -3763,6 +2589,13 @@ var DATA =
       "schedule": "매일 09:10",
       "mode": "무토큰",
       "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "PC-20261111-01 review-framework qa 문구 지연 적용 (0토큰, PC-09 유휴 뒤)",
+      "schedule": "every 120m",
+      "mode": "무토큰",
+      "kind": "기타",
       "profile": "all"
     },
     {
@@ -4092,8 +2925,7 @@ var DATA =
       "enabled": false,
       "profiles": [
         "all",
-        "s",
-        "marketer"
+        "s"
       ]
     },
     {
