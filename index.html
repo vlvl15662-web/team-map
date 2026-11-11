@@ -669,7 +669,7 @@ html[data-theme="dark"] .fnode.hub{background:linear-gradient(160deg,#241E10,var
    ================================================================== */
 var DATA =
 /*__DATA_START__*/{
-  "generated_at": "2026-11-11T04:51:57+09:00",
+  "generated_at": "2026-11-12T04:51:54+09:00",
   "bots": [
     {
       "id": "all",
@@ -678,8 +678,8 @@ var DATA =
       "model": "gpt-6.1-terra",
       "skill_count": 147,
       "custom_count": 103,
-      "soul_chars": 7280,
-      "cron_count": 50,
+      "soul_chars": 1870,
+      "cron_count": 53,
       "color": "#fbcf5a",
       "soul_path": "<hermes>/profiles/all/SOUL.md",
       "skills_path": "<hermes>/profiles/all/skills",
@@ -2471,7 +2471,7 @@ var DATA =
     },
     {
       "name": "windows-pc-maintenance",
-      "desc": "PC 정비·인터넷 끊김·용량 정리·앱 설치/삭제·도구 업데이트·포맷 백업/복구 시.",
+      "desc": "PC 견적·중고 평가·정비·장애 진단·설치·백업/복구 시.",
       "owners": [
         "all"
       ],
@@ -2592,13 +2592,6 @@ var DATA =
       "profile": "all"
     },
     {
-      "name": "PC-20261111-01 review-framework qa 문구 지연 적용 (0토큰, PC-09 유휴 뒤)",
-      "schedule": "every 120m",
-      "mode": "무토큰",
-      "kind": "기타",
-      "profile": "all"
-    },
-    {
       "name": "PlayMCP 토큰 갱신(6시간)",
       "schedule": "매일 */6",
       "mode": "무토큰",
@@ -2624,6 +2617,27 @@ var DATA =
       "schedule": "매일 매시",
       "mode": "무토큰",
       "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "공모전 당일 마감 대기 글 자동 삭제 · 매일 13시",
+      "schedule": "매일 13:00",
+      "mode": "AI",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
+      "name": "공모전 주간 조사 결과 노션 등록 (토 10:30·14:30·20:30, 0토큰 스크립트)",
+      "schedule": "매주 토 10:30 · 14:30 · 20:30",
+      "mode": "무토큰",
+      "kind": "기타",
+      "profile": "all"
+    },
+    {
+      "name": "공모전 주간 추가조사 발주(토요일 09시)",
+      "schedule": "매주 토 09:00",
+      "mode": "무토큰",
+      "kind": "기타",
       "profile": "all"
     },
     {
@@ -2655,6 +2669,13 @@ var DATA =
       "profile": "all"
     },
     {
+      "name": "담당 후속 처리 미확인 감시 (5분, 0토큰, PC-20261111-25)",
+      "schedule": "5분마다",
+      "mode": "무토큰",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
       "name": "도구 사용빈도 주간 보고",
       "schedule": "매주 금 09:00",
       "mode": "감시형(변화 있을 때만 AI)",
@@ -2679,6 +2700,13 @@ var DATA =
       "name": "도구함 흐름 점검 (확정 흐름 v5, 매일)",
       "schedule": "매일 10:00",
       "mode": "감시형(변화 있을 때만 AI)",
+      "kind": "점검",
+      "profile": "all"
+    },
+    {
+      "name": "멈춤 감시기 2주 측정(1회, PC-20261111-25)",
+      "schedule": "매일 10:00",
+      "mode": "AI",
       "kind": "점검",
       "profile": "all"
     },
@@ -2729,13 +2757,6 @@ var DATA =
       "schedule": "매일 04:00",
       "mode": "무토큰",
       "kind": "동기화",
-      "profile": "all"
-    },
-    {
-      "name": "스낵영상 신규 소재 5개 확인 알림",
-      "schedule": "매일 09:00",
-      "mode": "무토큰",
-      "kind": "점검",
       "profile": "all"
     },
     {
